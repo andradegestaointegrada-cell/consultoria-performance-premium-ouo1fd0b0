@@ -24293,7 +24293,7 @@ var services = [
 		id: "iso-14001",
 		title: "ISO 14001",
 		desc: "Gestão Ambiental",
-		img: "https://img.usecurling.com/p/600/400?q=sustainable%20technology&color=black"
+		img: "https://i.postimg.cc/9F7DwLpR/GESTAO-AMBIENTAL.png"
 	},
 	{
 		id: "iso-45001",
@@ -28495,4 +28495,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-Btitg7o-.js.map
+//# sourceMappingURL=index-CNdN86J8.js.map

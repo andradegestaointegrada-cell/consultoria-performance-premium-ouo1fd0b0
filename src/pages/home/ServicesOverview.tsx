@@ -14,7 +14,7 @@ const services = [
     id: 'iso-14001',
     title: 'ISO 14001',
     desc: 'Gestão Ambiental',
-    img: 'https://img.usecurling.com/p/600/400?q=sustainable%20technology&color=black',
+    img: 'https://i.postimg.cc/9F7DwLpR/GESTAO-AMBIENTAL.png',
   },
   {
     id: 'iso-45001',
