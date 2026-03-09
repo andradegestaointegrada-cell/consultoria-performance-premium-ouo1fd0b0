@@ -17693,7 +17693,7 @@ function useToast() {
 		})
 	};
 }
-var import_react_dom$4 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
+var import_react_dom$5 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 typeof window !== "undefined" && window.document && window.document.createElement;
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
 	return function handleEvent(event) {
@@ -18002,7 +18002,7 @@ var Primitive = [
 	};
 }, {});
 function dispatchDiscreteCustomEvent(target, event) {
-	if (target) import_react_dom$4.flushSync(() => target.dispatchEvent(event));
+	if (target) import_react_dom$5.flushSync(() => target.dispatchEvent(event));
 }
 function useCallbackRef(callback) {
 	const callbackRef = import_react.useRef(callback);
@@ -18193,17 +18193,17 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$5 = DismissableLayer;
+var Root$6 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 var useLayoutEffect2 = globalThis?.document ? import_react.useLayoutEffect : () => {};
-var import_react_dom$3 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
+var import_react_dom$4 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var PORTAL_NAME$4 = "Portal";
 var Portal = import_react.forwardRef((props, forwardedRef) => {
 	const { container: containerProp, ...portalProps } = props;
 	const [mounted, setMounted] = import_react.useState(false);
 	useLayoutEffect2(() => setMounted(true), []);
 	const container = containerProp || mounted && globalThis?.document?.body;
-	return container ? import_react_dom$3.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return container ? import_react_dom$4.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...portalProps,
 		ref: forwardedRef
 	}), container) : null;
@@ -18372,7 +18372,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	whiteSpace: "nowrap",
 	wordWrap: "normal"
 });
-var NAME$1 = "VisuallyHidden";
+var NAME$2 = "VisuallyHidden";
 var VisuallyHidden$1 = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 		...props,
@@ -18383,9 +18383,9 @@ var VisuallyHidden$1 = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-VisuallyHidden$1.displayName = NAME$1;
-var Root$4 = VisuallyHidden$1;
-var import_react_dom$2 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
+VisuallyHidden$1.displayName = NAME$2;
+var Root$5 = VisuallyHidden$1;
+var import_react_dom$3 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var PROVIDER_NAME$1 = "ToastProvider";
 var [Collection$3, useCollection$3, createCollectionScope$3] = createCollection("Toast");
 var [createToastContext, createToastScope] = createContextScope("Toast", [createCollectionScope$3]);
@@ -18681,9 +18681,9 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastInteractiveProvider, {
 		scope: __scopeToast,
 		onClose: handleClose,
-		children: import_react_dom$2.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$3.ItemSlot, {
+		children: import_react_dom$3.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$3.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
@@ -20710,7 +20710,7 @@ function Toaster() {
 		}, id);
 	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastViewport, {})] });
 }
-var import_react_dom$1 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
+var import_react_dom$2 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 function __insertCSS(code) {
 	if (!code || typeof document == "undefined") return;
 	let head = document.head || document.getElementsByTagName("head")[0];
@@ -21003,10 +21003,10 @@ var Observer = class {
 			if (typeof id !== "string" && typeof id !== "number") return { unwrap };
 			else return Object.assign(id, { unwrap });
 		};
-		this.custom = (jsx$20, data) => {
+		this.custom = (jsx$22, data) => {
 			const id = (data == null ? void 0 : data.id) || toastsCounter++;
 			this.create({
-				jsx: jsx$20(id),
+				jsx: jsx$22(id),
 				id,
 				...data
 			});
@@ -21455,7 +21455,7 @@ var Toaster$2 = /* @__PURE__ */ import_react.forwardRef(function Toaster$3(props
 				return;
 			}
 			setTimeout(() => {
-				import_react_dom$1.flushSync(() => {
+				import_react_dom$2.flushSync(() => {
 					setToasts((toasts$1) => {
 						const indexOfExistingToast = toasts$1.findIndex((t) => t.id === toast$2.id);
 						if (indexOfExistingToast !== -1) return [
@@ -22893,7 +22893,7 @@ var computePosition = (reference, floating, options$1) => {
 		platform: platformWithCache
 	});
 };
-var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom(), 1);
+var import_react_dom$1 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var index = typeof document !== "undefined" ? import_react.useLayoutEffect : function noop() {};
 function deepEqual(a, b$1) {
 	if (a === b$1) return true;
@@ -22988,7 +22988,7 @@ function useFloating(options$1) {
 			};
 			if (isMountedRef.current && !deepEqual(dataRef.current, fullData)) {
 				dataRef.current = fullData;
-				import_react_dom.flushSync(() => {
+				import_react_dom$1.flushSync(() => {
 					setData(fullData);
 				});
 			}
@@ -23132,7 +23132,7 @@ var arrow = (options$1, deps) => ({
 	...arrow$1$1(options$1),
 	options: [options$1, deps]
 });
-var NAME = "Arrow";
+var NAME$1 = "Arrow";
 var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { children, width = 10, height = 5, ...arrowProps } = props;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.svg, {
@@ -23145,8 +23145,8 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 		children: props.asChild ? children : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("polygon", { points: "0,0 30,0 15,10" })
 	});
 });
-Arrow$1.displayName = NAME;
-var Root$3 = Arrow$1;
+Arrow$1.displayName = NAME$1;
+var Root$4 = Arrow$1;
 function useSize(element) {
 	const [size$3, setSize] = import_react.useState(void 0);
 	useLayoutEffect2(() => {
@@ -23363,7 +23363,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -23745,7 +23745,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -24755,7 +24755,7 @@ var CollapsibleContentImpl = import_react.forwardRef((props, forwardedRef) => {
 function getState$2(open) {
 	return open ? "open" : "closed";
 }
-var Root$2 = Collapsible;
+var Root$3 = Collapsible;
 var Trigger$2 = CollapsibleTrigger;
 var Content$1 = CollapsibleContent;
 var DirectionContext = import_react.createContext(void 0);
@@ -24921,7 +24921,7 @@ var AccordionItem$1 = import_react.forwardRef((props, forwardedRef) => {
 		open,
 		disabled,
 		triggerId,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
 			"data-orientation": accordionContext.orientation,
 			"data-state": getState$1(open),
 			...collapsibleScope,
@@ -26197,7 +26197,7 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root$1 = Dialog$1;
+var Root$2 = Dialog$1;
 var Trigger$1 = DialogTrigger$1;
 var Portal$2 = DialogPortal$1;
 var Overlay = DialogOverlay$1;
@@ -26205,7 +26205,7 @@ var Content = DialogContent$1;
 var Title = DialogTitle$1;
 var Description = DialogDescription$1;
 var Close = DialogClose$1;
-var Dialog = Root$1;
+var Dialog = Root$2;
 var DialogPortal = Portal$2;
 var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	ref,
@@ -26260,9 +26260,109 @@ var VisuallyHidden = import_react.forwardRef(({ className, ...props }, ref) => {
 	});
 });
 VisuallyHidden.displayName = "VisuallyHidden";
+require_react_dom();
+var Primitive$1 = [
+	"a",
+	"button",
+	"div",
+	"form",
+	"h2",
+	"h3",
+	"img",
+	"input",
+	"label",
+	"li",
+	"nav",
+	"ol",
+	"p",
+	"select",
+	"span",
+	"svg",
+	"ul"
+].reduce((primitive, node) => {
+	const Slot$3 = /* @__PURE__ */ createSlot$1(`Primitive.${node}`);
+	const Node$1 = import_react.forwardRef((props, forwardedRef) => {
+		const { asChild, ...primitiveProps } = props;
+		const Comp = asChild ? Slot$3 : node;
+		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
+			...primitiveProps,
+			ref: forwardedRef
+		});
+	});
+	Node$1.displayName = `Primitive.${node}`;
+	return {
+		...primitive,
+		[node]: Node$1
+	};
+}, {});
+var NAME = "AspectRatio";
+var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { ratio = 1 / 1, style, ...aspectRatioProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		style: {
+			position: "relative",
+			width: "100%",
+			paddingBottom: `${100 / ratio}%`
+		},
+		"data-radix-aspect-ratio-wrapper": "",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			...aspectRatioProps,
+			ref: forwardedRef,
+			style: {
+				...style,
+				position: "absolute",
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0
+			}
+		})
+	});
+});
+AspectRatio$1.displayName = NAME;
+var AspectRatio = AspectRatio$1;
+var S_DATA = {
+	"iso-9001": {
+		t: "ISO 9001",
+		d: "Sistema de Gestão da Qualidade focado na excelência operacional e melhoria contínua.",
+		i: "quality%20control",
+		w: "Implementamos processos robustos que garantem a padronização e alta performance da sua equipe."
+	},
+	"iso-14001": {
+		t: "ISO 14001",
+		d: "Sistema de Gestão Ambiental para empresas que buscam sustentabilidade e conformidade.",
+		i: "sustainability",
+		w: "Desenvolvemos estratégias sustentáveis integradas ao seu negócio, otimizando recursos."
+	},
+	"iso-45001": {
+		t: "ISO 45001",
+		d: "Gestão de Saúde e Segurança Ocupacional para proteger colaboradores e mitigar riscos.",
+		i: "safety%20engineering",
+		w: "Criamos um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança."
+	},
+	"iso-27001": {
+		t: "ISO 27001",
+		d: "Gestão da Segurança da Informação para proteger dados sensíveis contra ameaças.",
+		i: "cybersecurity",
+		w: "Estabelecemos controles rigorosos garantindo confidencialidade, integridade e conformidade."
+	},
+	esg: {
+		t: "Consultoria ESG",
+		d: "Integração de práticas Ambientais, Sociais e de Governança para impulsionar sustentabilidade.",
+		i: "corporate%20governance",
+		w: "Apoiamos na estruturação de relatórios e práticas alinhadas às exigências dos investidores."
+	}
+};
+var DEF = {
+	d: "Implementação estratégica focada em trazer resultados reais para a operação da sua empresa.",
+	i: "business%20consulting",
+	w: "Entregamos um sistema de gestão vivo, focado em gerar valor através da otimização de recursos e redução de riscos operacionais."
+};
 function ServiceDetail() {
 	const { id } = useParams();
-	const title = id ? id.replace("-", " ").toUpperCase() : "Serviço";
+	const svc = S_DATA[id?.toLowerCase() || ""] || DEF;
+	const title = svc.t || (id ? id.replace("-", " ").toUpperCase() : "Serviço");
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "pt-20",
 		children: [
@@ -26280,13 +26380,9 @@ function ServiceDetail() {
 							className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
 							children: title
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-xl text-muted-foreground max-w-2xl",
-							children: [
-								"Implementação completa e estratégica da norma ",
-								title,
-								", focada em trazer resultados reais para a operação da sua empresa."
-							]
+							children: svc.d
 						})
 					] })
 				})]
@@ -26294,21 +26390,37 @@ function ServiceDetail() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 				className: "py-24",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "container mx-auto px-4 max-w-4xl",
+					className: "container mx-auto px-4 max-w-5xl",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-20",
+						className: "space-y-24",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-								className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-								children: "O que entregamos"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "prose prose-invert max-w-none text-muted-foreground",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Nossa abordagem vai além do certificado na parede. Entregamos um sistema de gestão vivo, integrado à cultura da empresa e focado em gerar valor através da otimização de recursos e redução de riscos operacionais." })
-							})] }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "grid md:grid-cols-2 gap-12 items-center",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+									children: "O que entregamos"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-lg text-muted-foreground leading-relaxed",
+									children: svc.w
+								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "relative rounded-2xl overflow-hidden border border-primary/20 bg-card p-2 shadow-[0_0_30px_rgba(207,174,112,0.1)]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "rounded-xl overflow-hidden bg-muted",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
+											ratio: 4 / 3,
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+												src: `https://img.usecurling.com/p/800/600?q=${svc.i}&color=black`,
+												alt: `Ilustração do serviço ${title}`,
+												className: "object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+											})
+										})
+									})
+								})]
+							}) }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
 								delay: 100,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center",
 									children: "Como funciona (Pit Stop)"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "grid sm:grid-cols-3 gap-6",
@@ -26316,12 +26428,12 @@ function ServiceDetail() {
 										{
 											step: "1",
 											title: "Diagnóstico",
-											desc: "Mapeamento profundo da operação atual."
+											desc: "Mapeamento da operação atual."
 										},
 										{
 											step: "2",
 											title: "Implementação",
-											desc: "Ajustes ágeis e treinamento da equipe."
+											desc: "Ajustes ágeis e treinamento."
 										},
 										{
 											step: "3",
@@ -26349,8 +26461,9 @@ function ServiceDetail() {
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
 								delay: 200,
+								className: "max-w-3xl mx-auto",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center",
 									children: "FAQ"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Accordion, {
 									type: "single",
@@ -26374,14 +26487,14 @@ function ServiceDetail() {
 											children: "Qual o envolvimento necessário da diretoria?"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
 											className: "text-muted-foreground text-base",
-											children: "Requeremos alinhamento estratégico nas fases de planejamento e revisão, mas a carga operacional é absorvida por nossos especialistas e multiplicadores internos."
+											children: "Requeremos alinhamento estratégico nas fases de planejamento e revisão, mas a carga operacional é absorvida por nossos especialistas internamente."
 										})]
 									})]
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
 								delay: 300,
-								className: "p-10 bg-secondary border-l-4 border-l-primary rounded-r-2xl text-left shadow-2xl",
+								className: "p-10 bg-secondary border-l-4 border-l-primary rounded-r-2xl text-left shadow-2xl max-w-4xl mx-auto",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
 										className: "text-3xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide",
@@ -26744,7 +26857,7 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Sheet = Root$1;
+var Sheet = Root$2;
 var SheetTrigger = Trigger$1;
 var SheetPortal = Portal$2;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
@@ -28398,4 +28511,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-C8xaNG8S.js.map
+//# sourceMappingURL=index-Bzwb35-c.js.map
