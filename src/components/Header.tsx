@@ -4,6 +4,7 @@ import { Menu, Hexagon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
+import { ThemeToggle } from './ThemeToggle'
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -42,7 +43,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -55,38 +56,46 @@ export function Header() {
               {link.name}
             </Link>
           ))}
+          <ThemeToggle />
           <Button asChild className="rounded-full uppercase tracking-wider font-bold">
             <Link to="/contato">Fale com um Especialista</Link>
           </Button>
         </nav>
 
         {/* Mobile Nav */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-foreground hover:bg-white/5">
-              <Menu className="h-6 w-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] bg-card border-l-border">
-            <nav className="flex flex-col gap-6 mt-12">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={cn(
-                    'text-lg font-bold uppercase tracking-wider transition-colors hover:text-primary',
-                    location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <Button asChild className="w-full mt-4 uppercase tracking-wider font-bold">
-                <Link to="/contato">Fale com um Especialista</Link>
+        <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground hover:bg-black/5 dark:hover:bg-white/5"
+              >
+                <Menu className="h-6 w-6" />
               </Button>
-            </nav>
-          </SheetContent>
-        </Sheet>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] bg-card border-l-border">
+              <nav className="flex flex-col gap-6 mt-12">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={cn(
+                      'text-lg font-bold uppercase tracking-wider transition-colors hover:text-primary',
+                      location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <Button asChild className="w-full mt-4 uppercase tracking-wider font-bold">
+                  <Link to="/contato">Fale com um Especialista</Link>
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

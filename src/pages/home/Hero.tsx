@@ -6,20 +6,20 @@ import { Reveal } from '@/components/ui/reveal'
 export function Hero() {
   return (
     <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-background">
+      <div className="absolute inset-0 z-0 bg-black">
         <img
-          src="https://img.usecurling.com/p/1920/1080?q=f1%20racing%20car%20dark&color=black"
+          src="https://img.usecurling.com/p/1920/1080?q=corporate%20strategy%20office&color=black"
           alt="Performance Background"
-          className="w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale"
+          className="w-full h-full object-cover opacity-50 mix-blend-luminosity grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -29,14 +29,14 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={100}>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-foreground mb-6 leading-[1.1] uppercase">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase">
               Performance Elevada ao{' '}
               <em className="font-heading italic text-primary font-normal">Nível Máximo</em>.
             </h1>
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
               Consultoria especializada em normas ISO para empresas que buscam a pole position no
               mercado global. Metodologia precisa, resultados mensuráveis.
             </p>
@@ -56,7 +56,7 @@ export function Hero() {
               size="lg"
               variant="outline"
               asChild
-              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold"
+              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold border-white/20 text-white hover:bg-white hover:text-black"
             >
               <Link to="/servicos">Conheça Nossas Soluções</Link>
             </Button>
