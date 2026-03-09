@@ -35,8 +35,8 @@ const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: 
   'pbqp-h': {
     t: 'PBQP-H',
     d: 'Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=civil%20engineering%20construction&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=construction%20worker%20tablet%20helmet&dpr=2',
+    hi: 'https://i.postimg.cc/bY3NWQFL/PBQP_H_BANNER.jpg',
+    ci: 'https://i.postimg.cc/vHTHscJB/PBQP_H_DESCRIÇÃO.jpg',
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
   },
   'iatf-16949': {
@@ -49,22 +49,22 @@ const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: 
   'iso-17020': {
     t: 'ISO/IEC 17020',
     d: 'Critérios rigorosos para garantir a competência e imparcialidade de organismos de inspeção.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=quality%20control%20inspection%20industrial&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=inspector%20checking%20equipment&dpr=2',
+    hi: 'https://i.postimg.cc/NG6BvRJk/17020_BANNER.png',
+    ci: 'https://i.postimg.cc/52jhyzgY/17000.png',
     w: 'Confiabilidade atestada nas inspeções, garantindo credibilidade no mercado.',
   },
   'iso-17025': {
     t: 'ISO/IEC 17025',
     d: 'Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=modern%20science%20laboratory%20research&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=clean%20professional%20laboratory&dpr=2',
+    hi: 'https://i.postimg.cc/xdBnn5VF/17025_BANNER.png',
+    ci: 'https://i.postimg.cc/Sx3KVCx0/17025-DESCRICAO.png',
     w: 'Padronização internacional e reconhecimento da qualidade dos seus laudos e ensaios.',
   },
   sassmaq: {
     t: 'SASSMAQ',
     d: 'Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=logistics%20dock%20trailers&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=logistics%20worker%20inspecting%20chemicals&dpr=2',
+    hi: 'https://i.postimg.cc/8CfxBr7N/SASSMAQ_BANNER.png',
+    ci: 'https://i.postimg.cc/wjvCMrHv/SASSMAQ_DESCRIÇÃO.png',
     w: 'Minimização de riscos operacionais e adequação às exigências da indústria química.',
   },
   esg: {
