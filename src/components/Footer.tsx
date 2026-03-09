@@ -10,19 +10,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img
-                src="https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png"
-                alt="Andrade Gestão Integrada"
-                className="h-8 w-8 object-contain"
-              />
               <span className="font-heading font-bold text-xl text-foreground uppercase tracking-wide">
                 Andrade Gestão Integrada
               </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
               Andrade Gestão Integrada. Consultoria premium focada em alta performance,
-              flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF
-              16949, PBQP-H, SASSMAQ).
+              flexibilidade operacional e certificações ISO.
             </p>
             <div className="flex gap-4">
               <a

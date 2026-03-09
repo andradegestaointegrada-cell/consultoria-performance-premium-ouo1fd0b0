@@ -36,11 +36,6 @@ export function Header() {
     >
       <div className="container mx-auto px-4 h-24 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <img
-            src="https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png"
-            alt="Andrade Gestão Integrada"
-            className="h-8 w-8 group-hover:rotate-12 transition-transform duration-300 object-contain"
-          />
           <span className="font-heading font-bold text-lg md:text-xl lg:text-2xl tracking-wide text-foreground uppercase">
             Andrade <span className="text-primary hidden sm:inline-block">Gestão Integrada</span>
           </span>

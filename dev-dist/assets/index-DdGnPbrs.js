@@ -28071,20 +28071,16 @@ function Header() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "container mx-auto px-4 h-24 flex items-center justify-between",
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 					to: "/",
 					className: "flex items-center gap-3 group",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: "https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png",
-						alt: "Andrade Gestão Integrada",
-						className: "h-8 w-8 group-hover:rotate-12 transition-transform duration-300 object-contain"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 						className: "font-heading font-bold text-lg md:text-xl lg:text-2xl tracking-wide text-foreground uppercase",
 						children: ["Andrade ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-primary hidden sm:inline-block",
 							children: "Gestão Integrada"
 						})]
-					})]
+					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
 					className: "hidden md:flex items-center gap-6",
@@ -28154,21 +28150,17 @@ function Footer() {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "md:col-span-1",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 								to: "/",
 								className: "flex items-center gap-3 mb-6",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png",
-									alt: "Andrade Gestão Integrada",
-									className: "h-8 w-8 object-contain"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 									className: "font-heading font-bold text-xl text-foreground uppercase tracking-wide",
 									children: "Andrade Gestão Integrada"
-								})]
+								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-muted-foreground text-sm mb-8 leading-relaxed",
-								children: "Andrade Gestão Integrada. Consultoria premium focada em alta performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ)."
+								children: "Andrade Gestão Integrada. Consultoria premium focada em alta performance, flexibilidade operacional e certificações ISO."
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex gap-4",
@@ -28344,4 +28336,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-CT2v-vSI.js.map
+//# sourceMappingURL=index-DdGnPbrs.js.map
