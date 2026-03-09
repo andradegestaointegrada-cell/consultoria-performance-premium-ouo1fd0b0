@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, Hexagon } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
@@ -35,10 +35,14 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 h-24 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <Hexagon className="h-8 w-8 text-primary group-hover:rotate-12 transition-transform duration-300" />
-          <span className="font-heading font-bold text-3xl tracking-wide text-foreground uppercase">
-            Performance<span className="text-primary">.</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img
+            src="https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png"
+            alt="Andrade Gestão Integrada"
+            className="h-8 w-8 group-hover:rotate-12 transition-transform duration-300 object-contain"
+          />
+          <span className="font-heading font-bold text-lg md:text-xl lg:text-2xl tracking-wide text-foreground uppercase">
+            Andrade <span className="text-primary hidden sm:inline-block">Gestão Integrada</span>
           </span>
         </Link>
 

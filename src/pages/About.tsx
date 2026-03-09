@@ -20,8 +20,8 @@ export default function About() {
         <div className="container mx-auto px-4 text-center max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-              Andrade Gestão Integrada{' '}
-              <em className="font-heading italic font-normal text-primary">e Treinamento</em>
+              Andrade{' '}
+              <em className="font-heading italic font-normal text-primary">Gestão Integrada</em>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Especialistas em sistemas de gestão com foco absoluto em resultados. Nossa consultoria

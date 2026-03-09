@@ -37,8 +37,8 @@ export function Hero() {
 
           <Reveal delay={200}>
             <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
-              Consultoria especializada em normas ISO para empresas que buscam a pole position no
-              mercado global. Metodologia precisa, resultados mensuráveis.
+              Consultoria especializada em normas ISO para empresas que buscam a LIDERANÇA no
+              mercado. Metodologia precisa, resultados mensuráveis.
             </p>
           </Reveal>
 

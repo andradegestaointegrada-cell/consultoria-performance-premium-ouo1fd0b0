@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Hexagon, Linkedin, Twitter, Instagram } from 'lucide-react'
+import { Linkedin, Twitter, Instagram } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -9,16 +9,20 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <Hexagon className="h-6 w-6 text-primary" />
-              <span className="font-heading font-bold text-2xl text-foreground uppercase tracking-wide">
-                Andrade.
+            <Link to="/" className="flex items-center gap-3 mb-6">
+              <img
+                src="https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png"
+                alt="Andrade Gestão Integrada"
+                className="h-8 w-8 object-contain"
+              />
+              <span className="font-heading font-bold text-xl text-foreground uppercase tracking-wide">
+                Andrade Gestão Integrada
               </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
-              Andrade Gestão Integrada e Treinamento. Consultoria premium focada em alta
-              performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020,
-              17025, IATF 16949, PBQP-H, SASSMAQ).
+              Andrade Gestão Integrada. Consultoria premium focada em alta performance,
+              flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF
+              16949, PBQP-H, SASSMAQ).
             </p>
             <div className="flex gap-4">
               <a
@@ -114,7 +118,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 text-center text-sm font-bold text-muted-foreground uppercase tracking-wider flex flex-col md:flex-row justify-between items-center">
-          <p>© {new Date().getFullYear()} Andrade Gestão Integrada e Treinamento.</p>
+          <p>© {new Date().getFullYear()} Andrade Gestão Integrada.</p>
           <p className="mt-4 md:mt-0 text-primary">Desenvolvido com precisão.</p>
         </div>
       </div>

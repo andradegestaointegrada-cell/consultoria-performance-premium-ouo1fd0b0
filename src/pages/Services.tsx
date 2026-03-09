@@ -22,6 +22,18 @@ const allServices = [
     desc: 'Ambiente de trabalho seguro, prevenção de acidentes e gestão de riscos ocupacionais.',
   },
   {
+    id: 'pbqp-h',
+    title: 'PBQP-H',
+    name: 'Programa de Qualidade do Habitat',
+    desc: 'Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil.',
+  },
+  {
+    id: 'iatf-16949',
+    title: 'IATF 16949',
+    name: 'Gestão da Qualidade Automotiva',
+    desc: 'Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva.',
+  },
+  {
     id: 'iso-17020',
     title: 'ISO/IEC 17020',
     name: 'Organismos de Inspeção',
@@ -32,18 +44,6 @@ const allServices = [
     title: 'ISO/IEC 17025',
     name: 'Laboratórios de Ensaio e Calibração',
     desc: 'Competência técnica para testes, calibração e resultados consistentes globalmente.',
-  },
-  {
-    id: 'iatf-16949',
-    title: 'IATF 16949',
-    name: 'Gestão da Qualidade Automotiva',
-    desc: 'Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva.',
-  },
-  {
-    id: 'pbqp-h',
-    title: 'PBQP-H',
-    name: 'Programa de Qualidade do Habitat',
-    desc: 'Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil.',
   },
   {
     id: 'sassmaq',

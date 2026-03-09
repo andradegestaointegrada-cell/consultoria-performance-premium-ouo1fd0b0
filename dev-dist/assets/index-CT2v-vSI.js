@@ -19093,10 +19093,6 @@ var Circle = createLucideIcon("circle", [["circle", {
 	r: "10",
 	key: "1mglay"
 }]]);
-var Hexagon = createLucideIcon("hexagon", [["path", {
-	d: "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z",
-	key: "yt0hxn"
-}]]);
 var Instagram = createLucideIcon("instagram", [
 	["rect", {
 		width: "20",
@@ -24106,7 +24102,7 @@ function Hero() {
 							delay: 200,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-xl text-white/80 mb-8 max-w-2xl leading-relaxed",
-								children: "Consultoria especializada em normas ISO para empresas que buscam a pole position no mercado global. Metodologia precisa, resultados mensuráveis."
+								children: "Consultoria especializada em normas ISO para empresas que buscam a LIDERANÇA no mercado. Metodologia precisa, resultados mensuráveis."
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
@@ -24424,11 +24420,11 @@ function About() {
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 						className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
 						children: [
-							"Andrade Gestão Integrada",
+							"Andrade",
 							" ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
 								className: "font-heading italic font-normal text-primary",
-								children: "e Treinamento"
+								children: "Gestão Integrada"
 							})
 						]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
@@ -24547,6 +24543,18 @@ var allServices = [
 		desc: "Ambiente de trabalho seguro, prevenção de acidentes e gestão de riscos ocupacionais."
 	},
 	{
+		id: "pbqp-h",
+		title: "PBQP-H",
+		name: "Programa de Qualidade do Habitat",
+		desc: "Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil."
+	},
+	{
+		id: "iatf-16949",
+		title: "IATF 16949",
+		name: "Gestão da Qualidade Automotiva",
+		desc: "Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva."
+	},
+	{
 		id: "iso-17020",
 		title: "ISO/IEC 17020",
 		name: "Organismos de Inspeção",
@@ -24557,18 +24565,6 @@ var allServices = [
 		title: "ISO/IEC 17025",
 		name: "Laboratórios de Ensaio e Calibração",
 		desc: "Competência técnica para testes, calibração e resultados consistentes globalmente."
-	},
-	{
-		id: "iatf-16949",
-		title: "IATF 16949",
-		name: "Gestão da Qualidade Automotiva",
-		desc: "Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva."
-	},
-	{
-		id: "pbqp-h",
-		title: "PBQP-H",
-		name: "Programa de Qualidade do Habitat",
-		desc: "Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil."
 	},
 	{
 		id: "sassmaq",
@@ -28077,12 +28073,16 @@ function Header() {
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 					to: "/",
-					className: "flex items-center gap-2 group",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hexagon, { className: "h-8 w-8 text-primary group-hover:rotate-12 transition-transform duration-300" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "font-heading font-bold text-3xl tracking-wide text-foreground uppercase",
-						children: ["Performance", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-primary",
-							children: "."
+					className: "flex items-center gap-3 group",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: "https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png",
+						alt: "Andrade Gestão Integrada",
+						className: "h-8 w-8 group-hover:rotate-12 transition-transform duration-300 object-contain"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-heading font-bold text-lg md:text-xl lg:text-2xl tracking-wide text-foreground uppercase",
+						children: ["Andrade ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-primary hidden sm:inline-block",
+							children: "Gestão Integrada"
 						})]
 					})]
 				}),
@@ -28156,15 +28156,19 @@ function Footer() {
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 								to: "/",
-								className: "flex items-center gap-2 mb-6",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hexagon, { className: "h-6 w-6 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-heading font-bold text-2xl text-foreground uppercase tracking-wide",
-									children: "Andrade."
+								className: "flex items-center gap-3 mb-6",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: "https://skip-assets.s3.amazonaws.com/1741530985860-icon_b.png",
+									alt: "Andrade Gestão Integrada",
+									className: "h-8 w-8 object-contain"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-heading font-bold text-xl text-foreground uppercase tracking-wide",
+									children: "Andrade Gestão Integrada"
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-muted-foreground text-sm mb-8 leading-relaxed",
-								children: "Andrade Gestão Integrada e Treinamento. Consultoria premium focada em alta performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ)."
+								children: "Andrade Gestão Integrada. Consultoria premium focada em alta performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ)."
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex gap-4",
@@ -28268,7 +28272,7 @@ function Footer() {
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
 					"© ",
 					(/* @__PURE__ */ new Date()).getFullYear(),
-					" Andrade Gestão Integrada e Treinamento."
+					" Andrade Gestão Integrada."
 				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "mt-4 md:mt-0 text-primary",
 					children: "Desenvolvido com precisão."
@@ -28340,4 +28344,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-DXiwzs2B.js.map
+//# sourceMappingURL=index-CT2v-vSI.js.map
