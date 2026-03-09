@@ -22,11 +22,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Open Sans"', 'system-ui', 'sans-serif'],
+        heading: ['"Times New Roman MT Condensed"', '"Times New Roman"', 'Times', 'serif'],
       },
       colors: {
-        border: 'hsl(var(--border) / 0.08)',
-        input: 'hsl(var(--input) / 0.16)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -66,7 +67,7 @@ export default {
       },
       boxShadow: {
         glass: '0 4px 30px rgba(0, 0, 0, 0.1)',
-        glow: '0 0 20px rgba(0, 161, 156, 0.15)',
+        glow: '0 0 20px rgba(207, 174, 112, 0.15)',
       },
     },
   },

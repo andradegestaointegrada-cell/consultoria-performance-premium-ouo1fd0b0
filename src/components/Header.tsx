@@ -30,13 +30,13 @@ export function Header() {
     <header
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent',
-        isScrolled && 'bg-background/80 backdrop-blur-md border-border glass-panel',
+        isScrolled && 'bg-background/90 backdrop-blur-md border-border glass-panel',
       )}
     >
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-24 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <Hexagon className="h-8 w-8 text-primary group-hover:rotate-12 transition-transform duration-300" />
-          <span className="font-bold text-xl tracking-tight text-white">
+          <span className="font-heading font-bold text-3xl tracking-wide text-foreground uppercase">
             Performance<span className="text-primary">.</span>
           </span>
         </Link>
@@ -48,14 +48,14 @@ export function Header() {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-primary',
+                'text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary',
                 location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
               )}
             >
               {link.name}
             </Link>
           ))}
-          <Button asChild className="rounded-full shadow-glow">
+          <Button asChild className="rounded-full uppercase tracking-wider font-bold">
             <Link to="/contato">Fale com um Especialista</Link>
           </Button>
         </nav>
@@ -63,7 +63,7 @@ export function Header() {
         {/* Mobile Nav */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+            <Button variant="ghost" size="icon" className="text-foreground hover:bg-white/5">
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
@@ -74,14 +74,14 @@ export function Header() {
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    'text-lg font-medium transition-colors hover:text-primary',
+                    'text-lg font-bold uppercase tracking-wider transition-colors hover:text-primary',
                     location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Button asChild className="w-full mt-4">
+              <Button asChild className="w-full mt-4 uppercase tracking-wider font-bold">
                 <Link to="/contato">Fale com um Especialista</Link>
               </Button>
             </nav>

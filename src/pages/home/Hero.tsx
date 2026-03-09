@@ -10,16 +10,16 @@ export function Hero() {
         <img
           src="https://img.usecurling.com/p/1920/1080?q=f1%20racing%20car%20dark&color=black"
           alt="Performance Background"
-          className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
+          className="w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-3xl">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -29,12 +29,9 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={100}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-foreground mb-6 leading-[1.1] uppercase">
               Performance Elevada ao{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
-                Nível Máximo
-              </span>
-              .
+              <em className="font-heading italic text-primary font-normal">Nível Máximo</em>.
             </h1>
           </Reveal>
 
@@ -46,7 +43,11 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={300} className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" asChild className="h-14 px-8 text-base shadow-glow rounded-full">
+            <Button
+              size="lg"
+              asChild
+              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold"
+            >
               <Link to="/contato">
                 Inicie sua Jornada <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -55,7 +56,7 @@ export function Hero() {
               size="lg"
               variant="outline"
               asChild
-              className="h-14 px-8 text-base rounded-full border-border hover:bg-white/5"
+              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold"
             >
               <Link to="/servicos">Conheça Nossas Soluções</Link>
             </Button>
@@ -64,7 +65,7 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-muted-foreground opacity-50" />
+        <ChevronDown className="h-8 w-8 text-primary opacity-80" />
       </div>
     </section>
   )

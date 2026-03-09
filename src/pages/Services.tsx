@@ -44,10 +44,12 @@ const allServices = [
 export default function Services() {
   return (
     <div className="pt-20">
-      <section className="py-24 bg-card border-b border-border">
+      <section className="py-24 bg-secondary border-b border-border">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Catálogo de Serviços</h1>
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+              Catálogo de <em className="font-heading italic font-normal text-primary">Serviços</em>
+            </h1>
             <p className="text-xl text-muted-foreground">
               Soluções projetadas para elevar sua empresa aos padrões globais de excelência, com
               precisão técnica e foco no negócio.
@@ -62,19 +64,19 @@ export default function Services() {
             {allServices.map((svc, i) => (
               <Reveal key={svc.id} delay={i * 100}>
                 <Link to={`/servicos/${svc.id}`} className="block h-full group">
-                  <Card className="h-full bg-card hover:bg-card/80 border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-[100px] transition-transform duration-500 group-hover:scale-150" />
+                  <Card className="h-full bg-card hover:bg-card/90 border-2 border-border hover:border-primary transition-all duration-300 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-secondary rounded-bl-[100px] transition-transform duration-500 group-hover:scale-150 opacity-50" />
                     <CardContent className="p-8 relative z-10">
-                      <div className="text-primary font-bold text-lg mb-2 tracking-wide uppercase">
+                      <div className="text-primary font-bold text-sm mb-2 tracking-widest uppercase">
                         {svc.title}
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+                      <h3 className="text-3xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide">
                         {svc.name}
                       </h3>
                       <p className="text-muted-foreground">{svc.desc}</p>
-                      <div className="mt-8 flex items-center text-sm font-medium text-white group-hover:text-primary transition-colors">
+                      <div className="mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider">
                         Explorar solução{' '}
-                        <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                        <span className="ml-2 group-hover:translate-x-2 transition-transform">
                           →
                         </span>
                       </div>

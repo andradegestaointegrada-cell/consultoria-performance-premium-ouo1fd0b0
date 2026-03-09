@@ -29,7 +29,7 @@ export default function Insights() {
       <section className="py-24 bg-card border-b border-border">
         <div className="container mx-auto px-4">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
               Insights & Inteligência
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
@@ -44,21 +44,21 @@ export default function Insights() {
         <div className="container mx-auto px-4">
           <Reveal>
             <div className="mb-16">
-              <h2 className="text-2xl font-bold text-white mb-8 border-b border-border pb-4">
+              <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
                 Destaque
               </h2>
-              <div className="relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border border-border group cursor-pointer">
+              <div className="relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer">
                 <img
                   src="https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black"
                   alt="Pitstop"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                <div className="absolute bottom-8 left-8 max-w-2xl">
-                  <div className="text-primary font-bold text-sm uppercase tracking-wider mb-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                <div className="absolute bottom-8 left-8 max-w-3xl">
+                  <div className="text-primary font-bold text-sm uppercase tracking-widest mb-4">
                     Estratégia Corporativa
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:underline">
+                  <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide">
                     A Metáfora do Pit Stop na Otimização de Processos Empresariais
                   </h3>
                   <p className="text-muted-foreground line-clamp-2 text-lg">
@@ -70,25 +70,25 @@ export default function Insights() {
             </div>
           </Reveal>
 
-          <h2 className="text-2xl font-bold text-white mb-8 border-b border-border pb-4">
+          <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
             Últimos Artigos
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {articles.map((article, i) => (
               <Reveal key={i} delay={i * 100}>
-                <div className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors">
+                <div className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300">
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={article.img}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100"
                     />
                   </div>
-                  <div className="p-5">
-                    <div className="text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                  <div className="p-6">
+                    <div className="text-primary text-xs font-bold uppercase tracking-widest mb-3">
                       {article.category}
                     </div>
-                    <h4 className="text-lg font-bold text-white group-hover:text-primary transition-colors">
+                    <h4 className="text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight">
                       {article.title}
                     </h4>
                   </div>
