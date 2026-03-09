@@ -140,7 +140,7 @@ export default function Contact() {
 
               <div className="h-64 rounded-2xl overflow-hidden border-2 border-border bg-card relative">
                 <img
-                  src="https://img.usecurling.com/p/800/400?q=map%20dark&color=black"
+                  src="https://img.usecurling.com/p/800/400?q=clean%20city%20map&color=black"
                   alt="Mapa"
                   className="w-full h-full object-cover opacity-50 grayscale"
                 />
