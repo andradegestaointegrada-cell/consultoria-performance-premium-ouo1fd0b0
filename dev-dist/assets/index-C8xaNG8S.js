@@ -24401,13 +24401,13 @@ function Index() {
 	});
 }
 var team = [{
-	name: "Andrade",
+	name: "Alexandre Andrade",
 	role: "Diretor e Consultor Principal",
-	img: "https://img.usecurling.com/ppl/large?gender=male&seed=1"
+	img: "https://i.postimg.cc/sX63ZmpV/CONSULTOR_ALEXANDRE_ANDRADE_1.png"
 }, {
-	name: "Equipe Técnica",
-	role: "Especialistas Associados",
-	img: "https://img.usecurling.com/ppl/large?gender=female&seed=2"
+	name: "Thatiana Pidlepa Andrade",
+	role: "Auditora",
+	img: "https://i.postimg.cc/SsTmzdWq/CONSULTORA_THATIANA_PIDLEPA_ANDRADE_1.png"
 }];
 function About() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -24444,9 +24444,9 @@ function About() {
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "relative",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -inset-1 bg-gradient-to-tr from-primary/50 to-transparent rounded-2xl blur-lg opacity-30" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://img.usecurling.com/p/800/600?q=office%20strategy%20dark&color=black",
-									alt: "Estratégia",
-									className: "relative rounded-2xl border-2 border-border shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+									src: "https://i.postimg.cc/HW8Qsh0g/HOME-NEW.jpg",
+									alt: "Flexibilidade e Adaptação",
+									className: "relative w-full aspect-[4/3] object-cover rounded-2xl border-2 border-border shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
 								})]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
@@ -24503,7 +24503,7 @@ function About() {
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 											src: member.img,
 											alt: member.name,
-											className: "w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+											className: "w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 object-top"
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
@@ -28398,4 +28398,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-fxFQZGwH.js.map
+//# sourceMappingURL=index-C8xaNG8S.js.map
