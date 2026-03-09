@@ -24248,7 +24248,7 @@ var stats = [
 		label: "Anos de Experiência"
 	},
 	{
-		value: "500+",
+		value: "100+",
 		label: "Certificações"
 	},
 	{
@@ -28336,4 +28336,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-DdGnPbrs.js.map
+//# sourceMappingURL=index-DKXzuXth.js.map
