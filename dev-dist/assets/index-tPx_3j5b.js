@@ -25096,45 +25096,45 @@ var AspectRatio = AspectRatio$1;
 var S_DATA = {
 	"iso-9001": {
 		t: "ISO 9001",
-		d: "A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência operacional e resultados consistentes.",
-		hi: "corporate%20office",
-		ci: "quality%20control",
-		w: "Processos robustos que garantem a padronização e a alta performance contínua da sua equipe."
+		d: "A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.",
+		hi: "modern%20corporate%20building",
+		ci: "team%20meeting%20presentation",
+		w: "Processos robustos que garantem a padronização e a alta performance contínua."
 	},
 	"iso-14001": {
 		t: "ISO 14001",
-		d: "Transformamos a gestão ambiental em um diferencial competitivo sustentável, com a expertise e autoridade da Andrade Gestão.",
-		hi: "sustainable%20business",
-		ci: "sustainability",
-		w: "Estratégias sustentáveis integradas ao negócio, otimizando recursos e mitigando impactos ambientais."
+		d: "Transformamos a gestão ambiental em um diferencial competitivo sustentável.",
+		hi: "sustainable%20nature%20corporate",
+		ci: "renewable%20energy%20business",
+		w: "Estratégias sustentáveis integradas ao negócio, mitigando impactos ambientais."
 	},
 	"iso-45001": {
 		t: "ISO 45001",
-		d: "Proteja seu maior ativo. Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.",
-		hi: "industrial%20safety",
-		ci: "safety%20engineering",
-		w: "Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança interna."
+		d: "Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.",
+		hi: "drone%20construction%20site%20safety",
+		ci: "industrial%20worker%20helmet",
+		w: "Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança."
 	},
 	"iso-27001": {
 		t: "ISO 27001",
-		d: "Segurança da informação levada a sério. Protegemos os dados da sua empresa contra ameaças com padrões globais de excelência.",
-		hi: "server%20room",
-		ci: "cybersecurity",
-		w: "Estabelecemos controles rigorosos garantindo confidencialidade, integridade e total conformidade."
+		d: "Segurança da informação levada a sério. Protegemos os dados da sua empresa.",
+		hi: "server%20room%20technology",
+		ci: "cybersecurity%20data%20protection",
+		w: "Estabelecemos controles rigorosos garantindo confidencialidade e integridade."
 	},
 	esg: {
 		t: "Consultoria ESG",
-		d: "Guiamos sua empresa na jornada ESG, alinhando propósito, governança sólida e impacto positivo na sociedade de forma integrada.",
-		hi: "corporate%20governance",
-		ci: "esg%20business",
-		w: "Apoiamos na estruturação completa de relatórios e práticas alinhadas às altas exigências dos investidores."
+		d: "Guiamos sua empresa na jornada ESG, alinhando propósito e governança sólida.",
+		hi: "corporate%20sustainability%20green",
+		ci: "business%20ecology%20growth",
+		w: "Apoiamos na estruturação completa de práticas alinhadas às exigências dos investidores."
 	}
 };
 var DEF = {
-	d: "Soluções estratégicas da Andrade Gestão focadas em trazer resultados reais para a operação da sua empresa.",
-	hi: "business%20consulting",
-	ci: "strategy%20planning",
-	w: "Entregamos um sistema de gestão vivo, focado em gerar valor e reduzir riscos operacionais críticos."
+	d: "Soluções estratégicas focadas em trazer resultados reais para a operação da sua empresa.",
+	hi: "business%20strategy%20office",
+	ci: "corporate%20planning%20team",
+	w: "Entregamos um sistema focado em gerar valor e reduzir riscos."
 };
 function ServiceDetail() {
 	const { id } = useParams();
@@ -25147,7 +25147,7 @@ function ServiceDetail() {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "absolute inset-0 z-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: `https://img.usecurling.com/p/1920/1080?q=${svc.hi}&color=black`,
+					src: `https://img.usecurling.com/p/1920/1080?q=${svc.hi}&dpr=2`,
 					alt: `${title} Background`,
 					className: "w-full h-full object-cover"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/75" })]
@@ -25189,7 +25189,7 @@ function ServiceDetail() {
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
 									ratio: 4 / 3,
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-										src: `https://img.usecurling.com/p/800/600?q=${svc.ci}&color=black`,
+										src: `https://img.usecurling.com/p/800/600?q=${svc.ci}&dpr=2`,
 										alt: `Detalhes de ${title}`,
 										className: "object-cover w-full h-full hover:scale-105 transition-transform duration-700"
 									})
@@ -25201,24 +25201,24 @@ function ServiceDetail() {
 						delay: 100,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 							className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-12 uppercase tracking-wide text-center",
-							children: "Como funciona (Pit Stop)"
+							children: "Como funciona"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "grid sm:grid-cols-3 gap-8",
 							children: [
 								{
 									step: "1",
 									title: "Diagnóstico",
-									desc: "Mapeamento profundo da operação atual e identificação de gaps estratégicos."
+									desc: "Mapeamento da operação e identificação de gaps estratégicos."
 								},
 								{
 									step: "2",
 									title: "Implementação",
-									desc: "Ajustes ágeis, criação de processos customizados e treinamento da equipe."
+									desc: "Ajustes ágeis, criação de processos customizados e treinamento."
 								},
 								{
 									step: "3",
 									title: "Auditoria",
-									desc: "Validação final de conformidade e suporte total para a certificação."
+									desc: "Validação final de conformidade para a certificação."
 								}
 							].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "p-8 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all duration-300 group",
@@ -25252,26 +25252,22 @@ function ServiceDetail() {
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
 								value: "item-1",
 								className: "border-border/50",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionTrigger, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
 									className: "text-foreground hover:text-primary font-bold uppercase tracking-wider text-left",
-									children: [
-										"Quanto tempo leva a implementação da ",
-										title,
-										"?"
-									]
+									children: "Prazo de implementação?"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
 									className: "text-muted-foreground text-base leading-relaxed",
-									children: "O prazo varia conforme o porte e maturidade da empresa. A metodologia ágil da Andrade Gestão costuma reduzir o tempo padrão de mercado em até 30%, garantindo entregas rápidas sem perder a excelência técnica."
+									children: "Reduzimos o tempo padrão de mercado em até 30% com nossa metodologia ágil, garantindo entregas rápidas sem perder a excelência técnica."
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
 								value: "item-2",
 								className: "border-border/50",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
 									className: "text-foreground hover:text-primary font-bold uppercase tracking-wider text-left",
-									children: "Qual o envolvimento necessário da nossa diretoria?"
+									children: "Envolvimento da diretoria?"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
 									className: "text-muted-foreground text-base leading-relaxed",
-									children: "Requeremos alinhamento estratégico apenas nas fases de planejamento e revisão executiva. A carga operacional pesada é totalmente absorvida pelos nossos especialistas, liberando sua equipe para focar no core business."
+									children: "Requeremos alinhamento estratégico nas fases de planejamento e revisão executiva. A carga operacional é absorvida pelos nossos especialistas."
 								})]
 							})]
 						})]
@@ -25294,8 +25290,7 @@ function ServiceDetail() {
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "text-muted-foreground text-lg max-w-xl",
 								children: [
-									"Fale com um consultor da Andrade Gestão Integrada e descubra o impacto real da",
-									" ",
+									"Fale com um consultor e descubra o impacto real da ",
 									title,
 									" no seu negócio."
 								]
@@ -28466,4 +28461,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-DH8irhoS.js.map
+//# sourceMappingURL=index-tPx_3j5b.js.map
