@@ -34,8 +34,9 @@ export function ServicesOverview() {
               Soluções de Ponta
             </h2>
             <p className="text-muted-foreground">
-              Implementação ágil e precisa das principais normas internacionais, garantindo vantagem
-              competitiva e conformidade global.
+              Implementação ágil e precisa das principais normas (ISO 9001, 14001, 45001, 17020,
+              17025, IATF 16949, PBQP-H, SASSMAQ), garantindo vantagem competitiva e flexibilidade
+              no atendimento.
             </p>
           </div>
           <Button

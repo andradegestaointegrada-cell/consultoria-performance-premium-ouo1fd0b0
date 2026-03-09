@@ -12,12 +12,13 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2 mb-6">
               <Hexagon className="h-6 w-6 text-primary" />
               <span className="font-heading font-bold text-2xl text-foreground uppercase tracking-wide">
-                Performance.
+                Andrade.
               </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
-              Consultoria premium focada em alta performance e certificações ISO para líderes de
-              mercado.
+              Andrade Gestão Integrada e Treinamento. Consultoria premium focada em alta
+              performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020,
+              17025, IATF 16949, PBQP-H, SASSMAQ).
             </p>
             <div className="flex gap-4">
               <a
@@ -113,7 +114,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 text-center text-sm font-bold text-muted-foreground uppercase tracking-wider flex flex-col md:flex-row justify-between items-center">
-          <p>© {new Date().getFullYear()} Consultoria Performance Premium.</p>
+          <p>© {new Date().getFullYear()} Andrade Gestão Integrada e Treinamento.</p>
           <p className="mt-4 md:mt-0 text-primary">Desenvolvido com precisão.</p>
         </div>
       </div>

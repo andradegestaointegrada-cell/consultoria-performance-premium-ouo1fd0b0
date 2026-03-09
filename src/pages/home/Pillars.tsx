@@ -6,22 +6,22 @@ const pillars = [
   {
     icon: <ShieldCheck className="h-8 w-8 text-primary" />,
     title: 'Conformidade',
-    desc: 'Aderência estrita aos mais altos padrões globais de qualidade e segurança.',
+    desc: 'Domínio das normas (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ).',
   },
   {
     icon: <Zap className="h-8 w-8 text-primary" />,
-    title: 'Performance',
-    desc: 'Otimização contínua de processos para máxima eficiência operacional.',
+    title: 'Flexibilidade',
+    desc: 'Adaptação à dinâmica e aos prazos do cliente com gestão completa ou suporte técnico colaborativo.',
   },
   {
     icon: <Users className="h-8 w-8 text-primary" />,
     title: 'Cultura',
-    desc: 'Engajamento e transformação cultural focada em excelência.',
+    desc: 'Engajamento e transformação cultural focada em excelência na base da organização.',
   },
   {
     icon: <LineChart className="h-8 w-8 text-primary" />,
-    title: 'Evidências',
-    desc: 'Decisões baseadas em dados concretos e métricas de desempenho.',
+    title: 'Resultados',
+    desc: 'Foco contínuo em elevar o desempenho operacional e garantir certificações com agilidade e solidez.',
   },
 ]
 
@@ -35,7 +35,8 @@ export function Pillars() {
               Nossos Pilares
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              A fundação da nossa metodologia é construída sobre quatro princípios inegociáveis.
+              A fundação da nossa metodologia é construída sobre quatro princípios inegociáveis,
+              destacando-se a flexibilidade para atender à sua operação.
             </p>
           </div>
         </Reveal>

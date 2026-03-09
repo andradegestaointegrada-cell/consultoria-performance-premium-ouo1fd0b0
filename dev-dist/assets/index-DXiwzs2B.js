@@ -24181,22 +24181,22 @@ var pillars = [
 	{
 		icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: "h-8 w-8 text-primary" }),
 		title: "Conformidade",
-		desc: "Aderência estrita aos mais altos padrões globais de qualidade e segurança."
+		desc: "Domínio das normas (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ)."
 	},
 	{
 		icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, { className: "h-8 w-8 text-primary" }),
-		title: "Performance",
-		desc: "Otimização contínua de processos para máxima eficiência operacional."
+		title: "Flexibilidade",
+		desc: "Adaptação à dinâmica e aos prazos do cliente com gestão completa ou suporte técnico colaborativo."
 	},
 	{
 		icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-8 w-8 text-primary" }),
 		title: "Cultura",
-		desc: "Engajamento e transformação cultural focada em excelência."
+		desc: "Engajamento e transformação cultural focada em excelência na base da organização."
 	},
 	{
 		icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartLine, { className: "h-8 w-8 text-primary" }),
-		title: "Evidências",
-		desc: "Decisões baseadas em dados concretos e métricas de desempenho."
+		title: "Resultados",
+		desc: "Foco contínuo em elevar o desempenho operacional e garantir certificações com agilidade e solidez."
 	}
 ];
 function Pillars() {
@@ -24211,7 +24211,7 @@ function Pillars() {
 					children: "Nossos Pilares"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "text-muted-foreground max-w-2xl mx-auto",
-					children: "A fundação da nossa metodologia é construída sobre quatro princípios inegociáveis."
+					children: "A fundação da nossa metodologia é construída sobre quatro princípios inegociáveis, destacando-se a flexibilidade para atender à sua operação."
 				})]
 			}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
@@ -24316,7 +24316,7 @@ function ServicesOverview() {
 						children: "Soluções de Ponta"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "text-muted-foreground",
-						children: "Implementação ágil e precisa das principais normas internacionais, garantindo vantagem competitiva e conformidade global."
+						children: "Implementação ágil e precisa das principais normas (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ), garantindo vantagem competitiva e flexibilidade no atendimento."
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 					variant: "outline",
@@ -24404,23 +24404,15 @@ function Index() {
 		]
 	});
 }
-var team = [
-	{
-		name: "Alexandre Costa",
-		role: "Diretor de Performance",
-		img: "https://img.usecurling.com/ppl/large?gender=male&seed=1"
-	},
-	{
-		name: "Carolina Neves",
-		role: "Lead Auditor ISO",
-		img: "https://img.usecurling.com/ppl/large?gender=female&seed=2"
-	},
-	{
-		name: "Roberto Silva",
-		role: "Especialista em Cultura",
-		img: "https://img.usecurling.com/ppl/large?gender=male&seed=3"
-	}
-];
+var team = [{
+	name: "Andrade",
+	role: "Diretor e Consultor Principal",
+	img: "https://img.usecurling.com/ppl/large?gender=male&seed=1"
+}, {
+	name: "Equipe Técnica",
+	role: "Especialistas Associados",
+	img: "https://img.usecurling.com/ppl/large?gender=female&seed=2"
+}];
 function About() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "pt-20",
@@ -24432,16 +24424,16 @@ function About() {
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 						className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
 						children: [
-							"A Engenharia da",
+							"Andrade Gestão Integrada",
 							" ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
 								className: "font-heading italic font-normal text-primary",
-								children: "Excelência"
+								children: "e Treinamento"
 							})
 						]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "text-xl text-muted-foreground leading-relaxed",
-						children: "Nascemos da crença de que a conformidade não é um fim, mas o ponto de partida para a verdadeira performance empresarial. Inspirados na precisão do automobilismo de elite, entregamos resultados incontestáveis."
+						children: "Especialistas em sistemas de gestão com foco absoluto em resultados. Nossa consultoria se destaca pela flexibilidade operacional, adaptando-se integralmente à dinâmica e aos prazos da sua empresa, oferecendo desde o gerenciamento completo até o suporte técnico colaborativo."
 					})] })
 				})
 			}),
@@ -24467,22 +24459,22 @@ function About() {
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide",
-									children: "Nossa Metodologia"
+									children: "Flexibilidade e Adaptação"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-muted-foreground text-lg mb-6",
-									children: "Assim como um carro de F1 é ajustado para cada pista, adaptamos nossa abordagem à realidade única da sua empresa. Utilizamos dados precisos para eliminar gargalos e garantir que cada processo opere em sua máxima eficiência."
+									children: "Entendemos que cada organização possui seu próprio ritmo. Nosso diferencial é a flexibilidade operacional: atuamos conforme as suas necessidades, seja assumindo a gestão completa dos sistemas ou atuando de forma colaborativa com a sua equipe técnica."
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
 									className: "space-y-4",
 									children: [
-										"Diagnóstico Preciso (Telemetria)",
-										"Ajuste de Processos (Setup)",
-										"Implementação Ágil (Pit Stop)",
-										"Melhoria Contínua (Volta Mais Rápida)"
+										"Amplo Domínio: ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ",
+										"Ajuste de Processos com Foco na Realidade do Cliente",
+										"Gestão Completa ou Suporte Colaborativo",
+										"Melhoria Contínua e Acompanhamento Ágil"
 									].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
 										className: "flex items-center text-foreground font-medium",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2 w-2 rounded-full bg-primary mr-3 shadow-[0_0_8px_rgba(207,174,112,0.8)]" }), item]
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2 w-2 rounded-full bg-primary mr-3 shadow-[0_0_8px_rgba(207,174,112,0.8)] min-w-[8px]" }), item]
 									}, i))
 								})
 							]
@@ -24501,10 +24493,10 @@ function About() {
 							children: "Nosso Time"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "text-muted-foreground",
-							children: "Especialistas com vivência executiva e foco em resultados."
+							children: "Especialistas com vivência técnica e foco em resultados operacionais."
 						})]
 					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "grid md:grid-cols-3 gap-8 max-w-5xl mx-auto",
+						className: "grid md:grid-cols-2 gap-8 max-w-4xl mx-auto",
 						children: team.map((member, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
 							delay: i * 100,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -24540,37 +24532,49 @@ var allServices = [
 		id: "iso-9001",
 		title: "ISO 9001",
 		name: "Gestão da Qualidade",
-		desc: "Excelência operacional e satisfação do cliente."
+		desc: "Excelência operacional e satisfação do cliente em todos os processos da organização."
 	},
 	{
 		id: "iso-14001",
 		title: "ISO 14001",
 		name: "Gestão Ambiental",
-		desc: "Sustentabilidade e compliance regulatório."
+		desc: "Sustentabilidade, compliance regulatório e redução de impactos ambientais."
 	},
 	{
 		id: "iso-45001",
 		title: "ISO 45001",
 		name: "Saúde e Segurança",
-		desc: "Ambiente de trabalho seguro e prevenção de riscos."
+		desc: "Ambiente de trabalho seguro, prevenção de acidentes e gestão de riscos ocupacionais."
 	},
 	{
 		id: "iso-17020",
-		title: "ISO 17020",
-		name: "Inspeção",
-		desc: "Critérios rigorosos para organismos de inspeção."
+		title: "ISO/IEC 17020",
+		name: "Organismos de Inspeção",
+		desc: "Critérios rigorosos para garantir a competência e imparcialidade dos organismos de inspeção."
 	},
 	{
 		id: "iso-17025",
-		title: "ISO 17025",
-		name: "Laboratórios",
-		desc: "Competência técnica para testes e calibração."
+		title: "ISO/IEC 17025",
+		name: "Laboratórios de Ensaio e Calibração",
+		desc: "Competência técnica para testes, calibração e resultados consistentes globalmente."
 	},
 	{
-		id: "consultoria-estrategica",
-		title: "Consultoria",
-		name: "Estratégica",
-		desc: "Mentoria executiva e planejamento de alto nível."
+		id: "iatf-16949",
+		title: "IATF 16949",
+		name: "Gestão da Qualidade Automotiva",
+		desc: "Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva."
+	},
+	{
+		id: "pbqp-h",
+		title: "PBQP-H",
+		name: "Programa de Qualidade do Habitat",
+		desc: "Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil."
+	},
+	{
+		id: "sassmaq",
+		title: "SASSMAQ",
+		name: "Logística Segura de Químicos",
+		desc: "Avaliação de segurança, saúde, meio ambiente e qualidade para o transporte de produtos químicos."
 	}
 ];
 function Services() {
@@ -24582,13 +24586,17 @@ function Services() {
 				className: "container mx-auto px-4 text-center max-w-3xl",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 					className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-					children: ["Catálogo de ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
-						className: "font-heading italic font-normal text-primary",
-						children: "Serviços"
-					})]
+					children: [
+						"Especialidades e",
+						" ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
+							className: "font-heading italic font-normal text-primary",
+							children: "Certificações"
+						})
+					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "text-xl text-muted-foreground",
-					children: "Soluções projetadas para elevar sua empresa aos padrões globais de excelência, com precisão técnica e foco no negócio."
+					children: "Com flexibilidade operacional, adaptamos nossas soluções em sistemas de gestão para oferecer desde suporte técnico colaborativo até o gerenciamento completo."
 				})] })
 			})
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
@@ -24596,33 +24604,33 @@ function Services() {
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "container mx-auto px-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "grid md:grid-cols-2 lg:grid-cols-3 gap-6",
+					className: "grid md:grid-cols-2 lg:grid-cols-4 gap-6",
 					children: allServices.map((svc, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-						delay: i * 100,
+						delay: i * 50,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 							to: `/servicos/${svc.id}`,
 							className: "block h-full group",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 								className: "h-full bg-card hover:bg-card/90 border-2 border-border hover:border-primary transition-all duration-300 relative overflow-hidden",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 right-0 w-24 h-24 bg-secondary rounded-bl-[100px] transition-transform duration-500 group-hover:scale-150 opacity-50" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-									className: "p-8 relative z-10",
+									className: "p-8 relative z-10 flex flex-col h-full",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 											className: "text-primary font-bold text-sm mb-2 tracking-widest uppercase",
 											children: svc.title
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-											className: "text-3xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide",
+											className: "text-2xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide",
 											children: svc.name
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-muted-foreground",
+											className: "text-muted-foreground text-sm flex-grow",
 											children: svc.desc
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 											className: "mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider",
 											children: [
-												"Explorar solução",
+												"Ver Mais",
 												" ",
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 													className: "ml-2 group-hover:translate-x-2 transition-transform",
@@ -25424,33 +25432,37 @@ function Contact() {
 											className: "font-bold text-foreground mb-1 uppercase tracking-wider",
 											children: "Sede Operacional"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-											className: "leading-relaxed",
+											className: "leading-relaxed uppercase text-sm",
 											children: [
-												"Av. Paulista, 1000 - Bela Vista",
+												"Rua Olavo Gonçalves, 330 Sala 11.",
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-												"São Paulo, SP - Brasil"
+												"São Bernardo do Campo - SP"
 											]
 										})]
 									})]
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center gap-6 text-muted-foreground group",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: "https://wa.me/5511986134789",
+									target: "_blank",
+									rel: "noopener noreferrer",
+									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "text-primary h-6 w-6" })
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "font-bold text-foreground group-hover:text-primary transition-colors text-lg",
-										children: "+55 (11) 3000-0000"
+										children: "+55 (11) 98613-4789"
 									})]
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center gap-6 text-muted-foreground group",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: "mailto:andrade.gestaointegrada@gmail.com",
+									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "text-primary h-6 w-6" })
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "font-bold text-foreground group-hover:text-primary transition-colors text-lg",
-										children: "contato@performancepremium.com"
+										className: "font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all",
+										children: "ANDRADE.GESTÃOINTEGRADA@GMAIL.COM"
 									})]
 								})
 							]
@@ -28147,12 +28159,12 @@ function Footer() {
 								className: "flex items-center gap-2 mb-6",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hexagon, { className: "h-6 w-6 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 									className: "font-heading font-bold text-2xl text-foreground uppercase tracking-wide",
-									children: "Performance."
+									children: "Andrade."
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-muted-foreground text-sm mb-8 leading-relaxed",
-								children: "Consultoria premium focada em alta performance e certificações ISO para líderes de mercado."
+								children: "Andrade Gestão Integrada e Treinamento. Consultoria premium focada em alta performance, flexibilidade operacional e certificações (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ)."
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex gap-4",
@@ -28256,7 +28268,7 @@ function Footer() {
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
 					"© ",
 					(/* @__PURE__ */ new Date()).getFullYear(),
-					" Consultoria Performance Premium."
+					" Andrade Gestão Integrada e Treinamento."
 				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "mt-4 md:mt-0 text-primary",
 					children: "Desenvolvido com precisão."
@@ -28328,4 +28340,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-CkZmaLCG.js.map
+//# sourceMappingURL=index-DXiwzs2B.js.map

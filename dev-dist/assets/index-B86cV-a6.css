@@ -1820,6 +1820,10 @@ body{
   min-width: 12rem;
 }
 
+.min-w-\[8px\]{
+  min-width: 8px;
+}
+
 .min-w-\[8rem\]{
   min-width: 8rem;
 }
@@ -1838,10 +1842,6 @@ body{
 
 .max-w-4xl{
   max-width: 56rem;
-}
-
-.max-w-5xl{
-  max-width: 64rem;
 }
 
 .max-w-6xl{
@@ -2222,6 +2222,10 @@ body{
 
 .break-words{
   overflow-wrap: break-word;
+}
+
+.break-all{
+  word-break: break-all;
 }
 
 .rounded-2xl{
@@ -3506,6 +3510,10 @@ body{
   opacity: 1;
 }
 
+.hover\:opacity-90:hover{
+  opacity: 0.9;
+}
+
 .hover\:shadow-\[0_0_0_1px_hsl\(var\(--sidebar-accent\)\)\]:hover{
   --tw-shadow: 0 0 0 1px hsl(var(--sidebar-accent));
   --tw-shadow-colored: 0 0 0 1px var(--tw-shadow-color);
@@ -4444,6 +4452,11 @@ body{
     text-align: left;
   }
 
+  .sm\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
   .data-\[state\=open\]\:sm\:slide-in-from-bottom-full[data-state="open"]{
     --tw-enter-translate-y: 100%;
   }
@@ -4574,10 +4587,6 @@ body{
 }
 
 @media (min-width: 1024px){
-
-  .lg\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 
   .lg\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));

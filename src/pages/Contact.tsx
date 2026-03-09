@@ -104,29 +104,37 @@ export default function Contact() {
                       <p className="font-bold text-foreground mb-1 uppercase tracking-wider">
                         Sede Operacional
                       </p>
-                      <p className="leading-relaxed">
-                        Av. Paulista, 1000 - Bela Vista
+                      <p className="leading-relaxed uppercase text-sm">
+                        Rua Olavo Gonçalves, 330 Sala 11.
                         <br />
-                        São Paulo, SP - Brasil
+                        São Bernardo do Campo - SP
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6 text-muted-foreground group">
+                  <a
+                    href="https://wa.me/5511986134789"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-6 text-muted-foreground group hover:opacity-90"
+                  >
                     <div className="p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300">
                       <Phone className="text-primary h-6 w-6" />
                     </div>
                     <p className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">
-                      +55 (11) 3000-0000
+                      +55 (11) 98613-4789
                     </p>
-                  </div>
-                  <div className="flex items-center gap-6 text-muted-foreground group">
+                  </a>
+                  <a
+                    href="mailto:andrade.gestaointegrada@gmail.com"
+                    className="flex items-center gap-6 text-muted-foreground group hover:opacity-90"
+                  >
                     <div className="p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300">
                       <Mail className="text-primary h-6 w-6" />
                     </div>
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors text-lg">
-                      contato@performancepremium.com
+                    <p className="font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all">
+                      ANDRADE.GESTÃOINTEGRADA@GMAIL.COM
                     </p>
-                  </div>
+                  </a>
                 </div>
               </div>
 

@@ -2,19 +2,14 @@ import { Reveal } from '@/components/ui/reveal'
 
 const team = [
   {
-    name: 'Alexandre Costa',
-    role: 'Diretor de Performance',
+    name: 'Andrade',
+    role: 'Diretor e Consultor Principal',
     img: 'https://img.usecurling.com/ppl/large?gender=male&seed=1',
   },
   {
-    name: 'Carolina Neves',
-    role: 'Lead Auditor ISO',
+    name: 'Equipe Técnica',
+    role: 'Especialistas Associados',
     img: 'https://img.usecurling.com/ppl/large?gender=female&seed=2',
-  },
-  {
-    name: 'Roberto Silva',
-    role: 'Especialista em Cultura',
-    img: 'https://img.usecurling.com/ppl/large?gender=male&seed=3',
   },
 ]
 
@@ -25,13 +20,14 @@ export default function About() {
         <div className="container mx-auto px-4 text-center max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-              A Engenharia da{' '}
-              <em className="font-heading italic font-normal text-primary">Excelência</em>
+              Andrade Gestão Integrada{' '}
+              <em className="font-heading italic font-normal text-primary">e Treinamento</em>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Nascemos da crença de que a conformidade não é um fim, mas o ponto de partida para a
-              verdadeira performance empresarial. Inspirados na precisão do automobilismo de elite,
-              entregamos resultados incontestáveis.
+              Especialistas em sistemas de gestão com foco absoluto em resultados. Nossa consultoria
+              se destaca pela flexibilidade operacional, adaptando-se integralmente à dinâmica e aos
+              prazos da sua empresa, oferecendo desde o gerenciamento completo até o suporte técnico
+              colaborativo.
             </p>
           </Reveal>
         </div>
@@ -52,22 +48,23 @@ export default function About() {
             </Reveal>
             <Reveal className="order-1 md:order-2" delay={100}>
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
-                Nossa Metodologia
+                Flexibilidade e Adaptação
               </h2>
               <p className="text-muted-foreground text-lg mb-6">
-                Assim como um carro de F1 é ajustado para cada pista, adaptamos nossa abordagem à
-                realidade única da sua empresa. Utilizamos dados precisos para eliminar gargalos e
-                garantir que cada processo opere em sua máxima eficiência.
+                Entendemos que cada organização possui seu próprio ritmo. Nosso diferencial é a
+                flexibilidade operacional: atuamos conforme as suas necessidades, seja assumindo a
+                gestão completa dos sistemas ou atuando de forma colaborativa com a sua equipe
+                técnica.
               </p>
               <ul className="space-y-4">
                 {[
-                  'Diagnóstico Preciso (Telemetria)',
-                  'Ajuste de Processos (Setup)',
-                  'Implementação Ágil (Pit Stop)',
-                  'Melhoria Contínua (Volta Mais Rápida)',
+                  'Amplo Domínio: ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ',
+                  'Ajuste de Processos com Foco na Realidade do Cliente',
+                  'Gestão Completa ou Suporte Colaborativo',
+                  'Melhoria Contínua e Acompanhamento Ágil',
                 ].map((item, i) => (
                   <li key={i} className="flex items-center text-foreground font-medium">
-                    <span className="h-2 w-2 rounded-full bg-primary mr-3 shadow-[0_0_8px_rgba(207,174,112,0.8)]"></span>
+                    <span className="h-2 w-2 rounded-full bg-primary mr-3 shadow-[0_0_8px_rgba(207,174,112,0.8)] min-w-[8px]"></span>
                     {item}
                   </li>
                 ))}
@@ -85,11 +82,11 @@ export default function About() {
                 Nosso Time
               </h2>
               <p className="text-muted-foreground">
-                Especialistas com vivência executiva e foco em resultados.
+                Especialistas com vivência técnica e foco em resultados operacionais.
               </p>
             </div>
           </Reveal>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {team.map((member, i) => (
               <Reveal key={i} delay={i * 100}>
                 <div className="bg-background border-2 border-border rounded-xl p-6 text-center group hover:border-primary transition-colors duration-300">
