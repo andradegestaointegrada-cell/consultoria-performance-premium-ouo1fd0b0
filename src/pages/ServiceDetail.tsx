@@ -35,8 +35,8 @@ const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: 
   'pbqp-h': {
     t: 'PBQP-H',
     d: 'Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=modern%20construction%20site%20buildings&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=architect%20blueprint%20construction&dpr=2',
+    hi: 'https://img.usecurling.com/p/1920/1080?q=civil%20engineering%20construction&dpr=2',
+    ci: 'https://img.usecurling.com/p/800/600?q=construction%20worker%20tablet%20helmet&dpr=2',
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
   },
   'iatf-16949': {
@@ -57,14 +57,14 @@ const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: 
     t: 'ISO/IEC 17025',
     d: 'Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.',
     hi: 'https://img.usecurling.com/p/1920/1080?q=modern%20science%20laboratory%20research&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=scientist%20microscope%20calibration&dpr=2',
+    ci: 'https://img.usecurling.com/p/800/600?q=clean%20professional%20laboratory&dpr=2',
     w: 'Padronização internacional e reconhecimento da qualidade dos seus laudos e ensaios.',
   },
   sassmaq: {
     t: 'SASSMAQ',
     d: 'Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=chemical%20logistics%20truck%20transport&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=industrial%20cargo%20shipment%20safety&dpr=2',
+    hi: 'https://img.usecurling.com/p/1920/1080?q=logistics%20dock%20trailers&dpr=2',
+    ci: 'https://img.usecurling.com/p/800/600?q=logistics%20worker%20inspecting%20chemicals&dpr=2',
     w: 'Minimização de riscos operacionais e adequação às exigências da indústria química.',
   },
   esg: {
