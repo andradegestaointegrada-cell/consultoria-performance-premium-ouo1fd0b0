@@ -19097,30 +19097,6 @@ var Circle = createLucideIcon("circle", [["circle", {
 	r: "10",
 	key: "1mglay"
 }]]);
-var ImagePlus = createLucideIcon("image-plus", [
-	["path", {
-		d: "M16 5h6",
-		key: "1vod17"
-	}],
-	["path", {
-		d: "M19 2v6",
-		key: "4bpg5p"
-	}],
-	["path", {
-		d: "M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5",
-		key: "1ue2ih"
-	}],
-	["path", {
-		d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21",
-		key: "1xmnt7"
-	}],
-	["circle", {
-		cx: "9",
-		cy: "9",
-		r: "2",
-		key: "af1f0g"
-	}]
-]);
 var Instagram = createLucideIcon("instagram", [
 	["rect", {
 		width: "20",
@@ -24084,12 +24060,6 @@ function Reveal({ children, className, delay = 0, animation = "animate-fade-in-u
 	});
 }
 function Hero() {
-	const [bgImage, setBgImage] = (0, import_react.useState)("https://img.usecurling.com/p/1920/1080?q=corporate%20strategy%20office&color=black");
-	const fileInputRef = (0, import_react.useRef)(null);
-	const handleImageUpload = (e) => {
-		const file = e.target.files?.[0];
-		if (file) setBgImage(URL.createObjectURL(file));
-	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		className: "relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group",
 		children: [
@@ -24097,29 +24067,13 @@ function Hero() {
 				className: "absolute inset-0 z-0 bg-black",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: bgImage,
+						src: "https://img.usecurling.com/p/1920/1080?q=corporate%20strategy%20office&color=black",
 						alt: "Performance Background",
 						className: "w-full h-full object-cover opacity-50 mix-blend-luminosity grayscale transition-opacity duration-700"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" })
 				]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "absolute top-24 right-4 md:right-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-					type: "file",
-					ref: fileInputRef,
-					onChange: handleImageUpload,
-					className: "hidden",
-					accept: "image/*"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					variant: "outline",
-					size: "sm",
-					onClick: () => fileInputRef.current?.click(),
-					className: "backdrop-blur-md bg-black/40 hover:bg-black/60 border-white/20 text-white",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ImagePlus, { className: "w-4 h-4 mr-2" }), "Alterar Imagem"]
-				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "container relative z-10 mx-auto px-4",
@@ -28541,4 +28495,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-Duif44Fh.js.map
+//# sourceMappingURL=index-BdwgLFsq.js.map

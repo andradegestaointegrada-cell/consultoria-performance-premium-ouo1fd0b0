@@ -1,22 +1,11 @@
-import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, ChevronDown, ImagePlus } from 'lucide-react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 
 export function Hero() {
-  const [bgImage, setBgImage] = useState(
-    'https://img.usecurling.com/p/1920/1080?q=corporate%20strategy%20office&color=black',
-  )
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const url = URL.createObjectURL(file)
-      setBgImage(url)
-    }
-  }
+  const bgImage =
+    'https://img.usecurling.com/p/1920/1080?q=corporate%20strategy%20office&color=black'
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group">
@@ -28,25 +17,6 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-      </div>
-
-      <div className="absolute top-24 right-4 md:right-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleImageUpload}
-          className="hidden"
-          accept="image/*"
-        />
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => fileInputRef.current?.click()}
-          className="backdrop-blur-md bg-black/40 hover:bg-black/60 border-white/20 text-white"
-        >
-          <ImagePlus className="w-4 h-4 mr-2" />
-          Alterar Imagem
-        </Button>
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
