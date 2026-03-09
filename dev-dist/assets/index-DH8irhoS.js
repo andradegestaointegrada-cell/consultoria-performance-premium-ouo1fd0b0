@@ -18373,7 +18373,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	wordWrap: "normal"
 });
 var NAME$2 = "VisuallyHidden";
-var VisuallyHidden$1 = import_react.forwardRef((props, forwardedRef) => {
+var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 		...props,
 		ref: forwardedRef,
@@ -18383,8 +18383,8 @@ var VisuallyHidden$1 = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-VisuallyHidden$1.displayName = NAME$2;
-var Root$5 = VisuallyHidden$1;
+VisuallyHidden.displayName = NAME$2;
+var Root$5 = VisuallyHidden;
 var import_react_dom$3 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var PROVIDER_NAME$1 = "ToastProvider";
 var [Collection$3, useCollection$3, createCollectionScope$3] = createCollection("Toast");
@@ -18544,7 +18544,7 @@ var FOCUS_PROXY_NAME = "ToastFocusProxy";
 var FocusProxy = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, onFocusFromOutsideViewport, ...proxyProps } = props;
 	const context = useToastProviderContext(FOCUS_PROXY_NAME, __scopeToast);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden$1, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden, {
 		tabIndex: 0,
 		...proxyProps,
 		ref: forwardedRef,
@@ -18776,7 +18776,7 @@ var ToastAnnounce = (props) => {
 	}, []);
 	return isAnnounced ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal, {
 		asChild: true,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden$1, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden, {
 			...announceProps,
 			children: renderAnnounceText && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 				context.label,
@@ -19082,6 +19082,10 @@ var Check = createLucideIcon("check", [["path", {
 var ChevronDown = createLucideIcon("chevron-down", [["path", {
 	d: "m6 9 6 6 6-6",
 	key: "qrunsl"
+}]]);
+var ChevronLeft = createLucideIcon("chevron-left", [["path", {
+	d: "m15 18-6-6 6-6",
+	key: "1wnfg3"
 }]]);
 var ChevronRight = createLucideIcon("chevron-right", [["path", {
 	d: "m9 18 6-6-6-6",
@@ -25027,6 +25031,609 @@ var AccordionContent = import_react.forwardRef(({ className, children, ...props 
 	})
 }));
 AccordionContent.displayName = Content2$2.displayName;
+require_react_dom();
+var Primitive$1 = [
+	"a",
+	"button",
+	"div",
+	"form",
+	"h2",
+	"h3",
+	"img",
+	"input",
+	"label",
+	"li",
+	"nav",
+	"ol",
+	"p",
+	"select",
+	"span",
+	"svg",
+	"ul"
+].reduce((primitive, node) => {
+	const Slot$3 = /* @__PURE__ */ createSlot$1(`Primitive.${node}`);
+	const Node$1 = import_react.forwardRef((props, forwardedRef) => {
+		const { asChild, ...primitiveProps } = props;
+		const Comp = asChild ? Slot$3 : node;
+		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
+			...primitiveProps,
+			ref: forwardedRef
+		});
+	});
+	Node$1.displayName = `Primitive.${node}`;
+	return {
+		...primitive,
+		[node]: Node$1
+	};
+}, {});
+var NAME = "AspectRatio";
+var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { ratio = 1 / 1, style, ...aspectRatioProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		style: {
+			position: "relative",
+			width: "100%",
+			paddingBottom: `${100 / ratio}%`
+		},
+		"data-radix-aspect-ratio-wrapper": "",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			...aspectRatioProps,
+			ref: forwardedRef,
+			style: {
+				...style,
+				position: "absolute",
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0
+			}
+		})
+	});
+});
+AspectRatio$1.displayName = NAME;
+var AspectRatio = AspectRatio$1;
+var S_DATA = {
+	"iso-9001": {
+		t: "ISO 9001",
+		d: "A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência operacional e resultados consistentes.",
+		hi: "corporate%20office",
+		ci: "quality%20control",
+		w: "Processos robustos que garantem a padronização e a alta performance contínua da sua equipe."
+	},
+	"iso-14001": {
+		t: "ISO 14001",
+		d: "Transformamos a gestão ambiental em um diferencial competitivo sustentável, com a expertise e autoridade da Andrade Gestão.",
+		hi: "sustainable%20business",
+		ci: "sustainability",
+		w: "Estratégias sustentáveis integradas ao negócio, otimizando recursos e mitigando impactos ambientais."
+	},
+	"iso-45001": {
+		t: "ISO 45001",
+		d: "Proteja seu maior ativo. Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.",
+		hi: "industrial%20safety",
+		ci: "safety%20engineering",
+		w: "Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança interna."
+	},
+	"iso-27001": {
+		t: "ISO 27001",
+		d: "Segurança da informação levada a sério. Protegemos os dados da sua empresa contra ameaças com padrões globais de excelência.",
+		hi: "server%20room",
+		ci: "cybersecurity",
+		w: "Estabelecemos controles rigorosos garantindo confidencialidade, integridade e total conformidade."
+	},
+	esg: {
+		t: "Consultoria ESG",
+		d: "Guiamos sua empresa na jornada ESG, alinhando propósito, governança sólida e impacto positivo na sociedade de forma integrada.",
+		hi: "corporate%20governance",
+		ci: "esg%20business",
+		w: "Apoiamos na estruturação completa de relatórios e práticas alinhadas às altas exigências dos investidores."
+	}
+};
+var DEF = {
+	d: "Soluções estratégicas da Andrade Gestão focadas em trazer resultados reais para a operação da sua empresa.",
+	hi: "business%20consulting",
+	ci: "strategy%20planning",
+	w: "Entregamos um sistema de gestão vivo, focado em gerar valor e reduzir riscos operacionais críticos."
+};
+function ServiceDetail() {
+	const { id } = useParams();
+	const svc = S_DATA[id?.toLowerCase() || ""] || DEF;
+	const title = svc.t || (id ? id.replace("-", " ").toUpperCase() : "Serviço");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "pt-20",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+			className: "relative py-32 min-h-[60vh] flex items-center overflow-hidden border-b border-border",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "absolute inset-0 z-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+					src: `https://img.usecurling.com/p/1920/1080?q=${svc.hi}&color=black`,
+					alt: `${title} Background`,
+					className: "w-full h-full object-cover"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/75" })]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container mx-auto px-4 relative z-10",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+						to: "/servicos",
+						className: "text-white/80 hover:text-white transition-colors text-sm font-bold mb-8 inline-flex items-center uppercase tracking-wider",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "w-4 h-4 mr-2" }), " Voltar para Serviços"]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						className: "text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg",
+						children: title
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-xl md:text-2xl text-white/90 max-w-3xl drop-shadow-md font-light leading-relaxed",
+						children: svc.d
+					})
+				] })
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "py-24",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "container mx-auto px-4 max-w-5xl space-y-24",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid md:grid-cols-2 gap-12 items-center",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+							children: "O que entregamos"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-lg text-muted-foreground leading-relaxed",
+							children: svc.w
+						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "relative rounded-2xl overflow-hidden border border-primary/20 bg-card p-2 shadow-[0_0_30px_rgba(207,174,112,0.1)]",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "rounded-xl overflow-hidden bg-muted",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
+									ratio: 4 / 3,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: `https://img.usecurling.com/p/800/600?q=${svc.ci}&color=black`,
+										alt: `Detalhes de ${title}`,
+										className: "object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+									})
+								})
+							})
+						})]
+					}) }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
+						delay: 100,
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-12 uppercase tracking-wide text-center",
+							children: "Como funciona (Pit Stop)"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "grid sm:grid-cols-3 gap-8",
+							children: [
+								{
+									step: "1",
+									title: "Diagnóstico",
+									desc: "Mapeamento profundo da operação atual e identificação de gaps estratégicos."
+								},
+								{
+									step: "2",
+									title: "Implementação",
+									desc: "Ajustes ágeis, criação de processos customizados e treinamento da equipe."
+								},
+								{
+									step: "3",
+									title: "Auditoria",
+									desc: "Validação final de conformidade e suporte total para a certificação."
+								}
+							].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "p-8 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all duration-300 group",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "text-primary font-heading font-bold text-5xl mb-6 opacity-80 group-hover:opacity-100 transition-opacity",
+										children: [s.step, "."]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "text-xl font-heading font-bold text-foreground mb-3 uppercase tracking-wide",
+										children: s.title
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-muted-foreground leading-relaxed",
+										children: s.desc
+									})
+								]
+							}, s.step))
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
+						delay: 200,
+						className: "max-w-3xl mx-auto",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center",
+							children: "Perguntas Frequentes"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Accordion, {
+							type: "single",
+							collapsible: true,
+							className: "w-full",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
+								value: "item-1",
+								className: "border-border/50",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionTrigger, {
+									className: "text-foreground hover:text-primary font-bold uppercase tracking-wider text-left",
+									children: [
+										"Quanto tempo leva a implementação da ",
+										title,
+										"?"
+									]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
+									className: "text-muted-foreground text-base leading-relaxed",
+									children: "O prazo varia conforme o porte e maturidade da empresa. A metodologia ágil da Andrade Gestão costuma reduzir o tempo padrão de mercado em até 30%, garantindo entregas rápidas sem perder a excelência técnica."
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
+								value: "item-2",
+								className: "border-border/50",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
+									className: "text-foreground hover:text-primary font-bold uppercase tracking-wider text-left",
+									children: "Qual o envolvimento necessário da nossa diretoria?"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
+									className: "text-muted-foreground text-base leading-relaxed",
+									children: "Requeremos alinhamento estratégico apenas nas fases de planejamento e revisão executiva. A carga operacional pesada é totalmente absorvida pelos nossos especialistas, liberando sua equipe para focar no core business."
+								})]
+							})]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+						delay: 300,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-10 md:p-12 bg-secondary border-l-4 border-l-primary rounded-r-2xl text-left shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
+								className: "text-3xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide",
+								children: [
+									"Pronto para a",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
+										className: "font-heading italic font-normal text-primary",
+										children: "pole position"
+									}),
+									"?"
+								]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "text-muted-foreground text-lg max-w-xl",
+								children: [
+									"Fale com um consultor da Andrade Gestão Integrada e descubra o impacto real da",
+									" ",
+									title,
+									" no seu negócio."
+								]
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+								asChild: true,
+								size: "lg",
+								className: "rounded-full uppercase tracking-wider font-bold shrink-0",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+									to: "/contato",
+									children: "Agendar Diagnóstico"
+								})
+							})]
+						})
+					})
+				]
+			})
+		})]
+	});
+}
+var articles = [
+	{
+		title: "O Futuro da Qualidade",
+		category: "ISO 9001",
+		img: "https://img.usecurling.com/p/600/400?q=future%20technology&color=black"
+	},
+	{
+		title: "Sustentabilidade Corporativa",
+		category: "ISO 14001",
+		img: "https://img.usecurling.com/p/600/400?q=green%20city&color=black"
+	},
+	{
+		title: "Liderança e Segurança",
+		category: "ISO 45001",
+		img: "https://img.usecurling.com/p/600/400?q=construction%20leadership&color=black"
+	},
+	{
+		title: "Auditorias Remotas: O Novo Normal",
+		category: "Metodologia",
+		img: "https://img.usecurling.com/p/600/400?q=video%20conference&color=black"
+	}
+];
+function Insights() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "pt-20",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "py-24 bg-card border-b border-border",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container mx-auto px-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+					className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+					children: "Insights & Inteligência"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-xl text-muted-foreground max-w-2xl",
+					children: "Artigos, análises e tendências sobre alta performance empresarial e normas internacionais."
+				})] })
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "py-24",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "container mx-auto px-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mb-16",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
+							children: "Destaque"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
+									alt: "Pitstop",
+									className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "absolute bottom-8 left-8 max-w-3xl",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "text-primary font-bold text-sm uppercase tracking-widest mb-4",
+											children: "Estratégia Corporativa"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+											className: "text-4xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide",
+											children: "A Metáfora do Pit Stop na Otimização de Processos Empresariais"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-muted-foreground line-clamp-2 text-lg",
+											children: "Como aplicar a precisão milimétrica e o trabalho em equipe do automobilismo de elite para reduzir gargalos e aumentar a eficiência operacional."
+										})
+									]
+								})
+							]
+						})]
+					}) }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
+						children: "Últimos Artigos"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "grid md:grid-cols-2 lg:grid-cols-4 gap-6",
+						children: articles.map((article, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							delay: i * 100,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "aspect-video overflow-hidden",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: article.img,
+										alt: article.title,
+										className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100"
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "p-6",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "text-primary text-xs font-bold uppercase tracking-widest mb-3",
+										children: article.category
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+										className: "text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight",
+										children: article.title
+									})]
+								})]
+							})
+						}, i))
+					})
+				]
+			})
+		})]
+	});
+}
+var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+		type,
+		className: cn("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Input.displayName = "Input";
+var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+		className: cn("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Textarea.displayName = "Textarea";
+function Contact() {
+	const { toast: toast$2 } = useToast();
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		toast$2({
+			title: "Mensagem enviada com sucesso",
+			description: "Nossa equipe entrará em contato em breve."
+		});
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "pt-20",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "py-24 bg-secondary border-b border-border",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container mx-auto px-4 max-w-4xl text-center",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+					className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+					children: [
+						"Inicie a",
+						" ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
+							className: "font-heading italic font-normal text-primary",
+							children: "Transformação"
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-xl text-muted-foreground",
+					children: "Fale com nossos especialistas e descubra como elevar a performance da sua empresa."
+				})] })
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "py-24",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container mx-auto px-4 max-w-6xl",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "grid md:grid-cols-2 gap-16",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-card p-10 rounded-2xl border-2 border-border shadow-2xl",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-3xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide",
+							children: "Envie uma mensagem"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleSubmit,
+							className: "space-y-6",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-2 gap-6",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "text-sm text-foreground font-bold uppercase tracking-wider",
+											children: "Nome"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											required: true,
+											className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "text-sm text-foreground font-bold uppercase tracking-wider",
+											children: "Empresa"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											required: true,
+											className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
+										})]
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "text-sm text-foreground font-bold uppercase tracking-wider",
+										children: "E-mail corporativo"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+										type: "email",
+										required: true,
+										className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "text-sm text-foreground font-bold uppercase tracking-wider",
+										children: "Mensagem"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
+										required: true,
+										className: "bg-background border-border text-foreground min-h-[120px] focus-visible:ring-primary resize-none"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									type: "submit",
+									className: "w-full h-14 text-base uppercase tracking-widest font-bold mt-4",
+									children: "Enviar Solicitação"
+								})
+							]
+						})]
+					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
+						delay: 200,
+						className: "space-y-12",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
+							children: "Informações de Contato"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-8",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-start gap-6 text-muted-foreground group",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "text-primary h-6 w-6" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "pt-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "font-bold text-foreground mb-1 uppercase tracking-wider",
+											children: "Sede Operacional"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "leading-relaxed uppercase text-sm",
+											children: [
+												"Rua Olavo Gonçalves, 330 Sala 11.",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+												"São Bernardo do Campo - SP"
+											]
+										})]
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: "https://wa.me/5511986134789",
+									target: "_blank",
+									rel: "noopener noreferrer",
+									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "text-primary h-6 w-6" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-bold text-foreground group-hover:text-primary transition-colors text-lg",
+										children: "+55 (11) 98613-4789"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: "mailto:andrade.gestaointegrada@gmail.com",
+									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "text-primary h-6 w-6" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all",
+										children: "ANDRADE.GESTÃOINTEGRADA@GMAIL.COM"
+									})]
+								})
+							]
+						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "h-64 rounded-2xl overflow-hidden border-2 border-border bg-card relative",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "https://img.usecurling.com/p/800/400?q=map%20dark&color=black",
+								alt: "Mapa",
+								className: "w-full h-full object-cover opacity-50 grayscale"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-secondary/30 mix-blend-overlay" })]
+						})]
+					})]
+				})
+			})
+		})]
+	});
+}
+var NotFound = () => {
+	const location = useLocation();
+	(0, import_react.useEffect)(() => {
+		console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+	}, [location.pathname]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "min-h-screen flex items-center justify-center bg-gray-100",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "text-center",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+					className: "text-4xl font-bold mb-4",
+					children: "404"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-xl text-gray-600 mb-4",
+					children: "Oops! Page not found"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "/",
+					className: "text-blue-500 hover:text-blue-700 underline",
+					children: "Return to Home"
+				})
+			]
+		})
+	});
+};
+var NotFound_default = NotFound;
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
 var EVENT_OPTIONS$1 = {
@@ -25932,7 +26539,7 @@ var hideOthers = function(originalTarget, parentNode, markerName) {
 var DIALOG_NAME = "Dialog";
 var [createDialogContext, createDialogScope] = createContextScope(DIALOG_NAME);
 var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
+var Dialog = (props) => {
 	const { __scopeDialog, children, open: openProp, defaultOpen, onOpenChange, modal = true } = props;
 	const triggerRef = import_react.useRef(null);
 	const contentRef = import_react.useRef(null);
@@ -25956,9 +26563,9 @@ var Dialog$1 = (props) => {
 		children
 	});
 };
-Dialog$1.displayName = DIALOG_NAME;
+Dialog.displayName = DIALOG_NAME;
 var TRIGGER_NAME$1 = "DialogTrigger";
-var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogTrigger = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...triggerProps } = props;
 	const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
 	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
@@ -25973,10 +26580,10 @@ var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
 	});
 });
-DialogTrigger$1.displayName = TRIGGER_NAME$1;
+DialogTrigger.displayName = TRIGGER_NAME$1;
 var PORTAL_NAME$2 = "DialogPortal";
 var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$2, { forceMount: void 0 });
-var DialogPortal$1 = (props) => {
+var DialogPortal = (props) => {
 	const { __scopeDialog, forceMount, children, container } = props;
 	const context = useDialogContext(PORTAL_NAME$2, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
@@ -25992,9 +26599,9 @@ var DialogPortal$1 = (props) => {
 		}))
 	});
 };
-DialogPortal$1.displayName = PORTAL_NAME$2;
+DialogPortal.displayName = PORTAL_NAME$2;
 var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogOverlay = import_react.forwardRef((props, forwardedRef) => {
 	const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
 	const { forceMount = portalContext.forceMount, ...overlayProps } = props;
 	const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
@@ -26006,7 +26613,7 @@ var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	}) : null;
 });
-DialogOverlay$1.displayName = OVERLAY_NAME;
+DialogOverlay.displayName = OVERLAY_NAME;
 var Slot$1 = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
 var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...overlayProps } = props;
@@ -26027,7 +26634,7 @@ var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 var CONTENT_NAME$2 = "DialogContent";
-var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogContent = import_react.forwardRef((props, forwardedRef) => {
 	const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
 	const { forceMount = portalContext.forceMount, ...contentProps } = props;
 	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
@@ -26042,7 +26649,7 @@ var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-DialogContent$1.displayName = CONTENT_NAME$2;
+DialogContent.displayName = CONTENT_NAME$2;
 var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
 	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
 	const contentRef = import_react.useRef(null);
@@ -26126,7 +26733,7 @@ var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	})] })] });
 });
 var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogTitle = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...titleProps } = props;
 	const context = useDialogContext(TITLE_NAME, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.h2, {
@@ -26135,9 +26742,9 @@ var DialogTitle$1 = import_react.forwardRef((props, forwardedRef) => {
 		ref: forwardedRef
 	});
 });
-DialogTitle$1.displayName = TITLE_NAME;
+DialogTitle.displayName = TITLE_NAME;
 var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogDescription = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...descriptionProps } = props;
 	const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.p, {
@@ -26146,9 +26753,9 @@ var DialogDescription$1 = import_react.forwardRef((props, forwardedRef) => {
 		ref: forwardedRef
 	});
 });
-DialogDescription$1.displayName = DESCRIPTION_NAME;
+DialogDescription.displayName = DESCRIPTION_NAME;
 var CLOSE_NAME = "DialogClose";
-var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
+var DialogClose = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...closeProps } = props;
 	const context = useDialogContext(CLOSE_NAME, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
@@ -26158,7 +26765,7 @@ var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
 		onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
 	});
 });
-DialogClose$1.displayName = CLOSE_NAME;
+DialogClose.displayName = CLOSE_NAME;
 function getState(open) {
 	return open ? "open" : "closed";
 }
@@ -26197,667 +26804,15 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root$2 = Dialog$1;
-var Trigger$1 = DialogTrigger$1;
-var Portal$2 = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose$1;
-var Dialog = Root$2;
-var DialogPortal = Portal$2;
-var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
-	ref,
-	className: cn("fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
-	...props
-}));
-DialogOverlay.displayName = Overlay.displayName;
-var DialogContent = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content, {
-	ref,
-	className: cn("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-y-auto max-h-screen", className),
-	...props,
-	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
-		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "sr-only",
-			children: "Close"
-		})]
-	})]
-})] }));
-DialogContent.displayName = Content.displayName;
-var DialogHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	className: cn("flex flex-col space-y-1.5 text-center sm:text-left", className),
-	...props
-});
-DialogHeader.displayName = "DialogHeader";
-var DialogFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	className: cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
-	...props
-});
-DialogFooter.displayName = "DialogFooter";
-var DialogTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
-	ref,
-	className: cn("text-lg font-semibold leading-none tracking-tight", className),
-	...props
-}));
-DialogTitle.displayName = Title.displayName;
-var DialogDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description, {
-	ref,
-	className: cn("text-sm text-muted-foreground", className),
-	...props
-}));
-DialogDescription.displayName = Description.displayName;
-var VisuallyHidden = import_react.forwardRef(({ className, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-		ref,
-		className: cn("absolute w-[1px] h-[1px] p-0 -m-[1px] overflow-hidden whitespace-nowrap border-0 clip-rect-0", className),
-		style: {
-			clip: "rect(0 0 0 0)",
-			clipPath: "inset(50%)"
-		},
-		...props
-	});
-});
-VisuallyHidden.displayName = "VisuallyHidden";
-require_react_dom();
-var Primitive$1 = [
-	"a",
-	"button",
-	"div",
-	"form",
-	"h2",
-	"h3",
-	"img",
-	"input",
-	"label",
-	"li",
-	"nav",
-	"ol",
-	"p",
-	"select",
-	"span",
-	"svg",
-	"ul"
-].reduce((primitive, node) => {
-	const Slot$3 = /* @__PURE__ */ createSlot$1(`Primitive.${node}`);
-	const Node$1 = import_react.forwardRef((props, forwardedRef) => {
-		const { asChild, ...primitiveProps } = props;
-		const Comp = asChild ? Slot$3 : node;
-		if (typeof window !== "undefined") window[Symbol.for("radix-ui")] = true;
-		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Comp, {
-			...primitiveProps,
-			ref: forwardedRef
-		});
-	});
-	Node$1.displayName = `Primitive.${node}`;
-	return {
-		...primitive,
-		[node]: Node$1
-	};
-}, {});
-var NAME = "AspectRatio";
-var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { ratio = 1 / 1, style, ...aspectRatioProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		style: {
-			position: "relative",
-			width: "100%",
-			paddingBottom: `${100 / ratio}%`
-		},
-		"data-radix-aspect-ratio-wrapper": "",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			...aspectRatioProps,
-			ref: forwardedRef,
-			style: {
-				...style,
-				position: "absolute",
-				top: 0,
-				right: 0,
-				bottom: 0,
-				left: 0
-			}
-		})
-	});
-});
-AspectRatio$1.displayName = NAME;
-var AspectRatio = AspectRatio$1;
-var S_DATA = {
-	"iso-9001": {
-		t: "ISO 9001",
-		d: "Sistema de Gestão da Qualidade focado na excelência operacional e melhoria contínua.",
-		i: "quality%20control",
-		w: "Implementamos processos robustos que garantem a padronização e alta performance da sua equipe."
-	},
-	"iso-14001": {
-		t: "ISO 14001",
-		d: "Sistema de Gestão Ambiental para empresas que buscam sustentabilidade e conformidade.",
-		i: "sustainability",
-		w: "Desenvolvemos estratégias sustentáveis integradas ao seu negócio, otimizando recursos."
-	},
-	"iso-45001": {
-		t: "ISO 45001",
-		d: "Gestão de Saúde e Segurança Ocupacional para proteger colaboradores e mitigar riscos.",
-		i: "safety%20engineering",
-		w: "Criamos um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança."
-	},
-	"iso-27001": {
-		t: "ISO 27001",
-		d: "Gestão da Segurança da Informação para proteger dados sensíveis contra ameaças.",
-		i: "cybersecurity",
-		w: "Estabelecemos controles rigorosos garantindo confidencialidade, integridade e conformidade."
-	},
-	esg: {
-		t: "Consultoria ESG",
-		d: "Integração de práticas Ambientais, Sociais e de Governança para impulsionar sustentabilidade.",
-		i: "corporate%20governance",
-		w: "Apoiamos na estruturação de relatórios e práticas alinhadas às exigências dos investidores."
-	}
-};
-var DEF = {
-	d: "Implementação estratégica focada em trazer resultados reais para a operação da sua empresa.",
-	i: "business%20consulting",
-	w: "Entregamos um sistema de gestão vivo, focado em gerar valor através da otimização de recursos e redução de riscos operacionais."
-};
-function ServiceDetail() {
-	const { id } = useParams();
-	const svc = S_DATA[id?.toLowerCase() || ""] || DEF;
-	const title = svc.t || (id ? id.replace("-", " ").toUpperCase() : "Serviço");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "pt-20",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				className: "py-24 bg-card border-b border-border relative overflow-hidden",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-secondary/50 to-transparent pointer-events-none" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "container mx-auto px-4 relative z-10",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-							to: "/servicos",
-							className: "text-primary hover:text-primary/80 transition-colors text-sm font-bold mb-6 inline-block uppercase tracking-wider",
-							children: "← Voltar para Serviços"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-							children: title
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xl text-muted-foreground max-w-2xl",
-							children: svc.d
-						})
-					] })
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-				className: "py-24",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "container mx-auto px-4 max-w-5xl",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-24",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid md:grid-cols-2 gap-12 items-center",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-									children: "O que entregamos"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-lg text-muted-foreground leading-relaxed",
-									children: svc.w
-								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "relative rounded-2xl overflow-hidden border border-primary/20 bg-card p-2 shadow-[0_0_30px_rgba(207,174,112,0.1)]",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "rounded-xl overflow-hidden bg-muted",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
-											ratio: 4 / 3,
-											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-												src: `https://img.usecurling.com/p/800/600?q=${svc.i}&color=black`,
-												alt: `Ilustração do serviço ${title}`,
-												className: "object-cover w-full h-full hover:scale-105 transition-transform duration-700"
-											})
-										})
-									})
-								})]
-							}) }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
-								delay: 100,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center",
-									children: "Como funciona (Pit Stop)"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "grid sm:grid-cols-3 gap-6",
-									children: [
-										{
-											step: "1",
-											title: "Diagnóstico",
-											desc: "Mapeamento da operação atual."
-										},
-										{
-											step: "2",
-											title: "Implementação",
-											desc: "Ajustes ágeis e treinamento."
-										},
-										{
-											step: "3",
-											title: "Auditoria",
-											desc: "Validação final e certificação."
-										}
-									].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "p-6 bg-card border-2 border-border rounded-xl hover:border-primary transition-colors duration-300",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-												className: "text-primary font-heading font-bold text-4xl mb-4",
-												children: [s.step, "."]
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-												className: "text-2xl font-heading font-bold text-foreground mb-2 uppercase tracking-wide",
-												children: s.title
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-												className: "text-sm text-muted-foreground",
-												children: s.desc
-											})
-										]
-									}, s.step))
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
-								delay: 200,
-								className: "max-w-3xl mx-auto",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center",
-									children: "FAQ"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Accordion, {
-									type: "single",
-									collapsible: true,
-									className: "w-full",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
-										value: "item-1",
-										className: "border-border",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
-											className: "text-foreground hover:text-primary font-bold uppercase tracking-wider",
-											children: "Quanto tempo leva a implementação?"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
-											className: "text-muted-foreground text-base",
-											children: "Depende do tamanho e maturidade da empresa, mas nossa metodologia ágil costuma reduzir o tempo padrão do mercado em até 30%."
-										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AccordionItem, {
-										value: "item-2",
-										className: "border-border",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionTrigger, {
-											className: "text-foreground hover:text-primary font-bold uppercase tracking-wider",
-											children: "Qual o envolvimento necessário da diretoria?"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AccordionContent, {
-											className: "text-muted-foreground text-base",
-											children: "Requeremos alinhamento estratégico nas fases de planejamento e revisão, mas a carga operacional é absorvida por nossos especialistas internamente."
-										})]
-									})]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
-								delay: 300,
-								className: "p-10 bg-secondary border-l-4 border-l-primary rounded-r-2xl text-left shadow-2xl max-w-4xl mx-auto",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-										className: "text-3xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide",
-										children: [
-											"Pronto para a",
-											" ",
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
-												className: "font-heading italic font-normal text-primary",
-												children: "pole position"
-											}),
-											"?"
-										]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "text-muted-foreground mb-8 text-lg",
-										children: [
-											"Fale com um de nossos especialistas e descubra o impacto da ",
-											title,
-											" no seu negócio."
-										]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-										asChild: true,
-										size: "lg",
-										className: "rounded-full uppercase tracking-wider font-bold",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-											to: "/contato",
-											children: "Agendar Reunião de Diagnóstico"
-										})
-									})
-								]
-							})
-						]
-					})
-				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContent, {
-				"aria-describedby": void 0,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogTitle, { children: ["Detalhes de ", title] }) })
-			}) })
-		]
-	});
-}
-var articles = [
-	{
-		title: "O Futuro da Qualidade",
-		category: "ISO 9001",
-		img: "https://img.usecurling.com/p/600/400?q=future%20technology&color=black"
-	},
-	{
-		title: "Sustentabilidade Corporativa",
-		category: "ISO 14001",
-		img: "https://img.usecurling.com/p/600/400?q=green%20city&color=black"
-	},
-	{
-		title: "Liderança e Segurança",
-		category: "ISO 45001",
-		img: "https://img.usecurling.com/p/600/400?q=construction%20leadership&color=black"
-	},
-	{
-		title: "Auditorias Remotas: O Novo Normal",
-		category: "Metodologia",
-		img: "https://img.usecurling.com/p/600/400?q=video%20conference&color=black"
-	}
-];
-function Insights() {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "pt-20",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-			className: "py-24 bg-card border-b border-border",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "container mx-auto px-4",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-					children: "Insights & Inteligência"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-xl text-muted-foreground max-w-2xl",
-					children: "Artigos, análises e tendências sobre alta performance empresarial e normas internacionais."
-				})] })
-			})
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-			className: "py-24",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "container mx-auto px-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "mb-16",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
-							children: "Destaque"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
-									alt: "Pitstop",
-									className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "absolute bottom-8 left-8 max-w-3xl",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: "text-primary font-bold text-sm uppercase tracking-widest mb-4",
-											children: "Estratégia Corporativa"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-											className: "text-4xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide",
-											children: "A Metáfora do Pit Stop na Otimização de Processos Empresariais"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-muted-foreground line-clamp-2 text-lg",
-											children: "Como aplicar a precisão milimétrica e o trabalho em equipe do automobilismo de elite para reduzir gargalos e aumentar a eficiência operacional."
-										})
-									]
-								})
-							]
-						})]
-					}) }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
-						children: "Últimos Artigos"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "grid md:grid-cols-2 lg:grid-cols-4 gap-6",
-						children: articles.map((article, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: i * 100,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "aspect-video overflow-hidden",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-										src: article.img,
-										alt: article.title,
-										className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100"
-									})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "p-6",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "text-primary text-xs font-bold uppercase tracking-widest mb-3",
-										children: article.category
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-										className: "text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight",
-										children: article.title
-									})]
-								})]
-							})
-						}, i))
-					})
-				]
-			})
-		})]
-	});
-}
-var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-		type,
-		className: cn("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
-		ref,
-		...props
-	});
-});
-Input.displayName = "Input";
-var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
-		className: cn("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
-		ref,
-		...props
-	});
-});
-Textarea.displayName = "Textarea";
-function Contact() {
-	const { toast: toast$2 } = useToast();
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		toast$2({
-			title: "Mensagem enviada com sucesso",
-			description: "Nossa equipe entrará em contato em breve."
-		});
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "pt-20",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-			className: "py-24 bg-secondary border-b border-border",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "container mx-auto px-4 max-w-4xl text-center",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-					className: "text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-					children: [
-						"Inicie a",
-						" ",
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", {
-							className: "font-heading italic font-normal text-primary",
-							children: "Transformação"
-						})
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-xl text-muted-foreground",
-					children: "Fale com nossos especialistas e descubra como elevar a performance da sua empresa."
-				})] })
-			})
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-			className: "py-24",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "container mx-auto px-4 max-w-6xl",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "grid md:grid-cols-2 gap-16",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "bg-card p-10 rounded-2xl border-2 border-border shadow-2xl",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-							className: "text-3xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide",
-							children: "Envie uma mensagem"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-							onSubmit: handleSubmit,
-							className: "space-y-6",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "grid grid-cols-2 gap-6",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "space-y-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-											className: "text-sm text-foreground font-bold uppercase tracking-wider",
-											children: "Nome"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-											required: true,
-											className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
-										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "space-y-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-											className: "text-sm text-foreground font-bold uppercase tracking-wider",
-											children: "Empresa"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-											required: true,
-											className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
-										})]
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "text-sm text-foreground font-bold uppercase tracking-wider",
-										children: "E-mail corporativo"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										type: "email",
-										required: true,
-										className: "bg-background border-border text-foreground focus-visible:ring-primary h-12"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "text-sm text-foreground font-bold uppercase tracking-wider",
-										children: "Mensagem"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
-										required: true,
-										className: "bg-background border-border text-foreground min-h-[120px] focus-visible:ring-primary resize-none"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-									type: "submit",
-									className: "w-full h-14 text-base uppercase tracking-widest font-bold mt-4",
-									children: "Enviar Solicitação"
-								})
-							]
-						})]
-					}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, {
-						delay: 200,
-						className: "space-y-12",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
-							children: "Informações de Contato"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-8",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-start gap-6 text-muted-foreground group",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "text-primary h-6 w-6" })
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "pt-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "font-bold text-foreground mb-1 uppercase tracking-wider",
-											children: "Sede Operacional"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-											className: "leading-relaxed uppercase text-sm",
-											children: [
-												"Rua Olavo Gonçalves, 330 Sala 11.",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-												"São Bernardo do Campo - SP"
-											]
-										})]
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-									href: "https://wa.me/5511986134789",
-									target: "_blank",
-									rel: "noopener noreferrer",
-									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "text-primary h-6 w-6" })
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "font-bold text-foreground group-hover:text-primary transition-colors text-lg",
-										children: "+55 (11) 98613-4789"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-									href: "mailto:andrade.gestaointegrada@gmail.com",
-									className: "flex items-center gap-6 text-muted-foreground group hover:opacity-90",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "p-4 rounded-full bg-secondary border border-border group-hover:border-primary group-hover:scale-110 transition-all duration-300",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "text-primary h-6 w-6" })
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all",
-										children: "ANDRADE.GESTÃOINTEGRADA@GMAIL.COM"
-									})]
-								})
-							]
-						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "h-64 rounded-2xl overflow-hidden border-2 border-border bg-card relative",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: "https://img.usecurling.com/p/800/400?q=map%20dark&color=black",
-								alt: "Mapa",
-								className: "w-full h-full object-cover opacity-50 grayscale"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-secondary/30 mix-blend-overlay" })]
-						})]
-					})]
-				})
-			})
-		})]
-	});
-}
-var NotFound = () => {
-	const location = useLocation();
-	(0, import_react.useEffect)(() => {
-		console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-	}, [location.pathname]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		className: "min-h-screen flex items-center justify-center bg-gray-100",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "text-center",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					className: "text-4xl font-bold mb-4",
-					children: "404"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-xl text-gray-600 mb-4",
-					children: "Oops! Page not found"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-					href: "/",
-					className: "text-blue-500 hover:text-blue-700 underline",
-					children: "Return to Home"
-				})
-			]
-		})
-	});
-};
-var NotFound_default = NotFound;
-var Sheet = Root$2;
+var Root$1 = Dialog;
+var Trigger$1 = DialogTrigger;
+var Portal$2 = DialogPortal;
+var Overlay = DialogOverlay;
+var Content = DialogContent;
+var Title = DialogTitle;
+var Description = DialogDescription;
+var Close = DialogClose;
+var Sheet = Root$1;
 var SheetTrigger = Trigger$1;
 var SheetPortal = Portal$2;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
@@ -28511,4 +28466,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-Bzwb35-c.js.map
+//# sourceMappingURL=index-DH8irhoS.js.map
