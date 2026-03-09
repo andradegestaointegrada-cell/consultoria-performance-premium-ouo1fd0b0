@@ -1904,10 +1904,6 @@ body{
   background-color: rgb(0 0 0 / 0.4);
 }
 
-.bg-black\/75{
-  background-color: rgb(0 0 0 / 0.75);
-}
-
 .bg-black\/80{
   background-color: rgb(0 0 0 / 0.8);
 }
@@ -1984,6 +1980,12 @@ body{
 .from-background{
   --tw-gradient-from: hsl(var(--background)) var(--tw-gradient-from-position);
   --tw-gradient-to: hsl(var(--background) / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-black\/60{
+  --tw-gradient-from: rgb(0 0 0 / 0.6) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -2512,6 +2514,10 @@ body{
 
 .opacity-90{
   opacity: 0.9;
+}
+
+.mix-blend-multiply{
+  mix-blend-mode: multiply;
 }
 
 .mix-blend-overlay{

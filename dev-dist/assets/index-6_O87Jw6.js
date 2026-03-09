@@ -25097,45 +25097,91 @@ var S_DATA = {
 	"iso-9001": {
 		t: "ISO 9001",
 		d: "A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.",
-		hi: "modern%20corporate%20building",
-		ci: "team%20meeting%20presentation",
+		hi: "https://i.postimg.cc/t4Z2xNx0/BANNER_9001.jpg",
+		ci: "https://i.postimg.cc/15YvXjfS/9001_DESCRIÇÃO_SERVIÇO.jpg",
 		w: "Processos robustos que garantem a padronização e a alta performance contínua."
 	},
 	"iso-14001": {
 		t: "ISO 14001",
 		d: "Transformamos a gestão ambiental em um diferencial competitivo sustentável.",
-		hi: "sustainable%20nature%20corporate",
-		ci: "renewable%20energy%20business",
+		hi: "https://i.postimg.cc/bwD3t9tz/14001_BANNER.jpg",
+		ci: "https://i.postimg.cc/yYrLxbk7/14001_DESCRIÇÃO_SERVIÇO.jpg",
 		w: "Estratégias sustentáveis integradas ao negócio, mitigando impactos ambientais."
 	},
 	"iso-45001": {
 		t: "ISO 45001",
 		d: "Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.",
-		hi: "drone%20construction%20site%20safety",
-		ci: "industrial%20worker%20helmet",
+		hi: "https://img.usecurling.com/p/1920/1080?q=engineer%20safety%20helmet%20factory&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=industrial%20workers%20safety%20gear&dpr=2",
 		w: "Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança."
 	},
-	"iso-27001": {
-		t: "ISO 27001",
-		d: "Segurança da informação levada a sério. Protegemos os dados da sua empresa.",
-		hi: "server%20room%20technology",
-		ci: "cybersecurity%20data%20protection",
-		w: "Estabelecemos controles rigorosos garantindo confidencialidade e integridade."
+	"pbqp-h": {
+		t: "PBQP-H",
+		d: "Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.",
+		hi: "https://img.usecurling.com/p/1920/1080?q=modern%20construction%20site%20buildings&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=architect%20blueprint%20construction&dpr=2",
+		w: "Aumento de produtividade, compliance setorial e redução de desperdícios em obras."
+	},
+	"iatf-16949": {
+		t: "IATF 16949",
+		d: "Gestão da qualidade rigorosa para a cadeia de suprimentos da indústria automotiva.",
+		hi: "https://img.usecurling.com/p/1920/1080?q=automotive%20manufacturing%20robotics&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=car%20assembly%20line%20factory&dpr=2",
+		w: "Prevenção de defeitos, redução de variação e desperdício na cadeia automotiva."
+	},
+	"iso-17020": {
+		t: "ISO/IEC 17020",
+		d: "Critérios rigorosos para garantir a competência e imparcialidade de organismos de inspeção.",
+		hi: "https://img.usecurling.com/p/1920/1080?q=quality%20control%20inspection%20industrial&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=inspector%20checking%20equipment&dpr=2",
+		w: "Confiabilidade atestada nas inspeções, garantindo credibilidade no mercado."
+	},
+	"iso-17025": {
+		t: "ISO/IEC 17025",
+		d: "Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.",
+		hi: "https://img.usecurling.com/p/1920/1080?q=modern%20science%20laboratory%20research&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=scientist%20microscope%20calibration&dpr=2",
+		w: "Padronização internacional e reconhecimento da qualidade dos seus laudos e ensaios."
+	},
+	sassmaq: {
+		t: "SASSMAQ",
+		d: "Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.",
+		hi: "https://img.usecurling.com/p/1920/1080?q=chemical%20logistics%20truck%20transport&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=industrial%20cargo%20shipment%20safety&dpr=2",
+		w: "Minimização de riscos operacionais e adequação às exigências da indústria química."
 	},
 	esg: {
 		t: "Consultoria ESG",
 		d: "Guiamos sua empresa na jornada ESG, alinhando propósito e governança sólida.",
-		hi: "corporate%20sustainability%20green",
-		ci: "business%20ecology%20growth",
+		hi: "https://img.usecurling.com/p/1920/1080?q=sustainable%20corporate%20wind%20energy&dpr=2",
+		ci: "https://img.usecurling.com/p/800/600?q=environmental%20social%20governance%20business&dpr=2",
 		w: "Apoiamos na estruturação completa de práticas alinhadas às exigências dos investidores."
 	}
 };
 var DEF = {
+	t: "",
 	d: "Soluções estratégicas focadas em trazer resultados reais para a operação da sua empresa.",
-	hi: "business%20strategy%20office",
-	ci: "corporate%20planning%20team",
+	hi: "https://img.usecurling.com/p/1920/1080?q=business%20strategy%20corporate&dpr=2",
+	ci: "https://img.usecurling.com/p/800/600?q=corporate%20planning%20team%20meeting&dpr=2",
 	w: "Entregamos um sistema focado em gerar valor e reduzir riscos."
 };
+var STEPS = [
+	{
+		step: "1",
+		title: "Diagnóstico",
+		desc: "Mapeamento da operação e identificação de gaps estratégicos."
+	},
+	{
+		step: "2",
+		title: "Implementação",
+		desc: "Ajustes ágeis, criação de processos customizados e treinamento."
+	},
+	{
+		step: "3",
+		title: "Auditoria",
+		desc: "Validação final de conformidade para a certificação."
+	}
+];
 function ServiceDetail() {
 	const { id } = useParams();
 	const svc = S_DATA[id?.toLowerCase() || ""] || DEF;
@@ -25146,11 +25192,15 @@ function ServiceDetail() {
 			className: "relative py-32 min-h-[60vh] flex items-center overflow-hidden border-b border-border",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "absolute inset-0 z-0",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: `https://img.usecurling.com/p/1920/1080?q=${svc.hi}&dpr=2`,
-					alt: `${title} Background`,
-					className: "w-full h-full object-cover"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/75" })]
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: svc.hi,
+						alt: `${title} Background`,
+						className: "w-full h-full object-cover"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/80 mix-blend-multiply" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" })
+				]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "container mx-auto px-4 relative z-10",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Reveal, { children: [
@@ -25189,7 +25239,7 @@ function ServiceDetail() {
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
 									ratio: 4 / 3,
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-										src: `https://img.usecurling.com/p/800/600?q=${svc.ci}&dpr=2`,
+										src: svc.ci,
 										alt: `Detalhes de ${title}`,
 										className: "object-cover w-full h-full hover:scale-105 transition-transform duration-700"
 									})
@@ -25204,23 +25254,7 @@ function ServiceDetail() {
 							children: "Como funciona"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "grid sm:grid-cols-3 gap-8",
-							children: [
-								{
-									step: "1",
-									title: "Diagnóstico",
-									desc: "Mapeamento da operação e identificação de gaps estratégicos."
-								},
-								{
-									step: "2",
-									title: "Implementação",
-									desc: "Ajustes ágeis, criação de processos customizados e treinamento."
-								},
-								{
-									step: "3",
-									title: "Auditoria",
-									desc: "Validação final de conformidade para a certificação."
-								}
-							].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							children: STEPS.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "p-8 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all duration-300 group",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -28461,4 +28495,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-tPx_3j5b.js.map
+//# sourceMappingURL=index-6_O87Jw6.js.map
