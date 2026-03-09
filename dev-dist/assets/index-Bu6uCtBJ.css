@@ -1331,6 +1331,10 @@ body{
   order: 2;
 }
 
+.-m-\[1px\]{
+  margin: -1px;
+}
+
 .-mx-1{
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -2294,6 +2298,10 @@ body{
 
 .border{
   border-width: 1px;
+}
+
+.border-0{
+  border-width: 0px;
 }
 
 .border-2{
