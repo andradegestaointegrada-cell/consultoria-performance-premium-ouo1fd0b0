@@ -44,14 +44,45 @@ export const exportToPDF = (
       const clone = svg.cloneNode(true) as SVGElement
       clone.setAttribute('width', '100%')
       clone.setAttribute('height', '250px')
-      // Map text to Platina Pura for contrast against Noir Supremo background
+
+      // Update SVG styling for white background compatibility
       const textElements = clone.querySelectorAll('text')
       textElements.forEach((text) => {
-        text.style.fill = '#E8E8E8'
+        text.style.fill = '#2C2C2C'
         text.style.fontFamily = 'Open Sans, sans-serif'
       })
+
+      const paths = clone.querySelectorAll('path')
+      paths.forEach((path) => {
+        if (path.getAttribute('stroke') === 'var(--background)') {
+          path.setAttribute('stroke', '#FFFFFF')
+        }
+      })
+
+      const grids = clone.querySelectorAll('.recharts-cartesian-grid line')
+      grids.forEach((line) => {
+        line.setAttribute('stroke', '#E8E8E8')
+      })
+
+      let legendHtml = ''
+      if (index === 0) {
+        legendHtml = `
+          <div style="display:flex; justify-content:center; gap:16px; margin-top:16px; font-size:12px; color:#2C2C2C; font-family:'Open Sans', sans-serif;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="width:10px;height:10px;background:#091D39;border-radius:2px;"></div> Novo
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="width:10px;height:10px;background:#CFAE70;border-radius:2px;"></div> Em Atendimento
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="width:10px;height:10px;background:#2C2C2C;border-radius:2px;"></div> Concluído
+            </div>
+          </div>
+        `
+      }
+
       const title = index === 0 ? 'Distribuição por Status' : 'Interesse por Serviço'
-      chartsHtml += `<div class="chart-container"><h3>${title}</h3><div style="text-align:center;">${clone.outerHTML}</div></div>`
+      chartsHtml += `<div class="chart-container"><h3>${title}</h3><div style="text-align:center;">${clone.outerHTML}${legendHtml}</div></div>`
     })
   }
 
@@ -62,29 +93,30 @@ export const exportToPDF = (
         <meta charset="UTF-8">
         <title>Relatório de Performance - ${date}</title>
         <style>
-          body { font-family: "Open Sans", system-ui, sans-serif; padding: 40px; color: #E8E8E8; max-width: 1000px; margin: 0 auto; background: #0D0D0D; }
-          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #E8E8E8; border-bottom: 2px solid #CFAE70; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+          body { font-family: "Open Sans", system-ui, sans-serif; padding: 40px; color: #0D0D0D; max-width: 1000px; margin: 0 auto; background: #FFFFFF; }
+          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; border-bottom: 2px solid #CFAE70; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+          h2 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; font-size: 20px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
           .metrics { display: flex; gap: 24px; margin-bottom: 40px; }
-          .metric-card { border: 1px solid #2C2C2C; padding: 24px; border-radius: 12px; flex: 1; background: #1A1A1A; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-          .metric-title { font-size: 13px; text-transform: uppercase; color: #A0A0A0; margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; }
-          .metric-value { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; font-size: 32px; font-weight: 700; color: #E8E8E8; }
+          .metric-card { border: 1px solid #E8E8E8; padding: 24px; border-radius: 12px; flex: 1; background: #FFFFFF; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+          .metric-title { font-size: 13px; text-transform: uppercase; color: #2C2C2C; margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; }
+          .metric-value { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; font-size: 32px; font-weight: 700; color: #091D39; }
           .charts-section { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
-          .chart-container { background: #1A1A1A; padding: 24px; border-radius: 12px; border: 1px solid #2C2C2C; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-          .chart-container h3 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; text-align: center; color: #E8E8E8; font-size: 16px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.05em; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; background: #1A1A1A; border-radius: 12px; overflow: hidden; border: 1px solid #2C2C2C; color: #E8E8E8; }
-          th, td { text-align: left; padding: 16px; border-bottom: 1px solid #2C2C2C; }
-          th { background-color: #091D39; font-weight: 600; color: #E8E8E8; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; border-bottom: 1px solid #2C2C2C; }
+          .chart-container { background: #FFFFFF; padding: 24px; border-radius: 12px; border: 1px solid #E8E8E8; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+          .chart-container h3 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; text-align: center; color: #091D39; font-size: 16px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.05em; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E8E8E8; color: #0D0D0D; }
+          th, td { text-align: left; padding: 16px; border-bottom: 1px solid #E8E8E8; }
+          th { background-color: #F9F9F9; font-weight: 600; color: #091D39; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; border-bottom: 2px solid #E8E8E8; }
           .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
-          .status-Novo { background: #091D39; color: #E8E8E8; }
+          .status-Novo { background: #091D39; color: #FFFFFF; }
           .status-Em-Atendimento { background: #CFAE70; color: #0D0D0D; }
-          .status-Concluído { background: #2C2C2C; color: #E8E8E8; }
+          .status-Concluído { background: #2C2C2C; color: #FFFFFF; }
           @media print {
-            body { padding: 0; background: #0D0D0D !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .metric-card, .chart-container, table { background: #1A1A1A !important; border: 1px solid #2C2C2C !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            th { background-color: #091D39 !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .status-Novo { background: #091D39 !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            body { padding: 0; background: #FFFFFF !important; color: #0D0D0D !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .metric-card, .chart-container, table { background: #FFFFFF !important; border: 1px solid #E8E8E8 !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { background-color: #F9F9F9 !important; color: #091D39 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .status-Novo { background: #091D39 !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .status-Em-Atendimento { background: #CFAE70 !important; color: #0D0D0D !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .status-Concluído { background: #2C2C2C !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .status-Concluído { background: #2C2C2C !important; color: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           }
         </style>
       </head>
