@@ -15,17 +15,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    /* Primary: Azul Petróleo #091D39 */
-    --primary: 216 73% 13%;
-    --primary-foreground: 0 0% 91%; /* Platina Pura #E8E8E8 */
+    /* Primary: Ouro Imperial #CFAE70 */
+    --primary: 40 45% 62%;
+    --primary-foreground: 0 0% 5%; /* Noir Supremo #0D0D0D */
 
     /* Secondary: Platina Pura #E8E8E8 */
     --secondary: 0 0% 91%;
     --secondary-foreground: 216 73% 13%;
 
-    /* Accent: Ouro Imperial #CFAE70 */
-    --accent: 40 45% 62%;
-    --accent-foreground: 0 0% 5%;
+    /* Accent: Azul Petróleo #091D39 */
+    --accent: 216 73% 13%;
+    --accent-foreground: 0 0% 91%; /* Platina Pura #E8E8E8 */
 
     /* Muted: Platina Pura / Light Gray */
     --muted: 0 0% 91%;
@@ -54,17 +54,17 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 91%;
 
-    /* Primary: Azul Petróleo #091D39 */
-    --primary: 216 73% 13%;
-    --primary-foreground: 0 0% 91%;
+    /* Primary: Ouro Imperial #CFAE70 */
+    --primary: 40 45% 62%;
+    --primary-foreground: 0 0% 5%;
 
     /* Secondary: Aço Sólido #2C2C2C */
     --secondary: 0 0% 17%;
     --secondary-foreground: 0 0% 91%;
 
-    /* Accent: Ouro Imperial #CFAE70 */
-    --accent: 40 45% 62%;
-    --accent-foreground: 0 0% 5%;
+    /* Accent: Azul Petróleo #091D39 */
+    --accent: 216 73% 13%;
+    --accent-foreground: 0 0% 91%;
 
     --muted: 0 0% 17%;
     --muted-foreground: 0 0% 65%;
