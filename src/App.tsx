@@ -11,6 +11,7 @@ import ServiceDetail from './pages/ServiceDetail'
 import Insights from './pages/Insights'
 import InsightDetail from './pages/InsightDetail'
 import Contact from './pages/Contact'
+import Dashboard from './pages/admin/Dashboard'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:slug" element={<InsightDetail />} />
             <Route path="/contato" element={<Contact />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

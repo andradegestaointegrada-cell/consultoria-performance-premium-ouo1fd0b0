@@ -1,19 +1,93 @@
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
 import { Reveal } from '@/components/ui/reveal'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { Checkbox } from '@/components/ui/checkbox'
+import useLeadStore from '@/stores/useLeadStore'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
+const formSchema = z.object({
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres.'),
+  company: z.string().min(2, 'O nome da empresa é obrigatório.'),
+  email: z.string().email('E-mail inválido.'),
+  service: z.string().min(1, 'Selecione um serviço de interesse.'),
+  message: z.string().min(10, 'A mensagem deve ter pelo menos 10 caracteres.'),
+  lgpdAgreed: z.literal(true, {
+    errorMap: () => ({ message: 'Você deve concordar com os termos da LGPD.' }),
+  }),
+})
+
+type ContactFormValues = z.infer<typeof formSchema>
+
+const SERVICES = [
+  'ISO 9001 - Gestão da Qualidade',
+  'ISO 14001 - Gestão Ambiental',
+  'ISO 45001 - Saúde e Segurança',
+  'PBQP-H - Qualidade do Habitat',
+  'IATF 16949 - Qualidade Automotiva',
+  'Consultoria ESG',
+  'Outros Serviços',
+]
 
 export default function Contact() {
   const { toast } = useToast()
+  const { addLead } = useLeadStore()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    toast({
-      title: 'Mensagem enviada com sucesso',
-      description: 'Nossa equipe entrará em contato em breve.',
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      company: '',
+      email: '',
+      service: '',
+      message: '',
+      lgpdAgreed: undefined,
+    },
+  })
+
+  function onSubmit(data: ContactFormValues) {
+    addLead({
+      name: data.name,
+      company: data.company,
+      email: data.email,
+      service: data.service,
+      message: data.message,
+      lgpdAgreed: data.lgpdAgreed,
     })
+
+    toast({
+      title: 'Mensagem enviada com sucesso!',
+      description: 'Você receberá um e-mail de confirmação em breve.',
+    })
+
+    // Simulate backend sending an automated email to the user
+    setTimeout(() => {
+      toast({
+        title: 'Auto-Resposta Enviada',
+        description: `Um e-mail de confirmação foi enviado para ${data.email}`,
+      })
+    }, 1500)
+
+    form.reset()
   }
 
   return (
@@ -40,53 +114,142 @@ export default function Contact() {
                 <h2 className="text-3xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide">
                   Envie uma mensagem
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm text-foreground font-bold uppercase tracking-wider">
-                        Nome
-                      </label>
-                      <Input
-                        required
-                        className="bg-background border-border text-foreground focus-visible:ring-primary h-12"
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="uppercase tracking-wider font-bold">
+                              Nome
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="Seu nome" className="h-12" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="company"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="uppercase tracking-wider font-bold">
+                              Empresa
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="Sua empresa" className="h-12" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm text-foreground font-bold uppercase tracking-wider">
-                        Empresa
-                      </label>
-                      <Input
-                        required
-                        className="bg-background border-border text-foreground focus-visible:ring-primary h-12"
+
+                    <div className="grid grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="uppercase tracking-wider font-bold">
+                              E-mail Corporativo
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                type="email"
+                                placeholder="email@empresa.com"
+                                className="h-12"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="service"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="uppercase tracking-wider font-bold">
+                              Serviço de Interesse
+                            </FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              value={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="h-12">
+                                  <SelectValue placeholder="Selecione um serviço" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {SERVICES.map((s) => (
+                                  <SelectItem key={s} value={s}>
+                                    {s}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
                     </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm text-foreground font-bold uppercase tracking-wider">
-                      E-mail corporativo
-                    </label>
-                    <Input
-                      type="email"
-                      required
-                      className="bg-background border-border text-foreground focus-visible:ring-primary h-12"
+
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="uppercase tracking-wider font-bold">
+                            Mensagem
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Como podemos ajudar sua empresa?"
+                              className="resize-none min-h-[120px]"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm text-foreground font-bold uppercase tracking-wider">
-                      Mensagem
-                    </label>
-                    <Textarea
-                      required
-                      className="bg-background border-border text-foreground min-h-[120px] focus-visible:ring-primary resize-none"
+
+                    <FormField
+                      control={form.control}
+                      name="lgpdAgreed"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+                          <FormControl>
+                            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-sm font-medium leading-relaxed">
+                              Concordo com a coleta e armazenamento dos meus dados para fins de
+                              contato comercial, em conformidade com a Lei Geral de Proteção de
+                              Dados (LGPD).
+                            </FormLabel>
+                            <FormMessage />
+                          </div>
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full h-14 text-base uppercase tracking-widest font-bold mt-4"
-                  >
-                    Enviar Solicitação
-                  </Button>
-                </form>
+
+                    <Button
+                      type="submit"
+                      className="w-full h-14 text-base uppercase tracking-widest font-bold"
+                    >
+                      Enviar Solicitação
+                    </Button>
+                  </form>
+                </Form>
               </div>
             </Reveal>
 
@@ -137,7 +300,6 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-
               <div className="h-64 rounded-2xl overflow-hidden border-2 border-border bg-card relative">
                 <img
                   src="https://img.usecurling.com/p/800/400?q=clean%20city%20map&color=black"
