@@ -16333,6 +16333,30 @@ function DataRoutes({ routes, future, state, isStatic, onError }) {
 		future
 	});
 }
+function Navigate({ to, replace: replace2, state, relative }) {
+	invariant(useInRouterContext(), `<Navigate> may be used only in the context of a <Router> component.`);
+	let { static: isStatic } = import_react.useContext(NavigationContext);
+	warning(!isStatic, `<Navigate> must not be used on the initial render in a <StaticRouter>. This is a no-op, but you should modify your code so the <Navigate> is only ever rendered in response to some user interaction or state change.`);
+	let { matches } = import_react.useContext(RouteContext);
+	let { pathname: locationPathname } = useLocation();
+	let navigate = useNavigate();
+	let path = resolveTo(to, getResolveToMatches(matches), locationPathname, relative === "path");
+	let jsonPath = JSON.stringify(path);
+	import_react.useEffect(() => {
+		navigate(JSON.parse(jsonPath), {
+			replace: replace2,
+			state,
+			relative
+		});
+	}, [
+		navigate,
+		jsonPath,
+		relative,
+		replace2,
+		state
+	]);
+	return null;
+}
 function Outlet(props) {
 	return useOutlet(props.context);
 }
@@ -25488,8 +25512,143 @@ function Insights() {
 		})]
 	});
 }
+const insightsData = {
+	"o-futuro-da-qualidade": {
+		category: "ISO 9001",
+		readTime: "Tempo de leitura: 5 min",
+		title: "O Futuro da Qualidade ISO 9001",
+		image: "https://img.usecurling.com/p/1200/600?q=future%20technology&color=black",
+		intro: "A transição para a nova versão da norma ISO 9001:2026 traz mudanças significativas que redefinem o conceito de Gestão da Qualidade. Este artigo explora as principais alterações, oportunidades e a importância estratégica da atualização para o seu negócio.",
+		pillarsTitle: "Os 4 Pilares da Alta Performance",
+		pillars: [
+			{
+				title: "1. Contexto",
+				desc: "Compreensão profunda do ambiente de negócios e expectativas das partes interessadas."
+			},
+			{
+				title: "2. Liderança",
+				desc: "Engajamento total da alta direção e alinhamento com a estratégia corporativa."
+			},
+			{
+				title: "3. Riscos",
+				desc: "Gestão preditiva e preventiva, focada na mitigação de ameaças e captura de oportunidades."
+			},
+			{
+				title: "4. Integração",
+				desc: "Sinergia com tecnologias emergentes e outros sistemas de gestão."
+			}
+		],
+		tableTitle: "Comparativo: ISO 9001:2015 vs ISO 9001:2026",
+		tableHeaders: [
+			"Critério",
+			"ISO 9001:2015",
+			"ISO 9001:2026"
+		],
+		tableRows: [
+			{
+				label: "Gestão de Mudanças",
+				old: "Reativa e departamental",
+				new: "Ágil e integrada estrategicamente"
+			},
+			{
+				label: "Foco Tecnológico",
+				old: "Documentação digital",
+				new: "IA, Automação e Dados em tempo real"
+			},
+			{
+				label: "Sustentabilidade",
+				old: "Opcional/Implícita",
+				new: "Mandatória (ESG Integrado)"
+			}
+		],
+		conclusionTitle: "O Caminho para a Excelência",
+		conclusionText: "Antecipar-se à transição não é apenas uma questão de conformidade, mas sim uma vantagem competitiva. Empresas que adotam precocemente os novos requisitos demonstram resiliência, visão de futuro e compromisso inabalável com a satisfação do cliente.",
+		bullets: [
+			"Avaliação de prontidão (Gap Analysis) especializada.",
+			"Treinamento e capacitação de equipes chave.",
+			"Atualização de documentação e processos.",
+			"Auditorias internas de transição."
+		],
+		statsNumber: "99%",
+		statsTitle: "Taxa de Sucesso",
+		statsDesc: "Em projetos de implementação e certificação conduzidos pela nossa equipe de especialistas focados em resultados práticos.",
+		ctaTitle: "Pronto para a Transição ISO 9001:2026?",
+		ctaText: "Não espere pelos prazos finais. Inicie hoje a jornada de atualização do seu Sistema de Gestão da Qualidade e coloque sua empresa na vanguarda do mercado.",
+		ctaBtnText: "Fale com um Especialista Agora",
+		ctaLink: "/contato"
+	},
+	"sustentabilidade-corporativa": {
+		category: "ISO 14001",
+		readTime: "Tempo de leitura: 6 min",
+		title: "ISO 14001:2026 — A Nova Era da Gestão Ambiental e o Papel Estratégico na Sustentabilidade Real",
+		image: "https://img.usecurling.com/p/1200/600?q=green%20city&color=black",
+		intro: "A transição para a nova norma ISO 14001:2026 reavalia o papel estratégico das empresas na preservação do ecossistema global. Este artigo explora as principais alterações regulatórias e a importância de alcançar a Sustentabilidade Real de maneira estrutural.",
+		pillarsTitle: "Os 4 Pilares da Sustentabilidade",
+		pillars: [
+			{
+				title: "1. Ciclo de Vida",
+				desc: "Análise contínua do berço ao túmulo, garantindo rastreabilidade e redução do impacto ambiental."
+			},
+			{
+				title: "2. Economia Circular",
+				desc: "Integração de práticas robustas de reuso, reciclagem avançada e eliminação de desperdícios produtivos."
+			},
+			{
+				title: "3. Riscos Climáticos",
+				desc: "Gestão preditiva com foco absoluto na mitigação de ameaças e adaptação da cadeia de suprimentos."
+			},
+			{
+				title: "4. Sustentabilidade Estratégica",
+				desc: "Integração de práticas ambientais com o framework global de governança corporativa ESG (Environmental, Social, and Governance)."
+			}
+		],
+		tableTitle: "Comparativo: ISO 14001:2015 vs ISO 14001:2026",
+		tableHeaders: [
+			"Critério",
+			"ISO 14001:2015",
+			"ISO 14001:2026"
+		],
+		tableRows: [
+			{
+				label: "Foco Principal",
+				old: "Mitigação de poluição",
+				new: "Sustentabilidade e Circularidade"
+			},
+			{
+				label: "Ciclo de Vida",
+				old: "Recomendação de perspectiva",
+				new: "Rastreabilidade mandatória e sistêmica"
+			},
+			{
+				label: "Gestão Climática",
+				old: "Abordagem implícita",
+				new: "Avaliação de impacto estrutural obrigatória"
+			}
+		],
+		conclusionTitle: "O Caminho para a Sustentabilidade Real",
+		conclusionText: "O alinhamento estratégico com os novos paradigmas ambientais não é opcional para as marcas que desejam liderar o futuro. Sustentabilidade se consolidou como a nova métrica inegociável de valorização global e mitigação de riscos mercadológicos.",
+		bullets: [
+			"Avaliação detalhada de maturidade ESG e Gap Analysis Ambiental.",
+			"Treinamento corporativo imersivo em práticas de Economia Circular.",
+			"Atualização de matrizes de impacto e processos de destinação final.",
+			"Auditorias rigorosas de transparência, rastreabilidade e pegada de carbono."
+		],
+		statsNumber: "100%",
+		statsTitle: "Conformidade Ambiental",
+		statsDesc: "Alinhamento integral com as exigências climáticas globais, preparando a organização para auditorias complexas e certificações.",
+		ctaTitle: "Pronto para a Sustentabilidade Real?",
+		ctaText: "Antecipe-se às exigências regulatórias. Inicie agora a transição do seu Sistema de Gestão Ambiental e destaque-se na jornada verde.",
+		ctaBtnText: "Fale com nossos Especialistas em ESG",
+		ctaLink: "mailto:contato@andradegestao.com.br"
+	}
+};
 function InsightDetail() {
 	const { slug } = useParams();
+	const article = slug && insightsData[slug] ? insightsData[slug] : insightsData["o-futuro-da-qualidade"];
+	if (!article) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navigate, {
+		to: "/insights",
+		replace: true
+	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "pt-24 pb-16 bg-background min-h-screen",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
@@ -25507,15 +25666,15 @@ function InsightDetail() {
 							className: "flex items-center gap-4 mb-6",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "text-primary font-bold text-sm uppercase tracking-widest",
-								children: "ISO 9001"
+								children: article.category
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "text-muted-foreground text-sm font-medium uppercase tracking-wider",
-								children: "Tempo de leitura: 5 min"
+								children: article.readTime
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 							className: "text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide leading-tight",
-							children: "O Futuro da Qualidade ISO 9001"
+							children: article.title
 						})
 					]
 				}) }),
@@ -25524,8 +25683,8 @@ function InsightDetail() {
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "aspect-video w-full rounded-2xl overflow-hidden mb-12 border-2 border-border",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-							src: "https://img.usecurling.com/p/1200/600?q=future%20technology&color=black",
-							alt: "O Futuro da Qualidade",
+							src: article.image,
+							alt: article.title,
 							className: "w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
 						})
 					})
@@ -25537,32 +25696,15 @@ function InsightDetail() {
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-xl md:text-2xl text-foreground font-medium mb-10 leading-relaxed",
-								children: "A transição para a nova versão da norma ISO 9001:2026 traz mudanças significativas que redefinem o conceito de Gestão da Qualidade. Este artigo explora as principais alterações, oportunidades e a importância estratégica da atualização para o seu negócio."
+								children: article.intro
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
-								children: "Os 4 Pilares da Alta Performance"
+								children: article.pillarsTitle
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "grid sm:grid-cols-2 gap-6 mb-12",
-								children: [
-									{
-										title: "1. Contexto",
-										desc: "Compreensão profunda do ambiente de negócios e expectativas das partes interessadas."
-									},
-									{
-										title: "2. Liderança",
-										desc: "Engajamento total da alta direção e alinhamento com a estratégia corporativa."
-									},
-									{
-										title: "3. Riscos",
-										desc: "Gestão preditiva e preventiva, focada na mitigação de ameaças e captura de oportunidades."
-									},
-									{
-										title: "4. Integração",
-										desc: "Sinergia com tecnologias emergentes e outros sistemas de gestão."
-									}
-								].map((pillar, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								children: article.pillars.map((pillar, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "bg-card p-6 md:p-8 rounded-xl border border-border hover:border-primary transition-colors",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 										className: "text-primary font-bold text-xl mb-3 uppercase tracking-wide",
@@ -25575,102 +25717,51 @@ function InsightDetail() {
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
-								children: "Comparativo: ISO 9001:2015 vs ISO 9001:2026"
+								children: article.tableTitle
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "overflow-x-auto mb-12",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
 									className: "w-full text-left border-collapse min-w-[600px]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
 										className: "border-b-2 border-primary text-foreground uppercase tracking-wider text-sm",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-												className: "py-4 px-4 font-bold w-1/3",
-												children: "Critério"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-												className: "py-4 px-4 font-bold w-1/3",
-												children: "ISO 9001:2015"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-												className: "py-4 px-4 font-bold w-1/3",
-												children: "ISO 9001:2026"
-											})
-										]
-									}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tbody", {
+										children: article.tableHeaders.map((header, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "py-4 px-4 font-bold w-1/3",
+											children: header
+										}, i))
+									}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
 										className: "text-muted-foreground",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-												className: "border-b border-border hover:bg-muted/50 transition-colors",
-												children: [
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-bold text-foreground",
-														children: "Gestão de Mudanças"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4",
-														children: "Reativa e departamental"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-semibold text-primary",
-														children: "Ágil e integrada estrategicamente"
-													})
-												]
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-												className: "border-b border-border hover:bg-muted/50 transition-colors",
-												children: [
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-bold text-foreground",
-														children: "Foco Tecnológico"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4",
-														children: "Documentação digital"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-semibold text-primary",
-														children: "IA, Automação e Dados em tempo real"
-													})
-												]
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-												className: "border-b border-border hover:bg-muted/50 transition-colors",
-												children: [
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-bold text-foreground",
-														children: "Sustentabilidade"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4",
-														children: "Opcional/Implícita"
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-														className: "py-4 px-4 font-semibold text-primary",
-														children: "Mandatória (ESG Integrado)"
-													})
-												]
-											})
-										]
+										children: article.tableRows.map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+											className: "border-b border-border hover:bg-muted/50 transition-colors",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+													className: "py-4 px-4 font-bold text-foreground",
+													children: row.label
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+													className: "py-4 px-4",
+													children: row.old
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+													className: "py-4 px-4 font-semibold text-primary",
+													children: row.new
+												})
+											]
+										}, i))
 									})]
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
-								children: "O Caminho para a Excelência"
+								children: article.conclusionTitle
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "mb-8",
-								children: "Antecipar-se à transição não é apenas uma questão de conformidade, mas sim uma vantagem competitiva. Empresas que adotam precocemente os novos requisitos demonstram resiliência, visão de futuro e compromisso inabalável com a satisfação do cliente."
+								children: article.conclusionText
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
 								className: "space-y-4 my-8",
-								children: [
-									"Avaliação de prontidão (Gap Analysis) especializada.",
-									"Treinamento e capacitação de equipes chave.",
-									"Atualização de documentação e processos.",
-									"Auditorias internas de transição."
-								].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+								children: article.bullets.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
 									className: "flex items-start gap-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-6 w-6 text-primary shrink-0 mt-1" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "text-foreground font-medium",
@@ -25683,15 +25774,15 @@ function InsightDetail() {
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "text-6xl md:text-8xl font-heading font-bold text-primary mb-6 drop-shadow-sm",
-										children: "99%"
+										children: article.statsNumber
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "text-2xl font-bold text-foreground uppercase tracking-wide mb-4",
-										children: "Taxa de Sucesso"
+										children: article.statsTitle
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "text-muted-foreground text-lg max-w-xl mx-auto",
-										children: "Em projetos de implementação e certificação conduzidos pela nossa equipe de especialistas focados em resultados práticos."
+										children: article.statsDesc
 									})
 								]
 							})
@@ -25707,19 +25798,22 @@ function InsightDetail() {
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
-									children: "Pronto para a Transição ISO 9001:2026?"
+									children: article.ctaTitle
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed",
-									children: "Não espere pelos prazos finais. Inicie hoje a jornada de atualização do seu Sistema de Gestão da Qualidade e coloque sua empresa na vanguarda do mercado."
+									children: article.ctaText
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 									size: "lg",
 									asChild: true,
 									className: "h-14 px-10 text-base uppercase font-bold tracking-widest shadow-[0_0_20px_rgba(207,174,112,0.3)]",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-										to: "/contato",
-										children: ["Fale com um Especialista Agora", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "ml-3 h-5 w-5" })]
+									children: article.ctaLink.startsWith("mailto:") ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+										href: article.ctaLink,
+										children: [article.ctaBtnText, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "ml-3 h-5 w-5" })]
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+										to: article.ctaLink,
+										children: [article.ctaBtnText, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "ml-3 h-5 w-5" })]
 									})
 								})
 							]
@@ -28774,4 +28868,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-D1iNbW3O.js.map
+//# sourceMappingURL=index-B29YJ_Yk.js.map
