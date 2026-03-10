@@ -188,7 +188,7 @@ export const insightsData: Record<string, any> = {
       'A construção de uma cultura interdependente onde a segurança é um valor fundamental e inegociável em todos os níveis hierárquicos.',
     ctaTitle: 'Quer liderar com segurança e excelência?',
     ctaText:
-      'Descubra como estruturar sua gestão ocupacional para a nova ISO 45001:2027 e integrar os requisitos da NR-01 de forma inteligente e definitiva.',
+      'Descubra como estruturar sua gestão ocupacional para a nova ISO 45001:2027 e integrate os requisitos da NR-01 de forma inteligente e definitiva.',
     ctaBtnText: 'Entre em contato agora',
     ctaLink: '/contato',
   },
@@ -196,7 +196,7 @@ export const insightsData: Record<string, any> = {
     category: 'Estratégia Corporativa',
     readTime: 'Tempo de leitura: 8 min',
     title: 'A Metáfora do Pit Stop na Otimização de Processos Empresariais',
-    image: 'https://i.postimg.cc/rpCCCDnk/PIT-STOP.jpg',
+    image: 'https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg',
     intro:
       'No automobilismo de elite, uma parada nos boxes pode definir o campeão. Mas o que as empresas podem aprender com a execução milimétrica de um pit stop? Descubra como aplicar a sincronia, preparação e precisão da Fórmula 1 para eliminar gargalos e acelerar a eficiência operacional do seu negócio.',
     pillarsTitle: 'O que as empresas podem aprender com um pit stop?',

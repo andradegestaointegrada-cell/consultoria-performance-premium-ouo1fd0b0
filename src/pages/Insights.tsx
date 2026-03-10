@@ -57,7 +57,7 @@ export default function Insights() {
                 className="relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer block"
               >
                 <img
-                  src="https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black"
+                  src="https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg"
                   alt="Pitstop"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
                 />

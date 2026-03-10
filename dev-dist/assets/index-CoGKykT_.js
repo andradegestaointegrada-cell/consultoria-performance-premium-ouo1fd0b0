@@ -25451,7 +25451,7 @@ function Insights() {
 							className: "relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer block",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
+									src: "https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg",
 									alt: "Pitstop",
 									className: "absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
 								}),
@@ -25701,7 +25701,7 @@ const insightsData = {
 		statsTitle: "Acidentes como Meta Inegociável",
 		statsDesc: "A construção de uma cultura interdependente onde a segurança é um valor fundamental e inegociável em todos os níveis hierárquicos.",
 		ctaTitle: "Quer liderar com segurança e excelência?",
-		ctaText: "Descubra como estruturar sua gestão ocupacional para a nova ISO 45001:2027 e integrar os requisitos da NR-01 de forma inteligente e definitiva.",
+		ctaText: "Descubra como estruturar sua gestão ocupacional para a nova ISO 45001:2027 e integrate os requisitos da NR-01 de forma inteligente e definitiva.",
 		ctaBtnText: "Entre em contato agora",
 		ctaLink: "/contato"
 	},
@@ -25709,7 +25709,7 @@ const insightsData = {
 		category: "Estratégia Corporativa",
 		readTime: "Tempo de leitura: 8 min",
 		title: "A Metáfora do Pit Stop na Otimização de Processos Empresariais",
-		image: "https://i.postimg.cc/rpCCCDnk/PIT-STOP.jpg",
+		image: "https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg",
 		intro: "No automobilismo de elite, uma parada nos boxes pode definir o campeão. Mas o que as empresas podem aprender com a execução milimétrica de um pit stop? Descubra como aplicar a sincronia, preparação e precisão da Fórmula 1 para eliminar gargalos e acelerar a eficiência operacional do seu negócio.",
 		pillarsTitle: "O que as empresas podem aprender com um pit stop?",
 		pillars: [
@@ -28996,4 +28996,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-jxTaSKQK.js.map
+//# sourceMappingURL=index-CoGKykT_.js.map
