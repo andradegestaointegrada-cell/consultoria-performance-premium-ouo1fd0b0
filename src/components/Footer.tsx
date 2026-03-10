@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { Linkedin, Twitter, Instagram } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
+import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
 
 export function Footer() {
   return (
@@ -10,9 +12,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <span className="font-heading font-bold text-xl text-foreground uppercase tracking-wide">
-                Andrade Gestão Integrada
-              </span>
+              <img src={logoLight} alt="Andrade Gestão Integrada" className="h-12 dark:hidden" />
+              <img
+                src={logoDark}
+                alt="Andrade Gestão Integrada"
+                className="h-12 hidden dark:block rounded-md overflow-hidden"
+              />
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
               Andrade Gestão Integrada. Consultoria premium focada em alta performance,
@@ -21,19 +26,19 @@ export function Footer() {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -46,22 +51,22 @@ export function Footer() {
             </h4>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
-                <Link to="/sobre" className="hover:text-primary transition-colors">
+                <Link to="/sobre" className="hover:text-accent transition-colors">
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link to="/servicos" className="hover:text-primary transition-colors">
+                <Link to="/servicos" className="hover:text-accent transition-colors">
                   Nossos Serviços
                 </Link>
               </li>
               <li>
-                <Link to="/insights" className="hover:text-primary transition-colors">
+                <Link to="/insights" className="hover:text-accent transition-colors">
                   Insights & Blog
                 </Link>
               </li>
               <li>
-                <Link to="/contato" className="hover:text-primary transition-colors">
+                <Link to="/contato" className="hover:text-accent transition-colors">
                   Contato
                 </Link>
               </li>
@@ -74,17 +79,17 @@ export function Footer() {
             </h4>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
-                <Link to="#" className="hover:text-primary transition-colors">
+                <Link to="/termos-de-uso" className="hover:text-accent transition-colors">
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <Link to="#" className="hover:text-primary transition-colors">
+                <Link to="/politica-de-privacidade" className="hover:text-accent transition-colors">
                   Política de Privacidade
                 </Link>
               </li>
               <li>
-                <Link to="#" className="hover:text-primary transition-colors">
+                <Link to="/portal-lgpd" className="hover:text-accent transition-colors">
                   Portal de LGPD
                 </Link>
               </li>
@@ -104,7 +109,10 @@ export function Footer() {
                 placeholder="Seu e-mail"
                 className="bg-card border-border text-foreground h-12"
               />
-              <Button type="submit" className="h-12 uppercase font-bold tracking-widest">
+              <Button
+                type="submit"
+                className="h-12 uppercase font-bold tracking-widest bg-accent text-accent-foreground hover:bg-accent/80"
+              >
                 Assinar
               </Button>
             </form>
@@ -113,7 +121,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-8 text-center text-sm font-bold text-muted-foreground uppercase tracking-wider flex flex-col md:flex-row justify-between items-center">
           <p>© {new Date().getFullYear()} Andrade Gestão Integrada.</p>
-          <p className="mt-4 md:mt-0 text-primary">Desenvolvido com precisão.</p>
+          <p className="mt-4 md:mt-0 text-accent">Desenvolvido com precisão.</p>
         </div>
       </div>
     </footer>

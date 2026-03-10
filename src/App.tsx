@@ -15,6 +15,10 @@ import Dashboard from './pages/admin/Dashboard'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 
+import TermsOfUse from './pages/legal/TermsOfUse'
+import PrivacyPolicy from './pages/legal/PrivacyPolicy'
+import LGPDPortal from './pages/legal/LGPDPortal'
+
 const App = () => (
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
     <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
@@ -32,6 +36,10 @@ const App = () => (
             <Route path="/insights/:slug" element={<InsightDetail />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
+
+            <Route path="/termos-de-uso" element={<TermsOfUse />} />
+            <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+            <Route path="/portal-lgpd" element={<LGPDPortal />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

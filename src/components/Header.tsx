@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './ThemeToggle'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
+import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -36,9 +38,16 @@ export function Header() {
     >
       <div className="container mx-auto px-4 h-24 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <span className="font-heading font-bold text-lg md:text-xl lg:text-2xl tracking-wide text-foreground uppercase">
-            Andrade <span className="text-primary hidden sm:inline-block">Gestão Integrada</span>
-          </span>
+          <img
+            src={logoLight}
+            alt="Andrade Gestão Integrada"
+            className="h-10 md:h-12 dark:hidden"
+          />
+          <img
+            src={logoDark}
+            alt="Andrade Gestão Integrada"
+            className="h-10 md:h-12 hidden dark:block rounded-md overflow-hidden"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -48,15 +57,18 @@ export function Header() {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary',
-                location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
+                'text-sm font-bold uppercase tracking-widest transition-colors hover:text-accent',
+                location.pathname === link.path ? 'text-accent' : 'text-muted-foreground',
               )}
             >
               {link.name}
             </Link>
           ))}
           <ThemeToggle />
-          <Button asChild className="rounded-full uppercase tracking-wider font-bold">
+          <Button
+            asChild
+            className="rounded-full uppercase tracking-wider font-bold bg-accent text-accent-foreground hover:bg-accent/80"
+          >
             <Link to="/contato">Fale com um Especialista</Link>
           </Button>
         </nav>
@@ -81,14 +93,17 @@ export function Header() {
                     key={link.path}
                     to={link.path}
                     className={cn(
-                      'text-lg font-bold uppercase tracking-wider transition-colors hover:text-primary',
-                      location.pathname === link.path ? 'text-primary' : 'text-muted-foreground',
+                      'text-lg font-bold uppercase tracking-wider transition-colors hover:text-accent',
+                      location.pathname === link.path ? 'text-accent' : 'text-muted-foreground',
                     )}
                   >
                     {link.name}
                   </Link>
                 ))}
-                <Button asChild className="w-full mt-4 uppercase tracking-wider font-bold">
+                <Button
+                  asChild
+                  className="w-full mt-4 uppercase tracking-wider font-bold bg-accent text-accent-foreground hover:bg-accent/80"
+                >
                   <Link to="/contato">Fale com um Especialista</Link>
                 </Button>
               </nav>

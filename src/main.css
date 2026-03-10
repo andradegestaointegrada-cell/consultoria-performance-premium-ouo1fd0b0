@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,58 +6,68 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    --background: 0 0% 100%; /* Platina Pura Light #FFFFFF */
+    --foreground: 0 0% 5%; /* Noir Supremo #0D0D0D */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 0 0% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 40 45% 62%; /* Ouro Imperial */
-    --primary-foreground: 0 0% 5%;
+    /* Primary: Azul Petróleo #091D39 */
+    --primary: 216 73% 13%;
+    --primary-foreground: 0 0% 91%; /* Platina Pura #E8E8E8 */
 
-    --secondary: 215 73% 95%;
-    --secondary-foreground: 215 73% 13%;
+    /* Secondary: Platina Pura #E8E8E8 */
+    --secondary: 0 0% 91%;
+    --secondary-foreground: 216 73% 13%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-
+    /* Accent: Ouro Imperial #CFAE70 */
     --accent: 40 45% 62%;
     --accent-foreground: 0 0% 5%;
+
+    /* Muted: Platina Pura / Light Gray */
+    --muted: 0 0% 91%;
+    --muted-foreground: 0 0% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 40 45% 62%;
+    /* Border: Aço Sólido #2C2C2C for dark accents, but lighter for default borders */
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 40 45% 62%; /* Ouro Imperial */
 
     --radius: 0.5rem;
   }
 
   .dark {
+    /* Background: Noir Supremo #0D0D0D */
     --background: 0 0% 5%;
-    --foreground: 0 0% 91%;
+    --foreground: 0 0% 91%; /* Platina Pura #E8E8E8 */
 
-    --card: 0 0% 17%;
+    /* Card: Aço Sólido dark shade #1A1A1A */
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 91%;
 
-    --popover: 0 0% 17%;
+    --popover: 0 0% 10%;
     --popover-foreground: 0 0% 91%;
 
-    --primary: 40 45% 62%; /* Ouro Imperial */
-    --primary-foreground: 0 0% 5%;
+    /* Primary: Azul Petróleo #091D39 */
+    --primary: 216 73% 13%;
+    --primary-foreground: 0 0% 91%;
 
-    --secondary: 215 73% 13%;
+    /* Secondary: Aço Sólido #2C2C2C */
+    --secondary: 0 0% 17%;
     --secondary-foreground: 0 0% 91%;
+
+    /* Accent: Ouro Imperial #CFAE70 */
+    --accent: 40 45% 62%;
+    --accent-foreground: 0 0% 5%;
 
     --muted: 0 0% 17%;
     --muted-foreground: 0 0% 65%;
-
-    --accent: 40 45% 62%;
-    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
@@ -94,7 +104,7 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
 
   .glass-panel {

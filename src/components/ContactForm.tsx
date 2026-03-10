@@ -53,23 +53,13 @@ export function ContactForm() {
   const { addLead } = useLeadStore()
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      company: '',
-      email: '',
-      service: '',
-      message: '',
-      lgpdAgreed: undefined,
-    },
-  })
-
   const sendNotifications = async (d: ContactFormValues) => {
     const resendKey = import.meta.env.VITE_RESEND_API_KEY
     const waKey = import.meta.env.VITE_WHATSAPP_API_KEY
     const resendDomain = import.meta.env.VITE_RESEND_DOMAIN || 'andradegestao.com.br'
-    const waNumber = import.meta.env.VITE_ADMIN_WHATSAPP_NUMBER || '+5511986134789'
+
+    const toEmail = 'andrade.gestaointegrada@gmail.com'
+    const waNumber = '+5511986134789'
 
     console.log('[System] Verificando autenticação de domínio (DNS) e chaves de API...')
 
@@ -84,16 +74,14 @@ export function ContactForm() {
               },
               body: JSON.stringify({
                 from: `Contato Premium <onboarding@${resendDomain}>`,
-                to: ['admin@' + resendDomain],
+                to: [toEmail],
                 subject: `Novo Lead Premium - ${d.name}`,
                 html: `<p><strong>Nome:</strong> ${d.name}</p><p><strong>Serviço:</strong> ${d.service}</p><p><strong>Mensagem:</strong> ${d.message}</p>`,
               }),
             })
           : new Promise((resolve) =>
               setTimeout(() => {
-                console.log(
-                  `✅ [Resend API] Sucesso! Email entregue com autenticação: admin@${resendDomain}`,
-                )
+                console.log(`✅ [Resend API] Sucesso! Email entregue com autenticação: ${toEmail}`)
                 resolve(true)
               }, 600),
             )
@@ -156,9 +144,13 @@ export function ContactForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-bold text-[#091D39]">NOME</FormLabel>
+                <FormLabel className="font-bold text-foreground">NOME</FormLabel>
                 <FormControl>
-                  <Input placeholder="Seu nome" className="border-[#2C2C2C]/20" {...field} />
+                  <Input
+                    placeholder="Seu nome"
+                    className="border-border bg-background text-foreground"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -169,9 +161,13 @@ export function ContactForm() {
             name="company"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-bold text-[#091D39]">EMPRESA</FormLabel>
+                <FormLabel className="font-bold text-foreground">EMPRESA</FormLabel>
                 <FormControl>
-                  <Input placeholder="Sua empresa" className="border-[#2C2C2C]/20" {...field} />
+                  <Input
+                    placeholder="Sua empresa"
+                    className="border-border bg-background text-foreground"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -184,12 +180,12 @@ export function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-bold text-[#091D39]">E-MAIL</FormLabel>
+                <FormLabel className="font-bold text-foreground">E-MAIL</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
                     placeholder="email@empresa.com"
-                    className="border-[#2C2C2C]/20"
+                    className="border-border bg-background text-foreground"
                     {...field}
                   />
                 </FormControl>
@@ -202,10 +198,10 @@ export function ContactForm() {
             name="service"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-bold text-[#091D39]">SERVIÇO</FormLabel>
+                <FormLabel className="font-bold text-foreground">SERVIÇO</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
-                    <SelectTrigger className="border-[#2C2C2C]/20">
+                    <SelectTrigger className="border-border bg-background text-foreground">
                       <SelectValue placeholder="Selecione" />
                     </SelectTrigger>
                   </FormControl>
@@ -227,11 +223,11 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold text-[#091D39]">MENSAGEM</FormLabel>
+              <FormLabel className="font-bold text-foreground">MENSAGEM</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Como podemos ajudar sua empresa?"
-                  className="min-h-[100px] resize-none border-[#2C2C2C]/20"
+                  className="min-h-[100px] resize-none border-border bg-background text-foreground"
                   {...field}
                 />
               </FormControl>
@@ -243,15 +239,15 @@ export function ContactForm() {
           control={form.control}
           name="lgpdAgreed"
           render={({ field }) => (
-            <FormItem className="flex items-start gap-3 border border-[#2C2C2C]/20 p-4 shadow-sm rounded-md bg-[#E8E8E8]/30">
+            <FormItem className="flex items-start gap-3 border border-border p-4 shadow-sm rounded-md bg-muted/30">
               <FormControl>
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  className="border-[#091D39] data-[state=checked]:bg-[#091D39]"
+                  className="border-primary data-[state=checked]:bg-primary"
                 />
               </FormControl>
-              <FormLabel className="text-xs leading-relaxed font-normal mt-0.5 text-[#2C2C2C]">
+              <FormLabel className="text-xs leading-relaxed font-normal mt-0.5 text-muted-foreground">
                 Concordo com a coleta e armazenamento dos meus dados para contato em conformidade
                 com a LGPD.
               </FormLabel>
@@ -261,7 +257,7 @@ export function ContactForm() {
         />
         <Button
           type="submit"
-          className="w-full h-12 uppercase tracking-widest font-bold bg-[#091D39] hover:bg-[#CFAE70] hover:text-[#0D0D0D] transition-colors text-white"
+          className="w-full h-12 uppercase tracking-widest font-bold bg-primary hover:bg-accent hover:text-accent-foreground transition-colors text-primary-foreground"
           disabled={loading}
         >
           {loading ? 'Enviando...' : 'Enviar Solicitação'}

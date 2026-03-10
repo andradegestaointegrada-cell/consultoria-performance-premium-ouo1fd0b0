@@ -51,15 +51,44 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" ref={ref}>
-      <Card className="bg-white border-[#2C2C2C]/10 shadow-lg">
+      <Card className="bg-card border-border shadow-lg">
         <CardHeader>
-          <CardTitle className="font-heading uppercase text-sm text-[#091D39] tracking-wide">
+          <CardTitle className="font-heading uppercase text-sm text-foreground tracking-wide">
             Distribuição por Status
           </CardTitle>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfigStatus} className="h-[250px] w-full">
             <PieChart>
+              <defs>
+                <filter id="glow-Novo" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow
+                    dx="0"
+                    dy="0"
+                    stdDeviation="3"
+                    floodColor="#091D39"
+                    floodOpacity="0.5"
+                  />
+                </filter>
+                <filter id="glow-Em-Atendimento" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow
+                    dx="0"
+                    dy="0"
+                    stdDeviation="3"
+                    floodColor="#CFAE70"
+                    floodOpacity="0.6"
+                  />
+                </filter>
+                <filter id="glow-Concluído" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow
+                    dx="0"
+                    dy="0"
+                    stdDeviation="3"
+                    floodColor="#2C2C2C"
+                    floodOpacity="0.4"
+                  />
+                </filter>
+              </defs>
               <Pie
                 data={chartDataStatus}
                 dataKey="count"
@@ -69,26 +98,27 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
                 innerRadius={60}
                 outerRadius={80}
                 paddingAngle={5}
-                stroke="#ffffff"
+                stroke="var(--background)"
                 strokeWidth={2}
               >
-                {chartDataStatus.map((e, i) => (
-                  <Cell key={i} fill={e.fill} />
-                ))}
+                {chartDataStatus.map((e, i) => {
+                  const filterId = `glow-${e.name.replace(/\s+/g, '-')}`
+                  return <Cell key={i} fill={e.fill} filter={`url(#${filterId})`} />
+                })}
               </Pie>
               <ChartTooltip content={<ChartTooltipContent hideLabel />} />
               <ChartLegend
                 content={<ChartLegendContent nameKey="name" />}
-                className="mt-4 flex flex-wrap justify-center gap-4 text-sm font-medium text-[#2C2C2C]"
+                className="mt-4 flex flex-wrap justify-center gap-4 text-sm font-medium text-foreground"
               />
             </PieChart>
           </ChartContainer>
         </CardContent>
       </Card>
 
-      <Card className="bg-white border-[#2C2C2C]/10 shadow-lg">
+      <Card className="bg-card border-border shadow-lg">
         <CardHeader>
-          <CardTitle className="font-heading uppercase text-sm text-[#091D39] tracking-wide">
+          <CardTitle className="font-heading uppercase text-sm text-foreground tracking-wide">
             Interesse por Serviço
           </CardTitle>
         </CardHeader>
@@ -110,10 +140,10 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
                 tickLine={false}
                 axisLine={false}
                 tickFormatter={(v) => (v.length > 15 ? v.slice(0, 15) + '...' : v)}
-                tick={{ fill: '#2C2C2C', fontSize: 11, fontWeight: 500 }}
+                tick={{ fill: 'currentColor', fontSize: 11, fontWeight: 500 }}
               />
               <ChartTooltip
-                cursor={{ fill: '#E8E8E8', opacity: 0.5 }}
+                cursor={{ fill: 'var(--muted)', opacity: 0.5 }}
                 content={<ChartTooltipContent />}
               />
               <Bar dataKey="count" fill="url(#premiumGradient)" radius={[6, 6, 0, 0]} />
