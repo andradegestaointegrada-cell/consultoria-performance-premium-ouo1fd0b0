@@ -9,7 +9,7 @@ import { DashboardTable } from '@/components/admin/DashboardTable'
 import { exportToCSV, exportToPDF } from '@/lib/export-utils'
 
 export default function Dashboard() {
-  const { leads, updateLeadStatus } = useLeadStore()
+  const { leads, updateLeadStatus, addFileToLead } = useLeadStore()
   const [filter, setFilter] = useState<LeadStatus | 'Todos'>('Todos')
   const chartsRef = useRef<HTMLDivElement>(null)
 
@@ -110,6 +110,7 @@ export default function Dashboard() {
             filter={filter}
             setFilter={setFilter}
             onUpdateStatus={updateLeadStatus}
+            onAddFile={addFileToLead}
           />
         </Reveal>
       </div>

@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 
 export type LeadStatus = 'Novo' | 'Em Atendimento' | 'Concluído'
 
+export interface LeadFile {
+  name: string
+  url: string
+}
+
 export interface Lead {
   id: string
   name: string
@@ -12,6 +17,7 @@ export interface Lead {
   lgpdAgreed: boolean
   status: LeadStatus
   createdAt: string
+  files?: LeadFile[]
 }
 
 const STORAGE_KEY = '@ag-consultoria/leads'
@@ -106,5 +112,12 @@ export default function useLeadStore() {
     emitChange()
   }
 
-  return { leads, addLead, updateLeadStatus }
+  const addFileToLead = (id: string, file: LeadFile) => {
+    memoryLeads = memoryLeads.map((lead) =>
+      lead.id === id ? { ...lead, files: [...(lead.files || []), file] } : lead,
+    )
+    emitChange()
+  }
+
+  return { leads, addLead, updateLeadStatus, addFileToLead }
 }

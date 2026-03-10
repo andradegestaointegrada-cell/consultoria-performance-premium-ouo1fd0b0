@@ -15,17 +15,25 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Lead, LeadStatus } from '@/stores/useLeadStore'
-import { Filter } from 'lucide-react'
+import { Lead, LeadStatus, LeadFile } from '@/stores/useLeadStore'
+import { Filter, Paperclip } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useRef, useState } from 'react'
+import { useToast } from '@/hooks/use-toast'
 
 interface Props {
   leads: Lead[]
   filter: LeadStatus | 'Todos'
   setFilter: (f: LeadStatus | 'Todos') => void
   onUpdateStatus: (id: string, status: LeadStatus) => void
+  onAddFile: (id: string, file: LeadFile) => void
 }
 
-export function DashboardTable({ leads, filter, setFilter, onUpdateStatus }: Props) {
+export function DashboardTable({ leads, filter, setFilter, onUpdateStatus, onAddFile }: Props) {
+  const { toast } = useToast()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [activeLeadId, setActiveLeadId] = useState<string | null>(null)
+
   const getBadge = (s: LeadStatus) => {
     if (s === 'Novo') {
       return <Badge className="bg-[#091D39] text-[#E8E8E8] hover:opacity-80 border-none">{s}</Badge>
@@ -34,6 +42,24 @@ export function DashboardTable({ leads, filter, setFilter, onUpdateStatus }: Pro
       return <Badge className="bg-[#CFAE70] text-[#0D0D0D] hover:opacity-80 border-none">{s}</Badge>
     }
     return <Badge className="bg-[#2C2C2C] text-[#E8E8E8] hover:opacity-80 border-none">{s}</Badge>
+  }
+
+  const handleFileClick = (id: string) => {
+    setActiveLeadId(id)
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file && activeLeadId) {
+      onAddFile(activeLeadId, { name: file.name, url: URL.createObjectURL(file) })
+      toast({
+        title: 'Arquivo anexado com sucesso',
+        description: `O arquivo ${file.name} foi associado ao processo atual.`,
+      })
+      e.target.value = ''
+      setActiveLeadId(null)
+    }
   }
 
   return (
@@ -58,6 +84,7 @@ export function DashboardTable({ leads, filter, setFilter, onUpdateStatus }: Pro
         </div>
       </CardHeader>
       <CardContent>
+        <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} />
         <Table>
           <TableHeader>
             <TableRow className="border-border">
@@ -65,7 +92,7 @@ export function DashboardTable({ leads, filter, setFilter, onUpdateStatus }: Pro
               <TableHead className="text-muted-foreground">Lead</TableHead>
               <TableHead className="text-muted-foreground">Serviço</TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
-              <TableHead className="text-right text-muted-foreground">Ação</TableHead>
+              <TableHead className="text-right text-muted-foreground">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -84,25 +111,53 @@ export function DashboardTable({ leads, filter, setFilter, onUpdateStatus }: Pro
                   <TableCell>
                     <div className="font-bold text-foreground">{l.name}</div>
                     <div className="text-sm text-muted-foreground">{l.company}</div>
+                    {l.files && l.files.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {l.files.map((f, i) => (
+                          <Badge
+                            key={i}
+                            variant="outline"
+                            className="text-[10px] py-0 px-1.5 h-5 flex items-center gap-1 bg-muted/50 text-muted-foreground border-border"
+                            title={f.name}
+                          >
+                            <Paperclip className="w-3 h-3" />
+                            <span className="truncate max-w-[100px]">{f.name}</span>
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="max-w-[150px] truncate text-foreground" title={l.service}>
                     {l.service}
                   </TableCell>
                   <TableCell>{getBadge(l.status)}</TableCell>
                   <TableCell className="text-right">
-                    <Select
-                      value={l.status}
-                      onValueChange={(v: LeadStatus) => onUpdateStatus(l.id, v)}
-                    >
-                      <SelectTrigger className="w-[150px] ml-auto border-border text-foreground bg-background">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Novo">Novo</SelectItem>
-                        <SelectItem value="Em Atendimento">Em Atendimento</SelectItem>
-                        <SelectItem value="Concluído">Concluído</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <div className="flex items-center justify-end gap-2">
+                      {l.status === 'Em Atendimento' && (
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleFileClick(l.id)}
+                          className="h-10 w-10 shrink-0 border-[#091D39] text-[#091D39] hover:bg-[#091D39] hover:text-[#E8E8E8] dark:border-[#CFAE70] dark:text-[#CFAE70] dark:hover:bg-[#CFAE70] dark:hover:text-[#0D0D0D] transition-colors"
+                          title="Anexar Arquivo"
+                        >
+                          <Paperclip className="h-4 w-4" />
+                        </Button>
+                      )}
+                      <Select
+                        value={l.status}
+                        onValueChange={(v: LeadStatus) => onUpdateStatus(l.id, v)}
+                      >
+                        <SelectTrigger className="w-[150px] border-border text-foreground bg-background">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Novo">Novo</SelectItem>
+                          <SelectItem value="Em Atendimento">Em Atendimento</SelectItem>
+                          <SelectItem value="Concluído">Concluído</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
