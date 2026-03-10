@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export type LeadStatus = 'Novo' | 'Em andamento' | 'Concluído'
+export type LeadStatus = 'Novo' | 'Em Atendimento' | 'Concluído'
 
 export interface Lead {
   id: string
@@ -22,7 +22,7 @@ const defaultLeads: Lead[] = [
     name: 'Carlos Almeida',
     company: 'Tech Solutions',
     email: 'carlos@techsolutions.com',
-    service: 'ISO 9001 - Gestão da Qualidade',
+    service: 'ISO 9001 - Qualidade',
     message: 'Gostaria de um orçamento para certificação inicial.',
     lgpdAgreed: true,
     status: 'Novo',
@@ -33,10 +33,10 @@ const defaultLeads: Lead[] = [
     name: 'Ana Nogueira',
     company: 'Indústria Verde',
     email: 'ana.nogueira@verde.ind.br',
-    service: 'ISO 14001 - Gestão Ambiental',
+    service: 'ISO 14001 - Ambiental',
     message: 'Precisamos de consultoria para auditoria de manutenção.',
     lgpdAgreed: true,
-    status: 'Em andamento',
+    status: 'Em Atendimento',
     createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
   },
   {
@@ -44,7 +44,7 @@ const defaultLeads: Lead[] = [
     name: 'Roberto Dias',
     company: 'Construtora Horizonte',
     email: 'roberto@horizonte.com.br',
-    service: 'PBQP-H - Qualidade do Habitat',
+    service: 'PBQP-H - Habitat',
     message: 'Implementação do programa de qualidade na construção civil.',
     lgpdAgreed: true,
     status: 'Concluído',

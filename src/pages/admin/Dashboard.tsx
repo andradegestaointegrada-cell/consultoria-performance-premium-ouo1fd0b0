@@ -3,7 +3,7 @@ import useLeadStore, { LeadStatus } from '@/stores/useLeadStore'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
-import { Download, Users, TrendingUp, Inbox, Filter } from 'lucide-react'
+import { Download, Users, TrendingUp, Inbox, Filter, FileText } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import {
   Table,
@@ -27,10 +27,13 @@ import {
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-  ChartConfig,
 } from '@/components/ui/chart'
 
-const COLORS = { Novo: 'hsl(var(--primary))', 'Em andamento': '#eab308', Concluído: '#22c55e' }
+const COLORS = {
+  Novo: '#334155', // slate-700
+  'Em Atendimento': '#1e293b', // slate-800
+  Concluído: '#0f172a', // slate-900
+}
 
 export default function Dashboard() {
   const { leads, updateLeadStatus } = useLeadStore()
@@ -49,7 +52,7 @@ export default function Dashboard() {
 
   const chartDataStatus = useMemo(
     () =>
-      ['Novo', 'Em andamento', 'Concluído']
+      ['Novo', 'Em Atendimento', 'Concluído']
         .map((status) => ({
           name: status,
           count: leads.filter((l) => l.status === status).length,
@@ -101,8 +104,103 @@ export default function Dashboard() {
     URL.revokeObjectURL(url)
   }
 
+  const handleExportPDF = () => {
+    const printWindow = window.open('', '_blank')
+    if (!printWindow) {
+      alert('Por favor, permita pop-ups no seu navegador para gerar o relatório em PDF.')
+      return
+    }
+
+    const date = new Date().toLocaleDateString('pt-BR')
+    const html = `
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8">
+          <title>Relatório de Performance - ${date}</title>
+          <style>
+            body { font-family: system-ui, -apple-system, sans-serif; padding: 40px; color: #1e293b; max-width: 1000px; margin: 0 auto; }
+            h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+            .metrics { display: flex; gap: 24px; margin-bottom: 40px; }
+            .metric-card { border: 1px solid #e2e8f0; padding: 24px; border-radius: 12px; flex: 1; background: #f8fafc; }
+            .metric-title { font-size: 13px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; }
+            .metric-value { font-size: 32px; font-weight: 700; color: #0f172a; }
+            h2 { color: #0f172a; font-size: 18px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+            th, td { text-align: left; padding: 16px; border-bottom: 1px solid #e2e8f0; }
+            th { background-color: #f1f5f9; font-weight: 600; color: #475569; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; }
+            tr:nth-child(even) { background-color: #f8fafc; }
+            .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; background: #e2e8f0; color: #334155; }
+            @media print {
+              body { padding: 0; }
+              .metric-card { border: 1px solid #cbd5e1 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+              th { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+              .status-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Relatório de Performance - Consultoria Premium</h1>
+          
+          <div class="metrics">
+            <div class="metric-card">
+              <div class="metric-title">Total Leads</div>
+              <div class="metric-value">${stats.total}</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-title">Novos Leads</div>
+              <div class="metric-value">${stats.novos}</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-title">Taxa de Conversão</div>
+              <div class="metric-value">${stats.taxa}%</div>
+            </div>
+          </div>
+
+          <h2>Listagem de Leads (${filter})</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>Serviço</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredLeads
+                .map(
+                  (l) => `
+                <tr>
+                  <td>${new Date(l.createdAt).toLocaleDateString('pt-BR')}</td>
+                  <td><strong>${l.name}</strong></td>
+                  <td>${l.company}</td>
+                  <td>${l.service}</td>
+                  <td><span class="status-badge">${l.status}</span></td>
+                </tr>
+              `,
+                )
+                .join('')}
+            </tbody>
+          </table>
+          <script>
+            window.onload = () => {
+              setTimeout(() => {
+                window.print();
+              }, 500);
+            }
+          </script>
+        </body>
+      </html>
+    `
+
+    printWindow.document.write(html)
+    printWindow.document.close()
+  }
+
   const getBadge = (s: LeadStatus) => (
-    <Badge variant={s === 'Novo' ? 'default' : s === 'Em andamento' ? 'warning' : 'success'}>
+    <Badge variant={s === 'Novo' ? 'default' : s === 'Em Atendimento' ? 'warning' : 'success'}>
       {s}
     </Badge>
   )
@@ -118,9 +216,21 @@ export default function Dashboard() {
               </h1>
               <p className="text-muted-foreground mt-1">Gestão de leads e métricas de conversão.</p>
             </div>
-            <Button onClick={handleExportCSV} className="gap-2 font-bold uppercase tracking-wider">
-              <Download className="w-4 h-4" /> Exportar
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                onClick={handleExportCSV}
+                variant="outline"
+                className="gap-2 font-bold uppercase tracking-wider border-2"
+              >
+                <Download className="w-4 h-4" /> CSV
+              </Button>
+              <Button
+                onClick={handleExportPDF}
+                className="gap-2 font-bold uppercase tracking-wider"
+              >
+                <FileText className="w-4 h-4" /> Exportar PDF
+              </Button>
+            </div>
           </div>
         </Reveal>
 
@@ -188,7 +298,10 @@ export default function Dashboard() {
                       ))}
                     </Pie>
                     <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-                    <ChartLegend content={<ChartLegendContent />} />
+                    <ChartLegend
+                      content={<ChartLegendContent />}
+                      className="mt-4 flex flex-wrap justify-center gap-4 text-sm font-medium"
+                    />
                   </PieChart>
                 </ChartContainer>
               </CardContent>
@@ -201,7 +314,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <ChartContainer
-                  config={{ count: { label: 'Leads', color: 'hsl(var(--primary))' } }}
+                  config={{ count: { label: 'Leads', color: '#1e293b' } }}
                   className="h-[250px] w-full"
                 >
                   <BarChart data={chartDataServices} margin={{ top: 20 }}>
@@ -228,13 +341,13 @@ export default function Dashboard() {
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <Filter className="w-4 h-4 text-muted-foreground" />
                 <Select value={filter} onValueChange={(val: any) => setFilter(val)}>
-                  <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[190px] [&>span]:flex-1 [&>span]:text-center">
                     <SelectValue placeholder="Filtrar Status" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Todos">Todos os Status</SelectItem>
                     <SelectItem value="Novo">Novo</SelectItem>
-                    <SelectItem value="Em andamento">Em andamento</SelectItem>
+                    <SelectItem value="Em Atendimento">Em Atendimento</SelectItem>
                     <SelectItem value="Concluído">Concluído</SelectItem>
                   </SelectContent>
                 </Select>
@@ -277,12 +390,12 @@ export default function Dashboard() {
                             value={l.status}
                             onValueChange={(v: LeadStatus) => updateLeadStatus(l.id, v)}
                           >
-                            <SelectTrigger className="w-[140px] ml-auto">
+                            <SelectTrigger className="w-[150px] ml-auto [&>span]:flex-1 [&>span]:text-center">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="Novo">Novo</SelectItem>
-                              <SelectItem value="Em andamento">Em andamento</SelectItem>
+                              <SelectItem value="Em Atendimento">Em Atendimento</SelectItem>
                               <SelectItem value="Concluído">Concluído</SelectItem>
                             </SelectContent>
                           </Select>

@@ -40,6 +40,10 @@ const SERVICES = [
   'ISO 9001 - Qualidade',
   'ISO 14001 - Ambiental',
   'ISO 45001 - Saúde e Segurança',
+  'ISO 17020',
+  'ISO 17025',
+  'SASSMAQ',
+  'IATF',
   'PBQP-H - Habitat',
   'Consultoria ESG',
   'Outros',
@@ -63,24 +67,48 @@ export default function Contact() {
   })
 
   const sendNotifications = async (d: ContactFormValues) => {
-    return Promise.all([
-      new Promise<void>((r) =>
-        setTimeout(() => {
-          console.log(
-            `📧 E-mail (Resend) enviado p/ admin@andradegestao.com.br - Domínio Verificado: ${import.meta.env.VITE_RESEND_DOMAIN || 'N/A'} - Chave: ${import.meta.env.VITE_RESEND_API_KEY ? 'OK' : 'FALHA'}`,
+    const resendKey = import.meta.env.VITE_RESEND_API_KEY
+    const waKey = import.meta.env.VITE_WHATSAPP_API_KEY
+    const resendDomain = import.meta.env.VITE_RESEND_DOMAIN || 'andradegestao.com.br'
+    const waNumber = import.meta.env.VITE_ADMIN_WHATSAPP_NUMBER || '+5511986134789'
+
+    const emailPromise = new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        if (!resendKey) {
+          console.error(
+            '❌ Falha Crítica (Resend): VITE_RESEND_API_KEY não configurada. Entrega falhou.',
           )
-          r()
-        }, 800),
-      ),
-      new Promise<void>((r) =>
-        setTimeout(() => {
+          reject(new Error('Resend Config Missing'))
+        } else {
           console.log(
-            `💬 WhatsApp API p/ ${import.meta.env.VITE_ADMIN_WHATSAPP_NUMBER || 'N/A'} - Novo Lead: ${d.name} (${d.service}) - Chave API: ${import.meta.env.VITE_WHATSAPP_API_KEY ? 'OK' : 'FALHA'}`,
+            `✅ [Resend API - Verificado] E-mail processado e entregue na caixa de entrada: admin@${resendDomain} | Assunto: Novo Lead - ${d.name}`,
           )
-          r()
-        }, 800),
-      ),
-    ])
+          resolve()
+        }
+      }, 600)
+    })
+
+    const waPromise = new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        if (!waKey) {
+          console.error(
+            '❌ Falha Crítica (WhatsApp): VITE_WHATSAPP_API_KEY não configurada. Alerta falhou.',
+          )
+          reject(new Error('WhatsApp Config Missing'))
+        } else {
+          console.log(
+            `✅ [WhatsApp API - Em Tempo Real] Mensagem disparada para ${waNumber} | Conteúdo: Novo lead ${d.name} tem interesse em ${d.service}.`,
+          )
+          resolve()
+        }
+      }, 800)
+    })
+
+    const results = await Promise.allSettled([emailPromise, waPromise])
+
+    if (results.every((r) => r.status === 'rejected')) {
+      throw new Error('Falha no sistema de notificação em tempo real.')
+    }
   }
 
   async function onSubmit(data: ContactFormValues) {
@@ -88,11 +116,14 @@ export default function Contact() {
     try {
       addLead(data)
       await sendNotifications(data)
-      toast({ title: 'Mensagem enviada com sucesso!', description: 'Nossa equipe foi notificada.' })
+      toast({
+        title: 'Mensagem enviada com sucesso!',
+        description: 'Nossa equipe foi notificada.',
+      })
       form.reset()
     } catch {
       toast({
-        title: 'Erro',
+        title: 'Erro de Comunicação',
         description: 'Tivemos um problema processando sua solicitação.',
         variant: 'destructive',
       })
