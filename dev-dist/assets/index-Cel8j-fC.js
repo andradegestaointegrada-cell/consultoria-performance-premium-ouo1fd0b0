@@ -23910,6 +23910,17 @@ var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...pr
 	...props
 }));
 TooltipContent.displayName = Content2$3.displayName;
+function ScrollToTop() {
+	const { pathname } = useLocation();
+	(0, import_react.useEffect)(() => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "instant"
+		});
+	}, [pathname]);
+	return null;
+}
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 var use = import_react[" use ".trim().toString()];
 function isPromiseLike(value) {
@@ -28449,12 +28460,12 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 	attribute: "class",
 	defaultTheme: "system",
 	enableSystem: true,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(BrowserRouter, {
 		future: {
 			v7_startTransition: false,
 			v7_relativeSplatPath: false
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, { children: [
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollToTop, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, { children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$1, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
@@ -28489,10 +28500,10 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 				path: "*",
 				element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound_default, {})
 			})] })
-		] })
+		] })]
 	})
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-BdwgLFsq.js.map
+//# sourceMappingURL=index-Cel8j-fC.js.map

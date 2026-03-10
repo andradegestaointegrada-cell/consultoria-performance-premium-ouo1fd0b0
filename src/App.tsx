@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { ScrollToTop } from './components/ScrollToTop'
 import Index from './pages/Index'
 import About from './pages/About'
 import Services from './pages/Services'
@@ -15,6 +16,7 @@ import Layout from './components/Layout'
 const App = () => (
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
     <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
+      <ScrollToTop />
       <TooltipProvider>
         <Toaster />
         <Sonner />
