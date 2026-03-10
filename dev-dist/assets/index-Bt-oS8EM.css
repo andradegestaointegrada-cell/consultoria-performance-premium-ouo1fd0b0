@@ -701,10 +701,6 @@ body{
   left: 1.5rem;
 }
 
-.left-8{
-  left: 2rem;
-}
-
 .left-\[50\%\]{
   left: 50%;
 }
@@ -935,11 +931,11 @@ body{
   margin-top: auto;
 }
 
-.line-clamp-2{
+.line-clamp-3{
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
 }
 
 .block{
@@ -964,10 +960,6 @@ body{
 
 .hidden{
   display: none;
-}
-
-.aspect-\[21\/9\]{
-  aspect-ratio: 21/9;
 }
 
 .aspect-\[4\/3\]{
@@ -1124,8 +1116,8 @@ body{
   min-height: 120px;
 }
 
-.min-h-\[400px\]{
-  min-height: 400px;
+.min-h-\[450px\]{
+  min-height: 450px;
 }
 
 .min-h-\[600px\]{
@@ -1574,6 +1566,10 @@ body{
   align-items: stretch;
 }
 
+.justify-end{
+  justify-content: flex-end;
+}
+
 .justify-center{
   justify-content: center;
 }
@@ -2017,9 +2013,9 @@ body{
   --tw-gradient-stops: var(--tw-gradient-from), hsl(var(--background) / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
-.via-background\/80{
+.via-background\/90{
   --tw-gradient-to: hsl(var(--background) / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), hsl(var(--background) / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to);
+  --tw-gradient-stops: var(--tw-gradient-from), hsl(var(--background) / 0.9) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 .via-black\/60{
@@ -3993,6 +3989,11 @@ body{
     text-align: left;
   }
 
+  .sm\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
   .sm\:text-lg{
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -4025,6 +4026,13 @@ body{
     margin-top: 0px;
   }
 
+  .md\:line-clamp-2{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
   .md\:block{
     display: block;
   }
@@ -4035,6 +4043,10 @@ body{
 
   .md\:hidden{
     display: none;
+  }
+
+  .md\:min-h-\[500px\]{
+    min-height: 500px;
   }
 
   .md\:w-\[var\(--radix-navigation-menu-viewport-width\)\]{
@@ -4063,6 +4075,15 @@ body{
 
   .md\:flex-row{
     flex-direction: row;
+  }
+
+  .md\:via-background\/70{
+    --tw-gradient-to: hsl(var(--background) / 0)  var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), hsl(var(--background) / 0.7) var(--tw-gradient-via-position), var(--tw-gradient-to);
+  }
+
+  .md\:p-10{
+    padding: 2.5rem;
   }
 
   .md\:p-12{
@@ -4097,6 +4118,11 @@ body{
   .md\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .md\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .md\:text-sm{

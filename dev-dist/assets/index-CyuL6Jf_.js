@@ -25403,27 +25403,27 @@ function Insights() {
 							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
 							children: "Destaque"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer",
+							className: "relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 									src: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
 									alt: "Pitstop",
-									className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
+									className: "absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent md:via-background/70" }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "absolute bottom-8 left-8 max-w-3xl",
+									className: "relative z-10 p-6 md:p-10 max-w-4xl",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: "text-primary font-bold text-sm uppercase tracking-widest mb-4",
+											className: "text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3",
 											children: "Estratégia Corporativa"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-											className: "text-4xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide",
+											className: "text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide leading-tight",
 											children: "A Metáfora do Pit Stop na Otimização de Processos Empresariais"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-muted-foreground line-clamp-2 text-lg",
+											className: "text-muted-foreground text-sm md:text-lg line-clamp-3 md:line-clamp-2",
 											children: "Como aplicar a precisão milimétrica e o trabalho em equipe do automobilismo de elite para reduzir gargalos e aumentar a eficiência operacional."
 										})
 									]
@@ -25440,7 +25440,7 @@ function Insights() {
 						children: articles.map((article, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
 							delay: i * 100,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300",
+								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "aspect-video overflow-hidden",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
@@ -25449,12 +25449,12 @@ function Insights() {
 										className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100"
 									})
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "p-6",
+									className: "p-6 flex-grow flex flex-col",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "text-primary text-xs font-bold uppercase tracking-widest mb-3",
 										children: article.category
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-										className: "text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight",
+										className: "text-xl md:text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight mt-auto",
 										children: article.title
 									})]
 								})]
@@ -28506,4 +28506,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-Cel8j-fC.js.map
+//# sourceMappingURL=index-CyuL6Jf_.js.map

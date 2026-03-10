@@ -47,21 +47,21 @@ export default function Insights() {
               <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
                 Destaque
               </h2>
-              <div className="relative rounded-2xl overflow-hidden aspect-[21/9] min-h-[400px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer">
+              <div className="relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer">
                 <img
                   src="https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black"
                   alt="Pitstop"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-                <div className="absolute bottom-8 left-8 max-w-3xl">
-                  <div className="text-primary font-bold text-sm uppercase tracking-widest mb-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent md:via-background/70" />
+                <div className="relative z-10 p-6 md:p-10 max-w-4xl">
+                  <div className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3">
                     Estratégia Corporativa
                   </div>
-                  <h3 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide">
+                  <h3 className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide leading-tight">
                     A Metáfora do Pit Stop na Otimização de Processos Empresariais
                   </h3>
-                  <p className="text-muted-foreground line-clamp-2 text-lg">
+                  <p className="text-muted-foreground text-sm md:text-lg line-clamp-3 md:line-clamp-2">
                     Como aplicar a precisão milimétrica e o trabalho em equipe do automobilismo de
                     elite para reduzir gargalos e aumentar a eficiência operacional.
                   </p>
@@ -76,7 +76,7 @@ export default function Insights() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {articles.map((article, i) => (
               <Reveal key={i} delay={i * 100}>
-                <div className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300">
+                <div className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col">
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={article.img}
@@ -84,11 +84,11 @@ export default function Insights() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex-grow flex flex-col">
                     <div className="text-primary text-xs font-bold uppercase tracking-widest mb-3">
                       {article.category}
                     </div>
-                    <h4 className="text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight">
+                    <h4 className="text-xl md:text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight mt-auto">
                       {article.title}
                     </h4>
                   </div>
