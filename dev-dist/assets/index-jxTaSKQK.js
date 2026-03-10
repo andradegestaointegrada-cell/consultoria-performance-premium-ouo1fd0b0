@@ -25635,7 +25635,7 @@ const insightsData = {
 		],
 		statsNumber: "100%",
 		statsTitle: "Conformidade Ambiental",
-		statsDesc: "Alinhamento integral com as exigências climáticas globais, preparando a organização para auditorias complexas e certificações.",
+		statsDesc: "Alinhamento integral com as exigências climáticas globais, preparando a organization para auditorias complexas e certificações.",
 		ctaTitle: "Pronto para a Sustentabilidade Real?",
 		ctaText: "Antecipe-se às exigências regulatórias. Inicie agora a transição do seu Sistema de Gestão Ambiental e destaque-se na jornada verde.",
 		ctaBtnText: "Fale com nossos Especialistas em ESG",
@@ -25709,7 +25709,7 @@ const insightsData = {
 		category: "Estratégia Corporativa",
 		readTime: "Tempo de leitura: 8 min",
 		title: "A Metáfora do Pit Stop na Otimização de Processos Empresariais",
-		image: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
+		image: "https://i.postimg.cc/rpCCCDnk/PIT-STOP.jpg",
 		intro: "No automobilismo de elite, uma parada nos boxes pode definir o campeão. Mas o que as empresas podem aprender com a execução milimétrica de um pit stop? Descubra como aplicar a sincronia, preparação e precisão da Fórmula 1 para eliminar gargalos e acelerar a eficiência operacional do seu negócio.",
 		pillarsTitle: "O que as empresas podem aprender com um pit stop?",
 		pillars: [
@@ -28996,4 +28996,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-Cw9xiVrW.js.map
+//# sourceMappingURL=index-jxTaSKQK.js.map
