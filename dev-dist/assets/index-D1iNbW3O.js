@@ -19061,6 +19061,13 @@ var createLucideIcon = (iconName, iconNode) => {
 	Component.displayName = toPascalCase(iconName);
 	return Component;
 };
+var ArrowLeft = createLucideIcon("arrow-left", [["path", {
+	d: "m12 19-7-7 7-7",
+	key: "1l729n"
+}], ["path", {
+	d: "M19 12H5",
+	key: "x3x0zl"
+}]]);
 var ArrowRight = createLucideIcon("arrow-right", [["path", {
 	d: "M5 12h14",
 	key: "1ays0h"
@@ -19090,6 +19097,15 @@ var ChevronLeft = createLucideIcon("chevron-left", [["path", {
 var ChevronRight = createLucideIcon("chevron-right", [["path", {
 	d: "m9 18 6-6-6-6",
 	key: "mthhwq"
+}]]);
+var CircleCheck = createLucideIcon("circle-check", [["circle", {
+	cx: "12",
+	cy: "12",
+	r: "10",
+	key: "1mglay"
+}], ["path", {
+	d: "m9 12 2 2 4-4",
+	key: "dzmm74"
 }]]);
 var Circle = createLucideIcon("circle", [["circle", {
 	cx: "12",
@@ -25358,21 +25374,25 @@ function ServiceDetail() {
 var articles = [
 	{
 		title: "O Futuro da Qualidade",
+		slug: "o-futuro-da-qualidade",
 		category: "ISO 9001",
 		img: "https://img.usecurling.com/p/600/400?q=future%20technology&color=black"
 	},
 	{
 		title: "Sustentabilidade Corporativa",
+		slug: "sustentabilidade-corporativa",
 		category: "ISO 14001",
 		img: "https://img.usecurling.com/p/600/400?q=green%20city&color=black"
 	},
 	{
 		title: "Liderança e Segurança",
+		slug: "lideranca-e-seguranca",
 		category: "ISO 45001",
 		img: "https://img.usecurling.com/p/600/400?q=construction%20leadership&color=black"
 	},
 	{
 		title: "Auditorias Remotas: O Novo Normal",
+		slug: "auditorias-remotas",
 		category: "Metodologia",
 		img: "https://img.usecurling.com/p/600/400?q=video%20conference&color=black"
 	}
@@ -25402,8 +25422,9 @@ function Insights() {
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 							className: "text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide",
 							children: "Destaque"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer",
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: "/insights/a-metafora-do-pit-stop",
+							className: "relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer block",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 									src: "https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black",
@@ -25439,8 +25460,9 @@ function Insights() {
 						className: "grid md:grid-cols-2 lg:grid-cols-4 gap-6",
 						children: articles.map((article, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
 							delay: i * 100,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+								to: `/insights/${article.slug}`,
+								className: "group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col block",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "aspect-video overflow-hidden",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
@@ -25464,6 +25486,248 @@ function Insights() {
 				]
 			})
 		})]
+	});
+}
+function InsightDetail() {
+	const { slug } = useParams();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "pt-24 pb-16 bg-background min-h-screen",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+			className: "container mx-auto px-4 max-w-4xl",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mb-8 mt-8",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: "/insights",
+							className: "inline-flex items-center text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors mb-8",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "mr-2 h-4 w-4" }), "Voltar para Insights"]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-4 mb-6",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-primary font-bold text-sm uppercase tracking-widest",
+								children: "ISO 9001"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-muted-foreground text-sm font-medium uppercase tracking-wider",
+								children: "Tempo de leitura: 5 min"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							className: "text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide leading-tight",
+							children: "O Futuro da Qualidade ISO 9001"
+						})
+					]
+				}) }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					delay: 100,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "aspect-video w-full rounded-2xl overflow-hidden mb-12 border-2 border-border",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: "https://img.usecurling.com/p/1200/600?q=future%20technology&color=black",
+							alt: "O Futuro da Qualidade",
+							className: "w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+						})
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					delay: 200,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "space-y-8 text-lg text-muted-foreground leading-relaxed",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xl md:text-2xl text-foreground font-medium mb-10 leading-relaxed",
+								children: "A transição para a nova versão da norma ISO 9001:2026 traz mudanças significativas que redefinem o conceito de Gestão da Qualidade. Este artigo explora as principais alterações, oportunidades e a importância estratégica da atualização para o seu negócio."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
+								children: "Os 4 Pilares da Alta Performance"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid sm:grid-cols-2 gap-6 mb-12",
+								children: [
+									{
+										title: "1. Contexto",
+										desc: "Compreensão profunda do ambiente de negócios e expectativas das partes interessadas."
+									},
+									{
+										title: "2. Liderança",
+										desc: "Engajamento total da alta direção e alinhamento com a estratégia corporativa."
+									},
+									{
+										title: "3. Riscos",
+										desc: "Gestão preditiva e preventiva, focada na mitigação de ameaças e captura de oportunidades."
+									},
+									{
+										title: "4. Integração",
+										desc: "Sinergia com tecnologias emergentes e outros sistemas de gestão."
+									}
+								].map((pillar, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "bg-card p-6 md:p-8 rounded-xl border border-border hover:border-primary transition-colors",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "text-primary font-bold text-xl mb-3 uppercase tracking-wide",
+										children: pillar.title
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-muted-foreground",
+										children: pillar.desc
+									})]
+								}, i))
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
+								children: "Comparativo: ISO 9001:2015 vs ISO 9001:2026"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "overflow-x-auto mb-12",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
+									className: "w-full text-left border-collapse min-w-[600px]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+										className: "border-b-2 border-primary text-foreground uppercase tracking-wider text-sm",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+												className: "py-4 px-4 font-bold w-1/3",
+												children: "Critério"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+												className: "py-4 px-4 font-bold w-1/3",
+												children: "ISO 9001:2015"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+												className: "py-4 px-4 font-bold w-1/3",
+												children: "ISO 9001:2026"
+											})
+										]
+									}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tbody", {
+										className: "text-muted-foreground",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+												className: "border-b border-border hover:bg-muted/50 transition-colors",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-bold text-foreground",
+														children: "Gestão de Mudanças"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4",
+														children: "Reativa e departamental"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-semibold text-primary",
+														children: "Ágil e integrada estrategicamente"
+													})
+												]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+												className: "border-b border-border hover:bg-muted/50 transition-colors",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-bold text-foreground",
+														children: "Foco Tecnológico"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4",
+														children: "Documentação digital"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-semibold text-primary",
+														children: "IA, Automação e Dados em tempo real"
+													})
+												]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+												className: "border-b border-border hover:bg-muted/50 transition-colors",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-bold text-foreground",
+														children: "Sustentabilidade"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4",
+														children: "Opcional/Implícita"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+														className: "py-4 px-4 font-semibold text-primary",
+														children: "Mandatória (ESG Integrado)"
+													})
+												]
+											})
+										]
+									})]
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								className: "text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide",
+								children: "O Caminho para a Excelência"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mb-8",
+								children: "Antecipar-se à transição não é apenas uma questão de conformidade, mas sim uma vantagem competitiva. Empresas que adotam precocemente os novos requisitos demonstram resiliência, visão de futuro e compromisso inabalável com a satisfação do cliente."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+								className: "space-y-4 my-8",
+								children: [
+									"Avaliação de prontidão (Gap Analysis) especializada.",
+									"Treinamento e capacitação de equipes chave.",
+									"Atualização de documentação e processos.",
+									"Auditorias internas de transição."
+								].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+									className: "flex items-start gap-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-6 w-6 text-primary shrink-0 mt-1" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-foreground font-medium",
+										children: item
+									})]
+								}, i))
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "bg-primary/10 border-2 border-primary/20 rounded-2xl p-8 md:p-12 my-16 text-center shadow-[0_0_30px_rgba(207,174,112,0.15)]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "text-6xl md:text-8xl font-heading font-bold text-primary mb-6 drop-shadow-sm",
+										children: "99%"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-2xl font-bold text-foreground uppercase tracking-wide mb-4",
+										children: "Taxa de Sucesso"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-muted-foreground text-lg max-w-xl mx-auto",
+										children: "Em projetos de implementação e certificação conduzidos pela nossa equipe de especialistas focados em resultados práticos."
+									})
+								]
+							})
+						]
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					delay: 300,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-20 p-8 md:p-16 bg-card rounded-2xl border-2 border-primary text-center relative overflow-hidden group",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative z-10",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide",
+									children: "Pronto para a Transição ISO 9001:2026?"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed",
+									children: "Não espere pelos prazos finais. Inicie hoje a jornada de atualização do seu Sistema de Gestão da Qualidade e coloque sua empresa na vanguarda do mercado."
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									size: "lg",
+									asChild: true,
+									className: "h-14 px-10 text-base uppercase font-bold tracking-widest shadow-[0_0_20px_rgba(207,174,112,0.3)]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+										to: "/contato",
+										children: ["Fale com um Especialista Agora", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "ml-3 h-5 w-5" })]
+									})
+								})
+							]
+						})]
+					})
+				})
+			]
+		})
 	});
 }
 var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
@@ -28492,6 +28756,10 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Insights, {})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+						path: "/insights/:slug",
+						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(InsightDetail, {})
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 						path: "/contato",
 						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Contact, {})
 					})
@@ -28506,4 +28774,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-8mvDTPEk.js.map
+//# sourceMappingURL=index-D1iNbW3O.js.map

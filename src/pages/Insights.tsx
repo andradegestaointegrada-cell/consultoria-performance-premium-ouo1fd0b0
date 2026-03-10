@@ -1,23 +1,28 @@
+import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 
 const articles = [
   {
     title: 'O Futuro da Qualidade',
+    slug: 'o-futuro-da-qualidade',
     category: 'ISO 9001',
     img: 'https://img.usecurling.com/p/600/400?q=future%20technology&color=black',
   },
   {
     title: 'Sustentabilidade Corporativa',
+    slug: 'sustentabilidade-corporativa',
     category: 'ISO 14001',
     img: 'https://img.usecurling.com/p/600/400?q=green%20city&color=black',
   },
   {
     title: 'Liderança e Segurança',
+    slug: 'lideranca-e-seguranca',
     category: 'ISO 45001',
     img: 'https://img.usecurling.com/p/600/400?q=construction%20leadership&color=black',
   },
   {
     title: 'Auditorias Remotas: O Novo Normal',
+    slug: 'auditorias-remotas',
     category: 'Metodologia',
     img: 'https://img.usecurling.com/p/600/400?q=video%20conference&color=black',
   },
@@ -47,7 +52,10 @@ export default function Insights() {
               <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
                 Destaque
               </h2>
-              <div className="relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer">
+              <Link
+                to="/insights/a-metafora-do-pit-stop"
+                className="relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group cursor-pointer block"
+              >
                 <img
                   src="https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black"
                   alt="Pitstop"
@@ -66,7 +74,7 @@ export default function Insights() {
                     elite para reduzir gargalos e aumentar a eficiência operacional.
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
           </Reveal>
 
@@ -76,7 +84,10 @@ export default function Insights() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {articles.map((article, i) => (
               <Reveal key={i} delay={i * 100}>
-                <div className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col">
+                <Link
+                  to={`/insights/${article.slug}`}
+                  className="group cursor-pointer h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col block"
+                >
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={article.img}
@@ -92,7 +103,7 @@ export default function Insights() {
                       {article.title}
                     </h4>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>

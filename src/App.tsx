@@ -9,6 +9,7 @@ import About from './pages/About'
 import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Insights from './pages/Insights'
+import InsightDetail from './pages/InsightDetail'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/servicos" element={<Services />} />
             <Route path="/servicos/:id" element={<ServiceDetail />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/insights/:slug" element={<InsightDetail />} />
             <Route path="/contato" element={<Contact />} />
           </Route>
           <Route path="*" element={<NotFound />} />
