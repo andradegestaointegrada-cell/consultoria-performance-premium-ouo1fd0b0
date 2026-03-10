@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -51,6 +52,7 @@ const SERVICES = [
 export default function Contact() {
   const { toast } = useToast()
   const { addLead } = useLeadStore()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
@@ -64,30 +66,55 @@ export default function Contact() {
     },
   })
 
-  function onSubmit(data: ContactFormValues) {
-    addLead({
-      name: data.name,
-      company: data.company,
-      email: data.email,
-      service: data.service,
-      message: data.message,
-      lgpdAgreed: data.lgpdAgreed,
+  const mockSendResendEmail = async (data: ContactFormValues) => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        console.group('[Resend Integration] Email Dispatch')
+        console.log('To: admin@andradegestao.com.br')
+        console.log(`Subject: Novo Lead Recebido - ${data.name}`)
+        console.log('--- Body ---')
+        console.log(`Name: ${data.name}`)
+        console.log(`Email: ${data.email}`)
+        console.log(`Selected Service: ${data.service}`)
+        console.log(`Message: ${data.message}`)
+        console.groupEnd()
+        resolve()
+      }, 1500)
     })
+  }
 
-    toast({
-      title: 'Mensagem enviada com sucesso!',
-      description: 'Você receberá um e-mail de confirmação em breve.',
-    })
-
-    // Simulate backend sending an automated email to the user
-    setTimeout(() => {
-      toast({
-        title: 'Auto-Resposta Enviada',
-        description: `Um e-mail de confirmação foi enviado para ${data.email}`,
+  async function onSubmit(data: ContactFormValues) {
+    setIsSubmitting(true)
+    try {
+      // 1. Data Persistence Fix: Store lead in local storage state
+      addLead({
+        name: data.name,
+        company: data.company,
+        email: data.email,
+        service: data.service,
+        message: data.message,
+        lgpdAgreed: data.lgpdAgreed,
       })
-    }, 1500)
 
-    form.reset()
+      // 2. Resend Email Notification (Mock implementation for integration)
+      await mockSendResendEmail(data)
+
+      // 3. Reliability: Toast ONLY after db insertion and email dispatch
+      toast({
+        title: 'Mensagem enviada com sucesso!',
+        description: 'Seus dados foram registrados e o administrador foi notificado.',
+      })
+
+      form.reset()
+    } catch (error) {
+      toast({
+        title: 'Erro ao enviar a mensagem',
+        description: 'Tivemos um problema processando sua solicitação.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -245,8 +272,9 @@ export default function Contact() {
                     <Button
                       type="submit"
                       className="w-full h-14 text-base uppercase tracking-widest font-bold"
+                      disabled={isSubmitting}
                     >
-                      Enviar Solicitação
+                      {isSubmitting ? 'Enviando...' : 'Enviar Solicitação'}
                     </Button>
                   </form>
                 </Form>

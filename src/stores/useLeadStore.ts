@@ -14,14 +14,15 @@ export interface Lead {
   createdAt: string
 }
 
-// Global in-memory state
-let memoryLeads: Lead[] = [
+const STORAGE_KEY = '@ag-consultoria/leads'
+
+const defaultLeads: Lead[] = [
   {
     id: '1',
     name: 'Carlos Almeida',
     company: 'Tech Solutions',
     email: 'carlos@techsolutions.com',
-    service: 'ISO 9001',
+    service: 'ISO 9001 - Gestão da Qualidade',
     message: 'Gostaria de um orçamento para certificação inicial.',
     lgpdAgreed: true,
     status: 'Novo',
@@ -32,7 +33,7 @@ let memoryLeads: Lead[] = [
     name: 'Ana Nogueira',
     company: 'Indústria Verde',
     email: 'ana.nogueira@verde.ind.br',
-    service: 'ISO 14001',
+    service: 'ISO 14001 - Gestão Ambiental',
     message: 'Precisamos de consultoria para auditoria de manutenção.',
     lgpdAgreed: true,
     status: 'Em andamento',
@@ -43,7 +44,7 @@ let memoryLeads: Lead[] = [
     name: 'Roberto Dias',
     company: 'Construtora Horizonte',
     email: 'roberto@horizonte.com.br',
-    service: 'PBQP-H',
+    service: 'PBQP-H - Qualidade do Habitat',
     message: 'Implementação do programa de qualidade na construção civil.',
     lgpdAgreed: true,
     status: 'Concluído',
@@ -51,9 +52,28 @@ let memoryLeads: Lead[] = [
   },
 ]
 
+const getInitialLeads = (): Lead[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      return JSON.parse(stored)
+    }
+  } catch (e) {
+    console.error('Failed to parse leads from local storage', e)
+  }
+  return defaultLeads
+}
+
+let memoryLeads: Lead[] = getInitialLeads()
+
 const listeners = new Set<() => void>()
 
 const emitChange = () => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryLeads))
+  } catch (e) {
+    console.error('Failed to save leads to local storage', e)
+  }
   for (const listener of listeners) {
     listener()
   }

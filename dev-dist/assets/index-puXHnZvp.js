@@ -31344,13 +31344,14 @@ var Checkbox = import_react.forwardRef(({ className, ...props }, ref) => /* @__P
 	})
 }));
 Checkbox.displayName = Checkbox$1.displayName;
-var memoryLeads = [
+var STORAGE_KEY = "@ag-consultoria/leads";
+var defaultLeads = [
 	{
 		id: "1",
 		name: "Carlos Almeida",
 		company: "Tech Solutions",
 		email: "carlos@techsolutions.com",
-		service: "ISO 9001",
+		service: "ISO 9001 - Gestão da Qualidade",
 		message: "Gostaria de um orçamento para certificação inicial.",
 		lgpdAgreed: true,
 		status: "Novo",
@@ -31361,7 +31362,7 @@ var memoryLeads = [
 		name: "Ana Nogueira",
 		company: "Indústria Verde",
 		email: "ana.nogueira@verde.ind.br",
-		service: "ISO 14001",
+		service: "ISO 14001 - Gestão Ambiental",
 		message: "Precisamos de consultoria para auditoria de manutenção.",
 		lgpdAgreed: true,
 		status: "Em andamento",
@@ -31372,15 +31373,30 @@ var memoryLeads = [
 		name: "Roberto Dias",
 		company: "Construtora Horizonte",
 		email: "roberto@horizonte.com.br",
-		service: "PBQP-H",
+		service: "PBQP-H - Qualidade do Habitat",
 		message: "Implementação do programa de qualidade na construção civil.",
 		lgpdAgreed: true,
 		status: "Concluído",
 		createdAt: (/* @__PURE__ */ new Date(Date.now() - 864e5 * 15)).toISOString()
 	}
 ];
+var getInitialLeads = () => {
+	try {
+		const stored = localStorage.getItem(STORAGE_KEY);
+		if (stored) return JSON.parse(stored);
+	} catch (e) {
+		console.error("Failed to parse leads from local storage", e);
+	}
+	return defaultLeads;
+};
+var memoryLeads = getInitialLeads();
 var listeners = /* @__PURE__ */ new Set();
 var emitChange = () => {
+	try {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryLeads));
+	} catch (e) {
+		console.error("Failed to save leads to local storage", e);
+	}
 	for (const listener of listeners) listener();
 };
 function useLeadStore() {
@@ -33454,6 +33470,7 @@ var SERVICES = [
 function Contact() {
 	const { toast: toast$2 } = useToast();
 	const { addLead } = useLeadStore();
+	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
 	const form = useForm({
 		resolver: a(formSchema),
 		defaultValues: {
@@ -33465,26 +33482,48 @@ function Contact() {
 			lgpdAgreed: void 0
 		}
 	});
-	function onSubmit(data) {
-		addLead({
-			name: data.name,
-			company: data.company,
-			email: data.email,
-			service: data.service,
-			message: data.message,
-			lgpdAgreed: data.lgpdAgreed
+	const mockSendResendEmail = async (data) => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				console.group("[Resend Integration] Email Dispatch");
+				console.log("To: admin@andradegestao.com.br");
+				console.log(`Subject: Novo Lead Recebido - ${data.name}`);
+				console.log("--- Body ---");
+				console.log(`Name: ${data.name}`);
+				console.log(`Email: ${data.email}`);
+				console.log(`Selected Service: ${data.service}`);
+				console.log(`Message: ${data.message}`);
+				console.groupEnd();
+				resolve();
+			}, 1500);
 		});
-		toast$2({
-			title: "Mensagem enviada com sucesso!",
-			description: "Você receberá um e-mail de confirmação em breve."
-		});
-		setTimeout(() => {
-			toast$2({
-				title: "Auto-Resposta Enviada",
-				description: `Um e-mail de confirmação foi enviado para ${data.email}`
+	};
+	async function onSubmit(data) {
+		setIsSubmitting(true);
+		try {
+			addLead({
+				name: data.name,
+				company: data.company,
+				email: data.email,
+				service: data.service,
+				message: data.message,
+				lgpdAgreed: data.lgpdAgreed
 			});
-		}, 1500);
-		form.reset();
+			await mockSendResendEmail(data);
+			toast$2({
+				title: "Mensagem enviada com sucesso!",
+				description: "Seus dados foram registrados e o administrador foi notificado."
+			});
+			form.reset();
+		} catch (error) {
+			toast$2({
+				title: "Erro ao enviar a mensagem",
+				description: "Tivemos um problema processando sua solicitação.",
+				variant: "destructive"
+			});
+		} finally {
+			setIsSubmitting(false);
+		}
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "pt-20",
@@ -33636,7 +33675,8 @@ function Contact() {
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 										type: "submit",
 										className: "w-full h-14 text-base uppercase tracking-widest font-bold",
-										children: "Enviar Solicitação"
+										disabled: isSubmitting,
+										children: isSubmitting ? "Enviando..." : "Enviar Solicitação"
 									})
 								]
 							})
@@ -35946,4 +35986,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-BrSc6YxC.js.map
+//# sourceMappingURL=index-puXHnZvp.js.map
