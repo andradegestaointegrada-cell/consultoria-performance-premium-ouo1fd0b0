@@ -192,4 +192,68 @@ export const insightsData: Record<string, any> = {
     ctaBtnText: 'Entre em contato agora',
     ctaLink: '/contato',
   },
+  'a-metafora-do-pit-stop': {
+    category: 'Estratégia Corporativa',
+    readTime: 'Tempo de leitura: 8 min',
+    title: 'A Metáfora do Pit Stop na Otimização de Processos Empresariais',
+    image: 'https://img.usecurling.com/p/1200/600?q=f1%20pitstop&color=black',
+    intro:
+      'No automobilismo de elite, uma parada nos boxes pode definir o campeão. Mas o que as empresas podem aprender com a execução milimétrica de um pit stop? Descubra como aplicar a sincronia, preparação e precisão da Fórmula 1 para eliminar gargalos e acelerar a eficiência operacional do seu negócio.',
+    pillarsTitle: 'O que as empresas podem aprender com um pit stop?',
+    pillars: [
+      {
+        title: '1. Sincronia e Trabalho em Equipe',
+        desc: 'Cada membro sabe exatamente o que, quando e como fazer sua tarefa, sem hesitação.',
+      },
+      {
+        title: '2. Ferramentas Adequadas',
+        desc: 'Uso da tecnologia certa e de equipamentos otimizados para maximizar a velocidade e a segurança.',
+      },
+      {
+        title: '3. Treinamento Exaustivo',
+        desc: 'Prática rigorosa e contínua para lidar com situações esperadas e reagir rápido ao inesperado.',
+      },
+      {
+        title: '4. Foco no Objetivo Comum',
+        desc: 'Colaboração total com o único propósito de colocar a máquina de volta na pista no menor tempo possível.',
+      },
+    ],
+    tableTitle: 'Como aplicar a Metáfora do Pit Stop na Prática',
+    tableHeaders: ['Fase do Processo', 'Ação', 'Resultado Esperado'],
+    tableRows: [
+      {
+        label: '1. Mapeamento de Processos',
+        old: 'Identificação de atividades e gargalos operacionais',
+        new: 'Visão holística e clareza do fluxo de valor',
+      },
+      {
+        label: '2. Padronização',
+        old: 'Definição estrita de papéis, métodos e ferramentas',
+        new: 'Minimização de falhas e redução de variabilidade',
+      },
+      {
+        label: '3. Comunicação e Treinamento',
+        old: 'Alinhamento e capacitação focada da equipe',
+        new: 'Execução rápida, previsível e sem fricções',
+      },
+    ],
+    conclusionTitle: 'O Pit Stop da sua Empresa',
+    conclusionText:
+      'Uma cultura organizacional baseada na agilidade, clareza e sinergia não apenas reduz o tempo e os custos das operações diárias, como também aumenta significativamente a moral da equipe. O foco na alta performance deixa de ser apenas uma meta teórica para se tornar um hábito praticado todos os dias.',
+    bullets: [
+      'Análise crítica dos fluxos atuais e eliminação de desperdícios (Lean).',
+      'Atribuição inequívoca de responsabilidades (Matriz RACI).',
+      'Treinamento imersivo com simulações de cenários sob pressão.',
+      'Definição e acompanhamento em tempo real de KPIs de eficiência.',
+    ],
+    statsNumber: '1.8s',
+    statsTitle: 'O Tempo da Perfeição',
+    statsDesc:
+      'Frações de segundo separam a vitória da derrota nas pistas. Nos negócios, a excelência dos processos define quem dita o ritmo do mercado.',
+    ctaTitle: 'Sua operação precisa de um pit stop?',
+    ctaText:
+      'Traga a precisão e a eficiência da alta performance para o coração do seu negócio. Fale com a Andrade Gestão Integrada e otimize sua estrutura operacional agora mesmo.',
+    ctaBtnText: 'Fale com a nossa Equipe',
+    ctaLink: '/contato',
+  },
 }
