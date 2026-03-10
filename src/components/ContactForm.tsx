@@ -53,6 +53,18 @@ export function ContactForm() {
   const { addLead } = useLeadStore()
   const [loading, setLoading] = useState(false)
 
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      company: '',
+      email: '',
+      service: '',
+      message: '',
+      lgpdAgreed: undefined as unknown as true,
+    },
+  })
+
   const sendNotifications = async (d: ContactFormValues) => {
     const resendKey = import.meta.env.VITE_RESEND_API_KEY
     const waKey = import.meta.env.VITE_WHATSAPP_API_KEY
@@ -244,14 +256,16 @@ export function ContactForm() {
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  className="border-primary data-[state=checked]:bg-primary"
+                  className="border-primary data-[state=checked]:bg-primary mt-1"
                 />
               </FormControl>
-              <FormLabel className="text-xs leading-relaxed font-normal mt-0.5 text-muted-foreground">
-                Concordo com a coleta e armazenamento dos meus dados para contato em conformidade
-                com a LGPD.
-              </FormLabel>
-              <FormMessage />
+              <div className="space-y-1 leading-none">
+                <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
+                  Concordo com a coleta e armazenamento dos meus dados para contato em conformidade
+                  com a LGPD.
+                </FormLabel>
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
