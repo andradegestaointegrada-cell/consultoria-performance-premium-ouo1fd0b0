@@ -132,7 +132,7 @@ export default function Contact() {
                       <Mail className="text-primary h-6 w-6" />
                     </div>
                     <p className="font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all">
-                      ANDRADE.GESTÃOINTEGRADA@GMAIL.COM
+                      ANDRADE.GESTAOINTEGRADA@GMAIL.COM
                     </p>
                   </a>
                 </div>

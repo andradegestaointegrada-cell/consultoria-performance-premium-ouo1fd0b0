@@ -25628,7 +25628,7 @@ function Contact() {
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "text-primary h-6 w-6" })
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "font-bold text-foreground group-hover:text-primary transition-colors sm:text-lg text-sm break-all",
-										children: "ANDRADE.GESTÃOINTEGRADA@GMAIL.COM"
+										children: "ANDRADE.GESTAOINTEGRADA@GMAIL.COM"
 									})]
 								})
 							]
@@ -28506,4 +28506,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 
-//# sourceMappingURL=index-CyuL6Jf_.js.map
+//# sourceMappingURL=index-8mvDTPEk.js.map
