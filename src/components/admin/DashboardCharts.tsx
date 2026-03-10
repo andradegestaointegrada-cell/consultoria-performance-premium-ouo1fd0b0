@@ -16,6 +16,8 @@ export const PREMIUM_COLORS = {
   Concluído: '#2C2C2C', // Aço Sólido
 }
 
+const BAR_COLORS = ['#091D39', '#CFAE70', '#2C2C2C']
+
 const chartConfigStatus = {
   Novo: { label: 'Novo', color: '#091D39' },
   'Em Atendimento': { label: 'Em Atendimento', color: '#CFAE70' },
@@ -60,35 +62,6 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
         <CardContent>
           <ChartContainer config={chartConfigStatus} className="h-[250px] w-full">
             <PieChart>
-              <defs>
-                <filter id="glow-Novo" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow
-                    dx="0"
-                    dy="0"
-                    stdDeviation="3"
-                    floodColor="#091D39"
-                    floodOpacity="0.5"
-                  />
-                </filter>
-                <filter id="glow-Em-Atendimento" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow
-                    dx="0"
-                    dy="0"
-                    stdDeviation="3"
-                    floodColor="#CFAE70"
-                    floodOpacity="0.6"
-                  />
-                </filter>
-                <filter id="glow-Concluído" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow
-                    dx="0"
-                    dy="0"
-                    stdDeviation="3"
-                    floodColor="#2C2C2C"
-                    floodOpacity="0.4"
-                  />
-                </filter>
-              </defs>
               <Pie
                 data={chartDataStatus}
                 dataKey="count"
@@ -101,10 +74,9 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
                 stroke="var(--background)"
                 strokeWidth={2}
               >
-                {chartDataStatus.map((e, i) => {
-                  const filterId = `glow-${e.name.replace(/\s+/g, '-')}`
-                  return <Cell key={i} fill={e.fill} filter={`url(#${filterId})`} />
-                })}
+                {chartDataStatus.map((e, i) => (
+                  <Cell key={i} fill={e.fill} />
+                ))}
               </Pie>
               <ChartTooltip content={<ChartTooltipContent hideLabel />} />
               <ChartLegend
@@ -128,12 +100,6 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
             className="h-[250px] w-full"
           >
             <BarChart data={chartDataServices} margin={{ top: 20 }}>
-              <defs>
-                <linearGradient id="premiumGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#CFAE70" stopOpacity={1} />
-                  <stop offset="100%" stopColor="#091D39" stopOpacity={1} />
-                </linearGradient>
-              </defs>
               <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.2} />
               <XAxis
                 dataKey="name"
@@ -146,7 +112,11 @@ export const DashboardCharts = forwardRef<HTMLDivElement, { leads: Lead[] }>(({ 
                 cursor={{ fill: 'var(--muted)', opacity: 0.5 }}
                 content={<ChartTooltipContent />}
               />
-              <Bar dataKey="count" fill="url(#premiumGradient)" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+                {chartDataServices.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={BAR_COLORS[index % BAR_COLORS.length]} />
+                ))}
+              </Bar>
             </BarChart>
           </ChartContainer>
         </CardContent>

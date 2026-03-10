@@ -46,13 +46,13 @@ export default function Dashboard() {
               <Button
                 onClick={() => exportToCSV(leads)}
                 variant="outline"
-                className="gap-2 font-bold uppercase tracking-wider border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className="gap-2 font-bold uppercase tracking-wider border-[#091D39] text-[#091D39] dark:border-[#CFAE70] dark:text-[#CFAE70] hover:bg-[#091D39] hover:text-[#E8E8E8] dark:hover:bg-[#CFAE70] dark:hover:text-[#0D0D0D]"
               >
                 <Download className="w-4 h-4" /> CSV
               </Button>
               <Button
                 onClick={() => exportToPDF(stats, filteredLeads, filter, chartsRef)}
-                className="gap-2 font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-primary text-primary-foreground hover:opacity-90 border-none"
+                className="gap-2 font-bold uppercase tracking-wider bg-[#CFAE70] text-[#0D0D0D] hover:bg-[#CFAE70]/90 border-none"
               >
                 <FileText className="w-4 h-4" /> Exportar PDF
               </Button>
@@ -67,7 +67,7 @@ export default function Dashboard() {
                 <CardTitle className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
                   Total Leads
                 </CardTitle>
-                <Users className="h-4 w-4 text-primary" />
+                <Users className="h-4 w-4 text-[#091D39] dark:text-[#E8E8E8]" />
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-heading font-bold text-foreground">{stats.total}</div>
@@ -79,10 +79,10 @@ export default function Dashboard() {
                 <CardTitle className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
                   Novos
                 </CardTitle>
-                <Inbox className="h-4 w-4 text-accent" />
+                <Inbox className="h-4 w-4 text-[#CFAE70]" />
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-heading font-bold text-accent">{stats.novos}</div>
+                <div className="text-4xl font-heading font-bold text-[#CFAE70]">{stats.novos}</div>
               </CardContent>
             </Card>
 
@@ -91,7 +91,7 @@ export default function Dashboard() {
                 <CardTitle className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
                   Conversão
                 </CardTitle>
-                <TrendingUp className="h-4 w-4 text-secondary-foreground" />
+                <TrendingUp className="h-4 w-4 text-[#2C2C2C] dark:text-[#E8E8E8]" />
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-heading font-bold text-foreground">{stats.taxa}%</div>

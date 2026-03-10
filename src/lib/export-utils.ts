@@ -44,10 +44,10 @@ export const exportToPDF = (
       const clone = svg.cloneNode(true) as SVGElement
       clone.setAttribute('width', '100%')
       clone.setAttribute('height', '250px')
-      // Let's force some default text fill colors for standard recharts text to show up correctly in PDF
+      // Map text to Platina Pura for contrast against Noir Supremo background
       const textElements = clone.querySelectorAll('text')
       textElements.forEach((text) => {
-        text.style.fill = '#0D0D0D'
+        text.style.fill = '#E8E8E8'
         text.style.fontFamily = 'Open Sans, sans-serif'
       })
       const title = index === 0 ? 'Distribuição por Status' : 'Interesse por Serviço'
@@ -62,25 +62,25 @@ export const exportToPDF = (
         <meta charset="UTF-8">
         <title>Relatório de Performance - ${date}</title>
         <style>
-          body { font-family: "Open Sans", system-ui, sans-serif; padding: 40px; color: #0D0D0D; max-width: 1000px; margin: 0 auto; background: #ffffff; }
-          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; border-bottom: 2px solid #CFAE70; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+          body { font-family: "Open Sans", system-ui, sans-serif; padding: 40px; color: #E8E8E8; max-width: 1000px; margin: 0 auto; background: #0D0D0D; }
+          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #E8E8E8; border-bottom: 2px solid #CFAE70; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
           .metrics { display: flex; gap: 24px; margin-bottom: 40px; }
-          .metric-card { border: 1px solid #E8E8E8; padding: 24px; border-radius: 12px; flex: 1; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-          .metric-title { font-size: 13px; text-transform: uppercase; color: #454545; margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; }
-          .metric-value { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; font-size: 32px; font-weight: 700; color: #091D39; }
+          .metric-card { border: 1px solid #2C2C2C; padding: 24px; border-radius: 12px; flex: 1; background: #1A1A1A; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+          .metric-title { font-size: 13px; text-transform: uppercase; color: #A0A0A0; margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; }
+          .metric-value { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; font-size: 32px; font-weight: 700; color: #E8E8E8; }
           .charts-section { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
-          .chart-container { background: #ffffff; padding: 24px; border-radius: 12px; border: 1px solid #E8E8E8; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-          .chart-container h3 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; text-align: center; color: #091D39; font-size: 16px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.05em; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #E8E8E8; }
-          th, td { text-align: left; padding: 16px; border-bottom: 1px solid #E8E8E8; }
-          th { background-color: #091D39; font-weight: 600; color: #E8E8E8; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; }
-          .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+          .chart-container { background: #1A1A1A; padding: 24px; border-radius: 12px; border: 1px solid #2C2C2C; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+          .chart-container h3 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; text-align: center; color: #E8E8E8; font-size: 16px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.05em; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; background: #1A1A1A; border-radius: 12px; overflow: hidden; border: 1px solid #2C2C2C; color: #E8E8E8; }
+          th, td { text-align: left; padding: 16px; border-bottom: 1px solid #2C2C2C; }
+          th { background-color: #091D39; font-weight: 600; color: #E8E8E8; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; border-bottom: 1px solid #2C2C2C; }
+          .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
           .status-Novo { background: #091D39; color: #E8E8E8; }
           .status-Em-Atendimento { background: #CFAE70; color: #0D0D0D; }
           .status-Concluído { background: #2C2C2C; color: #E8E8E8; }
           @media print {
-            body { padding: 0; background: white; }
-            .metric-card, .chart-container, table { border: 1px solid #2C2C2C !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            body { padding: 0; background: #0D0D0D !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .metric-card, .chart-container, table { background: #1A1A1A !important; border: 1px solid #2C2C2C !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             th { background-color: #091D39 !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .status-Novo { background: #091D39 !important; color: #E8E8E8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .status-Em-Atendimento { background: #CFAE70 !important; color: #0D0D0D !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -102,7 +102,7 @@ export const exportToPDF = (
           </div>
           <div class="metric-card">
             <div class="metric-title">Taxa de Conversão</div>
-            <div class="metric-value" style="color: #2C2C2C;">${stats.taxa}%</div>
+            <div class="metric-value" style="color: #091D39;">${stats.taxa}%</div>
           </div>
         </div>
 
