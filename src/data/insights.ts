@@ -128,4 +128,68 @@ export const insightsData: Record<string, any> = {
     ctaBtnText: 'Fale com nossos Especialistas em ESG',
     ctaLink: 'mailto:contato@andradegestao.com.br',
   },
+  'lideranca-e-seguranca': {
+    category: 'ISO 45001',
+    readTime: 'Tempo de leitura: 7 min',
+    title: 'ISO 45001:2027 — Liderança e Segurança Ocupacional (Integração NR-01)',
+    image: 'https://img.usecurling.com/p/1200/600?q=construction%20leadership&color=black',
+    intro:
+      'A evolução para a norma ISO 45001:2027 e a sua integração orgânica com a Nova NR-01 representam um marco definitivo na Saúde e Segurança Ocupacional (SSO). A abordagem corporativa deixa de ser uma resposta documental reativa para se consolidar como um pilar estratégico amparado pela liderança ativa e pela gestão preditiva de riscos ocupacionais.',
+    pillarsTitle: 'Os 4 Pilares da Nova Segurança Ocupacional',
+    pillars: [
+      {
+        title: '1. Liderança Ativa e Visível',
+        desc: 'A alta direção assume responsabilidade inegociável sobre a cultura de segurança, os indicadores de SSO e o bem-estar organizacional.',
+      },
+      {
+        title: '2. GRO e PGR (NR-01)',
+        desc: 'Integração estrutural com o Gerenciamento de Riscos Ocupacionais, garantindo aderência legal, eficiência na prevenção de acidentes e proteção jurídica.',
+      },
+      {
+        title: '3. Saúde e Bem-estar Psicossocial',
+        desc: 'Inclusão obrigatória de fatores psicossociais e de saúde mental como elementos indissociáveis da segurança do trabalhador contemporâneo.',
+      },
+      {
+        title: '4. Participação e Consulta',
+        desc: 'Engajamento genuíno e contínuo dos trabalhadores no desenvolvimento, planejamento, implementação e revisão do sistema de gestão de SSO.',
+      },
+    ],
+    tableTitle: 'Sinergia Estratégica: ISO 45001 & NR-01',
+    tableHeaders: ['Aspecto', 'Abordagem Tradicional', 'Nova Gestão Integrada'],
+    tableRows: [
+      {
+        label: 'Foco da Gestão',
+        old: 'Conformidade reativa a incidentes',
+        new: 'Prevenção proativa e preditiva (GRO)',
+      },
+      {
+        label: 'Papel da Liderança',
+        old: 'Delegação ao SESMT e RH',
+        new: 'Accountability total da Alta Direção',
+      },
+      {
+        label: 'Abrangência de Risco',
+        old: 'Riscos físicos e químicos limitados',
+        new: 'Riscos globais, incluindo psicossociais',
+      },
+    ],
+    conclusionTitle: 'O Futuro da Cultura de Segurança e Performance',
+    conclusionText:
+      'Empresas que enxergam a integração da ISO 45001 com a NR-01 como uma ferramenta de valorização humana ganham em resiliência, atratividade no mercado e engajamento genuíno. A segurança deixa de ser um custo para se tornar um diferencial competitivo e de governança corporativa profunda.',
+    bullets: [
+      'Implementação do PGR perfeitamente integrado à ISO 45001.',
+      'Treinamento avançado de Lideranças em Cultura de Segurança.',
+      'Auditoria de Maturidade de SSO, abrangendo saúde mental.',
+      'Otimização e digitalização do Programa de Gestão de Riscos (GRO).',
+    ],
+    statsNumber: 'Zero',
+    statsTitle: 'Acidentes como Meta Inegociável',
+    statsDesc:
+      'A construção de uma cultura interdependente onde a segurança é um valor fundamental e inegociável em todos os níveis hierárquicos.',
+    ctaTitle: 'Quer liderar com segurança e excelência?',
+    ctaText:
+      'Descubra como estruturar sua gestão ocupacional para a nova ISO 45001:2027 e integrar os requisitos da NR-01 de forma inteligente e definitiva.',
+    ctaBtnText: 'Entre em contato agora',
+    ctaLink: '/contato',
+  },
 }
