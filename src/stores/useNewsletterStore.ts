@@ -46,7 +46,9 @@ const listeners = new Set<() => void>()
 const emitChange = () => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryData))
-  } catch {}
+  } catch (error) {
+    console.error('Failed to save newsletter data to localStorage', error)
+  }
   listeners.forEach((l) => l())
 }
 
