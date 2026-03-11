@@ -1,5 +1,4 @@
 import { Reveal } from '@/components/ui/reveal'
-import { Button } from '@/components/ui/button'
 import { Mail } from 'lucide-react'
 
 export default function LGPDPortal() {
@@ -48,7 +47,7 @@ export default function LGPDPortal() {
                 </p>
                 <a
                   href="mailto:andrade.gestaointegrada@gmail.com"
-                  className="text-accent hover:underline m-0"
+                  className="text-primary hover:text-primary/80 transition-colors hover:underline m-0 font-medium"
                 >
                   andrade.gestaointegrada@gmail.com
                 </a>
