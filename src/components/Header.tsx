@@ -57,8 +57,8 @@ export function Header() {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-bold uppercase tracking-widest transition-colors hover:text-accent',
-                location.pathname === link.path ? 'text-accent' : 'text-muted-foreground',
+                'text-sm font-bold uppercase tracking-widest transition-colors duration-300 hover:text-primary',
+                location.pathname === link.path ? 'text-primary' : 'text-foreground/80',
               )}
             >
               {link.name}
@@ -67,7 +67,7 @@ export function Header() {
           <ThemeToggle />
           <Button
             asChild
-            className="rounded-full uppercase tracking-wider font-bold bg-accent text-accent-foreground hover:bg-accent/80"
+            className="rounded-full uppercase tracking-wider font-bold bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all"
           >
             <Link to="/contato">Fale com um Especialista</Link>
           </Button>
@@ -93,8 +93,8 @@ export function Header() {
                     key={link.path}
                     to={link.path}
                     className={cn(
-                      'text-lg font-bold uppercase tracking-wider transition-colors hover:text-accent',
-                      location.pathname === link.path ? 'text-accent' : 'text-muted-foreground',
+                      'text-lg font-bold uppercase tracking-wider transition-colors duration-300 hover:text-primary',
+                      location.pathname === link.path ? 'text-primary' : 'text-foreground/80',
                     )}
                   >
                     {link.name}
@@ -102,7 +102,7 @@ export function Header() {
                 ))}
                 <Button
                   asChild
-                  className="w-full mt-4 uppercase tracking-wider font-bold bg-accent text-accent-foreground hover:bg-accent/80"
+                  className="w-full mt-4 uppercase tracking-wider font-bold bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all"
                 >
                   <Link to="/contato">Fale com um Especialista</Link>
                 </Button>
