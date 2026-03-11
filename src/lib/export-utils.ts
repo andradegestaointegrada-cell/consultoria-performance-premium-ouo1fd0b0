@@ -1,4 +1,5 @@
 import { Lead } from '@/stores/useLeadStore'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
 
 export const exportToCSV = (leads: Lead[]) => {
   const rows = leads.map((l) => [
@@ -36,6 +37,8 @@ export const exportToPDF = (
   }
 
   const date = new Date().toLocaleDateString('pt-BR')
+  const logoAbsoluteUrl = new URL(logoLight, window.location.origin).href
+
   let chartsHtml = ''
 
   if (chartsRef.current) {
@@ -94,7 +97,9 @@ export const exportToPDF = (
         <title>Relatório de Performance - ${date}</title>
         <style>
           body { font-family: "Open Sans", system-ui, sans-serif; padding: 40px; color: #0D0D0D; max-width: 1000px; margin: 0 auto; background: #FFFFFF; }
-          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; border-bottom: 2px solid #CFAE70; padding-bottom: 16px; margin-bottom: 32px; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+          .header-container { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #CFAE70; padding-bottom: 20px; }
+          .logo-img { height: 60px; object-fit: contain; margin-bottom: 16px; }
+          h1 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
           h2 { font-family: "Times New Roman MT Condensed", "Times New Roman", serif; color: #091D39; font-size: 20px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
           .metrics { display: flex; gap: 24px; margin-bottom: 40px; }
           .metric-card { border: 1px solid #E8E8E8; padding: 24px; border-radius: 12px; flex: 1; background: #FFFFFF; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -121,7 +126,10 @@ export const exportToPDF = (
         </style>
       </head>
       <body>
-        <h1>Relatório de Performance - Consultoria Premium</h1>
+        <div class="header-container">
+          <img src="${logoAbsoluteUrl}" alt="Andrade Gestão Integrada Logo" class="logo-img" onerror="this.style.display='none'" />
+          <h1>Relatório de Performance - Andrade Gestão Integrada</h1>
+        </div>
         
         <div class="metrics">
           <div class="metric-card">

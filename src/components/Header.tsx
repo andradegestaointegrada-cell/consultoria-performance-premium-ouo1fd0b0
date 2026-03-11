@@ -36,17 +36,17 @@ export function Header() {
         isScrolled && 'bg-background/90 backdrop-blur-md border-border glass-panel',
       )}
     >
-      <div className="container mx-auto px-4 h-24 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-28 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
           <img
             src={logoLight}
             alt="Andrade Gestão Integrada"
-            className="h-10 md:h-12 dark:hidden"
+            className="h-14 md:h-16 dark:hidden transition-all duration-300"
           />
           <img
             src={logoDark}
             alt="Andrade Gestão Integrada"
-            className="h-10 md:h-12 hidden dark:block rounded-md overflow-hidden"
+            className="h-14 md:h-16 hidden dark:block rounded-md overflow-hidden transition-all duration-300"
           />
         </Link>
 

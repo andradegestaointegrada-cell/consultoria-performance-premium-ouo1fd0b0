@@ -1,11 +1,41 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Linkedin, Twitter, Instagram } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
+import { useToast } from '@/hooks/use-toast'
+import useNewsletterStore from '@/stores/useNewsletterStore'
 import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
 import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
 
 export function Footer() {
+  const [email, setEmail] = useState('')
+  const [lgpd, setLgpd] = useState(false)
+  const { addSubscriber } = useNewsletterStore()
+  const { toast } = useToast()
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+    if (!lgpd) {
+      toast({
+        title: 'Atenção Necessária',
+        description: 'Por favor, aceite os termos da LGPD para assinar nossa newsletter.',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    addSubscriber({ email, source: 'Rodapé - Inscrição Global', lgpdAgreed: true })
+    toast({
+      title: 'Inscrição Confirmada!',
+      description: 'Você passará a receber nossos insights exclusivos de alta performance.',
+    })
+    setEmail('')
+    setLgpd(false)
+  }
+
   return (
     <footer className="bg-background border-t border-border pt-20 pb-10">
       <div className="container mx-auto px-4">
@@ -15,12 +45,12 @@ export function Footer() {
               <img
                 src={logoLight}
                 alt="Andrade Gestão Integrada"
-                className="h-12 dark:hidden group-hover:opacity-80 transition-opacity"
+                className="h-16 dark:hidden group-hover:opacity-80 transition-opacity"
               />
               <img
                 src={logoDark}
                 alt="Andrade Gestão Integrada"
-                className="h-12 hidden dark:block rounded-md overflow-hidden group-hover:opacity-80 transition-opacity"
+                className="h-16 hidden dark:block rounded-md overflow-hidden group-hover:opacity-80 transition-opacity"
               />
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
@@ -116,15 +146,32 @@ export function Footer() {
             <p className="text-sm text-muted-foreground mb-6">
               Receba insights exclusivos sobre excelência corporativa.
             </p>
-            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-4" onSubmit={handleNewsletterSubmit}>
               <Input
                 type="email"
-                placeholder="Seu e-mail"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Seu e-mail profissional"
                 className="bg-card border-border text-foreground h-12 focus-visible:ring-primary"
               />
+              <div className="flex items-start gap-2 pt-1">
+                <Checkbox
+                  id="footer-lgpd"
+                  checked={lgpd}
+                  onCheckedChange={(v) => setLgpd(v === true)}
+                  className="border-primary data-[state=checked]:bg-primary mt-0.5"
+                />
+                <label
+                  htmlFor="footer-lgpd"
+                  className="text-xs text-muted-foreground leading-snug cursor-pointer"
+                >
+                  Concordo com os Termos de Serviço e política de privacidade (LGPD).
+                </label>
+              </div>
               <Button
                 type="submit"
-                className="h-12 uppercase font-bold tracking-widest bg-primary text-primary-foreground hover:bg-primary/80 transition-colors"
+                className="h-12 uppercase font-bold tracking-widest bg-primary text-primary-foreground hover:bg-primary/80 transition-colors mt-2"
               >
                 Assinar
               </Button>

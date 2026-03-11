@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useLeadStore from '@/stores/useLeadStore'
+import useNewsletterStore from '@/stores/useNewsletterStore'
 import { useToast } from '@/hooks/use-toast'
 
 const formSchema = z.object({
@@ -31,6 +32,7 @@ const formSchema = z.object({
   service: z.string().min(1, 'Selecione um serviço.'),
   message: z.string().min(10, 'Mensagem muito curta.'),
   lgpdAgreed: z.literal(true, { errorMap: () => ({ message: 'Aceite os termos.' }) }),
+  newsletterAgreed: z.boolean().optional(),
 })
 
 type ContactFormValues = z.infer<typeof formSchema>
@@ -51,6 +53,7 @@ const SERVICES = [
 export function ContactForm() {
   const { toast } = useToast()
   const { addLead } = useLeadStore()
+  const { addSubscriber } = useNewsletterStore()
   const [loading, setLoading] = useState(false)
 
   const form = useForm<ContactFormValues>({
@@ -62,6 +65,7 @@ export function ContactForm() {
       service: '',
       message: '',
       lgpdAgreed: undefined as unknown as true,
+      newsletterAgreed: false,
     },
   })
 
@@ -130,10 +134,19 @@ export function ContactForm() {
     setLoading(true)
     try {
       addLead(data)
+
+      if (data.newsletterAgreed) {
+        addSubscriber({
+          email: data.email,
+          source: `Formulário de Serviços - ${data.service}`,
+          lgpdAgreed: true,
+        })
+      }
+
       await sendNotifications(data)
       toast({
         title: 'Mensagem enviada com sucesso!',
-        description: 'Nossa equipe foi notificada.',
+        description: 'Nossa equipe foi notificada e entrará em contato em breve.',
       })
       form.reset()
     } catch {
@@ -247,28 +260,51 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="lgpdAgreed"
-          render={({ field }) => (
-            <FormItem className="flex items-start gap-3 border border-border p-4 shadow-sm rounded-md bg-muted/30">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  className="border-primary data-[state=checked]:bg-primary mt-1"
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
-                  Concordo com a coleta e armazenamento dos meus dados para contato em conformidade
-                  com a LGPD.
-                </FormLabel>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
+        <div className="space-y-3">
+          <FormField
+            control={form.control}
+            name="lgpdAgreed"
+            render={({ field }) => (
+              <FormItem className="flex items-start gap-3 border border-border p-4 shadow-sm rounded-md bg-muted/30">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="border-primary data-[state=checked]:bg-primary mt-1"
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
+                    Concordo com a coleta e armazenamento dos meus dados para contato em
+                    conformidade com a LGPD.
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="newsletterAgreed"
+            render={({ field }) => (
+              <FormItem className="flex items-start gap-3 border border-border p-4 shadow-sm rounded-md bg-muted/10">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="border-primary data-[state=checked]:bg-primary mt-1"
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
+                    Desejo receber a newsletter com insights exclusivos de performance e inovação
+                    para minha empresa.
+                  </FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
+        </div>
         <Button
           type="submit"
           className="w-full h-12 uppercase tracking-widest font-bold bg-primary hover:bg-accent hover:text-accent-foreground transition-colors text-primary-foreground"

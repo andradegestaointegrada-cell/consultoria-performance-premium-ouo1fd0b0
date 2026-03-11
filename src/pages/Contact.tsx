@@ -9,7 +9,7 @@ export default function Contact() {
         <div className="container mx-auto px-4 max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-foreground">
-              Inicie a <span className="text-primary">TRANSFORMAÇÃO</span>
+              Inicie a <b className="text-primary font-extrabold">TRANSFORMAÇÃO</b>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Fale com nossos especialistas para elevar a performance da sua empresa.
@@ -32,7 +32,7 @@ export default function Contact() {
           <Reveal delay={200} className="space-y-12">
             <div>
               <h3 className="text-2xl font-heading font-bold mb-8 border-b border-border pb-4 uppercase tracking-wide text-foreground">
-                Contato Premium
+                Contato Andrade Gestão Integrada
               </h3>
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
