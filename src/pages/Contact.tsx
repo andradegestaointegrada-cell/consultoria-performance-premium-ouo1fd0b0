@@ -9,7 +9,7 @@ export default function Contact() {
         <div className="container mx-auto px-4 max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-foreground">
-              Inicie a <b className="text-primary font-extrabold">TRANSFORMAÇÃO</b>
+              Inicie a <b className="text-primary font-extrabold italic">TRANSFORMAÇÃO</b>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Fale com nossos especialistas para elevar a performance da sua empresa.
