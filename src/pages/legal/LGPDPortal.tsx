@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/reveal'
-import { Mail } from 'lucide-react'
+import { LGPDContactForm } from './LGPDContactForm'
 
 export default function LGPDPortal() {
   return (
@@ -34,25 +34,11 @@ export default function LGPDPortal() {
             </h2>
             <p>
               Se você deseja exercer qualquer um dos seus direitos ou tiver alguma dúvida sobre como
-              processamos seus dados, entre em contato com nosso Encarregado de Proteção de Dados:
+              processamos seus dados, entre em contato com nosso Encarregado de Proteção de Dados
+              preenchendo o formulário abaixo:
             </p>
 
-            <div className="bg-card border border-border p-6 rounded-lg mt-6 flex items-center gap-4">
-              <div className="p-3 bg-primary text-primary-foreground rounded-full">
-                <Mail className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-foreground font-bold m-0 uppercase tracking-wide">
-                  E-mail para solicitações LGPD:
-                </p>
-                <a
-                  href="mailto:andrade.gestaointegrada@gmail.com"
-                  className="text-primary hover:text-primary/80 transition-colors hover:underline m-0 font-medium"
-                >
-                  andrade.gestaointegrada@gmail.com
-                </a>
-              </div>
-            </div>
+            <LGPDContactForm />
 
             <p className="mt-12 text-sm font-bold">
               Última atualização: {new Date().toLocaleDateString('pt-BR')}
