@@ -9,121 +9,7 @@ import {
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-
-const S_DATA: Record<
-  string,
-  {
-    t: string
-    d: string
-    hi: string
-    ci: string
-    w: string
-    methodologyDetails?: string
-    trainingPillars?: string[]
-  }
-> = {
-  'iso-9001': {
-    t: 'ISO 9001',
-    d: 'A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.',
-    hi: 'https://i.postimg.cc/t4Z2xNx0/BANNER_9001.jpg',
-    ci: 'https://i.postimg.cc/15YvXjfS/9001_DESCRIÇÃO_SERVIÇO.jpg',
-    w: 'Processos robustos que garantem a padronização e a alta performance contínua.',
-    methodologyDetails:
-      'Nossa metodologia para a ISO 9001 baseia-se na imersão profunda nos processos da sua empresa. Através de um diagnóstico gap-analysis rigoroso, desenvolvemos planos de ação customizados para fechar lacunas de conformidade, garantindo uma transição fluida e certificação sem surpresas.',
-    trainingPillars: [
-      'Conscientização da Qualidade e Política Interna',
-      'Mapeamento de Processos e KPIs',
-      'Formação de Auditores Internos ISO 9001',
-      'Tratamento de Não Conformidades (MASP/8D)',
-    ],
-  },
-  'iso-14001': {
-    t: 'ISO 14001',
-    d: 'Transformamos a gestão ambiental em um diferencial competitivo sustentável.',
-    hi: 'https://i.postimg.cc/bwD3t9tz/14001_BANNER.jpg',
-    ci: 'https://i.postimg.cc/yYrLxbk7/14001_DESCRIÇÃO_SERVIÇO.jpg',
-    w: 'Estratégias sustentáveis integradas ao negócio, mitigando impactos ambientais.',
-  },
-  'iso-45001': {
-    t: 'ISO 45001',
-    d: 'Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=engineer%20safety%20helmet%20factory&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=industrial%20workers%20safety%20gear&dpr=2',
-    w: 'Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança.',
-  },
-  'pbqp-h': {
-    t: 'PBQP-H',
-    d: 'Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.',
-    hi: 'https://i.postimg.cc/bY3NWQFL/PBQP_H_BANNER.jpg',
-    ci: 'https://i.postimg.cc/vHTHscJB/PBQP_H_DESCRIÇÃO.jpg',
-    w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
-    methodologyDetails:
-      'Para o PBQP-H, a metodologia integra as exigências específicas do SiMAC com a dinâmica do canteiro de obras. Realizamos auditorias de qualificação de fornecedores, avaliação de materiais e controle tecnológico in-loco para assegurar a conformidade desde a fundação até o acabamento.',
-    trainingPillars: [
-      'Interpretação dos Requisitos do SiMAC',
-      'Controle Tecnológico e Recebimento de Materiais',
-      'Gestão de Resíduos na Construção Civil',
-      'Indicadores de Produtividade e Desperdício',
-    ],
-  },
-  'iatf-16949': {
-    t: 'IATF 16949',
-    d: 'Gestão da qualidade rigorosa para a cadeia de suprimentos da indústria automotiva.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=automotive%20manufacturing%20robotics&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=car%20assembly%20line%20factory&dpr=2',
-    w: 'Prevenção de defeitos, redução de variação e desperdício na cadeia automotiva.',
-  },
-  'iso-17020': {
-    t: 'ISO/IEC 17020',
-    d: 'Critérios rigorosos para garantir a competência e imparcialidade de organismos de inspeção.',
-    hi: 'https://i.postimg.cc/NG6BvRJk/17020_BANNER.png',
-    ci: 'https://i.postimg.cc/52jhyzgY/17000.png',
-    w: 'Confiabilidade atestada nas inspeções, garantindo credibilidade no mercado.',
-  },
-  'iso-17025': {
-    t: 'ISO/IEC 17025',
-    d: 'Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.',
-    hi: 'https://i.postimg.cc/xdBnn5VF/17025_BANNER.png',
-    ci: 'https://i.postimg.cc/Sx3KVCx0/17025-DESCRICAO.png',
-    w: 'Padronização internacional e reconhecimento da qualidade dos seus laudos e ensaios.',
-  },
-  sassmaq: {
-    t: 'SASSMAQ',
-    d: 'Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.',
-    hi: 'https://i.postimg.cc/8CfxBr7N/SASSMAQ_BANNER.png',
-    ci: 'https://i.postimg.cc/wjvCMrHv/SASSMAQ_DESCRIÇÃO.png',
-    w: 'Minimização de riscos operacionais e adequação às exigências da indústria química.',
-  },
-  esg: {
-    t: 'Consultoria ESG',
-    d: 'Guiamos sua empresa na jornada ESG, alinhando propósito e governança sólida.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=sustainable%20corporate%20wind%20energy&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=environmental%20social%20governance%20business&dpr=2',
-    w: 'Apoiamos na estruturação completa de práticas alinhadas às exigências dos investidores.',
-  },
-}
-
-const DEF = {
-  t: '',
-  d: 'Soluções estratégicas focadas em trazer resultados reais para a operação da sua empresa.',
-  hi: 'https://img.usecurling.com/p/1920/1080?q=business%20strategy%20corporate&dpr=2',
-  ci: 'https://img.usecurling.com/p/800/600?q=corporate%20planning%20team%20meeting&dpr=2',
-  w: 'Entregamos um sistema focado em gerar valor e reduzir riscos.',
-}
-
-const STEPS = [
-  {
-    step: '1',
-    title: 'Diagnóstico',
-    desc: 'Mapeamento da operação e identificação de gaps estratégicos.',
-  },
-  {
-    step: '2',
-    title: 'Implementação',
-    desc: 'Ajustes ágeis, criação de processos customizados e treinamento.',
-  },
-  { step: '3', title: 'Auditoria', desc: 'Validação final de conformidade para a certificação.' },
-]
+import { S_DATA, DEF, STEPS } from '@/data/services'
 
 export default function ServiceDetail() {
   const { id } = useParams()
@@ -147,7 +33,7 @@ export default function ServiceDetail() {
             >
               <ChevronLeft className="w-4 h-4 mr-2" /> Voltar para Serviços
             </Link>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               {title}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl drop-shadow-md font-light leading-relaxed">
@@ -215,14 +101,14 @@ export default function ServiceDetail() {
                 <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
                   Processos de Treinamento
                 </h3>
-                <ul className="grid sm:grid-cols-2 gap-4">
-                  {svc.trainingPillars.map((tp: string, idx: number) => (
+                <ul className="flex flex-col gap-4">
+                  {svc.trainingPillars.map((tp, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center gap-3 bg-secondary p-4 rounded-xl border border-border"
+                      className="flex items-center gap-4 bg-secondary p-5 md:p-6 rounded-xl border border-border/50 shadow-sm transition-all hover:border-primary/50"
                     >
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <span className="text-foreground font-bold">{tp}</span>
+                      <div className="h-2.5 w-2.5 rounded-full bg-primary shrink-0" />
+                      <span className="text-foreground font-bold text-base md:text-lg">{tp}</span>
                     </li>
                   ))}
                 </ul>

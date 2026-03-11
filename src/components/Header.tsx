@@ -39,20 +39,20 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 h-28 flex items-center justify-between">
-        <Link to="/" className="flex flex-col justify-center group py-2">
+        <Link to="/" className="flex flex-col justify-center group py-2 flex-1 min-w-0 mr-4">
           <div className="flex items-center gap-3">
             <img
               src={logoLight}
               alt="Andrade Gestão Integrada"
-              className="h-12 md:h-14 dark:hidden transition-all duration-300"
+              className="h-10 md:h-14 dark:hidden transition-all duration-300 shrink-0 object-contain"
             />
             <img
               src={logoDark}
               alt="Andrade Gestão Integrada"
-              className="h-12 md:h-14 hidden dark:block rounded-md overflow-hidden transition-all duration-300"
+              className="h-10 md:h-14 hidden dark:block rounded-md overflow-hidden transition-all duration-300 shrink-0 object-contain"
             />
           </div>
-          <span className="text-[10px] md:text-[11px] text-muted-foreground uppercase tracking-widest font-bold font-heading mt-1 opacity-80 group-hover:opacity-100 transition-opacity">
+          <span className="text-[8px] sm:text-[10px] md:text-[11px] text-muted-foreground uppercase tracking-wider md:tracking-widest font-bold font-heading mt-1 opacity-80 group-hover:opacity-100 transition-opacity whitespace-normal break-words leading-tight max-w-[280px]">
             Estratégia, Conformidade e Performance
           </span>
         </Link>
@@ -94,7 +94,7 @@ export function Header() {
         </nav>
 
         {/* Mobile Nav */}
-        <div className="lg:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-2 sm:gap-4 shrink-0">
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
