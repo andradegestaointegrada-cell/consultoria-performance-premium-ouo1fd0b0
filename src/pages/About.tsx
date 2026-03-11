@@ -35,6 +35,16 @@ export default function About() {
 
       <section className="py-24">
         <div className="container mx-auto px-4">
+          <Reveal>
+            <div className="max-w-4xl mx-auto bg-primary/5 border-l-4 border-primary p-8 md:p-12 mb-24 rounded-r-2xl shadow-sm">
+              <h3 className="text-xl md:text-3xl font-heading font-bold text-foreground leading-relaxed uppercase tracking-wide text-center">
+                "Diagnóstico, implementação e evolução de sistemas de gestão orientados à{' '}
+                <em className="font-heading italic text-primary font-normal">estratégia</em> e à{' '}
+                <em className="font-heading italic text-primary font-normal">performance</em>."
+              </h3>
+            </div>
+          </Reveal>
+
           <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
             <Reveal className="order-2 md:order-1">
               <div className="relative">

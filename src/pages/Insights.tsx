@@ -5,26 +5,26 @@ const articles = [
   {
     title: 'O Futuro da Qualidade',
     slug: 'o-futuro-da-qualidade',
-    category: 'ISO 9001',
+    category: 'ISO Standards',
     img: 'https://img.usecurling.com/p/600/400?q=future%20technology&color=black',
   },
   {
     title: 'Sustentabilidade Corporativa',
     slug: 'sustentabilidade-corporativa',
-    category: 'ISO 14001',
+    category: 'Engineering Certifications',
     img: 'https://img.usecurling.com/p/600/400?q=green%20city&color=black',
   },
   {
     title: 'Liderança e Segurança',
     slug: 'lideranca-e-seguranca',
-    category: 'ISO 45001',
+    category: 'ISO Standards',
     img: 'https://img.usecurling.com/p/600/400?q=construction%20leadership&color=black',
   },
   {
-    title: 'Auditorias Remotas: O Novo Normal',
-    slug: 'auditorias-remotas',
-    category: 'Metodologia',
-    img: 'https://img.usecurling.com/p/600/400?q=video%20conference&color=black',
+    title: 'A Metáfora do Pit Stop',
+    slug: 'a-metafora-do-pit-stop',
+    category: 'Performance Management',
+    img: 'https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg',
   },
 ]
 
@@ -35,10 +35,10 @@ export default function Insights() {
         <div className="container mx-auto px-4">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-              Insights & Inteligência
+              Blog Técnico & Inteligência
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Artigos, análises e tendências sobre alta performance empresarial e normas
+              Artigos, análises e tendências sobre alta performance empresarial e certificações
               internacionais.
             </p>
           </Reveal>
@@ -64,7 +64,7 @@ export default function Insights() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent md:via-background/70" />
                 <div className="relative z-10 p-6 md:p-10 max-w-4xl">
                   <div className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3">
-                    Estratégia Corporativa
+                    Performance Management
                   </div>
                   <h3 className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide leading-tight">
                     A Metáfora do Pit Stop na Otimização de Processos Empresariais

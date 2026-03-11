@@ -12,7 +12,9 @@ const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Sobre', path: '/sobre' },
   { name: 'Serviços', path: '/servicos' },
-  { name: 'Insights', path: '/insights' },
+  { name: 'Metodologia', path: '/metodologia' },
+  { name: 'Cases', path: '/cases' },
+  { name: 'Blog', path: '/insights' },
   { name: 'Contato', path: '/contato' },
 ]
 
@@ -37,21 +39,26 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 h-28 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
-          <img
-            src={logoLight}
-            alt="Andrade Gestão Integrada"
-            className="h-14 md:h-16 dark:hidden transition-all duration-300"
-          />
-          <img
-            src={logoDark}
-            alt="Andrade Gestão Integrada"
-            className="h-14 md:h-16 hidden dark:block rounded-md overflow-hidden transition-all duration-300"
-          />
+        <Link to="/" className="flex flex-col justify-center group py-2">
+          <div className="flex items-center gap-3">
+            <img
+              src={logoLight}
+              alt="Andrade Gestão Integrada"
+              className="h-12 md:h-14 dark:hidden transition-all duration-300"
+            />
+            <img
+              src={logoDark}
+              alt="Andrade Gestão Integrada"
+              className="h-12 md:h-14 hidden dark:block rounded-md overflow-hidden transition-all duration-300"
+            />
+          </div>
+          <span className="text-[10px] md:text-[11px] text-muted-foreground uppercase tracking-widest font-bold font-heading mt-1 opacity-80 group-hover:opacity-100 transition-opacity">
+            Estratégia, Conformidade e Performance
+          </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
           {navLinks.map((link) => {
             const isActive =
               link.path === '/'
@@ -82,12 +89,12 @@ export function Header() {
             asChild
             className="rounded-full uppercase tracking-wider font-bold bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all"
           >
-            <Link to="/contato">Fale com um Especialista</Link>
+            <Link to="/contato">Falar com Especialista</Link>
           </Button>
         </nav>
 
         {/* Mobile Nav */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-4">
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>

@@ -41,21 +41,26 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6 group">
-              <img
-                src={logoLight}
-                alt="Andrade Gestão Integrada"
-                className="h-16 dark:hidden group-hover:opacity-80 transition-opacity"
-              />
-              <img
-                src={logoDark}
-                alt="Andrade Gestão Integrada"
-                className="h-16 hidden dark:block rounded-md overflow-hidden group-hover:opacity-80 transition-opacity"
-              />
+            <Link to="/" className="flex flex-col justify-center mb-6 group">
+              <div className="flex items-center gap-3">
+                <img
+                  src={logoLight}
+                  alt="Andrade Gestão Integrada"
+                  className="h-14 dark:hidden group-hover:opacity-80 transition-opacity"
+                />
+                <img
+                  src={logoDark}
+                  alt="Andrade Gestão Integrada"
+                  className="h-14 hidden dark:block rounded-md overflow-hidden group-hover:opacity-80 transition-opacity"
+                />
+              </div>
+              <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold font-heading mt-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                Estratégia, Conformidade e Performance
+              </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
-              Andrade Gestão Integrada. Consultoria premium focada em alta performance,
-              flexibilidade operacional e certificações ISO.
+              Estruturamos sistemas de gestão que alinham estratégia organizacional, garantem
+              conformidade normativa e impulsionam a performance das empresas.
             </p>
             <div className="flex gap-4">
               <a
@@ -91,17 +96,25 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/servicos" className="hover:text-primary transition-colors duration-300">
-                  Nossos Serviços
+                  Serviços
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/metodologia"
+                  className="hover:text-primary transition-colors duration-300"
+                >
+                  Metodologia
+                </Link>
+              </li>
+              <li>
+                <Link to="/cases" className="hover:text-primary transition-colors duration-300">
+                  Cases de Sucesso
                 </Link>
               </li>
               <li>
                 <Link to="/insights" className="hover:text-primary transition-colors duration-300">
-                  Insights & Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/contato" className="hover:text-primary transition-colors duration-300">
-                  Contato
+                  Blog Técnico
                 </Link>
               </li>
             </ul>

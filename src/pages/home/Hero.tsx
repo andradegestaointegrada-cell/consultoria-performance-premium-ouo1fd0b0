@@ -20,7 +20,7 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider">
               <span className="relative flex h-2 w-2">
@@ -32,9 +32,9 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={100}>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase">
-              Performance Elevada ao{' '}
-              <em className="font-heading italic text-primary font-normal">Nível Máximo</em>.
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase">
+              Estratégia, Conformidade e{' '}
+              <em className="font-heading italic text-primary font-normal">Performance</em>.
             </h1>
           </Reveal>
 

@@ -1,6 +1,6 @@
 export const insightsData: Record<string, any> = {
   'o-futuro-da-qualidade': {
-    category: 'ISO 9001',
+    category: 'ISO Standards',
     readTime: 'Tempo de leitura: 5 min',
     title: 'O Futuro da Qualidade ISO 9001',
     image: 'https://img.usecurling.com/p/1200/600?q=future%20technology&color=black',
@@ -64,7 +64,7 @@ export const insightsData: Record<string, any> = {
     ctaLink: '/contato',
   },
   'sustentabilidade-corporativa': {
-    category: 'ISO 14001',
+    category: 'Engineering Certifications',
     readTime: 'Tempo de leitura: 6 min',
     title:
       'ISO 14001:2026 — A Nova Era da Gestão Ambiental e o Papel Estratégico na Sustentabilidade Real',
@@ -129,7 +129,7 @@ export const insightsData: Record<string, any> = {
     ctaLink: 'mailto:contato@andradegestao.com.br',
   },
   'lideranca-e-seguranca': {
-    category: 'ISO 45001',
+    category: 'ISO Standards',
     readTime: 'Tempo de leitura: 7 min',
     title: 'ISO 45001:2027 — Liderança e Segurança Ocupacional (Integração NR-01)',
     image: 'https://img.usecurling.com/p/1200/600?q=construction%20leadership&color=black',
@@ -193,7 +193,7 @@ export const insightsData: Record<string, any> = {
     ctaLink: '/contato',
   },
   'a-metafora-do-pit-stop': {
-    category: 'Estratégia Corporativa',
+    category: 'Performance Management',
     readTime: 'Tempo de leitura: 8 min',
     title: 'A Metáfora do Pit Stop na Otimização de Processos Empresariais',
     image: 'https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg',

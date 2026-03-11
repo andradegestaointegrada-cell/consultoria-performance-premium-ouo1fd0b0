@@ -10,13 +10,32 @@ import {
 import { Button } from '@/components/ui/button'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 
-const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: string }> = {
+const S_DATA: Record<
+  string,
+  {
+    t: string
+    d: string
+    hi: string
+    ci: string
+    w: string
+    methodologyDetails?: string
+    trainingPillars?: string[]
+  }
+> = {
   'iso-9001': {
     t: 'ISO 9001',
     d: 'A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.',
     hi: 'https://i.postimg.cc/t4Z2xNx0/BANNER_9001.jpg',
     ci: 'https://i.postimg.cc/15YvXjfS/9001_DESCRIÇÃO_SERVIÇO.jpg',
     w: 'Processos robustos que garantem a padronização e a alta performance contínua.',
+    methodologyDetails:
+      'Nossa metodologia para a ISO 9001 baseia-se na imersão profunda nos processos da sua empresa. Através de um diagnóstico gap-analysis rigoroso, desenvolvemos planos de ação customizados para fechar lacunas de conformidade, garantindo uma transição fluida e certificação sem surpresas.',
+    trainingPillars: [
+      'Conscientização da Qualidade e Política Interna',
+      'Mapeamento de Processos e KPIs',
+      'Formação de Auditores Internos ISO 9001',
+      'Tratamento de Não Conformidades (MASP/8D)',
+    ],
   },
   'iso-14001': {
     t: 'ISO 14001',
@@ -38,6 +57,14 @@ const S_DATA: Record<string, { t: string; d: string; hi: string; ci: string; w: 
     hi: 'https://i.postimg.cc/bY3NWQFL/PBQP_H_BANNER.jpg',
     ci: 'https://i.postimg.cc/vHTHscJB/PBQP_H_DESCRIÇÃO.jpg',
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
+    methodologyDetails:
+      'Para o PBQP-H, a metodologia integra as exigências específicas do SiMAC com a dinâmica do canteiro de obras. Realizamos auditorias de qualificação de fornecedores, avaliação de materiais e controle tecnológico in-loco para assegurar a conformidade desde a fundação até o acabamento.',
+    trainingPillars: [
+      'Interpretação dos Requisitos do SiMAC',
+      'Controle Tecnológico e Recebimento de Materiais',
+      'Gestão de Resíduos na Construção Civil',
+      'Indicadores de Produtividade e Desperdício',
+    ],
   },
   'iatf-16949': {
     t: 'IATF 16949',
@@ -175,6 +202,33 @@ export default function ServiceDetail() {
               ))}
             </div>
           </Reveal>
+
+          {svc.methodologyDetails && svc.trainingPillars && (
+            <Reveal delay={150}>
+              <div className="pt-10 border-t border-border">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                  Metodologia de Implementação
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-12">
+                  {svc.methodologyDetails}
+                </p>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                  Processos de Treinamento
+                </h3>
+                <ul className="grid sm:grid-cols-2 gap-4">
+                  {svc.trainingPillars.map((tp: string, idx: number) => (
+                    <li
+                      key={idx}
+                      className="flex items-center gap-3 bg-secondary p-4 rounded-xl border border-border"
+                    >
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <span className="text-foreground font-bold">{tp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          )}
 
           <Reveal delay={200} className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center">
