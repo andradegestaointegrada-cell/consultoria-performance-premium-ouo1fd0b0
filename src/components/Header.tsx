@@ -52,18 +52,31 @@ export function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                'text-sm font-bold uppercase tracking-widest transition-colors duration-300 hover:text-primary',
-                location.pathname === link.path ? 'text-primary' : 'text-foreground/80',
-              )}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              link.path === '/'
+                ? location.pathname === '/'
+                : location.pathname.startsWith(link.path)
+
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-primary relative group py-2',
+                  isActive ? 'text-primary' : 'text-foreground/80',
+                )}
+              >
+                {link.name}
+                <span
+                  className={cn(
+                    'absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300',
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full',
+                  )}
+                />
+              </Link>
+            )
+          })}
           <ThemeToggle />
           <Button
             asChild
@@ -88,18 +101,25 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-card border-l-border">
               <nav className="flex flex-col gap-6 mt-12">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={cn(
-                      'text-lg font-bold uppercase tracking-wider transition-colors duration-300 hover:text-primary',
-                      location.pathname === link.path ? 'text-primary' : 'text-foreground/80',
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  const isActive =
+                    link.path === '/'
+                      ? location.pathname === '/'
+                      : location.pathname.startsWith(link.path)
+
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className={cn(
+                        'text-lg font-bold uppercase tracking-wider transition-colors duration-300 hover:text-primary',
+                        isActive ? 'text-primary' : 'text-foreground/80',
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                })}
                 <Button
                   asChild
                   className="w-full mt-4 uppercase tracking-wider font-bold bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all"

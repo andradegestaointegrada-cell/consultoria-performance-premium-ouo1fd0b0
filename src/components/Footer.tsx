@@ -11,12 +11,16 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src={logoLight} alt="Andrade Gestão Integrada" className="h-12 dark:hidden" />
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <img
+                src={logoLight}
+                alt="Andrade Gestão Integrada"
+                className="h-12 dark:hidden group-hover:opacity-80 transition-opacity"
+              />
               <img
                 src={logoDark}
                 alt="Andrade Gestão Integrada"
-                className="h-12 hidden dark:block rounded-md overflow-hidden"
+                className="h-12 hidden dark:block rounded-md overflow-hidden group-hover:opacity-80 transition-opacity"
               />
             </Link>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
@@ -26,19 +30,19 @@ export function Footer() {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-accent hover:border-accent transition-all"
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -51,22 +55,22 @@ export function Footer() {
             </h4>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
-                <Link to="/sobre" className="hover:text-accent transition-colors">
+                <Link to="/sobre" className="hover:text-primary transition-colors duration-300">
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link to="/servicos" className="hover:text-accent transition-colors">
+                <Link to="/servicos" className="hover:text-primary transition-colors duration-300">
                   Nossos Serviços
                 </Link>
               </li>
               <li>
-                <Link to="/insights" className="hover:text-accent transition-colors">
+                <Link to="/insights" className="hover:text-primary transition-colors duration-300">
                   Insights & Blog
                 </Link>
               </li>
               <li>
-                <Link to="/contato" className="hover:text-accent transition-colors">
+                <Link to="/contato" className="hover:text-primary transition-colors duration-300">
                   Contato
                 </Link>
               </li>
@@ -79,17 +83,26 @@ export function Footer() {
             </h4>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
-                <Link to="/termos-de-uso" className="hover:text-accent transition-colors">
+                <Link
+                  to="/termos-de-uso"
+                  className="hover:text-primary transition-colors duration-300"
+                >
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <Link to="/politica-de-privacidade" className="hover:text-accent transition-colors">
+                <Link
+                  to="/politica-de-privacidade"
+                  className="hover:text-primary transition-colors duration-300"
+                >
                   Política de Privacidade
                 </Link>
               </li>
               <li>
-                <Link to="/portal-lgpd" className="hover:text-accent transition-colors">
+                <Link
+                  to="/portal-lgpd"
+                  className="hover:text-primary transition-colors duration-300"
+                >
                   Portal de LGPD
                 </Link>
               </li>
@@ -107,11 +120,11 @@ export function Footer() {
               <Input
                 type="email"
                 placeholder="Seu e-mail"
-                className="bg-card border-border text-foreground h-12"
+                className="bg-card border-border text-foreground h-12 focus-visible:ring-primary"
               />
               <Button
                 type="submit"
-                className="h-12 uppercase font-bold tracking-widest bg-accent text-accent-foreground hover:bg-accent/80"
+                className="h-12 uppercase font-bold tracking-widest bg-primary text-primary-foreground hover:bg-primary/80 transition-colors"
               >
                 Assinar
               </Button>
@@ -121,7 +134,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-8 text-center text-sm font-bold text-muted-foreground uppercase tracking-wider flex flex-col md:flex-row justify-between items-center">
           <p>© {new Date().getFullYear()} Andrade Gestão Integrada.</p>
-          <p className="mt-4 md:mt-0 text-accent">Desenvolvido com precisão.</p>
+          <p className="mt-4 md:mt-0 text-primary">Desenvolvido com precisão.</p>
         </div>
       </div>
     </footer>
