@@ -86,13 +86,13 @@ export default function Methodology() {
           </div>
 
           <Reveal delay={400}>
-            <div className="mt-20 p-10 bg-secondary rounded-2xl border border-border text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://img.usecurling.com/p/1920/600?q=pattern&color=black')] opacity-5 mix-blend-overlay pointer-events-none"></div>
+            <div className="mt-20 p-10 bg-secondary rounded-2xl border border-border text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden transition-all duration-500 hover:shadow-glow hover:border-primary/50 hover:-translate-y-1 group cursor-default">
+              <div className="absolute inset-0 bg-[url('https://img.usecurling.com/p/1920/600?q=pattern&color=black')] opacity-5 mix-blend-overlay pointer-events-none group-hover:opacity-10 transition-opacity duration-500"></div>
               <div className="relative z-10">
-                <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-4">
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary uppercase tracking-wide mb-4 drop-shadow-sm transition-colors duration-300">
                   Excelência Operacional Contínua
                 </h3>
-                <p className="text-muted-foreground text-lg font-sans">
+                <p className="text-muted-foreground text-lg font-sans transition-colors duration-300 group-hover:text-foreground/80">
                   Todos os treinamentos são documentados e ministrados por especialistas com
                   vivência prática de mercado, assegurando que a teoria se transforme em resultados
                   no dia a dia da sua organização.
