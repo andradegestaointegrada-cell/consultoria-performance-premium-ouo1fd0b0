@@ -16,14 +16,18 @@ const team = [
 export default function About() {
   return (
     <div className="pt-20">
-      <section className="py-24 bg-card border-b border-border">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+      <section
+        className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
+        style={{ backgroundImage: `url('https://i.postimg.cc/mgRhjk3p/SOBRE_BANNER.jpg')` }}
+      >
+        <div className="absolute inset-0 bg-[#0D0D0D]/60" />
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
               Andrade{' '}
               <em className="font-heading italic font-normal text-primary">Gestão Integrada</em>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
               Especialistas em sistemas de gestão com foco absoluto em resultados. Nossa consultoria
               se destaca pela flexibilidade operacional, adaptando-se integralmente à dinâmica e aos
               prazos da sua empresa, oferecendo desde o gerenciamento completo até o suporte técnico
@@ -60,13 +64,13 @@ export default function About() {
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
                 Flexibilidade e Adaptação
               </h2>
-              <p className="text-muted-foreground text-lg mb-6">
+              <p className="text-muted-foreground text-lg mb-6 font-sans">
                 Entendemos que cada organização possui seu próprio ritmo. Nosso diferencial é a
                 flexibilidade operacional: atuamos conforme as suas necessidades, seja assumindo a
                 gestão completa dos sistemas ou atuando de forma colaborativa com a sua equipe
                 técnica.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-4 font-sans">
                 {[
                   'Amplo Domínio: ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ',
                   'Ajuste de Processos com Foco na Realidade do Cliente',
@@ -91,7 +95,7 @@ export default function About() {
               <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
                 Nosso Time
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground font-sans">
                 Especialistas com vivência técnica e foco em resultados operacionais.
               </p>
             </div>
@@ -110,7 +114,7 @@ export default function About() {
                   <h3 className="text-2xl font-heading font-bold text-foreground mb-1 uppercase tracking-wide">
                     {member.name}
                   </h3>
-                  <p className="text-primary text-sm font-bold uppercase tracking-wider">
+                  <p className="text-primary text-sm font-bold uppercase tracking-wider font-sans">
                     {member.role}
                   </p>
                 </div>

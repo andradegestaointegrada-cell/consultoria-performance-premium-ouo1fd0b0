@@ -5,29 +5,28 @@ import { ContactForm } from '@/components/ContactForm'
 export default function Contact() {
   return (
     <div className="pt-20">
-      <section className="py-24 bg-secondary border-b border-border text-center">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <section
+        className="py-32 relative bg-fixed bg-cover bg-center border-b border-border text-center"
+        style={{ backgroundImage: `url('https://i.postimg.cc/HWykwTg6/CONTATO.png')` }}
+      >
+        <div className="absolute inset-0 bg-[#091D39]/60" />
+        <div className="container relative z-10 mx-auto px-4 max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-foreground">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-white drop-shadow-lg">
               Inicie a{' '}
               <b className="text-primary font-extrabold italic font-heading">TRANSFORMAÇÃO</b>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed font-sans">
+            <p className="text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
               Fale com nossos especialistas para elevar a performance da sua empresa.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section
-        className="py-24 relative bg-cover bg-center"
-        style={{ backgroundImage: `url('https://i.postimg.cc/HWykwTg6/CONTATO.png')` }}
-      >
-        <div className="absolute inset-0 bg-background/90 md:bg-background/80 backdrop-blur-[2px]" />
-
+      <section className="py-24 relative bg-background">
         <div className="container relative z-10 px-4 max-w-6xl grid md:grid-cols-2 gap-16">
           <Reveal>
-            <div className="bg-card/95 backdrop-blur-md p-8 rounded-2xl border border-border shadow-xl hover:border-primary/50 transition-colors duration-500">
+            <div className="bg-card p-8 rounded-2xl border border-border shadow-xl hover:border-primary/50 transition-colors duration-500">
               <h2 className="text-2xl font-heading font-bold uppercase tracking-wide mb-6 text-foreground">
                 Envie uma mensagem
               </h2>
@@ -36,7 +35,7 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={200} className="space-y-12">
-            <div className="bg-card/90 backdrop-blur-sm p-8 rounded-2xl border border-border shadow-lg">
+            <div className="bg-card p-8 rounded-2xl border border-border shadow-lg">
               <h3 className="text-2xl font-heading font-bold mb-8 border-b border-border pb-4 uppercase tracking-wide text-foreground">
                 Contato Andrade Gestão Integrada
               </h3>
@@ -49,7 +48,7 @@ export default function Contact() {
                     <p className="font-bold text-foreground uppercase tracking-wide font-sans">
                       Sede Operacional
                     </p>
-                    <p className="text-sm text-foreground/80 mt-1 font-sans">
+                    <p className="text-sm text-muted-foreground mt-1 font-sans">
                       Rua Olavo Gonçalves, 330
                       <br />
                       São Bernardo do Campo - SP

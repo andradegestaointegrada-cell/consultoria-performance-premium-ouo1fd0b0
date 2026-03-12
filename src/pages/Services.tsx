@@ -93,7 +93,7 @@ export default function Services() {
                       <p className="text-muted-foreground text-sm flex-grow font-sans">
                         {svc.desc}
                       </p>
-                      <div className="mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider">
+                      <div className="mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider font-sans">
                         Ver Mais{' '}
                         <span className="ml-2 group-hover:translate-x-2 transition-transform">
                           →

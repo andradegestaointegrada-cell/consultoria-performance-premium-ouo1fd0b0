@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 
 export function Hero() {
-  const bgImage = 'https://i.postimg.cc/BnTRBwY3/home-page.jpg'
+  const bgImage = 'https://i.postimg.cc/0QfzKJB6/home-page.jpg'
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group">
@@ -12,7 +12,7 @@ export function Hero() {
         <img
           src={bgImage}
           alt="Performance Background"
-          className="w-full h-full object-cover object-[center_30%] md:object-center opacity-80 transition-opacity duration-700"
+          className="w-full h-full object-cover object-[center_30%] md:object-center opacity-80 grayscale contrast-125 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/90 via-[#0D0D0D]/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -38,7 +38,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed font-sans">
+            <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
               Consultoria especializada em normas ISO para empresas que buscam a LIDERANÇA no
               mercado. Metodologia precisa, resultados mensuráveis.
             </p>
@@ -48,7 +48,7 @@ export function Hero() {
             <Button
               size="lg"
               asChild
-              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_4px_14px_0_rgba(207,174,112,0.39)]"
             >
               <Link to="/contato">
                 Inicie sua Jornada <ArrowRight className="ml-2 h-5 w-5" />

@@ -31,10 +31,10 @@ export default function Cases() {
   return (
     <div className="pt-20">
       <section
-        className="py-32 relative bg-cover bg-center border-b border-border"
+        className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
         style={{ backgroundImage: `url('https://i.postimg.cc/JnGZc03Z/CASES.jpg')` }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-[#091D39]/60" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
@@ -60,7 +60,7 @@ export default function Cases() {
                       alt={c.title}
                       className="w-full h-full object-cover object-center transition-all duration-700 hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/80 via-[#0D0D0D]/20 to-transparent pointer-events-none" />
                     <div className="absolute bottom-6 left-6 right-6">
                       <h2 className="text-2xl md:text-3xl font-heading font-bold text-white uppercase tracking-wide drop-shadow-md">
                         Setor: <span className="text-primary">{c.title}</span>
