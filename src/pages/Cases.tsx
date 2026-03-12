@@ -30,13 +30,17 @@ export default function Cases() {
 
   return (
     <div className="pt-20">
-      <section className="py-24 bg-card border-b border-border">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+      <section
+        className="py-32 relative bg-cover bg-center border-b border-border"
+        style={{ backgroundImage: `url('https://i.postimg.cc/JnGZc03Z/CASES.jpg')` }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
               Cases de <em className="font-heading italic font-normal text-primary">Sucesso</em>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
               Resultados reais e mensuráveis conquistados através de nossa metodologia de excelência
               e foco em performance.
             </p>
@@ -54,9 +58,9 @@ export default function Cases() {
                     <img
                       src={c.image}
                       alt={c.title}
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      className="w-full h-full object-cover object-center transition-all duration-700 hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                     <div className="absolute bottom-6 left-6 right-6">
                       <h2 className="text-2xl md:text-3xl font-heading font-bold text-white uppercase tracking-wide drop-shadow-md">
                         Setor: <span className="text-primary">{c.title}</span>
@@ -69,32 +73,32 @@ export default function Cases() {
                   <Card className="bg-card border-border shadow-xl h-full border-t-4 border-t-primary">
                     <CardContent className="p-8 space-y-6">
                       <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest">
+                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
                           <Briefcase className="h-5 w-5" />
                           <span>Escopo</span>
                         </div>
-                        <p className="text-foreground font-semibold text-lg">{c.scope}</p>
+                        <p className="text-foreground font-semibold text-lg font-sans">{c.scope}</p>
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest">
+                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
                           <CheckCircle className="h-5 w-5" />
                           <span>Detalhes</span>
                         </div>
-                        <p className="text-muted-foreground">{c.details}</p>
+                        <p className="text-muted-foreground font-sans">{c.details}</p>
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest">
+                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
                           <BarChart className="h-5 w-5" />
                           <span>Resultado</span>
                         </div>
-                        <p className="text-muted-foreground">{c.results}</p>
+                        <p className="text-muted-foreground font-sans">{c.results}</p>
                       </div>
 
                       <div className="bg-secondary p-6 rounded-xl border-l-4 border-primary relative mt-8">
                         <Quote className="absolute top-4 right-4 h-8 w-8 text-primary/20" />
-                        <p className="text-foreground italic relative z-10 leading-relaxed">
+                        <p className="text-foreground italic relative z-10 leading-relaxed font-sans">
                           "{c.testimonial}"
                         </p>
                       </div>

@@ -56,14 +56,18 @@ const allServices = [
 export default function Services() {
   return (
     <div className="pt-20">
-      <section className="py-24 bg-secondary border-b border-border">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
+      <section
+        className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
+        style={{ backgroundImage: `url('https://i.postimg.cc/63XP2VLR/SERVICOS-PAGE.png')` }}
+      >
+        <div className="absolute inset-0 bg-[#0D0D0D]/60" />
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
               Especialidades e{' '}
               <em className="font-heading italic font-normal text-primary">Certificações</em>
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-white/90 drop-shadow-md font-sans">
               Com flexibilidade operacional, adaptamos nossas soluções em sistemas de gestão para
               oferecer desde suporte técnico colaborativo até o gerenciamento completo.
             </p>
@@ -71,7 +75,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {allServices.map((svc, i) => (
@@ -86,7 +90,9 @@ export default function Services() {
                       <h3 className="text-2xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide">
                         {svc.name}
                       </h3>
-                      <p className="text-muted-foreground text-sm flex-grow">{svc.desc}</p>
+                      <p className="text-muted-foreground text-sm flex-grow font-sans">
+                        {svc.desc}
+                      </p>
                       <div className="mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider">
                         Ver Mais{' '}
                         <span className="ml-2 group-hover:translate-x-2 transition-transform">

@@ -43,14 +43,18 @@ export default function Methodology() {
 
   return (
     <div className="pt-20">
-      <section className="py-24 bg-card border-b border-border">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+      <section
+        className="py-32 relative bg-cover bg-center border-b border-border"
+        style={{ backgroundImage: `url('https://i.postimg.cc/3wVpJ7pq/M451945treinamento.webp')` }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
               Metodologia de{' '}
               <em className="font-heading italic font-normal text-primary">Treinamento</em>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
               Nossos pilares de capacitação técnica são estruturados para transferir conhecimento
               profundo à sua equipe, garantindo autonomia, segurança e aderência contínua às normas
               internacionais.
@@ -72,7 +76,9 @@ export default function Methodology() {
                     <h3 className="text-xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide leading-tight">
                       {pillar.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed flex-grow">{pillar.desc}</p>
+                    <p className="text-muted-foreground leading-relaxed flex-grow font-sans">
+                      {pillar.desc}
+                    </p>
                   </CardContent>
                 </Card>
               </Reveal>
@@ -86,7 +92,7 @@ export default function Methodology() {
                 <h3 className="text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-4">
                   Excelência Operacional Contínua
                 </h3>
-                <p className="text-muted-foreground text-lg">
+                <p className="text-muted-foreground text-lg font-sans">
                   Todos os treinamentos são documentados e ministrados por especialistas com
                   vivência prática de mercado, assegurando que a teoria se transforme em resultados
                   no dia a dia da sua organização.
