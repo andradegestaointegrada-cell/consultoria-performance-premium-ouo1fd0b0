@@ -39,20 +39,23 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 h-28 flex items-center justify-between">
-        <Link to="/" className="flex flex-col justify-center group py-2 flex-1 min-w-0 mr-4">
-          <div className="flex items-center gap-3">
+        <Link
+          to="/"
+          className="flex flex-col items-start justify-center group py-2 flex-1 min-w-0 mr-4"
+        >
+          <div className="flex items-center">
             <img
               src={logoLight}
               alt="Andrade Gestão Integrada"
-              className="h-10 md:h-14 dark:hidden transition-all duration-300 shrink-0 object-contain"
+              className="h-9 sm:h-12 lg:h-14 dark:hidden transition-all duration-300 shrink-0 object-contain object-left"
             />
             <img
               src={logoDark}
               alt="Andrade Gestão Integrada"
-              className="h-10 md:h-14 hidden dark:block rounded-md overflow-hidden transition-all duration-300 shrink-0 object-contain"
+              className="h-9 sm:h-12 lg:h-14 hidden dark:block rounded-md overflow-hidden transition-all duration-300 shrink-0 object-contain object-left"
             />
           </div>
-          <span className="text-[8px] sm:text-[10px] md:text-[11px] text-muted-foreground uppercase tracking-wider md:tracking-widest font-bold font-heading mt-1 opacity-80 group-hover:opacity-100 transition-opacity whitespace-normal break-words leading-tight max-w-[280px]">
+          <span className="text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] font-bold font-sans mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity whitespace-normal leading-tight pl-0.5">
             Estratégia, Conformidade e Performance
           </span>
         </Link>

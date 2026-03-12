@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 
 export function Hero() {
-  const bgImage = 'https://i.postimg.cc/0QfzKJB6/home-page.jpg'
+  const bgImage = 'https://i.postimg.cc/15Q4yB7x/home-page.jpg'
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group">

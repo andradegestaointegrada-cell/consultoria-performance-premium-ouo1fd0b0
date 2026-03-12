@@ -9,7 +9,7 @@ export default function Contact() {
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border text-center"
         style={{ backgroundImage: `url('https://i.postimg.cc/HWykwTg6/CONTATO.png')` }}
       >
-        <div className="absolute inset-0 bg-[#091D39]/60" />
+        <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="container relative z-10 mx-auto px-4 max-w-4xl">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-white drop-shadow-lg">

@@ -35,7 +35,7 @@ export default function Insights() {
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
         style={{ backgroundImage: `url('https://i.postimg.cc/Y2vzQnbp/BLOG_PAGE.jpg')` }}
       >
-        <div className="absolute inset-0 bg-[#0D0D0D]/60" />
+        <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <Reveal>
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
@@ -63,7 +63,7 @@ export default function Insights() {
                 <img
                   src="https://i.postimg.cc/fWxG1CV5/PIT-STOP-01.jpg"
                   alt="Pitstop"
-                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
                 <div className="relative z-10 p-6 md:p-10 max-w-4xl">
@@ -96,7 +96,7 @@ export default function Insights() {
                     <img
                       src={article.img}
                       alt={article.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
                   </div>
