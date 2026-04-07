@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/ui/reveal'
+import { Linkedin } from 'lucide-react'
 
 const team = [
   {
@@ -6,6 +7,7 @@ const team = [
     alt: 'Consultor Alexandre Andrade',
     role: 'Diretor e Consultor Principal',
     img: 'https://i.postimg.cc/nrGfbVJS/CONSULTOR-ALEXANDRE-ANDRADE-1.png',
+    linkedin: 'https://www.linkedin.com/in/alexandreandradegestaodeprojetos',
   },
   {
     name: 'Thatiana Pidlepa Andrade',
@@ -119,6 +121,20 @@ export default function About() {
                   <p className="text-primary text-sm font-bold uppercase tracking-wider font-sans">
                     {member.role}
                   </p>
+                  {member.linkedin && (
+                    <div className="mt-5 flex justify-center">
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+                        title={`LinkedIn - ${member.name}`}
+                        aria-label={`LinkedIn - ${member.name}`}
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
