@@ -127,6 +127,7 @@ export default function About() {
                         href={member.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center justify-center p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
                         title={`LinkedIn - ${member.name}`}
                         aria-label={`LinkedIn - ${member.name}`}
