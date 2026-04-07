@@ -31,14 +31,14 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={100}>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase break-words">
               Estratégia, Conformidade e{' '}
               <em className="font-heading italic text-primary font-normal">Performance</em>.
             </h1>
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
+            <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
               Consultoria especializada em normas ISO para empresas que buscam a LIDERANÇA no
               mercado. Metodologia precisa, resultados mensuráveis.
             </p>
@@ -48,19 +48,21 @@ export function Hero() {
             <Button
               size="lg"
               asChild
-              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_4px_14px_0_rgba(207,174,112,0.39)]"
+              className="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_4px_14px_0_rgba(207,174,112,0.39)] w-full sm:w-auto text-center whitespace-normal"
             >
-              <Link to="/contato">
-                Inicie sua Jornada <ArrowRight className="ml-2 h-5 w-5" />
+              <Link to="/contato" className="flex items-center justify-center">
+                Inicie sua Jornada <ArrowRight className="ml-2 h-5 w-5 shrink-0" />
               </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
               asChild
-              className="h-14 px-8 text-base rounded-full uppercase tracking-wider font-bold border-white/20 text-white hover:bg-white hover:text-black"
+              className="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold border-white/20 text-white hover:bg-white hover:text-black w-full sm:w-auto text-center whitespace-normal"
             >
-              <Link to="/servicos">Conheça Nossas Soluções</Link>
+              <Link to="/servicos" className="flex items-center justify-center">
+                Conheça Nossas Soluções
+              </Link>
             </Button>
           </Reveal>
         </div>

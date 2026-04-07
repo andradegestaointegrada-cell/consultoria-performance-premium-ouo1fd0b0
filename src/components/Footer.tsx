@@ -58,10 +58,16 @@ export function Footer() {
                 Estratégia, Conformidade e Performance
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
+            <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
               Estruturamos sistemas de gestão que alinham estratégia organizacional, garantem
               conformidade normativa e impulsionam a performance das empresas.
             </p>
+            <div className="mb-8">
+              <p className="text-sm font-bold text-foreground uppercase tracking-wider mb-2">
+                Sede Operacional
+              </p>
+              <p className="text-sm text-muted-foreground">Rua Paes Leme 215, Conj 1713</p>
+            </div>
             <div className="flex gap-4">
               <a
                 href="#"

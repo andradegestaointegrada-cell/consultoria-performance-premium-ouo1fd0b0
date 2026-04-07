@@ -38,10 +38,10 @@ export default function Insights() {
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               Blog Técnico & Inteligência
             </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md font-sans">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md font-sans">
               Artigos, análises e tendências sobre alta performance empresarial e certificações
               internacionais.
             </p>

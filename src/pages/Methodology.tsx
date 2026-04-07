@@ -50,11 +50,11 @@ export default function Methodology() {
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               Metodologia de{' '}
               <em className="font-heading italic font-normal text-primary">Treinamento</em>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
               Nossos pilares de capacitação técnica são estruturados para transferir conhecimento
               profundo à sua equipe, garantindo autonomia, segurança e aderência contínua às normas
               internacionais.
@@ -86,13 +86,14 @@ export default function Methodology() {
           </div>
 
           <Reveal delay={400}>
-            <div className="mt-20 p-10 bg-secondary rounded-2xl border border-border text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden transition-all duration-500 hover:shadow-glow hover:border-primary/50 hover:-translate-y-1 group cursor-default">
+            <div className="mt-20 p-8 md:p-12 bg-card rounded-2xl border border-border text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/50 hover:-translate-y-2 group cursor-pointer">
+              <div className="absolute inset-0 bg-secondary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               <div className="absolute inset-0 bg-[url('https://img.usecurling.com/p/1920/600?q=pattern&color=black')] opacity-5 mix-blend-overlay pointer-events-none group-hover:opacity-10 transition-opacity duration-500"></div>
               <div className="relative z-10">
-                <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary uppercase tracking-wide mb-4 drop-shadow-sm transition-colors duration-300">
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary uppercase tracking-wide mb-4 drop-shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all duration-500 group-hover:drop-shadow-[0_0_25px_rgba(207,174,112,0.7)] group-hover:scale-[1.02]">
                   Excelência Operacional Contínua
                 </h3>
-                <p className="text-muted-foreground text-lg font-sans transition-colors duration-300 group-hover:text-foreground/80">
+                <p className="text-muted-foreground text-base sm:text-lg font-sans transition-colors duration-300 group-hover:text-foreground">
                   Todos os treinamentos são documentados e ministrados por especialistas com
                   vivência prática de mercado, assegurando que a teoria se transforme em resultados
                   no dia a dia da sua organização.

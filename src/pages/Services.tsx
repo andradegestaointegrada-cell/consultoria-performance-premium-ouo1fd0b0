@@ -63,11 +63,11 @@ export default function Services() {
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               Especialidades e{' '}
               <em className="font-heading italic font-normal text-primary">Certificações</em>
             </h1>
-            <p className="text-xl text-white/90 drop-shadow-md font-sans">
+            <p className="text-lg sm:text-xl text-white/90 drop-shadow-md font-sans">
               Com flexibilidade operacional, adaptamos nossas soluções em sistemas de gestão para
               oferecer desde suporte técnico colaborativo até o gerenciamento completo.
             </p>

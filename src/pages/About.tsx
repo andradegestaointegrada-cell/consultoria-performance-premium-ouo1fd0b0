@@ -23,11 +23,11 @@ export default function About() {
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               Andrade{' '}
               <em className="font-heading italic font-normal text-primary">Gestão Integrada</em>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
               Especialistas em sistemas de gestão com foco absoluto em resultados. Nossa consultoria
               se destaca pela flexibilidade operacional, adaptando-se integralmente à dinâmica e aos
               prazos da sua empresa, oferecendo desde o gerenciamento completo até o suporte técnico

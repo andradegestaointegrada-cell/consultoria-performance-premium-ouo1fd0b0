@@ -12,11 +12,11 @@ export default function Contact() {
         <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="container relative z-10 mx-auto px-4 max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-white drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-white drop-shadow-lg break-words">
               Inicie a{' '}
               <b className="text-primary font-extrabold italic font-heading">TRANSFORMAÇÃO</b>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
               Fale com nossos especialistas para elevar a performance da sua empresa.
             </p>
           </Reveal>
@@ -49,9 +49,7 @@ export default function Contact() {
                       Sede Operacional
                     </p>
                     <p className="text-sm text-muted-foreground mt-1 font-sans">
-                      Rua Olavo Gonçalves, 330
-                      <br />
-                      São Bernardo do Campo - SP
+                      Rua Paes Leme 215, Conj 1713
                     </p>
                   </div>
                 </div>
@@ -82,11 +80,11 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="h-56 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
+            <div className="h-64 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
               <img
-                src="https://img.usecurling.com/p/800/400?q=map&color=black"
-                alt="Mapa"
-                className="w-full h-full object-cover object-center opacity-80 grayscale mix-blend-multiply dark:mix-blend-lighten transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+                src="https://drive.google.com/uc?export=view&id=15NbdWTHiqSJYBmmZm6cnXEdJRJI9KYqm"
+                alt="Sede Operacional"
+                className="w-full h-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
             </div>
           </Reveal>

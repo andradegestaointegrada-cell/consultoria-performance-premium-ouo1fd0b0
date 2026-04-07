@@ -37,10 +37,10 @@ export default function Cases() {
         <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
               Cases de <em className="font-heading italic font-normal text-primary">Sucesso</em>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
               Resultados reais e mensuráveis conquistados através de nossa metodologia de excelência
               e foco em performance.
             </p>
