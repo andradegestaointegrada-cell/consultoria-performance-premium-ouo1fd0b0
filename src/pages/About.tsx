@@ -3,13 +3,15 @@ import { Reveal } from '@/components/ui/reveal'
 const team = [
   {
     name: 'Alexandre Andrade',
+    alt: 'Consultor Alexandre Andrade',
     role: 'Diretor e Consultor Principal',
-    img: 'https://i.postimg.cc/sX63ZmpV/CONSULTOR_ALEXANDRE_ANDRADE_1.png',
+    img: 'https://i.postimg.cc/nrGfbVJS/CONSULTOR-ALEXANDRE-ANDRADE-1.png',
   },
   {
     name: 'Thatiana Pidlepa Andrade',
+    alt: 'Auditora Thatiana Pidlepa Andrade',
     role: 'Auditora',
-    img: 'https://i.postimg.cc/SsTmzdWq/CONSULTORA_THATIANA_PIDLEPA_ANDRADE_1.png',
+    img: 'https://i.postimg.cc/pL6bt1wX/CONSULTORA-THATIANA-PIDLEPA-ANDRADE-1.png',
   },
 ]
 
@@ -107,7 +109,7 @@ export default function About() {
                   <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-border mb-6 group-hover:border-primary transition-colors duration-300">
                     <img
                       src={member.img}
-                      alt={member.name}
+                      alt={member.alt || member.name}
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 object-top"
                     />
                   </div>

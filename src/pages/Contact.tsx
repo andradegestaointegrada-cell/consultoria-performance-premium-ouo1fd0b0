@@ -82,8 +82,8 @@ export default function Contact() {
 
             <div className="h-64 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
               <img
-                src="https://drive.google.com/uc?export=view&id=15NbdWTHiqSJYBmmZm6cnXEdJRJI9KYqm"
-                alt="Sede Operacional"
+                src="https://i.postimg.cc/3x66q0Gv/MATRIZ-AGI-PAES-LEME-215-CJ1713.png"
+                alt="Matriz AGI Paes Leme"
                 className="w-full h-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
             </div>
