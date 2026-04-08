@@ -48,16 +48,22 @@ export function NewsletterManager() {
         if (stored) {
           const parsed = JSON.parse(stored)
           if (parsed.subscribers && parsed.subscribers.length > 0) {
+            const existing = await getSubscribers()
+            const existingEmails = new Set(existing.map((s) => s.email))
+
             for (const sub of parsed.subscribers) {
-              try {
-                await createSubscriber({
-                  email: sub.email,
-                  source: sub.source,
-                  lgpdAgreed: sub.lgpdAgreed,
-                  active: true,
-                })
-              } catch (err) {
-                // ignore duplicates silently
+              if (!existingEmails.has(sub.email)) {
+                try {
+                  await createSubscriber({
+                    email: sub.email,
+                    source: sub.source,
+                    lgpdAgreed: sub.lgpdAgreed,
+                    active: true,
+                  })
+                  existingEmails.add(sub.email)
+                } catch (err) {
+                  // ignore duplicates silently
+                }
               }
             }
           }

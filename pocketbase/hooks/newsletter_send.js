@@ -76,7 +76,7 @@ routerAdd(
           } else {
             let errorMsg = 'Unknown error'
             try {
-              errorMsg = JSON.parse(res.body).message || res.statusCode.toString()
+              errorMsg = res.body ? String(res.body) : res.statusCode.toString()
             } catch (err) {}
 
             batchSubs.forEach((s) => {

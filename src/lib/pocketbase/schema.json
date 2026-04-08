@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T15:07:32.350Z",
+  "generatedAt": "2026-04-08T15:24:00.770Z",
   "collections": [
     {
       "name": "users",
@@ -94,7 +94,7 @@
           "autodateTriggers": ["onCreate", "onUpdate"]
         }
       ],
-      "indexes": ["CREATE UNIQUE INDEX idx_subscribers_email ON subscribers (email)"]
+      "indexes": ["CREATE UNIQUE INDEX `idx_subscribers_email` ON `subscribers` (email)"]
     },
     {
       "name": "newsletters",
@@ -199,7 +199,7 @@
           "autodateTriggers": ["onCreate", "onUpdate"]
         }
       ],
-      "indexes": []
+      "indexes": ["CREATE INDEX `idx_delivery_logs_newsletter` ON `delivery_logs` (newsletter_id)"]
     }
   ]
 }
