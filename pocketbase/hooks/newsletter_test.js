@@ -44,7 +44,15 @@ routerAdd(
         })
 
         if (res.statusCode >= 200 && res.statusCode < 300) {
+          let resData = {}
+          try {
+            resData = JSON.parse(res.body)
+          } catch (err) {}
+
           log.set('status', 'delivered')
+          if (resData && resData.id) {
+            log.set('error_message', `Resend ID: ${resData.id}`)
+          }
           $app.save(log)
 
           nlRecord.set('status', 'sent')

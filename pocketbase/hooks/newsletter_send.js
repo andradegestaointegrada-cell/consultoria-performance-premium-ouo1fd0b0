@@ -49,11 +49,27 @@ routerAdd(
           })
 
           if (res.statusCode >= 200 && res.statusCode < 300) {
-            batchSubs.forEach((s) => {
+            let resData = {}
+            try {
+              resData = JSON.parse(res.body)
+            } catch (e) {}
+
+            batchSubs.forEach((s, idx) => {
               const log = new Record(logsCollection)
               log.set('newsletter_id', nlRecord.id)
               log.set('recipient_email', s.get('email'))
-              log.set('status', 'delivered')
+
+              if (resData && resData.data && resData.data[idx]) {
+                if (resData.data[idx].error) {
+                  log.set('status', 'failed')
+                  log.set('error_message', resData.data[idx].error.message || 'Error')
+                } else {
+                  log.set('status', 'delivered')
+                  log.set('error_message', `Resend ID: ${resData.data[idx].id}`)
+                }
+              } else {
+                log.set('status', 'delivered')
+              }
               $app.save(log)
             })
             successCount += batchSubs.length
