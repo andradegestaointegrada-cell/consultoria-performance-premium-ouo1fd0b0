@@ -70,19 +70,25 @@ export function Footer() {
             </div>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/in/alexandreandradegestaodeprojetos"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
                 href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Instagram className="h-5 w-5" />

@@ -144,6 +144,25 @@ export function ContactForm() {
       }
 
       await sendNotifications(data)
+
+      try {
+        await fetch('/api/collections/contact_leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            subject: data.service,
+            message: data.message,
+            created_at: new Date().toISOString(),
+          }),
+        })
+      } catch (err) {
+        console.error('Falha ao salvar lead na collection:', err)
+      }
+
       toast({
         title: 'Mensagem enviada com sucesso!',
         description: 'Nossa equipe foi notificada e entrará em contato em breve.',
