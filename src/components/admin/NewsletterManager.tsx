@@ -26,7 +26,7 @@ export function NewsletterManager() {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [subject, setSubject] = useState('')
   const [content, setContent] = useState('')
-  const [testEmail, setTestEmail] = useState('')
+
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
@@ -74,11 +74,11 @@ export function NewsletterManager() {
   useRealtime('newsletters', loadData)
 
   const handleTestSend = async () => {
-    if (!testEmail || !subject || !content) return
+    if (!subject || !content) return
     setLoading(true)
     try {
-      await sendTestNewsletter(testEmail, subject, content)
-      toast({ title: 'Email de Teste Enviado' })
+      await sendTestNewsletter('alexandre@andradegestaointegrada.com.br', subject, content)
+      toast({ title: 'Email de Teste Enviado para Alexandre' })
     } catch (e: any) {
       toast({
         title: 'Erro',
@@ -174,20 +174,13 @@ export function NewsletterManager() {
               onChange={(e) => setContent(e.target.value)}
             />
             <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border mt-2">
-              <Input
-                placeholder="E-mail de teste"
-                value={testEmail}
-                onChange={(e) => setTestEmail(e.target.value)}
-                className="bg-background border-border flex-1 h-12"
-                type="email"
-              />
               <Button
                 onClick={handleTestSend}
-                disabled={loading || !testEmail || !subject || !content}
+                disabled={loading || !subject || !content}
                 variant="outline"
-                className="whitespace-nowrap h-12 uppercase tracking-wider font-bold text-xs"
+                className="w-full h-12 uppercase tracking-wider font-bold text-xs"
               >
-                Testar Envio
+                Testar Envio (alexandre@andradegestaointegrada.com.br)
               </Button>
             </div>
             <Button

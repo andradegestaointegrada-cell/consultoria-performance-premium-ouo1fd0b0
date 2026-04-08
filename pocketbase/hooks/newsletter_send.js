@@ -8,8 +8,6 @@ routerAdd(
     }
 
     const resendKey = $secrets.get('RESEND_API_KEY') || $os.getenv('VITE_RESEND_API_KEY')
-    const resendDomain =
-      $secrets.get('RESEND_DOMAIN') || $os.getenv('VITE_RESEND_DOMAIN') || 'andradegestao.com.br'
 
     const subs = $app.findRecordsByFilter('subscribers', 'active = true', '', 0, 0)
 
@@ -26,77 +24,75 @@ routerAdd(
 
     const logsCollection = $app.findCollectionByNameOrId('delivery_logs')
 
-    if (subs.length > 0 && resendKey && resendKey !== 're_valid_api_key_mock_999') {
-      const emails = subs.map((s) => s.get('email'))
+    if (subs.length > 0 && resendKey) {
+      const BATCH_SIZE = 100
 
-      const payload = {
-        from: `Newsletter Insights <newsletter@${resendDomain}>`,
-        to: emails,
-        subject: body.subject,
-        html: body.content,
-      }
+      for (let i = 0; i < subs.length; i += BATCH_SIZE) {
+        const batchSubs = subs.slice(i, i + BATCH_SIZE)
+        const payload = batchSubs.map((s) => ({
+          from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
+          to: [s.get('email')],
+          subject: body.subject,
+          html: body.content,
+        }))
 
-      try {
-        const res = $http.send({
-          url: 'https://api.resend.com/emails',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${resendKey}`,
-          },
-          body: JSON.stringify(payload),
-          timeout: 30,
-        })
-
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          subs.forEach((s) => {
-            const log = new Record(logsCollection)
-            log.set('newsletter_id', nlRecord.id)
-            log.set('recipient_email', s.get('email'))
-            log.set('status', 'delivered')
-            $app.save(log)
+        try {
+          const res = $http.send({
+            url: 'https://api.resend.com/emails/batch',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${resendKey}`,
+            },
+            body: JSON.stringify(payload),
+            timeout: 30,
           })
-          nlRecord.set('status', 'sent')
-          successCount = subs.length
-        } else {
-          let errorMsg = 'Unknown error'
-          try {
-            errorMsg = JSON.parse(res.body).message || res.statusCode.toString()
-          } catch (err) {}
 
-          subs.forEach((s) => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            batchSubs.forEach((s) => {
+              const log = new Record(logsCollection)
+              log.set('newsletter_id', nlRecord.id)
+              log.set('recipient_email', s.get('email'))
+              log.set('status', 'delivered')
+              $app.save(log)
+            })
+            successCount += batchSubs.length
+          } else {
+            let errorMsg = 'Unknown error'
+            try {
+              errorMsg = JSON.parse(res.body).message || res.statusCode.toString()
+            } catch (err) {}
+
+            batchSubs.forEach((s) => {
+              const log = new Record(logsCollection)
+              log.set('newsletter_id', nlRecord.id)
+              log.set('recipient_email', s.get('email'))
+              log.set('status', 'failed')
+              log.set('error_message', errorMsg)
+              $app.save(log)
+            })
+            failCount += batchSubs.length
+          }
+        } catch (err) {
+          batchSubs.forEach((s) => {
             const log = new Record(logsCollection)
             log.set('newsletter_id', nlRecord.id)
             log.set('recipient_email', s.get('email'))
             log.set('status', 'failed')
-            log.set('error_message', errorMsg)
+            log.set('error_message', err.message)
             $app.save(log)
           })
-          nlRecord.set('status', 'failed')
-          failCount = subs.length
+          failCount += batchSubs.length
         }
-      } catch (err) {
-        subs.forEach((s) => {
-          const log = new Record(logsCollection)
-          log.set('newsletter_id', nlRecord.id)
-          log.set('recipient_email', s.get('email'))
-          log.set('status', 'failed')
-          log.set('error_message', err.message)
-          $app.save(log)
-        })
-        nlRecord.set('status', 'failed')
-        failCount = subs.length
       }
-    } else if (resendKey === 're_valid_api_key_mock_999') {
-      subs.forEach((s) => {
-        const log = new Record(logsCollection)
-        log.set('newsletter_id', nlRecord.id)
-        log.set('recipient_email', s.get('email'))
-        log.set('status', 'delivered')
-        $app.save(log)
-      })
-      nlRecord.set('status', 'sent')
-      successCount = subs.length
+
+      if (failCount === 0) {
+        nlRecord.set('status', 'sent')
+      } else if (successCount === 0) {
+        nlRecord.set('status', 'failed')
+      } else {
+        nlRecord.set('status', 'partial')
+      }
     } else {
       nlRecord.set('status', 'failed')
       failCount = subs.length
