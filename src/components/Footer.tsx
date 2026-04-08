@@ -5,17 +5,16 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useToast } from '@/hooks/use-toast'
-import useNewsletterStore from '@/stores/useNewsletterStore'
+import { createSubscriber } from '@/services/newsletter'
 import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
 import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
 
 export function Footer() {
   const [email, setEmail] = useState('')
   const [lgpd, setLgpd] = useState(false)
-  const { addSubscriber } = useNewsletterStore()
   const { toast } = useToast()
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
     if (!lgpd) {
@@ -27,13 +26,26 @@ export function Footer() {
       return
     }
 
-    addSubscriber({ email, source: 'Rodapé - Inscrição Global', lgpdAgreed: true })
-    toast({
-      title: 'Inscrição Confirmada!',
-      description: 'Você passará a receber nossos insights exclusivos de alta performance.',
-    })
-    setEmail('')
-    setLgpd(false)
+    try {
+      await createSubscriber({
+        email,
+        source: 'Rodapé - Inscrição Global',
+        lgpdAgreed: true,
+        active: true,
+      })
+      toast({
+        title: 'Inscrição Confirmada!',
+        description: 'Você passará a receber nossos insights exclusivos de alta performance.',
+      })
+      setEmail('')
+      setLgpd(false)
+    } catch (err) {
+      toast({
+        title: 'Erro na Inscrição',
+        description: 'Este e-mail já está inscrito ou ocorreu um erro.',
+        variant: 'destructive',
+      })
+    }
   }
 
   return (

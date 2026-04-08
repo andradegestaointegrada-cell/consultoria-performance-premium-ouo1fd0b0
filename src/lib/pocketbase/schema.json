@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T12:21:54.538Z",
+  "generatedAt": "2026-04-08T12:29:54.582Z",
   "collections": [
     {
       "name": "users",
@@ -29,25 +29,177 @@
           "type": "autodate",
           "required": false,
           "system": false,
-          "autodateTriggers": [
-            "onCreate"
-          ]
+          "autodateTriggers": ["onCreate"]
         },
         {
           "name": "updated",
           "type": "autodate",
           "required": false,
           "system": false,
-          "autodateTriggers": [
-            "onCreate",
-            "onUpdate"
-          ]
+          "autodateTriggers": ["onCreate", "onUpdate"]
         }
       ],
       "indexes": [
         "CREATE UNIQUE INDEX `idx_tokenKey__pb_users_auth_` ON `users` (`tokenKey`)",
         "CREATE UNIQUE INDEX `idx_email__pb_users_auth_` ON `users` (`email`) WHERE `email` != ''"
       ]
+    },
+    {
+      "name": "subscribers",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != ''",
+        "view": "@request.auth.id != ''",
+        "create": "",
+        "update": "@request.auth.id != ''",
+        "delete": "@request.auth.id != ''"
+      },
+      "fields": [
+        {
+          "name": "email",
+          "type": "email",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "source",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "lgpdAgreed",
+          "type": "bool",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "active",
+          "type": "bool",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": ["CREATE UNIQUE INDEX idx_subscribers_email ON subscribers (email)"]
+    },
+    {
+      "name": "newsletters",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != ''",
+        "view": "@request.auth.id != ''",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != ''",
+        "delete": "@request.auth.id != ''"
+      },
+      "fields": [
+        {
+          "name": "subject",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "content",
+          "type": "editor",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "recipient_count",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "delivery_logs",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != ''",
+        "view": "@request.auth.id != ''",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != ''",
+        "delete": "@request.auth.id != ''"
+      },
+      "fields": [
+        {
+          "name": "newsletter_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "newsletters"
+        },
+        {
+          "name": "recipient_email",
+          "type": "email",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate"]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": ["onCreate", "onUpdate"]
+        }
+      ],
+      "indexes": []
     }
   ]
 }

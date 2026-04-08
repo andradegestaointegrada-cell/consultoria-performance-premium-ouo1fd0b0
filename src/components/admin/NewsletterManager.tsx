@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Calendar } from '@/components/ui/calendar'
@@ -8,65 +8,81 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/hooks/use-toast'
-import useNewsletterStore from '@/stores/useNewsletterStore'
+import { useRealtime } from '@/hooks/use-realtime'
+import {
+  getSubscribers,
+  getNewsletters,
+  sendNewsletter,
+  sendTestNewsletter,
+  createSubscriber,
+  Subscriber,
+  Newsletter,
+} from '@/services/newsletter'
 
 export function NewsletterManager() {
-  const { subscribers, campaigns, addCampaign } = useNewsletterStore()
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([])
+  const [newsletters, setNewsletters] = useState<Newsletter[]>([])
+
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [subject, setSubject] = useState('')
   const [content, setContent] = useState('')
+  const [testEmail, setTestEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
-  const handleSchedule = async () => {
-    if (!date || !subject || !content) {
-      return toast({
-        title: 'Dados Incompletos',
-        description: 'Preencha o assunto, conteúdo e selecione uma data.',
-        variant: 'destructive',
-      })
-    }
-    setLoading(true)
-
+  const loadData = async () => {
     try {
-      const resendKey = import.meta.env.VITE_RESEND_API_KEY
-      const resendDomain = import.meta.env.VITE_RESEND_DOMAIN || 'andradegestao.com.br'
-
-      if (resendKey && resendKey !== 're_valid_api_key_mock_999') {
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${resendKey}`,
-          },
-          body: JSON.stringify({
-            from: `Newsletter Insights <newsletter@${resendDomain}>`,
-            to: ['test-audience@example.com'], // In a real scenario, this goes to the subscriber list
-            subject: subject,
-            html: content,
-          }),
-        })
-      } else {
-        await new Promise((res) => setTimeout(res, 800)) // Mock delay
-      }
-
-      addCampaign({
-        subject,
-        content,
-        sendDate: date.toISOString(),
-        status: date > new Date() ? 'Scheduled' : 'Sent',
-      })
-
-      toast({
-        title: 'Campanha Cadastrada',
-        description: `Agendada com sucesso para ${format(date, 'dd/MM/yyyy')}.`,
-      })
-      setSubject('')
-      setContent('')
+      const subs = await getSubscribers()
+      const news = await getNewsletters()
+      setSubscribers(subs)
+      setNewsletters(news)
     } catch (e) {
+      console.error('Failed to load data', e)
+    }
+  }
+
+  useEffect(() => {
+    const syncLocalStorage = async () => {
+      try {
+        const stored = localStorage.getItem('@ag-consultoria/newsletter')
+        if (stored) {
+          const parsed = JSON.parse(stored)
+          if (parsed.subscribers && parsed.subscribers.length > 0) {
+            for (const sub of parsed.subscribers) {
+              try {
+                await createSubscriber({
+                  email: sub.email,
+                  source: sub.source,
+                  lgpdAgreed: sub.lgpdAgreed,
+                  active: true,
+                })
+              } catch (err) {
+                // ignore duplicates silently
+              }
+            }
+          }
+          localStorage.removeItem('@ag-consultoria/newsletter')
+        }
+      } catch (e) {
+        console.error('Failed to sync local storage', e)
+      }
+    }
+    syncLocalStorage().then(loadData)
+  }, [])
+
+  useRealtime('subscribers', loadData)
+  useRealtime('newsletters', loadData)
+
+  const handleTestSend = async () => {
+    if (!testEmail || !subject || !content) return
+    setLoading(true)
+    try {
+      await sendTestNewsletter(testEmail, subject, content)
+      toast({ title: 'Email de Teste Enviado' })
+    } catch (e: any) {
       toast({
-        title: 'Erro no Agendamento',
-        description: 'Não foi possível se comunicar com o servidor de emails.',
+        title: 'Erro',
+        description: e.message || 'Falha no envio do teste',
         variant: 'destructive',
       })
     } finally {
@@ -74,11 +90,40 @@ export function NewsletterManager() {
     }
   }
 
-  const selectedDateCampaigns = campaigns.filter(
-    (c) => format(new Date(c.sendDate), 'yyyy-MM-dd') === format(date || new Date(), 'yyyy-MM-dd'),
+  const handleSend = async () => {
+    if (!subject || !content) {
+      return toast({
+        title: 'Dados Incompletos',
+        description: 'Preencha o assunto e conteúdo da campanha.',
+        variant: 'destructive',
+      })
+    }
+    setLoading(true)
+
+    try {
+      await sendNewsletter(subject, content)
+      toast({
+        title: 'Campanha Enviada',
+        description: 'A comunicação foi disparada para toda a base ativa.',
+      })
+      setSubject('')
+      setContent('')
+    } catch (e: any) {
+      toast({
+        title: 'Erro no Envio',
+        description: e.message || 'Falha na comunicação com o servidor de emails.',
+        variant: 'destructive',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const selectedDateCampaigns = newsletters.filter(
+    (c) => format(new Date(c.created), 'yyyy-MM-dd') === format(date || new Date(), 'yyyy-MM-dd'),
   )
 
-  const scheduledDates = campaigns.map((c) => new Date(c.sendDate))
+  const sentDates = newsletters.map((c) => new Date(c.created))
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -86,7 +131,7 @@ export function NewsletterManager() {
         <Card className="bg-card border-border shadow-lg">
           <CardHeader>
             <CardTitle className="font-heading uppercase tracking-wide text-foreground">
-              Calendário de Distribuição
+              Calendário de Comunicações
             </CardTitle>
           </CardHeader>
           <CardContent className="flex justify-center">
@@ -95,9 +140,9 @@ export function NewsletterManager() {
               selected={date}
               onSelect={setDate}
               className="rounded-md border border-border shadow-sm p-3 bg-background"
-              modifiers={{ scheduled: scheduledDates }}
+              modifiers={{ sent: sentDates }}
               modifiersStyles={{
-                scheduled: {
+                sent: {
                   fontWeight: 'bold',
                   backgroundColor: 'rgba(207,174,112,0.15)',
                   color: '#CFAE70',
@@ -112,7 +157,7 @@ export function NewsletterManager() {
         <Card className="bg-card border-border shadow-lg">
           <CardHeader>
             <CardTitle className="font-heading uppercase tracking-wide text-foreground text-lg">
-              {date ? `Agendar Disparo: ${format(date, 'dd/MM/yyyy')}` : 'Selecione uma data'}
+              Nova Campanha
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -120,20 +165,37 @@ export function NewsletterManager() {
               placeholder="Assunto do E-mail"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="bg-background border-border"
+              className="bg-background border-border h-12"
             />
             <Textarea
-              placeholder="Conteúdo Estratégico (Texto ou HTML)"
+              placeholder="Conteúdo Estratégico (Texto ou HTML suportado)"
               className="min-h-[160px] bg-background border-border resize-y"
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
+            <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border mt-2">
+              <Input
+                placeholder="E-mail de teste"
+                value={testEmail}
+                onChange={(e) => setTestEmail(e.target.value)}
+                className="bg-background border-border flex-1 h-12"
+                type="email"
+              />
+              <Button
+                onClick={handleTestSend}
+                disabled={loading || !testEmail || !subject || !content}
+                variant="outline"
+                className="whitespace-nowrap h-12 uppercase tracking-wider font-bold text-xs"
+              >
+                Testar Envio
+              </Button>
+            </div>
             <Button
-              onClick={handleSchedule}
-              disabled={loading || !date}
-              className="w-full bg-[#091D39] text-[#E8E8E8] hover:bg-[#091D39]/90 dark:bg-[#CFAE70] dark:text-[#0D0D0D] dark:hover:bg-[#CFAE70]/90 uppercase tracking-widest font-bold h-12"
+              onClick={handleSend}
+              disabled={loading || !subject || !content}
+              className="w-full bg-[#091D39] text-[#E8E8E8] hover:bg-[#091D39]/90 dark:bg-[#CFAE70] dark:text-[#0D0D0D] dark:hover:bg-[#CFAE70]/90 uppercase tracking-widest font-bold h-12 mt-4"
             >
-              {loading ? 'Processando...' : 'Programar Campanha'}
+              {loading ? 'Processando...' : 'Disparar Campanha para Todos'}
             </Button>
           </CardContent>
         </Card>
@@ -143,13 +205,13 @@ export function NewsletterManager() {
         <Card className="bg-card border-border shadow-lg">
           <CardHeader>
             <CardTitle className="font-heading uppercase tracking-wide text-foreground text-lg">
-              Campanhas do Dia
+              Campanhas no Dia ({date ? format(date, 'dd/MM/yyyy') : ''})
             </CardTitle>
           </CardHeader>
           <CardContent>
             {selectedDateCampaigns.length === 0 ? (
               <p className="text-muted-foreground text-sm italic">
-                Nenhuma comunicação programada para esta data.
+                Nenhuma comunicação registrada para esta data.
               </p>
             ) : (
               <div className="space-y-4">
@@ -160,13 +222,16 @@ export function NewsletterManager() {
                       <Badge
                         variant="outline"
                         className={
-                          c.status === 'Sent'
+                          c.status === 'sent'
                             ? 'border-green-500 text-green-500'
-                            : 'border-yellow-500 text-yellow-600'
+                            : 'border-red-500 text-red-600'
                         }
                       >
-                        {c.status === 'Sent' ? 'Enviado' : 'Agendado'}
+                        {c.status === 'sent' ? 'Enviado' : 'Erro'}
                       </Badge>
+                      <span className="text-xs text-muted-foreground font-medium">
+                        {c.recipient_count} destinos
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -178,26 +243,32 @@ export function NewsletterManager() {
         <Card className="bg-card border-border shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="font-heading uppercase tracking-wide text-foreground text-lg">
-              Base de Inscritos
+              Base de Inscritos Ativos
             </CardTitle>
-            <Badge className="bg-[#CFAE70] text-[#0D0D0D]">{subscribers.length}</Badge>
+            <Badge className="bg-[#CFAE70] text-[#0D0D0D] font-bold">
+              {subscribers.filter((s) => s.active).length}
+            </Badge>
           </CardHeader>
           <CardContent>
             <div className="max-h-[340px] overflow-y-auto space-y-2 pr-2">
               {subscribers.length === 0 && (
-                <p className="text-muted-foreground text-sm">Nenhum inscrito até o momento.</p>
+                <p className="text-muted-foreground text-sm">
+                  Nenhum inscrito processado até o momento.
+                </p>
               )}
-              {subscribers.map((s) => (
-                <div
-                  key={s.id}
-                  className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 p-3 border border-border rounded-md hover:bg-muted/50 transition-colors"
-                >
-                  <span className="font-medium text-sm text-foreground break-all">{s.email}</span>
-                  <Badge variant="secondary" className="text-[10px] w-fit">
-                    {s.source}
-                  </Badge>
-                </div>
-              ))}
+              {subscribers
+                .filter((s) => s.active)
+                .map((s) => (
+                  <div
+                    key={s.id}
+                    className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 p-3 border border-border rounded-md hover:bg-muted/50 transition-colors"
+                  >
+                    <span className="font-medium text-sm text-foreground break-all">{s.email}</span>
+                    <Badge variant="secondary" className="text-[10px] w-fit">
+                      {s.source}
+                    </Badge>
+                  </div>
+                ))}
             </div>
           </CardContent>
         </Card>
