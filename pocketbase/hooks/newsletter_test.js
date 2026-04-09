@@ -7,10 +7,7 @@ routerAdd(
       throw new BadRequestError('Subject and content are required')
     }
 
-    const resendKey =
-      $secrets.get('RESEND_API_KEY') ||
-      $os.getenv('RESEND_API_KEY') ||
-      $os.getenv('VITE_RESEND_API_KEY')
+    const resendKey = $secrets.get('RESEND_API_KEY')
     const recipientEmail = 'alexandre@andradegestaointegrada.com.br'
 
     const nlCollection = $app.findCollectionByNameOrId('newsletters')
