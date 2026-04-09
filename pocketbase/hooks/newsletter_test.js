@@ -1,3 +1,4 @@
+// deploy: secret atualizado
 routerAdd(
   'POST',
   '/backend/v1/newsletter/test',
