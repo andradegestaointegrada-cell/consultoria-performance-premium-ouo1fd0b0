@@ -7,7 +7,10 @@ routerAdd(
       throw new BadRequestError('Subject and content are required')
     }
 
-    const resendKey = $secrets.get('RESEND_API_KEY') || $os.getenv('VITE_RESEND_API_KEY')
+    const resendKey =
+      $secrets.get('RESEND_API_KEY') ||
+      $os.getenv('RESEND_API_KEY') ||
+      $os.getenv('VITE_RESEND_API_KEY')
 
     const subs = $app.findRecordsByFilter('subscribers', 'active = true', '', 0, 0)
 
@@ -74,10 +77,13 @@ routerAdd(
             })
             successCount += batchSubs.length
           } else {
-            let errorMsg = 'Unknown error'
+            let errorMsg = `HTTP ${res.statusCode}`
             try {
-              errorMsg = res.body ? String(res.body) : res.statusCode.toString()
-            } catch (err) {}
+              const parsed = JSON.parse(res.body)
+              errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${parsed.message || JSON.stringify(parsed)}`
+            } catch (err) {
+              errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
+            }
 
             batchSubs.forEach((s) => {
               const log = new Record(logsCollection)
@@ -112,6 +118,17 @@ routerAdd(
     } else {
       nlRecord.set('status', 'failed')
       failCount = subs.length
+
+      if (!resendKey && subs.length > 0) {
+        subs.forEach((s) => {
+          const log = new Record(logsCollection)
+          log.set('newsletter_id', nlRecord.id)
+          log.set('recipient_email', s.get('email'))
+          log.set('status', 'failed')
+          log.set('error_message', 'RESEND_API_KEY is not detected in the environment')
+          $app.save(log)
+        })
+      }
     }
 
     $app.save(nlRecord)
