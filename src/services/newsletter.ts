@@ -13,6 +13,7 @@ export interface Newsletter {
   id: string
   subject: string
   content: string
+  is_raw_html?: boolean
   edition?: string
   period?: string
   main_title?: string
@@ -26,10 +27,11 @@ export interface Newsletter {
 
 export interface StructuredNewsletterData {
   subject: string
-  edition: string
-  period: string
-  main_title: string
-  sections: { title: string; content: string }[]
+  is_raw_html?: boolean
+  edition?: string
+  period?: string
+  main_title?: string
+  sections?: { title: string; content: string }[]
   cta_text?: string
   cta_url?: string
 }
