@@ -3,32 +3,21 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
-import { useToast } from '@/hooks/use-toast'
 import { useRealtime } from '@/hooks/use-realtime'
 import {
   getSubscribers,
   getNewsletters,
-  sendNewsletter,
-  sendTestNewsletter,
   createSubscriber,
   Subscriber,
   Newsletter,
 } from '@/services/newsletter'
+import { NewsletterForm } from './NewsletterForm'
 
 export function NewsletterManager() {
   const [subscribers, setSubscribers] = useState<Subscriber[]>([])
   const [newsletters, setNewsletters] = useState<Newsletter[]>([])
-
   const [date, setDate] = useState<Date | undefined>(new Date())
-  const [subject, setSubject] = useState('')
-  const [content, setContent] = useState('')
-
-  const [loading, setLoading] = useState(false)
-  const { toast } = useToast()
 
   const loadData = async () => {
     try {
@@ -79,52 +68,6 @@ export function NewsletterManager() {
   useRealtime('subscribers', loadData)
   useRealtime('newsletters', loadData)
 
-  const handleTestSend = async () => {
-    if (!subject || !content) return
-    setLoading(true)
-    try {
-      await sendTestNewsletter('alexandre@andradegestaointegrada.com.br', subject, content)
-      toast({ title: 'Email de Teste Enviado para Alexandre' })
-    } catch (e: any) {
-      toast({
-        title: 'Erro',
-        description: e.message || 'Falha no envio do teste',
-        variant: 'destructive',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleSend = async () => {
-    if (!subject || !content) {
-      return toast({
-        title: 'Dados Incompletos',
-        description: 'Preencha o assunto e conteúdo da campanha.',
-        variant: 'destructive',
-      })
-    }
-    setLoading(true)
-
-    try {
-      await sendNewsletter(subject, content)
-      toast({
-        title: 'Campanha Enviada',
-        description: 'A comunicação foi disparada para toda a base ativa.',
-      })
-      setSubject('')
-      setContent('')
-    } catch (e: any) {
-      toast({
-        title: 'Erro no Envio',
-        description: e.message || 'Falha na comunicação com o servidor de emails.',
-        variant: 'destructive',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const selectedDateCampaigns = newsletters.filter(
     (c) => format(new Date(c.created), 'yyyy-MM-dd') === format(date || new Date(), 'yyyy-MM-dd'),
   )
@@ -160,44 +103,7 @@ export function NewsletterManager() {
           </CardContent>
         </Card>
 
-        <Card className="bg-card border-border shadow-lg">
-          <CardHeader>
-            <CardTitle className="font-heading uppercase tracking-wide text-foreground text-lg">
-              Nova Campanha
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Input
-              placeholder="Assunto do E-mail"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className="bg-background border-border h-12"
-            />
-            <Textarea
-              placeholder="Conteúdo Estratégico (Texto ou HTML suportado)"
-              className="min-h-[160px] bg-background border-border resize-y"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border mt-2">
-              <Button
-                onClick={handleTestSend}
-                disabled={loading || !subject || !content}
-                variant="outline"
-                className="w-full h-12 uppercase tracking-wider font-bold text-xs"
-              >
-                Testar Envio (alexandre@andradegestaointegrada.com.br)
-              </Button>
-            </div>
-            <Button
-              onClick={handleSend}
-              disabled={loading || !subject || !content}
-              className="w-full bg-[#091D39] text-[#E8E8E8] hover:bg-[#091D39]/90 dark:bg-[#CFAE70] dark:text-[#0D0D0D] dark:hover:bg-[#CFAE70]/90 uppercase tracking-widest font-bold h-12 mt-4"
-            >
-              {loading ? 'Processando...' : 'Disparar Campanha para Todos'}
-            </Button>
-          </CardContent>
-        </Card>
+        <NewsletterForm />
       </div>
 
       <div className="space-y-6">

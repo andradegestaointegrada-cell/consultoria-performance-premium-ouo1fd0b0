@@ -13,9 +13,25 @@ export interface Newsletter {
   id: string
   subject: string
   content: string
+  edition?: string
+  period?: string
+  main_title?: string
+  sections?: any
+  cta_text?: string
+  cta_url?: string
   recipient_count: number
   status: string
   created: string
+}
+
+export interface StructuredNewsletterData {
+  subject: string
+  edition: string
+  period: string
+  main_title: string
+  sections: { title: string; content: string }[]
+  cta_text?: string
+  cta_url?: string
 }
 
 export interface DeliveryLog {
@@ -39,14 +55,17 @@ export const getDeliveryLogs = (newsletterId: string) =>
     .collection('delivery_logs')
     .getFullList<DeliveryLog>({ filter: `newsletter_id="${newsletterId}"`, sort: '-created' })
 
-export const sendNewsletter = (subject: string, content: string) =>
+export const sendNewsletter = (data: StructuredNewsletterData & { content: string }) =>
   pb.send('/backend/v1/newsletter/send', {
     method: 'POST',
-    body: JSON.stringify({ subject, content }),
+    body: JSON.stringify(data),
   })
 
-export const sendTestNewsletter = (email: string, subject: string, content: string) =>
+export const sendTestNewsletter = (
+  email: string,
+  data: StructuredNewsletterData & { content: string },
+) =>
   pb.send('/backend/v1/newsletter/test', {
     method: 'POST',
-    body: JSON.stringify({ email, subject, content }),
+    body: JSON.stringify({ email, ...data }),
   })

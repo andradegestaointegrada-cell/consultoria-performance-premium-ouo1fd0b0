@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T20:43:10.413Z",
+  "generatedAt": "2026-04-10T21:11:08.717Z",
   "collections": [
     {
       "name": "users",
@@ -144,6 +144,42 @@
           "required": false,
           "system": false,
           "autodateTriggers": ["onCreate", "onUpdate"]
+        },
+        {
+          "name": "edition",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "period",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "main_title",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "sections",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "cta_text",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "cta_url",
+          "type": "text",
+          "required": false,
+          "system": false
         }
       ],
       "indexes": []
