@@ -76,8 +76,41 @@ routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
       timeout: 10,
     })
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      const data = JSON.parse(res.body)
-      nlRecordId = data[0].id
+      const bodyStr = res.body ? String(res.body).trim() : ''
+      if (bodyStr && bodyStr !== '<nil>' && bodyStr !== 'null') {
+        try {
+          const data = JSON.parse(bodyStr)
+          if (Array.isArray(data) && data.length > 0) {
+            nlRecordId = data[0].id
+          } else if (data && data.id) {
+            nlRecordId = data.id
+          }
+        } catch (parseErr) {
+          console.log('Failed to parse POST response:', parseErr.message)
+        }
+      }
+
+      if (!nlRecordId) {
+        const fallbackRes = $http.send({
+          url: `${supabaseUrl}/rest/v1/newsletters?order=created_at.desc&limit=1`,
+          method: 'GET',
+          headers: sbHeaders,
+          timeout: 10,
+        })
+        if (fallbackRes.statusCode >= 200 && fallbackRes.statusCode < 300) {
+          const fallbackBody = fallbackRes.body ? String(fallbackRes.body).trim() : ''
+          if (fallbackBody && fallbackBody !== '<nil>' && fallbackBody !== 'null') {
+            const fallbackData = JSON.parse(fallbackBody)
+            if (Array.isArray(fallbackData) && fallbackData.length > 0) {
+              nlRecordId = fallbackData[0].id
+            }
+          }
+        }
+      }
+
+      if (!nlRecordId) {
+        throw new Error('Failed to retrieve newsletter ID after creation')
+      }
     } else {
       throw new Error(`Failed to create newsletter: ${res.statusCode} ${res.body}`)
     }
