@@ -77,7 +77,7 @@ routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
     for (let i = 0; i < subs.length; i += BATCH_SIZE) {
       const batchSubs = subs.slice(i, i + BATCH_SIZE)
       const payload = batchSubs.map((s) => ({
-        from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
+        from: 'Newsletter AGI <newsletter@andradegestaointegrada.com.br>',
         to: [s.email],
         subject: body.subject,
         html: body.content,
@@ -127,11 +127,9 @@ routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
           let errorMsg = `HTTP ${res.statusCode}`
           try {
             const parsed = JSON.parse(res.body)
-            errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${
-              parsed.message || JSON.stringify(parsed)
-            }`
+            errorMsg = `Resend API Error (${res.statusCode}): ${JSON.stringify(parsed)}`
           } catch (err) {
-            errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
+            errorMsg = `Resend API Error (${res.statusCode}): ${res.body ? String(res.body) : 'Unknown error'}`
           }
 
           batchSubs.forEach((s) => {
