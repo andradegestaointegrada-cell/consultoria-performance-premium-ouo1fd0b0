@@ -4,14 +4,6 @@ routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
     throw new BadRequestError('Supabase configuration is missing')
   }
 
-  const authHeader =
-    e.request.header.get('Authorization') || e.requestInfo().headers['authorization'] || ''
-  const token = authHeader.replace(/^Bearer\s+/i, '').trim()
-
-  if (token !== supabaseKey) {
-    throw new UnauthorizedError('Invalid or missing token')
-  }
-
   const body = e.requestInfo().body
   if (!body.subject || !body.content) {
     throw new BadRequestError('Subject and content are required')
