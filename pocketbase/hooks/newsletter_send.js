@@ -1,5 +1,7 @@
 routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
-  const supabaseKey = $secrets.get('SUPABASE_SECRET_KEY') || $os.getenv('SUPABASE_SECRET_KEY')
+  let supabaseKey = $secrets.get('SUPABASE_SECRET_KEY') || $os.getenv('SUPABASE_SECRET_KEY') || ''
+  supabaseKey = supabaseKey.replace(/^["']|["']$/g, '').trim()
+
   if (!supabaseKey) {
     throw new BadRequestError('Supabase configuration is missing')
   }
@@ -9,12 +11,22 @@ routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
     throw new BadRequestError('Subject and content are required')
   }
 
-  const resendKey =
+  let resendKey =
     $secrets.get('RESEND_API_KEY') ||
     $os.getenv('RESEND_API_KEY') ||
-    $os.getenv('VITE_RESEND_API_KEY')
+    $os.getenv('VITE_RESEND_API_KEY') ||
+    ''
+  resendKey = resendKey.replace(/^["']|["']$/g, '').trim()
 
-  const supabaseUrl = $secrets.get('SUPABASE_URL') || $os.getenv('VITE_SUPABASE_URL')
+  let supabaseUrl = $secrets.get('SUPABASE_URL') || $os.getenv('VITE_SUPABASE_URL') || ''
+  supabaseUrl = supabaseUrl
+    .replace(/^["']|["']$/g, '')
+    .trim()
+    .replace(/\/+$/, '')
+
+  if (!supabaseUrl || !supabaseUrl.startsWith('http')) {
+    throw new BadRequestError('Supabase URL configuration is missing or invalid')
+  }
 
   const sbHeaders = {
     'Content-Type': 'application/json',
