@@ -1,18 +1,19 @@
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://mftirdjnmkegomoirmcc.supabase.co'
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_SECRET_KEY
+const SUPABASE_ANON_KEY =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_ZAXR7qW-S290nU3FP1hMPQ_VYWQPgIG'
 
 export const supabaseFetch = async (path: string, options: RequestInit = {}) => {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...(SUPABASE_KEY ? { apikey: SUPABASE_KEY } : {}),
+    ...(SUPABASE_ANON_KEY ? { apikey: SUPABASE_ANON_KEY } : {}),
     ...(options.headers as Record<string, string>),
   }
 
   const token = localStorage.getItem('sb-token')
   if (token && !headers['Authorization']) {
     headers['Authorization'] = `Bearer ${token}`
-  } else if (!headers['Authorization'] && SUPABASE_KEY) {
-    headers['Authorization'] = `Bearer ${SUPABASE_KEY}`
+  } else if (!headers['Authorization'] && SUPABASE_ANON_KEY) {
+    headers['Authorization'] = `Bearer ${SUPABASE_ANON_KEY}`
   }
 
   const response = await fetch(`${SUPABASE_URL}${path}`, { ...options, headers })

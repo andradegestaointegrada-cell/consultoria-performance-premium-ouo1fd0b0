@@ -9,13 +9,13 @@ import { useToast } from '@/hooks/use-toast'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { signIn } = useAuth()
+  const { signInWithPassword } = useAuth()
   const navigate = useNavigate()
   const { toast } = useToast()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { error } = await signIn(email, password)
+    const { error } = await signInWithPassword(email, password)
     if (error) {
       toast({
         title: 'Acesso Negado',

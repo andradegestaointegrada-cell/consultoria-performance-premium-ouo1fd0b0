@@ -4,7 +4,7 @@ import { supabaseFetch } from '@/lib/supabase/client'
 interface AuthContextType {
   user: any
   signUp: (email: string, password: string) => Promise<{ error: any }>
-  signIn: (email: string, password: string) => Promise<{ error: any }>
+  signInWithPassword: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => void
   loading: boolean
 }
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const signIn = async (email: string, password: string) => {
+  const signInWithPassword = async (email: string, password: string) => {
     try {
       const data = await supabaseFetch('/auth/v1/token?grant_type=password', {
         method: 'POST',
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{ user, signUp, signInWithPassword, signOut, loading }}>
       {children}
     </AuthContext.Provider>
   )
