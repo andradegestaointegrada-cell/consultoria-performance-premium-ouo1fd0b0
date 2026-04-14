@@ -29,20 +29,18 @@ export function Footer() {
     try {
       await createSubscriber({
         email,
-        source: 'Rodapé - Inscrição Global',
         lgpdAgreed: true,
-        active: true,
       })
       toast({
         title: 'Inscrição Confirmada!',
-        description: 'Você passará a receber nossos insights exclusivos de alta performance.',
+        description: 'Obrigado por se inscrever!',
       })
       setEmail('')
       setLgpd(false)
-    } catch (err) {
+    } catch (err: any) {
       toast({
         title: 'Erro na Inscrição',
-        description: 'Este e-mail já está inscrito ou ocorreu um erro.',
+        description: err.message || 'Erro ao processar sua inscrição',
         variant: 'destructive',
       })
     }

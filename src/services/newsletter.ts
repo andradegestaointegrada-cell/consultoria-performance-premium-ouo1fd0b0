@@ -50,12 +50,20 @@ export interface DeliveryLog {
 
 export const getSubscribers = () => supabaseFetch('/rest/v1/subscribers?order=created_at.desc')
 
-export const createSubscriber = (data: Partial<Subscriber>) =>
-  supabaseFetch('/rest/v1/subscribers', {
+export const createSubscriber = async (data: Partial<Subscriber>) => {
+  const res = await fetch(import.meta.env.VITE_POCKETBASE_URL + '/backend/v1/subscribe', {
     method: 'POST',
-    headers: { Prefer: 'return=representation' },
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
-  }).then((res: any) => res[0])
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message || 'Erro ao processar sua inscrição')
+  }
+  return res.json()
+}
 
 export const getNewsletters = () => supabaseFetch('/rest/v1/newsletters?order=created_at.desc')
 
