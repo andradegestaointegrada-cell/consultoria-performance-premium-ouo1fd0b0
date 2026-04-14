@@ -1,110 +1,208 @@
-// deploy: secret atualizado
-routerAdd(
-  'POST',
-  '/backend/v1/newsletter/test',
-  (e) => {
-    const body = e.requestInfo().body
-    if (!body.subject || !body.content) {
-      throw new BadRequestError('Subject and content are required')
+routerAdd('POST', '/backend/v1/newsletter/test', (e) => {
+  const body = e.requestInfo().body
+  if (!body.subject || !body.content) {
+    throw new BadRequestError('Subject and content are required')
+  }
+
+  const supabaseUrl = 'https://mftirdjnmkegomoirmcc.supabase.co'
+  const supabaseKey =
+    $secrets.get('SUPABASE_SECRET_KEY') ||
+    $os.getenv('SUPABASE_SECRET_KEY') ||
+    $os.getenv('VITE_SUPABASE_SECRET_KEY')
+
+  const authHeader = e.request.header.get('Authorization')
+  if (!authHeader) throw new UnauthorizedError('Missing Authorization header')
+  const userRes = $http.send({
+    url: `${supabaseUrl}/auth/v1/user`,
+    method: 'GET',
+    headers: { Authorization: authHeader, apikey: supabaseKey },
+  })
+  if (userRes.statusCode !== 200) throw new UnauthorizedError('Invalid Supabase Auth token')
+
+  const resendKey =
+    $secrets.get('RESEND_API_KEY') ||
+    $os.getenv('RESEND_API_KEY') ||
+    $os.getenv('VITE_RESEND_API_KEY')
+  const recipientEmail = 'alexandre@andradegestaointegrada.com.br'
+
+  const nlCreateRes = $http.send({
+    url: `${supabaseUrl}/rest/v1/newsletters`,
+    method: 'POST',
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify({
+      subject: '[TEST] ' + body.subject,
+      content: body.content,
+      is_raw_html: !!body.is_raw_html,
+      edition: body.edition || null,
+      period: body.period || null,
+      main_title: body.main_title || null,
+      sections: body.sections || null,
+      cta_text: body.cta_text || null,
+      cta_url: body.cta_url || null,
+      recipient_count: 1,
+      status: 'processing',
+    }),
+  })
+
+  if (nlCreateRes.statusCode >= 300) {
+    throw new InternalServerError('Failed to create newsletter in Supabase: ' + nlCreateRes.body)
+  }
+  const nlRecords = JSON.parse(nlCreateRes.body)
+  const nlRecord = Array.isArray(nlRecords) ? nlRecords[0] : nlRecords
+
+  const log = {
+    newsletter_id: nlRecord.id,
+    recipient_email: recipientEmail,
+  }
+
+  if (resendKey) {
+    const payload = {
+      from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
+      to: [recipientEmail],
+      subject: '[TEST] ' + body.subject,
+      html: body.content,
     }
 
-    const resendKey = $secrets.get('RESEND_API_KEY')
-    const recipientEmail = 'alexandre@andradegestaointegrada.com.br'
+    try {
+      const res = $http.send({
+        url: 'https://api.resend.com/emails',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${resendKey}`,
+        },
+        body: JSON.stringify(payload),
+        timeout: 15,
+      })
 
-    const nlCollection = $app.findCollectionByNameOrId('newsletters')
-    const nlRecord = new Record(nlCollection)
-    nlRecord.set('subject', '[TEST] ' + body.subject)
-    nlRecord.set('content', body.content)
-    nlRecord.set('is_raw_html', !!body.is_raw_html)
-    if (body.edition) nlRecord.set('edition', body.edition)
-    if (body.period) nlRecord.set('period', body.period)
-    if (body.main_title) nlRecord.set('main_title', body.main_title)
-    if (body.sections) nlRecord.set('sections', body.sections)
-    if (body.cta_text) nlRecord.set('cta_text', body.cta_text)
-    if (body.cta_url) nlRecord.set('cta_url', body.cta_url)
-    nlRecord.set('recipient_count', 1)
-    nlRecord.set('status', 'processing')
-    $app.save(nlRecord)
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        let resData = {}
+        try {
+          resData = JSON.parse(res.body)
+        } catch (err) {}
 
-    const logsCollection = $app.findCollectionByNameOrId('delivery_logs')
-    const log = new Record(logsCollection)
-    log.set('newsletter_id', nlRecord.id)
-    log.set('recipient_email', recipientEmail)
+        log.status = 'delivered'
+        if (resData && resData.id) {
+          log.error_message = `Resend ID: ${resData.id}`
+        }
 
-    if (resendKey) {
-      const payload = {
-        from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
-        to: [recipientEmail],
-        subject: '[TEST] ' + body.subject,
-        html: body.content,
-      }
-
-      try {
-        const res = $http.send({
-          url: 'https://api.resend.com/emails',
+        $http.send({
+          url: `${supabaseUrl}/rest/v1/delivery_logs`,
           method: 'POST',
           headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${resendKey}`,
           },
-          body: JSON.stringify(payload),
-          timeout: 15,
+          body: JSON.stringify(log),
         })
 
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          let resData = {}
-          try {
-            resData = JSON.parse(res.body)
-          } catch (err) {}
+        $http.send({
+          url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+          method: 'PATCH',
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status: 'sent' }),
+        })
 
-          log.set('status', 'delivered')
-          if (resData && resData.id) {
-            log.set('error_message', `Resend ID: ${resData.id}`)
-          }
-          $app.save(log)
-
-          nlRecord.set('status', 'sent')
-          $app.save(nlRecord)
-
-          return e.json(200, { success: true, message: 'Test email sent successfully' })
-        } else {
-          let errorMsg = `HTTP ${res.statusCode}`
-          try {
-            const parsed = JSON.parse(res.body)
-            errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${parsed.message || JSON.stringify(parsed)}`
-          } catch (err) {
-            errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
-          }
-
-          log.set('status', 'failed')
-          log.set('error_message', errorMsg)
-          $app.save(log)
-
-          nlRecord.set('status', 'failed')
-          $app.save(nlRecord)
-
-          throw new BadRequestError(`Failed to send test email: ${errorMsg}`)
+        return e.json(200, { success: true, message: 'Test email sent successfully' })
+      } else {
+        let errorMsg = `HTTP ${res.statusCode}`
+        try {
+          const parsed = JSON.parse(res.body)
+          errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${
+            parsed.message || JSON.stringify(parsed)
+          }`
+        } catch (err) {
+          errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
         }
-      } catch (err) {
-        log.set('status', 'failed')
-        log.set('error_message', err.message)
-        $app.save(log)
 
-        nlRecord.set('status', 'failed')
-        $app.save(nlRecord)
+        log.status = 'failed'
+        log.error_message = errorMsg
+        $http.send({
+          url: `${supabaseUrl}/rest/v1/delivery_logs`,
+          method: 'POST',
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(log),
+        })
 
-        throw new BadRequestError(`Failed to send test email: ${err.message}`)
+        $http.send({
+          url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+          method: 'PATCH',
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status: 'failed' }),
+        })
+
+        throw new BadRequestError(`Failed to send test email: ${errorMsg}`)
       }
-    } else {
-      log.set('status', 'failed')
-      log.set('error_message', 'RESEND_API_KEY is not detected in the environment')
-      $app.save(log)
+    } catch (err) {
+      log.status = 'failed'
+      log.error_message = err.message
+      $http.send({
+        url: `${supabaseUrl}/rest/v1/delivery_logs`,
+        method: 'POST',
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(log),
+      })
 
-      nlRecord.set('status', 'failed')
-      $app.save(nlRecord)
+      $http.send({
+        url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+        method: 'PATCH',
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'failed' }),
+      })
 
-      throw new BadRequestError('RESEND_API_KEY is not detected in the environment')
+      throw new BadRequestError(`Failed to send test email: ${err.message}`)
     }
-  },
-  $apis.requireAuth(),
-)
+  } else {
+    log.status = 'failed'
+    log.error_message = 'RESEND_API_KEY is not detected in the environment'
+    $http.send({
+      url: `${supabaseUrl}/rest/v1/delivery_logs`,
+      method: 'POST',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(log),
+    })
+
+    $http.send({
+      url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+      method: 'PATCH',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: 'failed' }),
+    })
+
+    throw new BadRequestError('RESEND_API_KEY is not detected in the environment')
+  }
+})

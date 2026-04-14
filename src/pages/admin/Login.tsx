@@ -19,7 +19,7 @@ export default function Login() {
     if (error) {
       toast({
         title: 'Acesso Negado',
-        description: 'Credenciais inválidas ou sem privilégios de administração.',
+        description: error.message || 'Credenciais inválidas ou sem privilégios de administração.',
         variant: 'destructive',
       })
     } else {

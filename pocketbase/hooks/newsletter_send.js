@@ -1,151 +1,232 @@
-routerAdd(
-  'POST',
-  '/backend/v1/newsletter/send',
-  (e) => {
-    const body = e.requestInfo().body
-    if (!body.subject || !body.content) {
-      throw new BadRequestError('Subject and content are required')
-    }
+routerAdd('POST', '/backend/v1/newsletter/send', (e) => {
+  const body = e.requestInfo().body
+  if (!body.subject || !body.content) {
+    throw new BadRequestError('Subject and content are required')
+  }
 
-    const resendKey =
-      $secrets.get('RESEND_API_KEY') ||
-      $os.getenv('RESEND_API_KEY') ||
-      $os.getenv('VITE_RESEND_API_KEY')
+  const supabaseUrl = 'https://mftirdjnmkegomoirmcc.supabase.co'
+  const supabaseKey =
+    $secrets.get('SUPABASE_SECRET_KEY') ||
+    $os.getenv('SUPABASE_SECRET_KEY') ||
+    $os.getenv('VITE_SUPABASE_SECRET_KEY')
 
-    const subs = $app.findRecordsByFilter('subscribers', 'active = true', '', 0, 0)
+  const authHeader = e.request.header.get('Authorization')
+  if (!authHeader) throw new UnauthorizedError('Missing Authorization header')
+  const userRes = $http.send({
+    url: `${supabaseUrl}/auth/v1/user`,
+    method: 'GET',
+    headers: { Authorization: authHeader, apikey: supabaseKey },
+  })
+  if (userRes.statusCode !== 200) throw new UnauthorizedError('Invalid Supabase Auth token')
 
-    const nlCollection = $app.findCollectionByNameOrId('newsletters')
-    const nlRecord = new Record(nlCollection)
-    nlRecord.set('subject', body.subject)
-    nlRecord.set('content', body.content)
-    nlRecord.set('is_raw_html', !!body.is_raw_html)
-    if (body.edition) nlRecord.set('edition', body.edition)
-    if (body.period) nlRecord.set('period', body.period)
-    if (body.main_title) nlRecord.set('main_title', body.main_title)
-    if (body.sections) nlRecord.set('sections', body.sections)
-    if (body.cta_text) nlRecord.set('cta_text', body.cta_text)
-    if (body.cta_url) nlRecord.set('cta_url', body.cta_url)
-    nlRecord.set('recipient_count', subs.length)
-    nlRecord.set('status', 'processing')
-    $app.save(nlRecord)
+  const resendKey =
+    $secrets.get('RESEND_API_KEY') ||
+    $os.getenv('RESEND_API_KEY') ||
+    $os.getenv('VITE_RESEND_API_KEY')
 
-    let successCount = 0
-    let failCount = 0
+  const subsRes = $http.send({
+    url: `${supabaseUrl}/rest/v1/subscribers?active=eq.true&select=*`,
+    method: 'GET',
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+    },
+  })
 
-    const logsCollection = $app.findCollectionByNameOrId('delivery_logs')
+  let subs = []
+  if (subsRes.statusCode === 200) {
+    subs = JSON.parse(subsRes.body)
+  }
 
-    if (subs.length > 0 && resendKey) {
-      const BATCH_SIZE = 100
+  const nlCreateRes = $http.send({
+    url: `${supabaseUrl}/rest/v1/newsletters`,
+    method: 'POST',
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify({
+      subject: body.subject,
+      content: body.content,
+      is_raw_html: !!body.is_raw_html,
+      edition: body.edition || null,
+      period: body.period || null,
+      main_title: body.main_title || null,
+      sections: body.sections || null,
+      cta_text: body.cta_text || null,
+      cta_url: body.cta_url || null,
+      recipient_count: subs.length,
+      status: 'processing',
+    }),
+  })
 
-      for (let i = 0; i < subs.length; i += BATCH_SIZE) {
-        const batchSubs = subs.slice(i, i + BATCH_SIZE)
-        const payload = batchSubs.map((s) => ({
-          from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
-          to: [s.get('email')],
-          subject: body.subject,
-          html: body.content,
-        }))
+  if (nlCreateRes.statusCode >= 300) {
+    throw new InternalServerError('Failed to create newsletter in Supabase: ' + nlCreateRes.body)
+  }
+  const nlRecords = JSON.parse(nlCreateRes.body)
+  const nlRecord = Array.isArray(nlRecords) ? nlRecords[0] : nlRecords
 
-        try {
-          const res = $http.send({
-            url: 'https://api.resend.com/emails/batch',
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${resendKey}`,
-            },
-            body: JSON.stringify(payload),
-            timeout: 30,
-          })
+  let successCount = 0
+  let failCount = 0
 
-          if (res.statusCode >= 200 && res.statusCode < 300) {
-            let resData = {}
-            try {
-              resData = JSON.parse(res.body)
-            } catch (e) {}
+  if (subs.length > 0 && resendKey) {
+    const BATCH_SIZE = 100
 
-            batchSubs.forEach((s, idx) => {
-              const log = new Record(logsCollection)
-              log.set('newsletter_id', nlRecord.id)
-              log.set('recipient_email', s.get('email'))
+    for (let i = 0; i < subs.length; i += BATCH_SIZE) {
+      const batchSubs = subs.slice(i, i + BATCH_SIZE)
+      const payload = batchSubs.map((s) => ({
+        from: 'Alexandre Andrade <alexandre@andradegestaointegrada.com.br>',
+        to: [s.email],
+        subject: body.subject,
+        html: body.content,
+      }))
 
-              if (resData && resData.data && resData.data[idx]) {
-                if (resData.data[idx].error) {
-                  log.set('status', 'failed')
-                  log.set('error_message', resData.data[idx].error.message || 'Error')
-                } else {
-                  log.set('status', 'delivered')
-                  log.set('error_message', `Resend ID: ${resData.data[idx].id}`)
-                }
-              } else {
-                log.set('status', 'delivered')
-              }
-              $app.save(log)
-            })
-            successCount += batchSubs.length
-          } else {
-            let errorMsg = `HTTP ${res.statusCode}`
-            try {
-              const parsed = JSON.parse(res.body)
-              errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${parsed.message || JSON.stringify(parsed)}`
-            } catch (err) {
-              errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
+      try {
+        const res = $http.send({
+          url: 'https://api.resend.com/emails/batch',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${resendKey}`,
+          },
+          body: JSON.stringify(payload),
+          timeout: 30,
+        })
+
+        const logsToInsert = []
+
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          let resData = {}
+          try {
+            resData = JSON.parse(res.body)
+          } catch (e) {}
+
+          batchSubs.forEach((s, idx) => {
+            const log = {
+              newsletter_id: nlRecord.id,
+              recipient_email: s.email,
             }
 
-            batchSubs.forEach((s) => {
-              const log = new Record(logsCollection)
-              log.set('newsletter_id', nlRecord.id)
-              log.set('recipient_email', s.get('email'))
-              log.set('status', 'failed')
-              log.set('error_message', errorMsg)
-              $app.save(log)
-            })
-            failCount += batchSubs.length
+            if (resData && resData.data && resData.data[idx]) {
+              if (resData.data[idx].error) {
+                log.status = 'failed'
+                log.error_message = resData.data[idx].error.message || 'Error'
+              } else {
+                log.status = 'delivered'
+                log.error_message = `Resend ID: ${resData.data[idx].id}`
+              }
+            } else {
+              log.status = 'delivered'
+            }
+            logsToInsert.push(log)
+          })
+          successCount += batchSubs.length
+        } else {
+          let errorMsg = `HTTP ${res.statusCode}`
+          try {
+            const parsed = JSON.parse(res.body)
+            errorMsg = `${res.statusCode} ${parsed.name || 'Error'}: ${
+              parsed.message || JSON.stringify(parsed)
+            }`
+          } catch (err) {
+            errorMsg = `HTTP ${res.statusCode}: ${res.body ? String(res.body) : 'Unknown error'}`
           }
-        } catch (err) {
+
           batchSubs.forEach((s) => {
-            const log = new Record(logsCollection)
-            log.set('newsletter_id', nlRecord.id)
-            log.set('recipient_email', s.get('email'))
-            log.set('status', 'failed')
-            log.set('error_message', err.message)
-            $app.save(log)
+            logsToInsert.push({
+              newsletter_id: nlRecord.id,
+              recipient_email: s.email,
+              status: 'failed',
+              error_message: errorMsg,
+            })
           })
           failCount += batchSubs.length
         }
-      }
 
-      if (failCount === 0) {
-        nlRecord.set('status', 'sent')
-      } else if (successCount === 0) {
-        nlRecord.set('status', 'failed')
-      } else {
-        nlRecord.set('status', 'partial')
-      }
-    } else {
-      nlRecord.set('status', 'failed')
-      failCount = subs.length
-
-      if (!resendKey && subs.length > 0) {
-        subs.forEach((s) => {
-          const log = new Record(logsCollection)
-          log.set('newsletter_id', nlRecord.id)
-          log.set('recipient_email', s.get('email'))
-          log.set('status', 'failed')
-          log.set('error_message', 'RESEND_API_KEY is not detected in the environment')
-          $app.save(log)
+        if (logsToInsert.length > 0) {
+          $http.send({
+            url: `${supabaseUrl}/rest/v1/delivery_logs`,
+            method: 'POST',
+            headers: {
+              apikey: supabaseKey,
+              Authorization: `Bearer ${supabaseKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(logsToInsert),
+          })
+        }
+      } catch (err) {
+        const logsToInsert = batchSubs.map((s) => ({
+          newsletter_id: nlRecord.id,
+          recipient_email: s.email,
+          status: 'failed',
+          error_message: err.message,
+        }))
+        $http.send({
+          url: `${supabaseUrl}/rest/v1/delivery_logs`,
+          method: 'POST',
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(logsToInsert),
         })
+        failCount += batchSubs.length
       }
     }
 
-    $app.save(nlRecord)
-
-    return e.json(200, {
-      message: 'Newsletter processed',
-      newsletterId: nlRecord.id,
-      successCount,
-      failCount,
+    const finalStatus = failCount === 0 ? 'sent' : successCount === 0 ? 'failed' : 'partial'
+    $http.send({
+      url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+      method: 'PATCH',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: finalStatus }),
     })
-  },
-  $apis.requireAuth(),
-)
+  } else {
+    failCount = subs.length
+
+    if (!resendKey && subs.length > 0) {
+      const logsToInsert = subs.map((s) => ({
+        newsletter_id: nlRecord.id,
+        recipient_email: s.email,
+        status: 'failed',
+        error_message: 'RESEND_API_KEY is not detected in the environment',
+      }))
+      $http.send({
+        url: `${supabaseUrl}/rest/v1/delivery_logs`,
+        method: 'POST',
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logsToInsert),
+      })
+    }
+
+    $http.send({
+      url: `${supabaseUrl}/rest/v1/newsletters?id=eq.${nlRecord.id}`,
+      method: 'PATCH',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: 'failed' }),
+    })
+  }
+
+  return e.json(200, {
+    message: 'Newsletter processed',
+    newsletterId: nlRecord.id,
+    successCount,
+    failCount,
+  })
+})

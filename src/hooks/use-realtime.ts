@@ -1,16 +1,12 @@
 import { useEffect, useRef } from 'react'
-import pb from '@/lib/pocketbase/client'
-import type { RecordSubscription } from 'pocketbase'
 
 /**
- * Hook for real-time subscriptions to a PocketBase collection.
- * ALWAYS use this hook instead of subscribing inline.
- * Uses the per-listener UnsubscribeFunc so multiple components
- * can safely subscribe to the same collection without conflicts.
+ * Hook for real-time subscriptions to a Supabase table.
+ * Uses short polling since native realtime requires supabase-js websocket.
  */
 export function useRealtime(
   collectionName: string,
-  callback: (data: RecordSubscription<any>) => void,
+  callback: (data: any) => void,
   enabled: boolean = true,
 ) {
   const callbackRef = useRef(callback)
@@ -19,26 +15,10 @@ export function useRealtime(
   useEffect(() => {
     if (!enabled) return
 
-    let unsubscribeFn: (() => Promise<void>) | undefined
-    let cancelled = false
+    const interval = setInterval(() => {
+      callbackRef.current({ action: 'poll', record: {} })
+    }, 5000)
 
-    pb.collection(collectionName)
-      .subscribe('*', (e) => {
-        callbackRef.current(e)
-      })
-      .then((fn) => {
-        if (cancelled) {
-          fn().catch(() => {})
-        } else {
-          unsubscribeFn = fn
-        }
-      })
-
-    return () => {
-      cancelled = true
-      if (unsubscribeFn) {
-        unsubscribeFn().catch(() => {})
-      }
-    }
+    return () => clearInterval(interval)
   }, [collectionName, enabled])
 }

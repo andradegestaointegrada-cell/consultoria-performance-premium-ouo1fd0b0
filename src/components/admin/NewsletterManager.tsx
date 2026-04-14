@@ -69,10 +69,12 @@ export function NewsletterManager() {
   useRealtime('newsletters', loadData)
 
   const selectedDateCampaigns = newsletters.filter(
-    (c) => format(new Date(c.created), 'yyyy-MM-dd') === format(date || new Date(), 'yyyy-MM-dd'),
+    (c) =>
+      format(new Date(c.created_at || c.created || new Date()), 'yyyy-MM-dd') ===
+      format(date || new Date(), 'yyyy-MM-dd'),
   )
 
-  const sentDates = newsletters.map((c) => new Date(c.created))
+  const sentDates = newsletters.map((c) => new Date(c.created_at || c.created || new Date()))
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import pb from '@/lib/pocketbase/client'
+import { supabaseFetch } from '@/lib/supabase/client'
 
 interface AuthContextType {
   user: any
@@ -18,23 +18,36 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<any>(pb.authStore.record)
+  const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = pb.authStore.onChange((_token, record) => {
-      setUser(record)
-    })
-    setLoading(false)
-    return () => {
-      unsubscribe()
+    const token = localStorage.getItem('sb-token')
+    if (token) {
+      supabaseFetch('/auth/v1/user')
+        .then((userData) => {
+          setUser(userData)
+        })
+        .catch(() => {
+          localStorage.removeItem('sb-token')
+          setUser(null)
+        })
+        .finally(() => setLoading(false))
+    } else {
+      setLoading(false)
     }
   }, [])
 
   const signUp = async (email: string, password: string) => {
     try {
-      await pb.collection('users').create({ email, password, passwordConfirm: password })
-      await pb.collection('users').authWithPassword(email, password)
+      const data = await supabaseFetch('/auth/v1/signup', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+      })
+      if (data && data.session) {
+        localStorage.setItem('sb-token', data.session.access_token)
+        setUser(data.user)
+      }
       return { error: null }
     } catch (error) {
       return { error }
@@ -43,7 +56,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      await pb.collection('users').authWithPassword(email, password)
+      const data = await supabaseFetch('/auth/v1/token?grant_type=password', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+      })
+      if (data && data.access_token) {
+        localStorage.setItem('sb-token', data.access_token)
+        setUser(data.user)
+      }
       return { error: null }
     } catch (error) {
       return { error }
@@ -51,7 +71,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const signOut = () => {
-    pb.authStore.clear()
+    localStorage.removeItem('sb-token')
+    setUser(null)
   }
 
   return (

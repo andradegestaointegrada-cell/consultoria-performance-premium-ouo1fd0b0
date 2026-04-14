@@ -1,4 +1,4 @@
-import pb from '@/lib/pocketbase/client'
+import { supabaseFetch } from '@/lib/supabase/client'
 
 export interface Subscriber {
   id: string
@@ -6,7 +6,8 @@ export interface Subscriber {
   source: string
   lgpdAgreed: boolean
   active: boolean
-  created: string
+  created?: string
+  created_at?: string
 }
 
 export interface Newsletter {
@@ -22,7 +23,8 @@ export interface Newsletter {
   cta_url?: string
   recipient_count: number
   status: string
-  created: string
+  created?: string
+  created_at?: string
 }
 
 export interface StructuredNewsletterData {
@@ -42,32 +44,57 @@ export interface DeliveryLog {
   recipient_email: string
   status: string
   error_message: string
-  created: string
+  created?: string
+  created_at?: string
 }
 
-export const getSubscribers = () =>
-  pb.collection('subscribers').getFullList<Subscriber>({ sort: '-created' })
+export const getSubscribers = () => supabaseFetch('/rest/v1/subscribers?order=created_at.desc')
+
 export const createSubscriber = (data: Partial<Subscriber>) =>
-  pb.collection('subscribers').create(data)
-
-export const getNewsletters = () =>
-  pb.collection('newsletters').getFullList<Newsletter>({ sort: '-created' })
-export const getDeliveryLogs = (newsletterId: string) =>
-  pb
-    .collection('delivery_logs')
-    .getFullList<DeliveryLog>({ filter: `newsletter_id="${newsletterId}"`, sort: '-created' })
-
-export const sendNewsletter = (data: StructuredNewsletterData & { content: string }) =>
-  pb.send('/backend/v1/newsletter/send', {
+  supabaseFetch('/rest/v1/subscribers', {
     method: 'POST',
+    headers: { Prefer: 'return=representation' },
+    body: JSON.stringify(data),
+  }).then((res: any) => res[0])
+
+export const getNewsletters = () => supabaseFetch('/rest/v1/newsletters?order=created_at.desc')
+
+export const getDeliveryLogs = (newsletterId: string) =>
+  supabaseFetch(`/rest/v1/delivery_logs?newsletter_id=eq.${newsletterId}&order=created_at.desc`)
+
+export const sendNewsletter = async (data: StructuredNewsletterData & { content: string }) => {
+  const token = localStorage.getItem('sb-token')
+  const res = await fetch(import.meta.env.VITE_POCKETBASE_URL + '/backend/v1/newsletter/send', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     body: JSON.stringify(data),
   })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message || 'Failed to send')
+  }
+  return res.json()
+}
 
-export const sendTestNewsletter = (
+export const sendTestNewsletter = async (
   email: string,
   data: StructuredNewsletterData & { content: string },
-) =>
-  pb.send('/backend/v1/newsletter/test', {
+) => {
+  const token = localStorage.getItem('sb-token')
+  const res = await fetch(import.meta.env.VITE_POCKETBASE_URL + '/backend/v1/newsletter/test', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     body: JSON.stringify({ email, ...data }),
   })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.message || 'Failed to send test email')
+  }
+  return res.json()
+}
