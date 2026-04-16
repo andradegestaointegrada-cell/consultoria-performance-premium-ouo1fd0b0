@@ -71,14 +71,19 @@ export const getDeliveryLogs = (newsletterId: string) =>
   supabaseFetch(`/rest/v1/delivery_logs?newsletter_id=eq.${newsletterId}&order=created_at.desc`)
 
 export const sendNewsletter = async (data: StructuredNewsletterData & { content: string }) => {
-  const token = localStorage.getItem('sb-token')
-  const res = await fetch(import.meta.env.VITE_POCKETBASE_URL + '/backend/v1/newsletter/send', {
+  const url = import.meta.env.VITE_SUPABASE_URL
+    ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/newsletter-send`
+    : 'https://mftirdjnmkegomoirmcc.supabase.co/functions/v1/newsletter-send'
+  const token =
+    import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_ZAXR7qW-S290nU3FP1hMPQ_VYWQPgIG'
+
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({ type: 'send', ...data }),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
@@ -91,14 +96,19 @@ export const sendTestNewsletter = async (
   email: string,
   data: StructuredNewsletterData & { content: string },
 ) => {
-  const token = localStorage.getItem('sb-token')
-  const res = await fetch(import.meta.env.VITE_POCKETBASE_URL + '/backend/v1/newsletter/test', {
+  const url = import.meta.env.VITE_SUPABASE_URL
+    ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/newsletter-send`
+    : 'https://mftirdjnmkegomoirmcc.supabase.co/functions/v1/newsletter-send'
+  const token =
+    import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_ZAXR7qW-S290nU3FP1hMPQ_VYWQPgIG'
+
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ email, ...data }),
+    body: JSON.stringify({ type: 'test', email, ...data }),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
