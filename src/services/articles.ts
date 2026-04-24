@@ -1,40 +1,35 @@
 import pb from '@/lib/pocketbase/client'
+import type { RecordModel } from 'pocketbase'
 
-export interface Article {
-  id: string
+export interface Article extends RecordModel {
   title: string
   slug: string
   summary: string
   content: string
   category: string
   image: string
-  is_highlighted?: boolean
   published_date: string
-  created: string
-  updated: string
+  is_highlighted: boolean
 }
 
-export const getArticles = () =>
-  pb.collection('articles').getFullList<Article>({ sort: '-created' })
+export async function getArticles(): Promise<Article[]> {
+  return pb.collection('articles').getFullList<Article>({
+    sort: '-published_date',
+  })
+}
 
-export const getArticleBySlug = (slug: string) =>
-  pb.collection('articles').getFirstListItem<Article>(`slug="${slug}"`)
+export async function getArticleBySlug(slug: string): Promise<Article> {
+  return pb.collection('articles').getFirstListItem<Article>(`slug="${slug}"`)
+}
 
-export const getArticleImage = (article: Article) => {
-  if (article.image) return pb.files.getUrl(article, article.image)
-
-  if (article.slug.includes('14001')) {
-    return 'https://img.usecurling.com/p/1200/600?q=environment%20corporate&color=black'
-  }
-  if (article.slug.includes('9001')) {
-    return 'https://img.usecurling.com/p/1200/600?q=quality%20management&color=black'
-  }
-  if (article.slug.includes('lideranca')) {
-    return 'https://img.usecurling.com/p/1200/600?q=corporate%20leadership&color=black'
-  }
-  if (article.slug.includes('pit-stop')) {
-    return 'https://img.usecurling.com/p/1200/600?q=f1%20pit%20stop&color=black'
+export function getArticleImage(article: Article): string {
+  if (!article.image) {
+    return 'https://i.postimg.cc/Y2vzQnbp/BLOG_PAGE.jpg'
   }
 
-  return `https://img.usecurling.com/p/1200/600?q=business&color=black&seed=${article.id}`
+  if (article.image.startsWith('http://') || article.image.startsWith('https://')) {
+    return article.image
+  }
+
+  return pb.files.getUrl(article, article.image)
 }
