@@ -15,7 +15,7 @@ export interface Article {
 }
 
 export const getArticles = () =>
-  pb.collection('articles').getFullList<Article>({ sort: '-published_date' })
+  pb.collection('articles').getFullList<Article>({ sort: '-created' })
 
 export const getArticleBySlug = (slug: string) =>
   pb.collection('articles').getFirstListItem<Article>(`slug="${slug}"`)

@@ -30,7 +30,13 @@ export default function Insights() {
         ? articles[0]
         : null
 
-  const rest = articles.filter((a) => a.id !== featured?.id)
+  const rest = articles
+    .filter((a) => a.id !== featured?.id)
+    .sort((a, b) => {
+      if (a.is_highlighted && !b.is_highlighted) return -1
+      if (!a.is_highlighted && b.is_highlighted) return 1
+      return 0
+    })
 
   return (
     <div className="pt-20 min-h-screen bg-background">
