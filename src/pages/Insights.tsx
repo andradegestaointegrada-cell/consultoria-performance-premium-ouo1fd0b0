@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
-import { getArticles, type Article } from '@/services/articles'
-import pb from '@/lib/pocketbase/client'
+import { getArticles, getArticleImage, type Article } from '@/services/articles'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -82,11 +81,7 @@ export default function Insights() {
                       )}
                     >
                       <img
-                        src={
-                          featured.image
-                            ? pb.files.getUrl(featured, featured.image)
-                            : 'https://img.usecurling.com/p/1200/600?q=corporate%20strategy&color=black'
-                        }
+                        src={getArticleImage(featured)}
                         alt={featured.title}
                         className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
                       />
@@ -134,11 +129,7 @@ export default function Insights() {
                         >
                           <div className="aspect-video overflow-hidden relative">
                             <img
-                              src={
-                                article.image
-                                  ? pb.files.getUrl(article, article.image)
-                                  : `https://img.usecurling.com/p/600/400?q=business&color=black&seed=${i}`
-                              }
+                              src={getArticleImage(article)}
                               alt={article.title}
                               className="w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                             />

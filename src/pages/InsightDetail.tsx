@@ -3,8 +3,7 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react'
-import { getArticleBySlug, type Article } from '@/services/articles'
-import pb from '@/lib/pocketbase/client'
+import { getArticleBySlug, getArticleImage, type Article } from '@/services/articles'
 
 export default function InsightDetail() {
   const { slug } = useParams()
@@ -77,11 +76,7 @@ export default function InsightDetail() {
         <Reveal delay={100}>
           <div className="aspect-video w-full rounded-2xl overflow-hidden mb-16 border-2 border-border">
             <img
-              src={
-                article.image
-                  ? pb.files.getUrl(article, article.image)
-                  : 'https://img.usecurling.com/p/1200/600?q=office%20strategy&color=black'
-              }
+              src={getArticleImage(article)}
               alt={article.title}
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
