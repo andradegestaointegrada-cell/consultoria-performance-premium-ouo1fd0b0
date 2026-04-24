@@ -49,7 +49,7 @@ export default function Contact() {
                       Sede Operacional
                     </p>
                     <p className="text-sm text-muted-foreground mt-1 font-sans">
-                      Rua Paes Leme 215, Conj 1713
+                      Rua Pais Leme 215, Conj 1713
                     </p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function Contact() {
             <div className="h-64 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
               <img
                 src="https://i.postimg.cc/3x66q0Gv/MATRIZ-AGI-PAES-LEME-215-CJ1713.png"
-                alt="Matriz AGI Paes Leme"
+                alt="Matriz AGI Pais Leme"
                 className="w-full h-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
             </div>

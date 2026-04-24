@@ -76,7 +76,7 @@ export function Footer() {
               <p className="text-sm font-bold text-foreground uppercase tracking-wider mb-2">
                 Sede Operacional
               </p>
-              <p className="text-sm text-muted-foreground">Rua Paes Leme 215, Conj 1713</p>
+              <p className="text-sm text-muted-foreground">Rua Pais Leme 215, Conj 1713</p>
             </div>
             <div className="flex gap-4">
               <a
