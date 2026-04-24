@@ -1,17 +1,46 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, CheckCircle2, ArrowRight } from 'lucide-react'
-import { insightsData } from '@/data/insights'
+import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react'
+import { getArticleBySlug, type Article } from '@/services/articles'
+import pb from '@/lib/pocketbase/client'
 
 export default function InsightDetail() {
   const { slug } = useParams()
+  const [article, setArticle] = useState<Article | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
-  // Fallback to the first article (ISO 9001) if the specific slug is not defined in our detailed data yet
-  const article =
-    slug && insightsData[slug] ? insightsData[slug] : insightsData['o-futuro-da-qualidade']
+  useEffect(() => {
+    if (!slug) return
+    getArticleBySlug(slug)
+      .then((data) => {
+        setArticle(data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error(err)
+        setError(true)
+        setLoading(false)
+      })
+  }, [slug])
 
-  if (!article) return <Navigate to="/insights" replace />
+  if (loading) {
+    return (
+      <div className="pt-32 pb-16 min-h-screen flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
+
+  if (error || !article) return <Navigate to="/insights" replace />
+
+  const formattedDate = new Date(article.published_date).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  })
 
   return (
     <div className="pt-24 pb-16 bg-background min-h-screen">
@@ -27,22 +56,32 @@ export default function InsightDetail() {
             </Link>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-primary font-bold text-sm uppercase tracking-widest">
-                {article.category}
+                {article.category || 'Insight Estratégico'}
               </span>
-              <span className="text-muted-foreground text-sm font-medium uppercase tracking-wider">
-                {article.readTime}
+              <span className="text-muted-foreground text-sm font-medium uppercase tracking-wider flex items-center">
+                <Calendar className="w-4 h-4 mr-2" />
+                {formattedDate}
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide leading-tight">
               {article.title}
             </h1>
+            {article.summary && (
+              <p className="text-xl md:text-2xl text-muted-foreground font-medium mb-10 leading-relaxed border-l-4 border-primary pl-6">
+                {article.summary}
+              </p>
+            )}
           </div>
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="aspect-video w-full rounded-2xl overflow-hidden mb-12 border-2 border-border">
+          <div className="aspect-video w-full rounded-2xl overflow-hidden mb-16 border-2 border-border">
             <img
-              src={article.image}
+              src={
+                article.image
+                  ? pb.files.getUrl(article, article.image)
+                  : 'https://img.usecurling.com/p/1200/600?q=office%20strategy&color=black'
+              }
               alt={article.title}
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
@@ -50,108 +89,43 @@ export default function InsightDetail() {
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="space-y-8 text-lg text-muted-foreground leading-relaxed">
-            <p className="text-xl md:text-2xl text-foreground font-medium mb-10 leading-relaxed">
-              {article.intro}
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide">
-              {article.pillarsTitle}
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-6 mb-12">
-              {article.pillars.map((pillar: any, i: number) => (
-                <div
-                  key={i}
-                  className="bg-card p-6 md:p-8 rounded-xl border border-border hover:border-primary transition-colors"
-                >
-                  <h3 className="text-primary font-bold text-xl mb-3 uppercase tracking-wide">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-muted-foreground">{pillar.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <h2 className="text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide">
-              {article.tableTitle}
-            </h2>
-            <div className="overflow-x-auto mb-12">
-              <table className="w-full text-left border-collapse min-w-[600px]">
-                <thead>
-                  <tr className="border-b-2 border-primary text-foreground uppercase tracking-wider text-sm">
-                    {article.tableHeaders.map((header: string, i: number) => (
-                      <th key={i} className="py-4 px-4 font-bold w-1/3">
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="text-muted-foreground">
-                  {article.tableRows.map((row: any, i: number) => (
-                    <tr
-                      key={i}
-                      className="border-b border-border hover:bg-muted/50 transition-colors"
-                    >
-                      <td className="py-4 px-4 font-bold text-foreground">{row.label}</td>
-                      <td className="py-4 px-4">{row.old}</td>
-                      <td className="py-4 px-4 font-semibold text-primary">{row.new}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <h2 className="text-2xl md:text-3xl font-heading font-bold mt-16 mb-8 text-foreground border-b border-border pb-4 uppercase tracking-wide">
-              {article.conclusionTitle}
-            </h2>
-            <p className="mb-8">{article.conclusionText}</p>
-            <ul className="space-y-4 my-8">
-              {article.bullets.map((item: string, i: number) => (
-                <li key={i} className="flex items-start gap-4">
-                  <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />
-                  <span className="text-foreground font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="bg-primary/10 border-2 border-primary/20 rounded-2xl p-8 md:p-12 my-16 text-center shadow-[0_0_30px_rgba(207,174,112,0.15)]">
-              <div className="text-6xl md:text-8xl font-heading font-bold text-primary mb-6 drop-shadow-sm">
-                {article.statsNumber}
-              </div>
-              <p className="text-2xl font-bold text-foreground uppercase tracking-wide mb-4">
-                {article.statsTitle}
-              </p>
-              <p className="text-muted-foreground text-lg max-w-xl mx-auto">{article.statsDesc}</p>
-            </div>
-          </div>
+          {/* Custom scoped styling for raw HTML injected content without requiring Tailwind Typography plugin */}
+          <div
+            className="
+              text-lg text-muted-foreground leading-relaxed mb-16
+              [&>p]:mb-6
+              [&>h2]:text-3xl [&>h2]:md:text-4xl [&>h2]:font-heading [&>h2]:font-bold [&>h2]:text-foreground [&>h2]:mb-6 [&>h2]:mt-16 [&>h2]:uppercase [&>h2]:tracking-wide [&>h2]:border-b [&>h2]:border-border [&>h2]:pb-4
+              [&>h3]:text-2xl [&>h3]:font-heading [&>h3]:font-bold [&>h3]:text-foreground [&>h3]:mb-4 [&>h3]:mt-10 [&>h3]:uppercase [&>h3]:tracking-wide
+              [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-8 [&>ul]:space-y-4
+              [&>ul>li>strong]:text-primary [&>ul>li>strong]:font-bold
+              [&>strong]:text-foreground [&>strong]:font-semibold
+              [&>a]:text-primary [&>a]:underline [&>a]:hover:text-primary/80
+              [&>blockquote]:border-l-4 [&>blockquote]:border-primary [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:my-8 [&>blockquote]:text-xl
+            "
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          />
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="mt-20 p-8 md:p-16 bg-card rounded-2xl border-2 border-primary text-center relative overflow-hidden group">
+          <div className="mt-20 p-8 md:p-12 bg-card rounded-2xl border-2 border-primary text-center relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-                {article.ctaTitle}
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                Diagnóstico Especializado
               </h3>
-              <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-                {article.ctaText}
+              <p className="text-lg md:text-xl text-foreground font-medium mb-10 max-w-3xl mx-auto leading-relaxed">
+                &rarr; Entre em contato com a AGI e descubra como conduzir a transição para a ISO
+                14001:2026 de forma planejada, eficiente e alinhada aos objetivos do seu negócio.
               </p>
               <Button
                 size="lg"
                 asChild
-                className="h-14 px-10 text-base uppercase font-bold tracking-widest shadow-[0_0_20px_rgba(207,174,112,0.3)]"
+                className="h-14 px-10 text-base uppercase font-bold tracking-widest shadow-[0_0_20px_rgba(207,174,112,0.3)] hover:scale-105 transition-transform"
               >
-                {article.ctaLink.startsWith('mailto:') ? (
-                  <a href={article.ctaLink}>
-                    {article.ctaBtnText}
-                    <ArrowRight className="ml-3 h-5 w-5" />
-                  </a>
-                ) : (
-                  <Link to={article.ctaLink}>
-                    {article.ctaBtnText}
-                    <ArrowRight className="ml-3 h-5 w-5" />
-                  </Link>
-                )}
+                <Link to="/contato">
+                  Fale com um Especialista
+                  <ArrowRight className="ml-3 h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
