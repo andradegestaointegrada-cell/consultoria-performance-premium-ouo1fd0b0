@@ -52,11 +52,7 @@ export default function ServiceDetail() {
                   O que entregamos
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Implementamos soluções de alta performance onde a certificação atua como uma
-                  alavanca estratégica para a eficiência operacional e a redução de desperdícios.
-                  Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão
-                  de Riscos Operacionais, Estruturação de Indicadores de Desempenho (KPIs) e
-                  Auditoria de Prontidão, consolidando operações robustas e previsíveis.
+                  {svc.deliverablesText}
                 </p>
               </div>
               <div className="relative rounded-2xl overflow-hidden border border-primary/20 bg-card p-2 shadow-[0_0_30px_rgba(207,174,112,0.1)]">

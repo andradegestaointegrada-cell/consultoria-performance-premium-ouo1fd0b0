@@ -6,6 +6,7 @@ export interface ServiceData {
   w: string
   methodologyDetails: string
   trainingPillars: string[]
+  deliverablesText: string
 }
 
 export const S_DATA: Record<string, ServiceData> = {
@@ -23,6 +24,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Formação de Auditores Internos ISO 9001',
       'Tratamento de Não Conformidades (MASP/8D)',
     ],
+    deliverablesText:
+      'Implementamos soluções de alta performance onde a certificação atua como uma alavanca estratégica para a eficiência operacional e a redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Operacionais, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando operações robustas e previsíveis.',
   },
   'iso-14001': {
     t: 'ISO 14001',
@@ -38,6 +41,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Gestão de Resíduos e Efluentes',
       'Auditoria Interna Ambiental',
     ],
+    deliverablesText:
+      'Implementamos soluções de alta performance onde a certificação atua como uma alavanca estratégica para a eficiência ambiental e otimização de recursos, mitigando passivos e focando na redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Ambientais, Estruturação de Indicadores de Desempenho (KPIs) de Sustentabilidade e Auditoria de Prontidão, consolidando operações sustentáveis e em total compliance.',
   },
   'iso-45001': {
     t: 'ISO 45001',
@@ -53,6 +58,25 @@ export const S_DATA: Record<string, ServiceData> = {
       'Investigação de Acidentes e Incidentes',
       'Formação de Auditores Internos ISO 45001',
     ],
+    deliverablesText:
+      'Implementamos soluções focadas na mitigação de perigos e na resiliência operacional, onde a certificação atua como alavanca estratégica para a máxima eficiência e redução de desperdícios ligados a incidentes. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Ocupacionais, Estruturação de KPIs de Segurança e Auditoria de Prontidão, consolidando um ambiente de trabalho seguro e produtivo.',
+  },
+  sgi: {
+    t: 'SGI (Sistema de Gestão Integrada)',
+    d: 'Sinergia e máxima eficiência através da integração de múltiplas normas em um único sistema.',
+    hi: 'https://img.usecurling.com/p/1920/1080?q=integrated%20management%20system&dpr=2',
+    ci: 'https://img.usecurling.com/p/800/600?q=business%20process%20integration&dpr=2',
+    w: 'Eliminação de redundâncias operacionais e visão unificada dos resultados.',
+    methodologyDetails:
+      'Nossa abordagem para o SGI foca na eliminação de redundâncias e na criação de sinergia entre normas (como ISO 9001, 14001 e 45001). Harmonizamos a base documental e os ciclos de auditoria para potencializar os resultados integrados da organização.',
+    trainingPillars: [
+      'Interpretação Integrada de Requisitos (Anexo SL)',
+      'Auditoria Interna de SGI',
+      'Tratamento de Não Conformidades Sistêmicas',
+      'Gestão de Indicadores Integrados',
+    ],
+    deliverablesText:
+      'Implementamos soluções de alta performance focadas na eliminação de redundâncias e na sinergia entre normas, onde o sistema atua como alavanca estratégica para a eficiência operacional e a redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Integrados, Estruturação de KPIs Multidimensionais e Auditoria de Prontidão, consolidando uma gestão corporativa unificada e de excelência.',
   },
   'pbqp-h': {
     t: 'PBQP-H',
@@ -68,6 +92,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Gestão de Resíduos na Construção Civil',
       'Indicadores de Produtividade e Desperdício',
     ],
+    deliverablesText:
+      'Implementamos soluções direcionadas ao canteiro de obras, onde a certificação atua como alavanca estratégica para a eficiência construtiva e a redução de desperdícios de materiais. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Construtivos, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando projetos rentáveis e em conformidade com o SiMAC.',
   },
   'iatf-16949': {
     t: 'IATF 16949',
@@ -83,6 +109,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Resolução de Problemas (8D/MASP)',
       'Auditoria de Processo e Produto (VDA 6.3)',
     ],
+    deliverablesText:
+      'Implementamos soluções de alta performance para a cadeia automotiva, onde a certificação atua como alavanca estratégica para a eficiência operacional, prevenção de defeitos e redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Automotivos, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando a confiabilidade do fornecimento.',
   },
   'iso-17020': {
     t: 'ISO/IEC 17020',
@@ -98,6 +126,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Critérios de Competência Técnica',
       'Formação de Auditores ISO 17020',
     ],
+    deliverablesText:
+      'Implementamos soluções para organismos de inspeção, onde a acreditação atua como alavanca estratégica para a eficiência técnica e a redução de desperdícios operacionais. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos de Imparcialidade, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando operações precisas e processos imparciais.',
   },
   'iso-17025': {
     t: 'ISO/IEC 17025',
@@ -113,6 +143,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Garantia da Validade dos Resultados',
       'Auditoria Interna ISO 17025',
     ],
+    deliverablesText:
+      'Implementamos soluções para laboratórios, onde a acreditação atua como alavanca estratégica para a eficiência analítica e a redução de desperdícios de recursos. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Laboratoriais, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando a validade técnica de ensaios e calibrações.',
   },
   sassmaq: {
     t: 'SASSMAQ',
@@ -128,6 +160,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Comportamento Seguro e Direção Defensiva',
       'Inspeção e Manutenção de Frota',
     ],
+    deliverablesText:
+      'Implementamos soluções logísticas, onde a avaliação SASSMAQ atua como alavanca estratégica para a eficiência no transporte e a redução de desperdícios operacionais. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos no Transporte, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando operações logísticas seguras e preparadas para emergências.',
   },
   esg: {
     t: 'Consultoria ESG',
@@ -143,6 +177,8 @@ export const S_DATA: Record<string, ServiceData> = {
       'Governança, Ética e Compliance',
       'Relatórios de Sustentabilidade (GRI/SASB)',
     ],
+    deliverablesText:
+      'Implementamos soluções corporativas integradas, onde a jornada ESG atua como alavanca estratégica para a eficiência do negócio e a redução de desperdícios ao longo de toda a cadeia de valor. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Corporativos (ESG), Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando práticas transparentes e sustentáveis.',
   },
 }
 
@@ -160,6 +196,8 @@ export const DEF: ServiceData = {
     'Gestão de Indicadores de Performance (KPIs)',
     'Formação de Multiplicadores Internos',
   ],
+  deliverablesText:
+    'Implementamos soluções de alta performance onde a nossa consultoria atua como uma alavanca estratégica para a eficiência operacional e a severa redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Operacionais, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando operações robustas, seguras e altamente previsíveis.',
 }
 
 export const STEPS = [
