@@ -4,6 +4,7 @@ import { Reveal } from '@/components/ui/reveal'
 import { getArticles, type Article } from '@/services/articles'
 import pb from '@/lib/pocketbase/client'
 import { ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function Insights() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -21,8 +22,15 @@ export default function Insights() {
       })
   }, [])
 
-  const featured = articles.length > 0 ? articles[0] : null
-  const rest = articles.length > 1 ? articles.slice(1) : []
+  const highlightedArticles = articles.filter((a) => a.is_highlighted)
+  const featured =
+    highlightedArticles.length > 0
+      ? highlightedArticles[0]
+      : articles.length > 0
+        ? articles[0]
+        : null
+
+  const rest = articles.filter((a) => a.id !== featured?.id)
 
   return (
     <div className="pt-20 min-h-screen bg-background">
@@ -56,11 +64,16 @@ export default function Insights() {
                 <Reveal>
                   <div className="mb-20">
                     <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
-                      Destaque
+                      {featured.is_highlighted ? 'Em Destaque' : 'Último Artigo'}
                     </h2>
                     <Link
                       to={`/insights/${featured.slug}`}
-                      className="relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 border-border hover:border-primary transition-colors duration-500 group block"
+                      className={cn(
+                        'relative rounded-2xl overflow-hidden flex flex-col justify-end min-h-[450px] md:min-h-[500px] border-2 transition-all duration-500 group block',
+                        featured.is_highlighted
+                          ? 'border-primary ring-2 ring-primary/40 shadow-lg shadow-primary/20'
+                          : 'border-border hover:border-primary',
+                      )}
                     >
                       <img
                         src={
@@ -73,8 +86,13 @@ export default function Insights() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent" />
                       <div className="relative z-10 p-6 md:p-10 max-w-4xl">
-                        <div className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3 font-sans">
-                          {featured.category || 'Estratégia'}
+                        <div className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3 font-sans flex items-center gap-3">
+                          {featured.is_highlighted && (
+                            <span className="bg-primary text-primary-foreground px-2.5 py-0.5 rounded-sm shadow-sm">
+                              Destaque Especial
+                            </span>
+                          )}
+                          <span>{featured.category || 'Estratégia'}</span>
                         </div>
                         <h3 className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4 group-hover:text-primary transition-colors uppercase tracking-wide leading-tight">
                           {featured.title}
@@ -94,14 +112,19 @@ export default function Insights() {
               {rest.length > 0 && (
                 <>
                   <h2 className="text-2xl font-heading font-bold text-foreground mb-8 border-b border-border pb-4 uppercase tracking-wide">
-                    Últimos Artigos
+                    Outros Artigos
                   </h2>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {rest.map((article, i) => (
                       <Reveal key={article.id} delay={i * 100}>
                         <Link
                           to={`/insights/${article.slug}`}
-                          className="group h-full bg-card rounded-xl overflow-hidden border-2 border-border hover:border-primary transition-colors duration-300 flex flex-col block"
+                          className={cn(
+                            'group h-full bg-card rounded-xl overflow-hidden border-2 transition-all duration-300 flex flex-col block relative',
+                            article.is_highlighted
+                              ? 'border-primary ring-1 ring-primary/40 shadow-md'
+                              : 'border-border hover:border-primary',
+                          )}
                         >
                           <div className="aspect-video overflow-hidden relative">
                             <img
@@ -116,8 +139,13 @@ export default function Insights() {
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
                           </div>
                           <div className="p-6 flex-grow flex flex-col">
-                            <div className="text-primary text-xs font-bold uppercase tracking-widest mb-3 font-sans">
-                              {article.category || 'Insights'}
+                            <div className="text-primary text-xs font-bold uppercase tracking-widest mb-3 font-sans flex items-center gap-2">
+                              {article.is_highlighted && (
+                                <span className="bg-primary text-primary-foreground px-2 py-0.5 rounded-sm">
+                                  Destaque
+                                </span>
+                              )}
+                              <span>{article.category || 'Insights'}</span>
                             </div>
                             <h4 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight mb-4">
                               {article.title}

@@ -8,6 +8,7 @@ export interface Article {
   content: string
   category: string
   image: string
+  is_highlighted?: boolean
   published_date: string
   created: string
   updated: string

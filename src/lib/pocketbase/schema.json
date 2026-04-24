@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-24T20:51:15.453Z",
+  "generatedAt": "2026-04-24T21:04:10.133Z",
   "collections": [
     {
       "name": "users",
@@ -309,6 +309,12 @@
           "required": false,
           "system": false,
           "autodateTriggers": ["onCreate", "onUpdate"]
+        },
+        {
+          "name": "is_highlighted",
+          "type": "bool",
+          "required": false,
+          "system": false
         }
       ],
       "indexes": ["CREATE UNIQUE INDEX idx_articles_slug ON articles (slug)"]
