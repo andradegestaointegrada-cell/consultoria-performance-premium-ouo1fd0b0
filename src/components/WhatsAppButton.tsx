@@ -1,17 +1,11 @@
 import { cn } from '@/lib/utils'
 
 export function WhatsAppButton() {
-  // Use the env variable or a fallback default format
-  const rawNumber = import.meta.env.VITE_ADMIN_WHATSAPP_NUMBER || '+5511986134789'
-
-  // Clean the number to contain only digits for the wa.me link
-  const cleanNumber = rawNumber.replace(/\D/g, '')
-
   const message =
     'Olá! Gostaria de solicitar um orçamento e tirar algumas dúvidas sobre os serviços da AGI.'
   const encodedMessage = encodeURIComponent(message)
 
-  const waUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`
+  const waUrl = `https://wa.me/5511986134789?text=${encodedMessage}`
 
   return (
     <a
