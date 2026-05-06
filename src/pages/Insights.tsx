@@ -83,9 +83,10 @@ export default function Insights() {
                       <img
                         src={getArticleImage(featured)}
                         alt={featured.title}
-                        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent" />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent pointer-events-none" />
                       <div className="relative z-10 p-6 md:p-10 max-w-4xl">
                         <div className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3 font-sans flex items-center gap-3">
                           {featured.is_highlighted && (
