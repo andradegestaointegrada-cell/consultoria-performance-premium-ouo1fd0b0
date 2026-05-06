@@ -131,7 +131,7 @@ export default function Insights() {
                             <img
                               src={getArticleImage(article)}
                               alt={article.title}
-                              className="w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                              className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
                           </div>
