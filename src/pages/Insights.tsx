@@ -3,6 +3,32 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { getArticles, getArticleImage, type Article } from '@/services/articles'
 import { ArrowRight } from 'lucide-react'
+
+const resolveImage = (article: Article) => {
+  const anyArticle = article as any
+  // Use direct HTTP URLs if stored in the database by our migration
+  if (
+    anyArticle.image &&
+    typeof anyArticle.image === 'string' &&
+    anyArticle.image.startsWith('http')
+  ) {
+    return anyArticle.image
+  }
+
+  // Use the standard getArticleImage function for normal file fields
+  const img = getArticleImage(article)
+  if (img) return img
+
+  // Provide robust fallbacks based on thematic keywords
+  const title = (article.title || '').toUpperCase()
+  if (title.includes('LIDERANÇA')) return 'https://img.usecurling.com/p/800/600?q=leadership'
+  if (title.includes('MAPEAMENTO'))
+    return 'https://img.usecurling.com/p/800/600?q=business%20process'
+  if (title.includes('PIT STOP')) return 'https://img.usecurling.com/p/800/600?q=pit%20stop'
+  if (title.includes('ISO')) return 'https://img.usecurling.com/p/800/600?q=quality%20management'
+
+  return 'https://img.usecurling.com/p/800/600?q=business'
+}
 import { cn } from '@/lib/utils'
 
 export default function Insights() {
@@ -81,7 +107,7 @@ export default function Insights() {
                       )}
                     >
                       <img
-                        src={getArticleImage(featured)}
+                        src={resolveImage(featured)}
                         alt={featured.title}
                         className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                       />
@@ -130,7 +156,7 @@ export default function Insights() {
                         >
                           <div className="aspect-video overflow-hidden relative">
                             <img
-                              src={getArticleImage(article)}
+                              src={resolveImage(article)}
                               alt={article.title}
                               className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                             />
