@@ -8,7 +8,7 @@ const services = [
     id: 'iso-9001',
     title: 'ISO 9001',
     desc: 'Gestão da Qualidade',
-    img: 'https://img.usecurling.com/p/600/400?q=precision%20engineering&color=black',
+    img: 'https://images.unsplash.com/photo-1748347084012-075796185d56?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 'iso-14001',
@@ -20,7 +20,7 @@ const services = [
     id: 'iso-45001',
     title: 'ISO 45001',
     desc: 'Saúde e Segurança',
-    img: 'https://img.usecurling.com/p/600/400?q=safety%20industry&color=black',
+    img: 'https://images.unsplash.com/photo-1748027869634-fc2e545cfb0c?auto=format&fit=crop&q=80&w=800',
   },
 ]
 
