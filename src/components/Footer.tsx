@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { Linkedin, Facebook, Mail, Phone } from 'lucide-react'
 import { EMAIL_CONTATO, WHATSAPP, WHATSAPP_URL } from '@/lib/api'
 import { NewsletterSignup } from '@/components/NewsletterSignup'
-import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
-import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.webp'
+import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.webp'
 
 export function Footer() {
   return (
@@ -87,9 +87,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h3 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Navegação
-            </h2>
+            </h3>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
                 <Link to="/sobre" className="hover:text-primary transition-colors duration-300">
@@ -106,7 +106,7 @@ export function Footer() {
                   to="/metodologia"
                   className="hover:text-primary transition-colors duration-300"
                 >
-                  Metodologia
+                  Treinamentos
                 </Link>
               </li>
               <li>
@@ -123,9 +123,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h3 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Legal
-            </h2>
+            </h3>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
                 <Link
@@ -155,9 +155,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h3 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Newsletter
-            </h2>
+            </h3>
             <p className="text-sm text-muted-foreground mb-6">
               Conteúdo quinzenal sobre sistemas de gestão, normas ISO e conformidade.
             </p>

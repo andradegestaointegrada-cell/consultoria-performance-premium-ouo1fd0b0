@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './ThemeToggle'
-import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
-import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.webp'
+import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.webp'
 
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Sobre', path: '/sobre' },
   { name: 'Serviços', path: '/servicos' },
-  { name: 'Metodologia', path: '/metodologia' },
+  { name: 'Treinamentos', path: '/metodologia' },
   { name: 'Cases', path: '/cases' },
   { name: 'Blog', path: '/insights' },
   { name: 'Contato', path: '/contato' },
@@ -104,6 +104,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
+                aria-label="Abrir menu de navegação"
                 className="text-foreground hover:bg-black/5 dark:hover:bg-white/5"
               >
                 <Menu className="h-6 w-6" />

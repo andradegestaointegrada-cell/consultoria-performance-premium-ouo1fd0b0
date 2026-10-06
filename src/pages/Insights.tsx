@@ -171,9 +171,9 @@ export default function Insights() {
                               )}
                               <span>{article.category || 'Insights'}</span>
                             </div>
-                            <h4 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight mb-4">
+                            <h3 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide leading-tight mb-4">
                               {article.title}
-                            </h4>
+                            </h3>
                             <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-grow">
                               {article.summary}
                             </p>
