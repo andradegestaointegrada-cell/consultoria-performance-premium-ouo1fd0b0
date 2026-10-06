@@ -21,8 +21,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Open Sans"', 'system-ui', 'sans-serif'],
-        heading: ['"Times New Roman MT Condensed"', '"Times New Roman"', 'Times', 'serif'],
+        sans: ['Inter', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        heading: ['"Playfair Display"', 'Georgia', '"Times New Roman"', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

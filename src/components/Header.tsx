@@ -12,7 +12,7 @@ const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Sobre', path: '/sobre' },
   { name: 'Serviços', path: '/servicos' },
-  { name: 'Treinamentos', path: '/metodologia' },
+  { name: 'Metodologia', path: '/metodologia' },
   { name: 'Cases', path: '/cases' },
   { name: 'Blog', path: '/insights' },
   { name: 'Contato', path: '/contato' },

@@ -106,7 +106,7 @@ export function Footer() {
                   to="/metodologia"
                   className="hover:text-primary transition-colors duration-300"
                 >
-                  Treinamentos
+                  Metodologia
                 </Link>
               </li>
               <li>
