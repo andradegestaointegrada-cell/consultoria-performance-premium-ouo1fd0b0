@@ -34,3 +34,6 @@ screenshot.png
 
 # Environment variables
 .env*
+
+.dev.vars
+.wrangler/

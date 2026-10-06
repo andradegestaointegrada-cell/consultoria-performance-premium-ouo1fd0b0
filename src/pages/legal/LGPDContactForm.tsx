@@ -1,7 +1,9 @@
+import { useRef, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useToast } from '@/hooks/use-toast'
+import { postApi } from '@/lib/api'
 import {
   Form,
   FormControl,
@@ -36,14 +38,36 @@ export function LGPDContactForm() {
     },
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // In a real application, you'd send this data to your backend
-    console.log('LGPD Form Submission:', values)
-    toast({
-      title: 'Solicitação enviada com sucesso',
-      description: 'Nossa equipe de DPO analisará seu pedido e retornará em breve.',
-    })
-    form.reset()
+  const [loading, setLoading] = useState(false)
+  const [website, setWebsite] = useState('')
+  const inicio = useRef(Date.now())
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true)
+    try {
+      await postApi('/api/contato', {
+        tipo: 'lgpd',
+        nome: values.name,
+        email: values.email,
+        assunto: values.subject,
+        mensagem: values.message,
+        website,
+        elapsed: Date.now() - inicio.current,
+      })
+      toast({
+        title: 'Solicitação enviada',
+        description: 'Responderemos no prazo da LGPD (até 15 dias), pelo e-mail informado.',
+      })
+      form.reset()
+    } catch (err) {
+      toast({
+        title: 'Solicitação não enviada',
+        description: (err as Error).message,
+        variant: 'destructive',
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -54,15 +78,27 @@ export function LGPDContactForm() {
           className="w-fit uppercase tracking-wider py-1.5 px-3 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 transition-colors"
         >
           <ShieldCheck className="w-4 h-4 mr-2" />
-          Atendimento Prioritário
+          Canal do Titular
         </Badge>
         <p className="text-sm text-muted-foreground m-0 leading-none">
-          Suporte direto com nosso DPO.
+          Pedidos recebidos pelo encarregado de dados da AGI.
         </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 relative">
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label>
+              Site
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </label>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
@@ -132,9 +168,10 @@ export function LGPDContactForm() {
           <Button
             type="submit"
             size="lg"
+            disabled={loading}
             className="w-full md:w-auto font-bold uppercase tracking-wide group h-12 px-8"
           >
-            <span>Entre em Contato</span>
+            <span>{loading ? 'Enviando...' : 'Enviar solicitação'}</span>
             <Send className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Button>
         </form>

@@ -1,0 +1,4 @@
+/admin / 302
+/blog /insights 301
+/admin/* / 302
+/blog/* /insights/:splat 301

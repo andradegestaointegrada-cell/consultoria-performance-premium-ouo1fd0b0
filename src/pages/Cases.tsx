@@ -1,33 +1,79 @@
+import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Quote, Briefcase, CheckCircle, BarChart } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Target } from 'lucide-react'
+
+interface Caso {
+  cliente: string
+  setor: string
+  normas: string[]
+  status: string
+  desafio: string
+  entregas: string[]
+  marcos: { quando: string; oque: string }[]
+  nota?: string
+}
+
+const CASOS: Caso[] = [
+  {
+    cliente: 'SETEC Hidrobrasileira',
+    setor: 'Engenharia consultiva · equipes em São Paulo e Fortaleza',
+    normas: ['ISO 9001', 'ISO 14001', 'ISO 45001'],
+    status: 'Relacionamento contínuo desde 2019',
+    desafio:
+      'A SETEC já tinha o sistema da qualidade certificado e precisava incorporar meio ambiente e saúde e segurança ocupacional sem criar um segundo sistema paralelo, com equipes de projeto em duas cidades.',
+    entregas: [
+      'Implantação da ISO 14001 e da ISO 45001: aspectos e impactos ambientais, perigos e riscos ocupacionais, requisitos legais, indicadores e auditorias internas.',
+      'Integração das três normas num único sistema de gestão, com procedimentos e registros comuns.',
+      'Acompanhamento das auditorias externas de certificação e de recertificação.',
+      'Manutenção contínua: auditorias internas, análise crítica pela direção, tratamento de não conformidades e revisão de documentos.',
+    ],
+    marcos: [
+      { quando: '2019', oque: 'Início da consultoria no sistema de gestão' },
+      { quando: 'Dez/2021', oque: 'Certificação ISO 14001 e ISO 45001' },
+      { quando: 'Mar/2024', oque: 'Recertificação integrada ISO 9001, 14001 e 45001' },
+      { quando: '2026–2027', oque: 'Transição para a ISO 9001:2026 e preparação da recertificação' },
+    ],
+    nota: 'Atuação de Alexandre Andrade desde 2019; pela AGI desde 2022.',
+  },
+  {
+    cliente: 'MSan Engenharia',
+    setor: 'Obras e serviços em plantas industriais',
+    normas: ['ISO 9001', 'ISO 45001'],
+    status: 'Em andamento · certificação prevista para dez/2026',
+    desafio:
+      'Estruturar um sistema de gestão da qualidade e de saúde e segurança ocupacional para uma empresa que executa obras dentro de plantas industriais com exigências rigorosas de segurança, com equipes divididas entre a sede e as frentes de trabalho.',
+    entregas: [
+      'Diagnóstico e mapeamento dos processos, da proposta comercial à execução em campo.',
+      'Informações documentadas: procedimentos, instruções de trabalho e formulários, com mais de 120 documentos vigentes sob controle.',
+      'Gestão de riscos de SSO: análise preliminar de risco (APR) e matriz de riscos e oportunidades.',
+      'Painéis de indicadores por processo, alimentados por formulários digitais.',
+      'Comparação técnica e comercial dos organismos certificadores.',
+    ],
+    marcos: [
+      { quando: 'Mar/2026', oque: 'Início do projeto' },
+      { quando: '2026', oque: 'Documentação do sistema e implantação nas frentes de trabalho' },
+      { quando: 'Dez/2026', oque: 'Auditoria de certificação prevista' },
+    ],
+  },
+  {
+    cliente: 'EPT Engenharia',
+    setor: 'Engenharia consultiva multidisciplinar',
+    normas: ['ISO 9001', 'ISO 14001', 'ISO 45001'],
+    status: 'Concluído em 2025',
+    desafio:
+      'Com o sistema de gestão integrado já certificado, a EPT precisava de uma auditoria interna independente nas três normas antes da auditoria externa.',
+    entregas: [
+      'Preparação e condução da auditoria interna do sistema de gestão integrado.',
+      'Relatório com constatações e oportunidades de melhoria por requisito.',
+      'Apoio na preparação para a auditoria externa.',
+    ],
+    marcos: [{ quando: '2025', oque: 'Auditoria interna integrada ISO 9001, 14001 e 45001' }],
+  },
+]
 
 export default function Cases() {
-  const casesData = [
-    {
-      title: 'Engenharia e Construção',
-      scope: 'ISO 9001 e PBQP-H',
-      details:
-        'Implementação de sistema de gestão da qualidade robusto com foco em controle tecnológico de materiais, rastreabilidade no canteiro de obras e qualificação de fornecedores estratégicos.',
-      results:
-        'Redução de 30% no desperdício de materiais, homologação em licitações públicas de grande porte e certificação alcançada em um tempo recorde de 6 meses.',
-      testimonial:
-        'A Andrade Gestão transformou nossa operação. A clareza na metodologia e o acompanhamento próximo no canteiro de obras nos garantiram a certificação e uma economia real que impactou nossa margem de lucro diretamente.',
-      image: 'https://img.usecurling.com/p/800/600?q=engineering%20construction&color=black',
-    },
-    {
-      title: 'Logística e Distribuição',
-      scope: 'ISO 14001 e ISO 45001',
-      details:
-        'Integração de práticas de sustentabilidade ambiental e segurança ocupacional, mapeamento completo de riscos nas rotas de transporte e reestruturação do plano de emergência ambiental.',
-      results:
-        'Zero acidentes de trabalho com afastamento em 12 meses, redução de 20% na pegada de carbono da frota e conformidade total com exigências de multinacionais parceiras.',
-      testimonial:
-        'Nossa cultura de segurança atingiu um novo patamar. O time da Andrade trouxe uma visão estratégica que não apenas garantiu as certificações, mas mudou o comportamento dos nossos motoristas e operadores de forma definitiva.',
-      image: 'https://img.usecurling.com/p/800/600?q=logistics%20trucks&color=black',
-    },
-  ]
-
   return (
     <div className="pt-20">
       <section
@@ -38,76 +84,109 @@ export default function Cases() {
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
           <Reveal>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words">
-              Cases de <em className="font-heading italic font-normal text-primary">Sucesso</em>
+              Cases
             </h1>
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
-              Resultados reais e mensuráveis conquistados através de nossa metodologia de excelência
-              e foco em performance.
+              Trabalhos reais, com escopo, normas e marcos verificáveis. Clientes citados com
+              autorização.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-6xl space-y-24">
-          {casesData.map((c, idx) => (
-            <Reveal key={idx} delay={100 * idx}>
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className={idx % 2 !== 0 ? 'md:order-2' : ''}>
-                  <div className="aspect-video rounded-2xl overflow-hidden border-2 border-border shadow-2xl relative">
-                    <img
-                      src={c.image}
-                      alt={c.title}
-                      className="w-full h-full object-cover object-center transition-all duration-700 hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/80 via-[#0D0D0D]/20 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h2 className="text-2xl md:text-3xl font-heading font-bold text-white uppercase tracking-wide drop-shadow-md">
-                        Setor: <span className="text-primary">{c.title}</span>
+      <section className="py-20 md:py-24 bg-background">
+        <div className="container mx-auto px-4 max-w-6xl space-y-16 md:space-y-20">
+          {CASOS.map((c, idx) => (
+            <Reveal key={c.cliente} delay={80 * idx}>
+              <Card className="bg-card border-border shadow-xl border-t-4 border-t-primary overflow-hidden">
+                <CardContent className="p-6 md:p-10">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
+                    <div>
+                      <h2 className="text-2xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide">
+                        {c.cliente}
                       </h2>
+                      <p className="text-muted-foreground mt-2">{c.setor}</p>
+                    </div>
+                    <span className="self-start shrink-0 text-xs font-bold uppercase tracking-widest text-primary border border-primary/60 rounded-full px-3 py-1.5">
+                      {c.status}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {c.normas.map((n) => (
+                      <span
+                        key={n}
+                        className="text-sm font-bold bg-secondary text-foreground rounded-md px-3 py-1"
+                      >
+                        {n}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="grid md:grid-cols-5 gap-10">
+                    <div className="md:col-span-3 space-y-8">
+                      <div>
+                        <h3 className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                          <Target className="h-5 w-5" /> Desafio
+                        </h3>
+                        <p className="text-foreground leading-relaxed">{c.desafio}</p>
+                      </div>
+                      <div>
+                        <h3 className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                          <CheckCircle2 className="h-5 w-5" /> O que a AGI fez
+                        </h3>
+                        <ul className="space-y-3">
+                          {c.entregas.map((e) => (
+                            <li key={e} className="flex gap-3 text-muted-foreground leading-relaxed">
+                              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              <span>{e}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <h3 className="text-primary font-bold uppercase tracking-widest text-sm mb-5">
+                        Marcos
+                      </h3>
+                      <ol className="relative border-l-2 border-border ml-2 space-y-6">
+                        {c.marcos.map((m) => (
+                          <li key={m.quando + m.oque} className="pl-6 relative">
+                            <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-background" />
+                            <p className="text-sm font-bold text-foreground uppercase tracking-wider">
+                              {m.quando}
+                            </p>
+                            <p className="text-muted-foreground text-sm mt-1">{m.oque}</p>
+                          </li>
+                        ))}
+                      </ol>
+                      {c.nota && <p className="text-xs text-muted-foreground mt-8">{c.nota}</p>}
                     </div>
                   </div>
-                </div>
-
-                <div className={idx % 2 !== 0 ? 'md:order-1' : ''}>
-                  <Card className="bg-card border-border shadow-xl h-full border-t-4 border-t-primary">
-                    <CardContent className="p-8 space-y-6">
-                      <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
-                          <Briefcase className="h-5 w-5" />
-                          <span>Escopo</span>
-                        </div>
-                        <p className="text-foreground font-semibold text-lg font-sans">{c.scope}</p>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
-                          <CheckCircle className="h-5 w-5" />
-                          <span>Detalhes</span>
-                        </div>
-                        <p className="text-muted-foreground font-sans">{c.details}</p>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-3 mb-2 text-primary font-bold uppercase tracking-widest font-sans">
-                          <BarChart className="h-5 w-5" />
-                          <span>Resultado</span>
-                        </div>
-                        <p className="text-muted-foreground font-sans">{c.results}</p>
-                      </div>
-
-                      <div className="bg-secondary p-6 rounded-xl border-l-4 border-primary relative mt-8">
-                        <Quote className="absolute top-4 right-4 h-8 w-8 text-primary/20" />
-                        <p className="text-foreground italic relative z-10 leading-relaxed font-sans">
-                          "{c.testimonial}"
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="py-20 bg-secondary border-t border-border">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide mb-6">
+              O próximo sistema pode ser o seu
+            </h2>
+            <p className="text-lg text-muted-foreground mb-10">
+              Implantação, integração de normas, auditoria interna ou manutenção do sistema: conte
+              o seu cenário e receba uma proposta de caminho.
+            </p>
+            <Button asChild size="lg" className="h-14 px-10 uppercase font-bold tracking-widest">
+              <Link to="/contato">
+                Fale com um especialista <ArrowRight className="ml-3 h-5 w-5" />
+              </Link>
+            </Button>
+          </Reveal>
         </div>
       </section>
     </div>

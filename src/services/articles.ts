@@ -1,6 +1,10 @@
-import type { RecordModel } from 'pocketbase'
-
-export interface Article extends RecordModel {
+export interface Article {
+  id: string
+  collectionId?: string
+  collectionName?: string
+  created?: string
+  updated?: string
+  expand?: Record<string, unknown>
   title: string
   slug: string
   summary: string

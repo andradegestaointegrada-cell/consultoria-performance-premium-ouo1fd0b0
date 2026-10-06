@@ -1,6 +1,7 @@
 import { Reveal } from '@/components/ui/reveal'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
+import { EMAIL_CONTATO, WHATSAPP, WHATSAPP_URL } from '@/lib/api'
 
 export default function Contact() {
   return (
@@ -48,13 +49,15 @@ export default function Contact() {
                     <p className="font-bold text-foreground uppercase tracking-wide font-sans">
                       Sede Operacional
                     </p>
-                    <p className="text-sm text-muted-foreground mt-1 font-sans">
-                      Rua Pais Leme 215, Conj 1713
-                    </p>
+                    <address className="not-italic text-sm text-muted-foreground mt-1 font-sans leading-relaxed">
+                      Rua Pais Leme, 215, conj. 1713
+                      <br />
+                      Pinheiros, São Paulo/SP · CEP 05424-150
+                    </address>
                   </div>
                 </div>
                 <a
-                  href="https://wa.me/5511986134789"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 group"
@@ -63,18 +66,18 @@ export default function Contact() {
                     <Phone className="text-primary group-hover:drop-shadow-[0_0_8px_rgba(207,174,112,0.8)] transition-all" />
                   </div>
                   <p className="font-bold text-foreground text-lg group-hover:text-primary transition-colors duration-300 font-sans">
-                    +55 (11) 98613-4789
+                    {WHATSAPP}
                   </p>
                 </a>
                 <a
-                  href="mailto:andrade.gestaointegrada@gmail.com"
+                  href={`mailto:${EMAIL_CONTATO}`}
                   className="flex items-center gap-4 group"
                 >
                   <div className="p-3 rounded-full bg-secondary border border-border group-hover:border-primary transition-colors duration-300">
                     <Mail className="text-primary group-hover:drop-shadow-[0_0_8px_rgba(207,174,112,0.8)] transition-all" />
                   </div>
                   <p className="font-bold text-foreground text-sm break-all group-hover:text-primary transition-colors duration-300 font-sans">
-                    andrade.gestaointegrada@gmail.com
+                    {EMAIL_CONTATO}
                   </p>
                 </a>
               </div>
@@ -83,7 +86,7 @@ export default function Contact() {
             <div className="h-64 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
               <img
                 src="https://i.postimg.cc/3x66q0Gv/MATRIZ-AGI-PAES-LEME-215-CJ1713.png"
-                alt="Matriz AGI Pais Leme"
+                alt="Fachada do edifício da Rua Pais Leme, 215, sede da AGI"
                 className="w-full h-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
             </div>

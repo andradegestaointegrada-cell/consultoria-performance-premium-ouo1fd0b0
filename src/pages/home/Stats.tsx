@@ -2,7 +2,7 @@ import { Reveal } from '@/components/ui/reveal'
 
 const stats = [
   { value: '99%', label: 'Taxa de Sucesso' },
-  { value: '15+', label: 'Anos de Experiência' },
+  { value: '17+', label: 'Anos de Experiência' },
   { value: '100+', label: 'Certificações' },
   { value: '24/7', label: 'Suporte Dedicado' },
 ]

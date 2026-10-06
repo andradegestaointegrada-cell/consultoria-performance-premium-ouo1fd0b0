@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/ui/reveal'
 import { LGPDContactForm } from './LGPDContactForm'
+import { EMAIL_CONTATO } from '@/lib/api'
 
 export default function LGPDPortal() {
   return (
@@ -33,15 +34,16 @@ export default function LGPDPortal() {
               Contato do Encarregado de Dados (DPO)
             </h2>
             <p>
-              Se você deseja exercer qualquer um dos seus direitos ou tiver alguma dúvida sobre como
-              processamos seus dados, entre em contato com nosso Encarregado de Proteção de Dados
-              preenchendo o formulário abaixo:
+              Encarregado: Alexandre Andrade —{' '}
+              <a href={`mailto:${EMAIL_CONTATO}`}>{EMAIL_CONTATO}</a>. Para exercer seus direitos ou
+              tirar dúvidas sobre o tratamento dos seus dados, preencha o formulário abaixo ou
+              escreva para esse e-mail. Respondemos em até 15 dias.
             </p>
 
             <LGPDContactForm />
 
             <p className="mt-12 text-sm font-bold">
-              Última atualização: {new Date().toLocaleDateString('pt-BR')}
+              Última atualização: 6 de outubro de 2026
             </p>
           </div>
         </Reveal>

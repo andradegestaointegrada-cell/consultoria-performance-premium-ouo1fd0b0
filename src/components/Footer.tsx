@@ -1,51 +1,11 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Linkedin, Twitter, Instagram } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
-import { useToast } from '@/hooks/use-toast'
-import { createSubscriber } from '@/services/newsletter'
+import { Linkedin, Facebook, Mail, Phone } from 'lucide-react'
+import { EMAIL_CONTATO, WHATSAPP, WHATSAPP_URL } from '@/lib/api'
+import { NewsletterSignup } from '@/components/NewsletterSignup'
 import logoLight from '@/assets/logo-fundo-branco-7d1af.png'
 import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.png'
 
 export function Footer() {
-  const [email, setEmail] = useState('')
-  const [lgpd, setLgpd] = useState(false)
-  const { toast } = useToast()
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) return
-    if (!lgpd) {
-      toast({
-        title: 'Atenção Necessária',
-        description: 'Por favor, aceite os termos da LGPD para assinar nossa newsletter.',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    try {
-      await createSubscriber({
-        email,
-        lgpdAgreed: true,
-      })
-      toast({
-        title: 'Inscrição Confirmada!',
-        description: 'Obrigado por se inscrever!',
-      })
-      setEmail('')
-      setLgpd(false)
-    } catch (err: any) {
-      toast({
-        title: 'Erro na Inscrição',
-        description: err.message || 'Erro ao processar sua inscrição',
-        variant: 'destructive',
-      })
-    }
-  }
-
   return (
     <footer className="bg-background border-t border-border pt-20 pb-10">
       <div className="container mx-auto px-4">
@@ -76,43 +36,60 @@ export function Footer() {
               <p className="text-sm font-bold text-foreground uppercase tracking-wider mb-2">
                 Sede Operacional
               </p>
-              <p className="text-sm text-muted-foreground">Rua Pais Leme 215, Conj 1713</p>
+              <address className="not-italic text-sm text-muted-foreground leading-relaxed">
+                Rua Pais Leme, 215, conj. 1713
+                <br />
+                Pinheiros, São Paulo/SP · CEP 05424-150
+              </address>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <a
+                    href={`mailto:${EMAIL_CONTATO}`}
+                    className="inline-flex items-center gap-2 hover:text-primary transition-colors break-all"
+                  >
+                    <Mail className="h-4 w-4 shrink-0 text-primary" />
+                    {EMAIL_CONTATO}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                  >
+                    <Phone className="h-4 w-4 shrink-0 text-primary" />
+                    {WHATSAPP}
+                  </a>
+                </li>
+              </ul>
             </div>
             <div className="flex gap-4">
               <a
-                href="https://www.linkedin.com/in/alexandreandradegestaodeprojetos"
+                href="https://www.linkedin.com/company/andrade-gest%C3%A3o-integrada-treinamento/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
+                aria-label="Página da AGI no LinkedIn"
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=100077658203124"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter"
+                aria-label="Página da AGI no Facebook"
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
               >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
-              >
-                <Instagram className="h-5 w-5" />
+                <Facebook className="h-5 w-5" />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Navegação
-            </h4>
+            </h2>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
                 <Link to="/sobre" className="hover:text-primary transition-colors duration-300">
@@ -146,9 +123,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Legal
-            </h4>
+            </h2>
             <ul className="space-y-4 text-sm font-bold text-muted-foreground uppercase tracking-wider">
               <li>
                 <Link
@@ -178,47 +155,21 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
+            <h2 className="font-heading font-bold text-xl text-foreground mb-6 uppercase tracking-wide">
               Newsletter
-            </h4>
+            </h2>
             <p className="text-sm text-muted-foreground mb-6">
-              Receba insights exclusivos sobre excelência corporativa.
+              Conteúdo quinzenal sobre sistemas de gestão, normas ISO e conformidade.
             </p>
-            <form className="flex flex-col gap-4" onSubmit={handleNewsletterSubmit}>
-              <Input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Seu e-mail profissional"
-                className="bg-card border-border text-foreground h-12 focus-visible:ring-primary"
-              />
-              <div className="flex items-start gap-2 pt-1">
-                <Checkbox
-                  id="footer-lgpd"
-                  checked={lgpd}
-                  onCheckedChange={(v) => setLgpd(v === true)}
-                  className="border-primary data-[state=checked]:bg-primary mt-0.5"
-                />
-                <label
-                  htmlFor="footer-lgpd"
-                  className="text-xs text-muted-foreground leading-snug cursor-pointer"
-                >
-                  Concordo com os Termos de Serviço e política de privacidade (LGPD).
-                </label>
-              </div>
-              <Button
-                type="submit"
-                className="h-12 uppercase font-bold tracking-widest bg-primary text-primary-foreground hover:bg-primary/80 transition-colors mt-2"
-              >
-                Assinar
-              </Button>
-            </form>
+            <NewsletterSignup origem="rodape" id="footer-newsletter" />
           </div>
         </div>
 
         <div className="border-t border-border pt-8 text-center text-sm font-bold text-muted-foreground uppercase tracking-wider flex flex-col md:flex-row justify-between items-center">
-          <p>© {new Date().getFullYear()} Andrade Gestão Integrada.</p>
+          <p>
+            © {new Date().getFullYear()} Andrade Gestão Integrada e Treinamento · CNPJ
+            66.060.174/0001-58
+          </p>
           <p className="mt-4 md:mt-0 text-primary">Desenvolvido com precisão.</p>
         </div>
       </div>

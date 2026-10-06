@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
@@ -16,6 +17,10 @@ export default function ServiceDetail() {
   const key = id?.toLowerCase() || ''
   const svc = S_DATA[key] || DEF
   const title = svc.t || (id ? id.replace('-', ' ').toUpperCase() : 'Serviço')
+
+  useEffect(() => {
+    document.title = `Consultoria ${title} | Andrade Gestão Integrada`
+  }, [title])
 
   return (
     <div className="pt-20">

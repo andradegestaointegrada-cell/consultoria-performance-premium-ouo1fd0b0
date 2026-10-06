@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -21,9 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useLeadStore from '@/stores/useLeadStore'
-import useNewsletterStore from '@/stores/useNewsletterStore'
 import { useToast } from '@/hooks/use-toast'
+import { postApi } from '@/lib/api'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Nome inválido.'),
@@ -31,7 +30,7 @@ const formSchema = z.object({
   email: z.string().email('E-mail inválido.'),
   service: z.string().min(1, 'Selecione um serviço.'),
   message: z.string().min(10, 'Mensagem muito curta.'),
-  lgpdAgreed: z.literal(true, { errorMap: () => ({ message: 'Aceite os termos.' }) }),
+  lgpdAgreed: z.literal(true, { message: 'Aceite para enviarmos a resposta.' }),
   newsletterAgreed: z.boolean().optional(),
 })
 
@@ -47,14 +46,16 @@ const SERVICES = [
   'IATF',
   'PBQP-H - Habitat',
   'Consultoria ESG',
+  'Auditoria Interna',
+  'Treinamentos',
   'Outros',
 ]
 
 export function ContactForm() {
   const { toast } = useToast()
-  const { addLead } = useLeadStore()
-  const { addSubscriber } = useNewsletterStore()
   const [loading, setLoading] = useState(false)
+  const [website, setWebsite] = useState('')
+  const inicio = useRef(Date.now())
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
@@ -69,109 +70,46 @@ export function ContactForm() {
     },
   })
 
-  const sendNotifications = async (d: ContactFormValues) => {
-    const resendKey = import.meta.env.VITE_RESEND_API_KEY
-    const waKey = import.meta.env.VITE_WHATSAPP_API_KEY
-    const resendDomain = import.meta.env.VITE_RESEND_DOMAIN || 'andradegestao.com.br'
-
-    const toEmail = 'andrade.gestaointegrada@gmail.com'
-    const waNumber = '+5511986134789'
-
-    console.log('[System] Verificando autenticação de domínio (DNS) e chaves de API...')
-
-    try {
-      const emailPromise =
-        resendKey && resendKey !== 're_valid_api_key_mock_999'
-          ? fetch('https://api.resend.com/emails', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${resendKey}`,
-              },
-              body: JSON.stringify({
-                from: `Contato Premium <onboarding@${resendDomain}>`,
-                to: [toEmail],
-                subject: `Novo Lead Premium - ${d.name}`,
-                html: `<p><strong>Nome:</strong> ${d.name}</p><p><strong>Serviço:</strong> ${d.service}</p><p><strong>Mensagem:</strong> ${d.message}</p>`,
-              }),
-            })
-          : new Promise((resolve) =>
-              setTimeout(() => {
-                console.log(`✅ [Resend API] Sucesso! Email entregue com autenticação: ${toEmail}`)
-                resolve(true)
-              }, 600),
-            )
-
-      const waPromise =
-        waKey && waKey !== 'wa_valid_api_key_mock_888'
-          ? fetch('https://graph.facebook.com/v17.0/YOUR_PHONE_ID/messages', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${waKey}` },
-              body: JSON.stringify({
-                messaging_product: 'whatsapp',
-                to: waNumber.replace(/\D/g, ''),
-                type: 'text',
-                text: { body: `*Novo Lead Premium*\nNome: ${d.name}\nServiço: ${d.service}` },
-              }),
-            })
-          : new Promise((resolve) =>
-              setTimeout(() => {
-                console.log(
-                  `✅ [WhatsApp API] Sucesso! Mensagem disparada em tempo real para ${waNumber}`,
-                )
-                resolve(true)
-              }, 800),
-            )
-
-      await Promise.all([emailPromise, waPromise])
-    } catch (error) {
-      console.error('❌ Falha crítica nas notificações:', error)
-      throw error
-    }
-  }
-
   async function onSubmit(data: ContactFormValues) {
     setLoading(true)
+    const elapsed = Date.now() - inicio.current
     try {
-      addLead(data)
+      await postApi('/api/contato', {
+        tipo: 'contato',
+        nome: data.name,
+        empresa: data.company,
+        email: data.email,
+        servico: data.service,
+        mensagem: data.message,
+        website,
+        elapsed,
+      })
 
+      let newsletterMsg = ''
       if (data.newsletterAgreed) {
-        addSubscriber({
-          email: data.email,
-          source: `Formulário de Serviços - ${data.service}`,
-          lgpdAgreed: true,
-        })
-      }
-
-      await sendNotifications(data)
-
-      try {
-        await fetch('/api/collections/contact_leads', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: data.name,
+        try {
+          await postApi('/api/newsletter', {
             email: data.email,
-            subject: data.service,
-            message: data.message,
-            created_at: new Date().toISOString(),
-          }),
-        })
-      } catch (err) {
-        console.error('Falha ao salvar lead na collection:', err)
+            consentimento: true,
+            origem: 'formulario-contato',
+            website,
+            elapsed,
+          })
+          newsletterMsg = ' Para concluir a inscrição na newsletter, confirme pelo link que enviamos ao seu e-mail.'
+        } catch {
+          newsletterMsg = ' A inscrição na newsletter não foi concluída; tente pelo rodapé do site.'
+        }
       }
 
       toast({
-        title: 'Mensagem enviada com sucesso!',
-        description: 'Nossa equipe foi notificada e entrará em contato em breve.',
+        title: 'Mensagem enviada',
+        description: `Recebemos seu contato e retornaremos em breve.${newsletterMsg}`,
       })
       form.reset()
-    } catch {
+    } catch (err) {
       toast({
-        title: 'Erro de Comunicação',
-        description: 'Tivemos um problema processando sua solicitação.',
+        title: 'Mensagem não enviada',
+        description: (err as Error).message,
         variant: 'destructive',
       })
     } finally {
@@ -182,7 +120,19 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        <div className="grid grid-cols-2 gap-4">
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label>
+            Site
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="name"
@@ -218,7 +168,7 @@ export function ContactForm() {
             )}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="email"
@@ -294,8 +244,8 @@ export function ContactForm() {
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
-                    Concordo com a coleta e armazenamento dos meus dados para contato em
-                    conformidade com a LGPD.
+                    Concordo com o uso dos meus dados para que a AGI responda a este contato,
+                    conforme a Política de Privacidade.
                   </FormLabel>
                   <FormMessage />
                 </div>
@@ -316,8 +266,8 @@ export function ContactForm() {
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
-                    Desejo receber a newsletter com insights exclusivos de performance e inovação
-                    para minha empresa.
+                    Quero receber a newsletter quinzenal da AGI (posso cancelar a qualquer
+                    momento).
                   </FormLabel>
                 </div>
               </FormItem>

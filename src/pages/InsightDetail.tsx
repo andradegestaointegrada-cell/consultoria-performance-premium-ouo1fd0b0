@@ -4,6 +4,7 @@ import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react'
 import { getArticleBySlug, getArticleImage, type Article } from '@/services/articles'
+import { NewsletterSignup } from '@/components/NewsletterSignup'
 
 export default function InsightDetail() {
   const { slug } = useParams()
@@ -16,6 +17,7 @@ export default function InsightDetail() {
     getArticleBySlug(slug)
       .then((data) => {
         setArticle(data)
+        document.title = `${data.title} | Andrade Gestão Integrada`
         setLoading(false)
       })
       .catch((err) => {
@@ -51,7 +53,7 @@ export default function InsightDetail() {
               className="inline-flex items-center text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para Insights
+              Voltar para o blog
             </Link>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-primary font-bold text-sm uppercase tracking-widest">
@@ -109,8 +111,8 @@ export default function InsightDetail() {
                 Diagnóstico Especializado
               </h3>
               <p className="text-lg md:text-xl text-foreground font-medium mb-10 max-w-3xl mx-auto leading-relaxed">
-                &rarr; Entre em contato com a AGI e descubra como conduzir a transição para a ISO
-                14001:2026 de forma planejada, eficiente e alinhada aos objetivos do seu negócio.
+                Quer aplicar isso na sua empresa? Conte o seu cenário e receba uma proposta de
+                caminho para o seu sistema de gestão.
               </p>
               <Button
                 size="lg"
@@ -125,6 +127,16 @@ export default function InsightDetail() {
             </div>
           </div>
         </Reveal>
+
+        <div className="mt-12 p-8 md:p-10 rounded-2xl border border-border bg-card">
+          <h3 className="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-2">
+            Receba os próximos artigos
+          </h3>
+          <p className="text-muted-foreground mb-6">
+            Newsletter quinzenal sobre sistemas de gestão, normas ISO e conformidade.
+          </p>
+          <NewsletterSignup origem={`artigo:${article.slug}`} id="artigo-newsletter" />
+        </div>
       </article>
     </div>
   )

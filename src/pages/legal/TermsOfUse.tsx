@@ -10,7 +10,8 @@ export default function TermsOfUse() {
           </h1>
           <div className="prose prose-lg dark:prose-invert text-muted-foreground font-sans max-w-none">
             <p>
-              Bem-vindo ao site da Andrade Gestão Integrada. Ao acessar e utilizar este site, você
+              Bem-vindo ao site da Andrade Gestão Integrada e Treinamento (ALEXANDRE FERREIRA DE
+              ANDRADE LTDA, CNPJ 66.060.174/0001-58). Ao acessar e utilizar este site, você
               concorda em cumprir os seguintes termos e condições de uso, que, juntamente com nossa
               política de privacidade, regem o relacionamento da Andrade Gestão Integrada com você
               em relação a este site.
@@ -50,7 +51,7 @@ export default function TermsOfUse() {
               oferecidos neste site para qualquer finalidade específica.
             </p>
             <p className="mt-12 text-sm font-bold">
-              Última atualização: {new Date().toLocaleDateString('pt-BR')}
+              Última atualização: 6 de outubro de 2026
             </p>
           </div>
         </Reveal>
