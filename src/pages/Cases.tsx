@@ -9,6 +9,68 @@ import msanImg from '@/assets/cases/cases-msan.webp'
 import eptImg from '@/assets/cases/cases-ept.webp'
 import inspecaoImg from '@/assets/cases/cases-inspecao.webp'
 import transporteImg from '@/assets/cases/cases-transporte.webp'
+import construcaoImg from '@/assets/frentes/frente-construcao.webp'
+import automotivoImg from '@/assets/frentes/frente-automotivo.webp'
+import esgImg from '@/assets/frentes/frente-esg.webp'
+import laboratorioImg from '@/assets/frentes/frente-laboratorio.webp'
+
+interface Frente {
+  setor: string
+  norma: string
+  texto: string
+  base: string
+  servico: string
+  imagem: string
+  imagemAlt: string
+  foco: string
+}
+
+const FRENTES: Frente[] = [
+  {
+    setor: 'Construtoras e incorporadoras',
+    norma: 'PBQP-H · SiAC',
+    texto:
+      'Implantação do SiAC por níveis, com documentação enxuta, controle de serviços e de materiais no canteiro e preparação para a auditoria de certificação, requisito frequente em financiamentos habitacionais da Caixa.',
+    base: 'Metodologia própria para construtoras na primeira certificação.',
+    servico: 'pbqp-h',
+    imagem: construcaoImg,
+    imagemAlt: 'Engenheiros de capacete conferem a planta sobre a laje de um edifício em construção',
+    foco: 'center 50%',
+  },
+  {
+    setor: 'Indústria automotiva',
+    norma: 'IATF 16949',
+    texto:
+      'Diagnóstico frente à IATF 16949 e aos requisitos específicos dos clientes, core tools (APQP, PPAP, FMEA, MSA e CEP), auditorias de processo e de produto e preparação para a certificação.',
+    base: '16 anos de atuação na indústria automotiva e credencial de auditor líder IATF 16949.',
+    servico: 'iatf-16949',
+    imagem: automotivoImg,
+    imagemAlt: 'Engenheiro da qualidade mede uma peça usinada com paquímetro em uma fábrica de autopeças',
+    foco: 'center 75%',
+  },
+  {
+    setor: 'Sustentabilidade e governança',
+    norma: 'ESG · Dupla materialidade',
+    texto:
+      'Avaliação de dupla materialidade, de impacto e financeira, com escuta das partes interessadas, matriz de temas materiais e base para o relato de sustentabilidade (GRI e SASB).',
+    base: 'Auditor líder ISO 14001 e ISO 45001, com sistemas ambientais e de SSO implantados até a certificação.',
+    servico: 'esg',
+    imagem: esgImg,
+    imagemAlt: 'Vista aérea de uma fábrica com painéis solares cercada de mata nativa e de um rio',
+    foco: 'center 20%',
+  },
+  {
+    setor: 'Laboratórios de ensaio e calibração',
+    norma: 'ISO/IEC 17025',
+    texto:
+      'Implantação da ISO/IEC 17025 com validação de métodos, incerteza de medição, rastreabilidade metrológica e garantia da validade dos resultados, até a avaliação da Cgcre.',
+    base: 'Auditor líder ISO/IEC 17025 e experiência em acreditação Cgcre na ISO/IEC 17020.',
+    servico: 'iso-17025',
+    imagem: laboratorioImg,
+    imagemAlt: 'Técnica de laboratório calibra uma balança analítica com pesos-padrão',
+    foco: 'center 30%',
+  },
+]
 
 interface Caso {
   cliente: string
@@ -241,6 +303,63 @@ export default function Cases() {
               </Card>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="py-20 md:py-24 bg-background border-t border-border">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Reveal>
+            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+              <p className="text-primary text-xs font-bold uppercase tracking-[0.3em] mb-4 font-sans">
+                Além dos cases
+              </p>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide mb-6">
+                Frentes de atuação
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Outros setores e normas em que a AGI atua. Abaixo, o escopo típico de cada frente,
+                sem citar clientes nem resultados.
+              </p>
+            </div>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-8">
+            {FRENTES.map((f, idx) => (
+              <Reveal key={f.norma} delay={80 * idx} className="h-full">
+                <Card className="h-full bg-card border-border shadow-lg overflow-hidden flex flex-col">
+                  <div className="relative h-44 md:h-52">
+                    <img
+                      src={f.imagem}
+                      alt={f.imagemAlt}
+                      width={1536}
+                      height={864}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      style={{ objectPosition: f.foco }}
+                    />
+                  </div>
+                  <CardContent className="p-6 md:p-8 flex flex-col flex-1">
+                    <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">
+                      {f.norma}
+                    </p>
+                    <h3 className="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-4">
+                      {f.setor}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4">{f.texto}</p>
+                    <p className="text-sm text-foreground mb-6">
+                      <span className="font-bold">Base:</span> {f.base}
+                    </p>
+                    <Link
+                      to={`/servicos/${f.servico}`}
+                      className="mt-auto inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary hover:underline"
+                    >
+                      Ver o serviço <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
