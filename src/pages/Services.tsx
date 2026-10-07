@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { Card, CardContent } from '@/components/ui/card'
+import servicosHero from '@/assets/servicos/servicos-hero.webp'
 
 const allServices = [
   {
@@ -58,7 +59,7 @@ export default function Services() {
     <div className="pt-20">
       <section
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-        style={{ backgroundImage: `url('https://i.postimg.cc/63XP2VLR/SERVICOS-PAGE.png')` }}
+        style={{ backgroundImage: `url('${servicosHero}')` }}
       >
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">

@@ -2,13 +2,14 @@ import { Reveal } from '@/components/ui/reveal'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
 import { EMAIL_CONTATO, WHATSAPP, WHATSAPP_URL } from '@/lib/api'
+import contatoHero from '@/assets/contato/contato-hero.webp'
 
 export default function Contact() {
   return (
     <div className="pt-20">
       <section
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border text-center"
-        style={{ backgroundImage: `url('https://i.postimg.cc/HWykwTg6/CONTATO.png')` }}
+        style={{ backgroundImage: `url('${contatoHero}')` }}
       >
         <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="container relative z-10 mx-auto px-4 max-w-4xl">

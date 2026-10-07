@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
+import bgImage from '@/assets/home/home-hero.webp'
 
 export function Hero() {
-  const bgImage = 'https://i.postimg.cc/15Q4yB7x/home-page.jpg'
 
   return (
     <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group">

@@ -1,3 +1,16 @@
+import sobreHero from '@/assets/sobre/sobre-hero.webp'
+import casesHero from '@/assets/cases/cases-hero.webp'
+import automotivo from '@/assets/frentes/frente-automotivo.webp'
+import esgFrente from '@/assets/frentes/frente-esg.webp'
+import laboratorio from '@/assets/frentes/frente-laboratorio.webp'
+import iso45001Hero from '@/assets/servicos/45001-hero.webp'
+import iso45001Conteudo from '@/assets/servicos/45001-conteudo.webp'
+import sgiHero from '@/assets/servicos/sgi-hero.webp'
+import sgiConteudo from '@/assets/servicos/sgi-conteudo.webp'
+import iatfHero from '@/assets/servicos/iatf-hero.webp'
+import esgHero from '@/assets/servicos/esg-hero.webp'
+import iso17025Hero from '@/assets/servicos/17025-hero.webp'
+
 export interface ServiceData {
   t: string
   d: string
@@ -47,8 +60,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iso-45001': {
     t: 'ISO 45001',
     d: 'Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=engineer%20safety%20helmet%20factory&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=industrial%20workers%20safety%20gear&dpr=2',
+    hi: iso45001Hero,
+    ci: iso45001Conteudo,
     w: 'Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança.',
     methodologyDetails:
       'Para a ISO 45001, priorizamos a mitigação de riscos e a promoção de uma cultura de segurança proativa. Realizamos o levantamento de perigos e estruturamos programas de saúde e segurança robustos e integrados ao dia a dia dos colaboradores.',
@@ -64,8 +77,8 @@ export const S_DATA: Record<string, ServiceData> = {
   sgi: {
     t: 'SGI (Sistema de Gestão Integrada)',
     d: 'Sinergia e máxima eficiência através da integração de múltiplas normas em um único sistema.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=integrated%20management%20system&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=business%20process%20integration&dpr=2',
+    hi: sgiHero,
+    ci: sgiConteudo,
     w: 'Eliminação de redundâncias operacionais e visão unificada dos resultados.',
     methodologyDetails:
       'Nossa abordagem para o SGI foca na eliminação de redundâncias e na criação de sinergia entre normas (como ISO 9001, 14001 e 45001). Harmonizamos a base documental e os ciclos de auditoria para potencializar os resultados integrados da organização.',
@@ -98,8 +111,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iatf-16949': {
     t: 'IATF 16949',
     d: 'Gestão da qualidade rigorosa para a cadeia de suprimentos da indústria automotiva.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=automotive%20manufacturing%20robotics&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=car%20assembly%20line%20factory&dpr=2',
+    hi: iatfHero,
+    ci: automotivo,
     w: 'Prevenção de defeitos, redução de variação e desperdício na cadeia automotiva.',
     methodologyDetails:
       'A implementação da IATF 16949 exige rigor técnico e foco na prevenção de defeitos. Nossa metodologia aborda de forma aprofundada o core tools automotivo garantindo a aprovação nas rigorosas auditorias do setor automotivo.',
@@ -132,8 +145,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iso-17025': {
     t: 'ISO/IEC 17025',
     d: 'Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.',
-    hi: 'https://i.postimg.cc/xdBnn5VF/17025_BANNER.png',
-    ci: 'https://i.postimg.cc/Sx3KVCx0/17025-DESCRICAO.png',
+    hi: iso17025Hero,
+    ci: laboratorio,
     w: 'Padronização internacional e reconhecimento da qualidade dos seus laudos e ensaios.',
     methodologyDetails:
       'Laboratórios de ensaio e calibração necessitam de confiabilidade inquestionável. Estruturamos a ISO 17025 com foco na validação de métodos, cálculo de incerteza de medição e garantia da validade dos resultados através de ensaios de proficiência.',
@@ -166,8 +179,8 @@ export const S_DATA: Record<string, ServiceData> = {
   esg: {
     t: 'Consultoria ESG',
     d: 'Guiamos sua empresa na jornada ESG, alinhando propósito e governança sólida.',
-    hi: 'https://img.usecurling.com/p/1920/1080?q=sustainable%20corporate%20wind%20energy&dpr=2',
-    ci: 'https://img.usecurling.com/p/800/600?q=environmental%20social%20governance%20business&dpr=2',
+    hi: esgHero,
+    ci: esgFrente,
     w: 'Apoiamos na estruturação completa de práticas alinhadas às exigências dos investidores.',
     methodologyDetails:
       'A jornada ESG requer alinhamento estratégico e ações tangíveis. Avaliamos a maturidade da empresa nos pilares ambiental, social e de governança, estruturando um plano de ação claro para reportar resultados e atrair investimentos responsáveis.',
@@ -185,8 +198,8 @@ export const S_DATA: Record<string, ServiceData> = {
 export const DEF: ServiceData = {
   t: '',
   d: 'Soluções estratégicas focadas em trazer resultados reais para a operação da sua empresa.',
-  hi: 'https://img.usecurling.com/p/1920/1080?q=business%20strategy%20corporate&dpr=2',
-  ci: 'https://img.usecurling.com/p/800/600?q=corporate%20planning%20team%20meeting&dpr=2',
+  hi: sobreHero,
+  ci: casesHero,
   w: 'Entregamos um sistema focado em gerar valor e reduzir riscos.',
   methodologyDetails:
     'Nossa metodologia adapta-se à realidade da sua empresa. Através de diagnósticos precisos e planos de ação direcionados, implementamos melhores práticas de gestão que garantem conformidade, mitigam riscos e impulsionam resultados expressivos.',

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import gestaoAmbiental from '@/assets/home/gestao-ambiental.webp'
 
 const services = [
   {
@@ -14,7 +15,7 @@ const services = [
     id: 'iso-14001',
     title: 'ISO 14001',
     desc: 'Gestão Ambiental',
-    img: 'https://i.postimg.cc/9F7DwLpR/GESTAO-AMBIENTAL.png',
+    img: gestaoAmbiental,
   },
   {
     id: 'iso-45001',
