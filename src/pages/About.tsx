@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/ui/reveal'
 import { Linkedin } from 'lucide-react'
+import sobreHero from '@/assets/sobre/sobre-hero.webp'
 
 const team = [
   {
@@ -22,7 +23,7 @@ export default function About() {
     <div className="pt-20">
       <section
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-        style={{ backgroundImage: `url('https://i.postimg.cc/mgRhjk3p/SOBRE_BANNER.jpg')` }}
+        style={{ backgroundImage: `url('${sobreHero}')` }}
       >
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
