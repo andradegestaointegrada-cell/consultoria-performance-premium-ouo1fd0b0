@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { getArticles, getArticleImage, type Article } from '@/services/articles'
 import { ArrowRight } from 'lucide-react'
+import blogHero from '@/assets/blog/blog-hero.webp'
 
 const resolveImage = (article: Article) => {
   const anyArticle = article as any
@@ -67,7 +68,7 @@ export default function Insights() {
     <div className="pt-20 min-h-screen bg-background">
       <section
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-        style={{ backgroundImage: `url('https://i.postimg.cc/Y2vzQnbp/BLOG_PAGE.jpg')` }}
+        style={{ backgroundImage: `url('${blogHero}')` }}
       >
         <div className="absolute inset-0 bg-[#0D0D0D]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center">

@@ -1,3 +1,5 @@
+import blogHero from '@/assets/blog/blog-hero.webp'
+
 export interface Article {
   id: string
   collectionId?: string
@@ -161,6 +163,6 @@ export async function getArticleBySlug(slug: string): Promise<Article> {
 }
 
 export function getArticleImage(article: Article): string {
-  if (!article.image) return 'https://i.postimg.cc/Y2vzQnbp/BLOG_PAGE.jpg'
+  if (!article.image) return blogHero
   return article.image
 }

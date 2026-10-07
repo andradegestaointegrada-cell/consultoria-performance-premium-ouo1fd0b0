@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Search, Settings, ClipboardCheck, TrendingUp } from 'lucide-react'
+import metodologiaHero from '@/assets/metodologia/metodologia-hero.webp'
 
 const phases = [
   {
@@ -62,7 +63,11 @@ export default function Methodology() {
   return (
     <div className="pt-20">
       {/* Hero */}
-      <section className="py-32 relative bg-[#091D39] border-b border-border overflow-hidden">
+      <section
+        className="py-32 relative bg-[#091D39] bg-fixed bg-cover bg-center border-b border-border overflow-hidden"
+        style={{ backgroundImage: `url('${metodologiaHero}')` }}
+      >
+        <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="absolute inset-0 opacity-10"
           style={{ backgroundImage: `radial-gradient(circle at 70% 50%, #CFAE70 0%, transparent 60%)` }}
         />
