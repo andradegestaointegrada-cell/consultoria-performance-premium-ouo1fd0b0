@@ -52,6 +52,18 @@ const allServices = [
     name: 'Logística Segura de Químicos',
     desc: 'Avaliação de segurança, saúde, meio ambiente e qualidade para o transporte de produtos químicos.',
   },
+  {
+    id: 'iso-42001',
+    title: 'ISO/IEC 42001',
+    name: 'Gestão de Inteligência Artificial',
+    desc: 'Governança de IA com responsáveis definidos, avaliação de riscos e de impacto e controles auditáveis.',
+  },
+  {
+    id: 'iso-37001',
+    title: 'ISO 37001',
+    name: 'Gestão Antissuborno',
+    desc: 'Programa de integridade estruturado em controles auditáveis, da due diligence ao canal de denúncia.',
+  },
 ]
 
 export default function Services() {

@@ -10,6 +10,10 @@ import sgiConteudo from '@/assets/servicos/sgi-conteudo.webp'
 import iatfHero from '@/assets/servicos/iatf-hero.webp'
 import esgHero from '@/assets/servicos/esg-hero.webp'
 import iso17025Hero from '@/assets/servicos/17025-hero.webp'
+import iso42001Hero from '@/assets/servicos/42001-hero.webp'
+import iso42001Conteudo from '@/assets/servicos/42001-conteudo.webp'
+import iso37001Hero from '@/assets/servicos/37001-hero.webp'
+import iso37001Conteudo from '@/assets/servicos/37001-conteudo.webp'
 
 export interface ServiceData {
   t: string
@@ -192,6 +196,40 @@ export const S_DATA: Record<string, ServiceData> = {
     ],
     deliverablesText:
       'Implementamos soluções corporativas integradas, onde a jornada ESG atua como alavanca estratégica para a eficiência do negócio e a redução de desperdícios ao longo de toda a cadeia de valor. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Corporativos (ESG), Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando práticas transparentes e sustentáveis.',
+  },
+  'iso-42001': {
+    t: 'ISO/IEC 42001',
+    d: 'Sistema de gestão de inteligência artificial com responsáveis, riscos e evidências definidos.',
+    hi: iso42001Hero,
+    ci: iso42001Conteudo,
+    w: 'Uso de IA com responsáveis definidos, riscos avaliados e evidência pronta para auditoria.',
+    methodologyDetails:
+      'Começamos por um diagnóstico de prontidão e pelo inventário dos sistemas de IA que a empresa desenvolve, fornece ou utiliza. Em seguida, avaliamos riscos e impactos, montamos a Declaração de Aplicabilidade e integramos os controles aos sistemas que já existem, como ISO 9001, ISO/IEC 27001 e LGPD. Fechamos com auditoria interna e preparação para a certificação.',
+    trainingPillars: [
+      'Interpretação da ISO/IEC 42001',
+      'Avaliação de Riscos e de Impacto de IA',
+      'Declaração de Aplicabilidade (Anexo A)',
+      'Auditoria Interna de Sistemas de IA',
+    ],
+    deliverablesText:
+      'O cliente recebe o inventário dos sistemas de IA no escopo, a política de IA, a matriz de riscos e os registros da avaliação de impacto, a Declaração de Aplicabilidade com as justificativas de inclusão e exclusão de controles, os procedimentos integrados ao sistema de gestão existente, o plano de treinamento e o relatório de auditoria interna com o plano de ação para a certificação.',
+  },
+  'iso-37001': {
+    t: 'ISO 37001',
+    d: 'Sistema de gestão antissuborno que transforma o programa de integridade em controles auditáveis.',
+    hi: iso37001Hero,
+    ci: iso37001Conteudo,
+    w: 'Decisões sobre terceiros, pagamentos e brindes rastreáveis e prontas para uma due diligence.',
+    methodologyDetails:
+      'Partimos do diagnóstico do programa existente e da avaliação de risco de suborno por processo, contrato e parceiro de negócio. Estruturamos a política e a função de compliance antissuborno, a due diligence, os controles financeiros e não financeiros e o canal de denúncia. Fechamos com auditoria interna, análise crítica pela direção e preparação para a certificação.',
+    trainingPillars: [
+      'Interpretação da ISO 37001:2025',
+      'Avaliação de Risco de Suborno',
+      'Due Diligence de Terceiros',
+      'Canal de Denúncia e Investigação',
+    ],
+    deliverablesText:
+      'O cliente recebe a matriz de riscos de suborno aprovada pela direção, a política antissuborno, as regras de alçada e de presentes e hospitalidades, o procedimento e os registros de due diligence de parceiros de negócio, o fluxo do canal de denúncia e de investigação, o plano de treinamento por função e o relatório de auditoria interna. Para quem já é certificado na edição de 2016, inclui a análise de lacunas para a transição, que termina em fevereiro de 2027.',
   },
 }
 
