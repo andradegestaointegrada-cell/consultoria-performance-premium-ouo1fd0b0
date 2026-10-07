@@ -76,8 +76,9 @@ export default function Contact() {
                   <div className="p-3 rounded-full bg-secondary border border-border group-hover:border-primary transition-colors duration-300">
                     <Mail className="text-primary group-hover:drop-shadow-[0_0_8px_rgba(207,174,112,0.8)] transition-all" />
                   </div>
-                  <p className="font-bold text-foreground text-sm break-all group-hover:text-primary transition-colors duration-300 font-sans">
-                    {EMAIL_CONTATO}
+                  <p className="font-bold text-foreground text-sm [overflow-wrap:anywhere] group-hover:text-primary transition-colors duration-300 font-sans">
+                    {EMAIL_CONTATO.split('@')[0]}@<wbr />
+                    {EMAIL_CONTATO.split('@')[1]}
                   </p>
                 </a>
               </div>

@@ -6,10 +6,11 @@ import logoLight from '@/assets/logo-fundo-branco-7d1af.webp'
 import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.webp'
 
 export function Footer() {
+  const [usuarioEmail, dominioEmail] = EMAIL_CONTATO.split('@')
   return (
     <footer className="bg-background border-t border-border pt-20 pb-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-12 mb-16">
           <div className="md:col-span-1">
             <Link to="/" className="flex flex-col justify-center mb-6 group">
               <div className="flex items-center gap-3">
@@ -39,16 +40,19 @@ export function Footer() {
               <address className="not-italic text-sm text-muted-foreground leading-relaxed">
                 Rua Pais Leme, 215, conj. 1713
                 <br />
-                Pinheiros, São Paulo/SP · CEP 05424-150
+                Pinheiros, São Paulo/SP · <span className="whitespace-nowrap">CEP 05424-150</span>
               </address>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li>
                   <a
                     href={`mailto:${EMAIL_CONTATO}`}
-                    className="inline-flex items-center gap-2 hover:text-primary transition-colors break-all"
+                    className="inline-flex items-start gap-2 hover:text-primary transition-colors"
                   >
-                    <Mail className="h-4 w-4 shrink-0 text-primary" />
-                    {EMAIL_CONTATO}
+                    <Mail className="h-4 w-4 shrink-0 text-primary mt-0.5" />
+                    <span className="[overflow-wrap:anywhere]">
+                      {usuarioEmail}@<wbr />
+                      {dominioEmail}
+                    </span>
                   </a>
                 </li>
                 <li>
