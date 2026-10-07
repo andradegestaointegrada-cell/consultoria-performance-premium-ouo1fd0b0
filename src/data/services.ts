@@ -85,15 +85,15 @@ export const S_DATA: Record<string, ServiceData> = {
     ci: 'https://i.postimg.cc/vHTHscJB/PBQP_H_DESCRIÇÃO.jpg',
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
     methodologyDetails:
-      'Para o PBQP-H, a metodologia integra as exigências específicas do SiMAC com a dinâmica do canteiro de obras. Realizamos auditorias de qualificação de fornecedores, avaliação de materiais e controle tecnológico in-loco para assegurar a conformidade desde a fundação até o acabamento.',
+      'Para o PBQP-H, a metodologia integra as exigências específicas do SiAC com a dinâmica do canteiro de obras. Realizamos auditorias de qualificação de fornecedores, avaliação de materiais e controle tecnológico in-loco para assegurar a conformidade desde a fundação até o acabamento.',
     trainingPillars: [
-      'Interpretação dos Requisitos do SiMAC',
+      'Interpretação dos Requisitos do SiAC',
       'Controle Tecnológico e Recebimento de Materiais',
       'Gestão de Resíduos na Construção Civil',
       'Indicadores de Produtividade e Desperdício',
     ],
     deliverablesText:
-      'Implementamos soluções direcionadas ao canteiro de obras, onde a certificação atua como alavanca estratégica para a eficiência construtiva e a redução de desperdícios de materiais. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Construtivos, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando projetos rentáveis e em conformidade com o SiMAC.',
+      'Implementamos soluções direcionadas ao canteiro de obras, onde a certificação atua como alavanca estratégica para a eficiência construtiva e a redução de desperdícios de materiais. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Construtivos, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando projetos rentáveis e em conformidade com o SiAC.',
   },
   'iatf-16949': {
     t: 'IATF 16949',

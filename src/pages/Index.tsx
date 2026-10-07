@@ -16,7 +16,11 @@ export default function Index() {
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden bg-secondary border-t border-border">
-        <div className="absolute inset-0 bg-[url('https://img.usecurling.com/p/1920/600?q=luxury%20pattern&color=black')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{ backgroundImage: `radial-gradient(circle at 70% 50%, #CFAE70 0%, transparent 60%)` }}
+        />
+
         <div className="container mx-auto px-4 relative z-10 text-center">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide break-words">

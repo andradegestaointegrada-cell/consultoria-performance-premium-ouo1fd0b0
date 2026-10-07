@@ -16,19 +16,7 @@ const resolveImage = (article: Article) => {
     return anyArticle.image
   }
 
-  // Use the standard getArticleImage function for normal file fields
-  const img = getArticleImage(article)
-  if (img) return img
-
-  // Provide robust fallbacks based on thematic keywords
-  const title = (article.title || '').toUpperCase()
-  if (title.includes('LIDERANÇA')) return 'https://img.usecurling.com/p/800/600?q=leadership'
-  if (title.includes('MAPEAMENTO'))
-    return 'https://img.usecurling.com/p/800/600?q=business%20process'
-  if (title.includes('PIT STOP')) return 'https://img.usecurling.com/p/800/600?q=pit%20stop'
-  if (title.includes('ISO')) return 'https://img.usecurling.com/p/800/600?q=quality%20management'
-
-  return 'https://img.usecurling.com/p/800/600?q=business'
+  return getArticleImage(article)
 }
 import { cn } from '@/lib/utils'
 
