@@ -7,6 +7,8 @@ import heroImg from '@/assets/cases/cases-hero.webp'
 import setecImg from '@/assets/cases/cases-setec.webp'
 import msanImg from '@/assets/cases/cases-msan.webp'
 import eptImg from '@/assets/cases/cases-ept.webp'
+import inspecaoImg from '@/assets/cases/cases-inspecao.webp'
+import transporteImg from '@/assets/cases/cases-transporte.webp'
 
 interface Caso {
   cliente: string
@@ -48,6 +50,28 @@ const CASOS: Caso[] = [
     nota: 'Atuação de Alexandre Andrade desde 2019; pela AGI desde 2022.',
   },
   {
+    cliente: 'Organismo de inspeção',
+    setor: 'Empresa de engenharia e controle tecnológico de grande porte',
+    imagem: inspecaoImg,
+    imagemAlt: 'Inspetor de capacete e colete mede um pilar de concreto em uma obra',
+    foco: 'center 20%',
+    normas: ['ISO/IEC 17020'],
+    status: 'Concluído em 2022',
+    desafio:
+      'O organismo de inspeção da empresa precisava da acreditação da Cgcre na ISO/IEC 17020, o que exige demonstrar imparcialidade, competência dos inspetores e métodos de inspeção controlados, do planejamento ao relatório.',
+    entregas: [
+      'Implantação completa do sistema de gestão do organismo de inspeção conforme a ISO/IEC 17020.',
+      'Procedimentos e registros de inspeção, com critérios de imparcialidade e de competência dos inspetores.',
+      'Formação de auditores internos na ISO/IEC 17020.',
+      'Preparação para a avaliação da Cgcre, até a acreditação.',
+    ],
+    marcos: [
+      { quando: 'Jun/2021', oque: 'Formação de auditores internos na ISO/IEC 17020' },
+      { quando: '2022', oque: 'Acreditação Cgcre ISO/IEC 17020' },
+    ],
+    nota: 'Projeto conduzido por Alexandre Andrade antes da fundação da AGI.',
+  },
+  {
     cliente: 'MSan Engenharia',
     setor: 'Obras e serviços em plantas industriais',
     imagem: msanImg,
@@ -69,6 +93,24 @@ const CASOS: Caso[] = [
       { quando: '2026', oque: 'Documentação do sistema e implantação nas frentes de trabalho' },
       { quando: 'Dez/2026', oque: 'Auditoria de certificação prevista' },
     ],
+  },
+  {
+    cliente: 'Transportadora de produtos químicos',
+    setor: 'Transporte rodoviário de cargas, inclusive produtos químicos · pequeno porte',
+    imagem: transporteImg,
+    imagemAlt: 'Motorista e técnico de segurança inspecionam um caminhão-tanque antes da viagem',
+    foco: 'center 60%',
+    normas: ['SASSMAQ', 'ISO 9001'],
+    status: 'Concluído em 2021',
+    desafio:
+      'A transportadora precisava atender ao SASSMAQ, a avaliação de segurança, saúde, meio ambiente e qualidade exigida pela indústria química, e certificar a ISO 9001, com equipe enxuta e a operação rodando.',
+    entregas: [
+      'Implantação integrada do SASSMAQ e da ISO 9001, com procedimentos e registros comuns aos dois sistemas.',
+      'Gestão de riscos de segurança, saúde e meio ambiente no transporte de produtos químicos.',
+      'Preparação para a avaliação SASSMAQ e para a auditoria de certificação ISO 9001.',
+    ],
+    marcos: [{ quando: '2021', oque: 'Certificação SASSMAQ e ISO 9001, 11 meses após o início' }],
+    nota: 'Projeto conduzido por Alexandre Andrade, com mais um consultor, antes da fundação da AGI.',
   },
   {
     cliente: 'EPT Engenharia',
@@ -164,7 +206,7 @@ export default function Cases() {
                       </div>
                       <div>
                         <h3 className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-3">
-                          <CheckCircle2 className="h-5 w-5" /> O que a AGI fez
+                          <CheckCircle2 className="h-5 w-5" /> O que foi feito
                         </h3>
                         <ul className="space-y-3">
                           {c.entregas.map((e) => (
