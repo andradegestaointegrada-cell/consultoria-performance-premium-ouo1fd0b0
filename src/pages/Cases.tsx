@@ -3,10 +3,17 @@ import { Reveal } from '@/components/ui/reveal'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRight, CheckCircle2, Target } from 'lucide-react'
+import heroImg from '@/assets/cases/cases-hero.webp'
+import setecImg from '@/assets/cases/cases-setec.webp'
+import msanImg from '@/assets/cases/cases-msan.webp'
+import eptImg from '@/assets/cases/cases-ept.webp'
 
 interface Caso {
   cliente: string
   setor: string
+  imagem: string
+  imagemAlt: string
+  foco: string
   normas: string[]
   status: string
   desafio: string
@@ -19,6 +26,9 @@ const CASOS: Caso[] = [
   {
     cliente: 'SETEC Hidrobrasileira',
     setor: 'Engenharia consultiva · equipes em São Paulo e Fortaleza',
+    imagem: setecImg,
+    imagemAlt: 'Engenheiros de capacete e colete revisam um projeto diante de uma usina hidrelétrica',
+    foco: 'center 60%',
     normas: ['ISO 9001', 'ISO 14001', 'ISO 45001'],
     status: 'Relacionamento contínuo desde 2019',
     desafio:
@@ -40,6 +50,9 @@ const CASOS: Caso[] = [
   {
     cliente: 'MSan Engenharia',
     setor: 'Obras e serviços em plantas industriais',
+    imagem: msanImg,
+    imagemAlt: 'Soldador e técnicos com EPI trabalhando em uma planta industrial',
+    foco: 'center 55%',
     normas: ['ISO 9001', 'ISO 45001'],
     status: 'Em andamento · certificação prevista para dez/2026',
     desafio:
@@ -60,6 +73,9 @@ const CASOS: Caso[] = [
   {
     cliente: 'EPT Engenharia',
     setor: 'Engenharia consultiva multidisciplinar',
+    imagem: eptImg,
+    imagemAlt: 'Consultor revisa um checklist de auditoria diante de projetos estruturais na tela',
+    foco: 'center 15%',
     normas: ['ISO 9001', 'ISO 14001', 'ISO 45001'],
     status: 'Concluído em 2025',
     desafio:
@@ -78,7 +94,7 @@ export default function Cases() {
     <div className="pt-20">
       <section
         className="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-        style={{ backgroundImage: `url('https://i.postimg.cc/JnGZc03Z/CASES.jpg')` }}
+        style={{ backgroundImage: `url('${heroImg}')` }}
       >
         <div className="absolute inset-0 bg-[#091D39]/85" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-4xl">
@@ -99,6 +115,21 @@ export default function Cases() {
           {CASOS.map((c, idx) => (
             <Reveal key={c.cliente} delay={80 * idx}>
               <Card className="bg-card border-border shadow-xl border-t-4 border-t-primary overflow-hidden">
+                <div className="relative h-56 sm:h-72 md:h-96">
+                  <img
+                    src={c.imagem}
+                    alt={c.imagemAlt}
+                    width={1536}
+                    height={864}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ objectPosition: c.foco }}
+                  />
+                  <span className="absolute bottom-3 right-3 rounded bg-black/55 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
+                    Imagem ilustrativa
+                  </span>
+                </div>
                 <CardContent className="p-6 md:p-10">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
                     <div>
