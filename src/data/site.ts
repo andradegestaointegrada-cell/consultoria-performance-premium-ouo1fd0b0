@@ -10,6 +10,7 @@ export const NAV_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'Sobre', path: '/sobre' },
   { name: 'Serviços', path: '/servicos' },
+  { name: 'Tecnologia', path: '/tecnologia' },
   { name: 'Metodologia', path: '/metodologia' },
   { name: 'Cases', path: '/cases' },
   { name: 'Blog', path: '/insights' },

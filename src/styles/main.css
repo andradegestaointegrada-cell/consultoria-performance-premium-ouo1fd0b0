@@ -140,10 +140,115 @@
   }
 }
 
+/* Casca tecnológica: a mesma identidade (navy, ouro, Playfair e Inter) com uma camada
+   de malha, grade e rótulos técnicos por cima. Nada aqui troca cor ou fonte da marca. */
+@layer base {
+  :root {
+    /* ouro escurecido para texto pequeno sobre fundo claro (contraste AA) */
+    --ouro-texto: 40 52% 33%;
+  }
+  .dark {
+    --ouro-texto: 40 45% 62%;
+  }
+}
+
+@layer components {
+  /* grade fina dourada, que some nas bordas */
+  .grade-tech {
+    background-image:
+      linear-gradient(to right, rgb(207 174 112 / 0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(207 174 112 / 0.09) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 65% 45%, #000 15%, transparent 72%);
+    mask-image: radial-gradient(ellipse 75% 70% at 65% 45%, #000 15%, transparent 72%);
+  }
+
+  /* rótulo técnico: Inter em caixa alta, espaçada, com losango na frente */
+  .rotulo-tech {
+    @apply inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.26em];
+    color: hsl(var(--ouro-texto));
+  }
+  .rotulo-tech::before {
+    content: '';
+    @apply h-1.5 w-1.5 shrink-0 rotate-45 bg-current;
+  }
+
+  /* cartão com cantos de mira (HUD) e filete que acende no hover */
+  .cartao-tech {
+    @apply relative overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-300;
+  }
+  .cartao-tech::before,
+  .cartao-tech::after {
+    content: '';
+    @apply pointer-events-none absolute h-4 w-4 transition-colors duration-300;
+    border-color: hsl(var(--primary) / 0.55);
+  }
+  .cartao-tech::before {
+    top: 10px;
+    left: 10px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+  .cartao-tech::after {
+    right: 10px;
+    bottom: 10px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+  }
+  .cartao-tech:hover {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+  .cartao-tech:hover::before,
+  .cartao-tech:hover::after {
+    border-color: hsl(var(--primary));
+  }
+
+  /* feixe de luz que percorre um filete dourado */
+  .feixe-tech {
+    @apply relative h-px w-full overflow-hidden;
+    background: linear-gradient(90deg, transparent, rgb(207 174 112 / 0.35), transparent);
+  }
+  .feixe-tech::after {
+    content: '';
+    @apply absolute inset-y-0 w-1/4;
+    background: linear-gradient(90deg, transparent, rgb(207 174 112 / 0.95), transparent);
+    animation: feixe 5s linear infinite;
+  }
+
+  /* faixa sempre escura (navy), nos dois temas */
+  .faixa-tech {
+    background:
+      radial-gradient(ellipse 60% 80% at 85% 20%, rgb(207 174 112 / 0.1), transparent 60%),
+      linear-gradient(160deg, #0b2345 0%, #091d39 40%, #0d0d0d 100%);
+    color: #e8e8e8;
+  }
+
+  .malha-canvas {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+}
+
+@keyframes feixe {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
 /* Revelação ao rolar: quem prefere menos movimento vê o conteúdo direto. */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1 !important;
     animation: none !important;
+  }
+  .feixe-tech::after {
+    animation: none;
+    display: none;
+  }
+  .malha-canvas {
+    transition: none;
   }
 }

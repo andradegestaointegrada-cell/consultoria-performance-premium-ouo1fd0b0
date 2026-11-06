@@ -40,3 +40,4 @@ screenshot.png
 
 # Astro
 .astro/
+dist-local

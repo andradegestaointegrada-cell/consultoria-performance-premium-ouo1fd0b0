@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -24,6 +24,7 @@ import {
 import { useToast } from '@/hooks/use-toast'
 import { postApi } from '@/lib/api'
 import { ToasterOnce } from '@/components/ToasterOnce'
+import { SERVICOS_CONTATO } from '@/data/contato'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Nome inválido.'),
@@ -37,20 +38,7 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>
 
-const SERVICES = [
-  'ISO 9001 - Qualidade',
-  'ISO 14001 - Ambiental',
-  'ISO 45001 - Saúde e Segurança',
-  'ISO 17020',
-  'ISO 17025',
-  'SASSMAQ',
-  'IATF',
-  'PBQP-H - Habitat',
-  'Consultoria ESG',
-  'Auditoria Interna',
-  'Treinamentos',
-  'Outros',
-]
+const SERVICES: readonly string[] = SERVICOS_CONTATO
 
 export function ContactForm() {
   const { toast } = useToast()
@@ -70,6 +58,15 @@ export function ContactForm() {
       newsletterAgreed: false,
     },
   })
+
+  // Links do site podem chegar com o serviço já escolhido: /contato?servico=<opção>.
+  // (adiado para depois da hidratação: na mesma passada o campo não redesenhava)
+  useEffect(() => {
+    const pedido = new URLSearchParams(window.location.search).get('servico')
+    if (!pedido || !SERVICES.includes(pedido)) return
+    const t = setTimeout(() => form.setValue('service', pedido, { shouldDirty: true }), 0)
+    return () => clearTimeout(t)
+  }, [form])
 
   async function onSubmit(data: ContactFormValues) {
     setLoading(true)
@@ -248,7 +245,8 @@ export function ContactForm() {
                 <div className="space-y-1 leading-none">
                   <FormLabel className="text-xs leading-relaxed font-normal text-muted-foreground">
                     Concordo com o uso dos meus dados para que a AGI responda a este contato,
-                    conforme a Política de Privacidade.
+                    conforme a Política de Privacidade. Pedidos sobre serviços, cursos ou a
+                    plataforma da Cyber Consulting são repassados a ela para atendimento.
                   </FormLabel>
                   <FormMessage />
                 </div>

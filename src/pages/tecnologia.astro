@@ -1,0 +1,467 @@
+---
+// Camada tecnológica: o catálogo da Cyber Consulting, ofertado pela AGI e integrado ao SGI.
+import { ArrowRight, ArrowUpRight, BrainCircuit, Fingerprint, LifeBuoy, ShieldCheck, Orbit, MessageCircle } from 'lucide-react'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import Malha from '@/components/tech/Malha.astro'
+import ogImg from '@/assets/servicos/42001-hero.webp'
+import {
+  APOIO_EXIN,
+  CULTURA,
+  CURSOS_NORMAS,
+  CYBER_URL,
+  FRENTES_TECH,
+  GALAXIA,
+  GALAXIA_URL,
+  METODO_INTEGRADO,
+  TRILHAS_EXIN,
+} from '@/data/tecnologia'
+import { linkContato } from '@/data/contato'
+import { ORG_ID, SITE_URL, whatsappLink } from '@/data/site'
+
+const url = `${SITE_URL}/tecnologia`
+const zap = (assunto: string) =>
+  whatsappLink(`Olá! Vim pela página Tecnologia do site da AGI e quero conversar sobre ${assunto}.`)
+const ICONES = [ShieldCheck, BrainCircuit, Fingerprint, LifeBuoy]
+
+const cyber = {
+  '@type': 'Organization',
+  '@id': 'https://www.cyberconsulting.com.br/#organizacao',
+  name: 'Cyber Consulting',
+  url: 'https://www.cyberconsulting.com.br/',
+}
+const lista = {
+  '@type': 'ItemList',
+  '@id': `${url}#frentes`,
+  name: 'Segurança da informação, privacidade e IA integradas ao sistema de gestão',
+  itemListElement: FRENTES_TECH.map((f, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: f.nome,
+      description: f.resumo,
+      url: `${url}#${f.id}`,
+      provider: cyber,
+      broker: { '@id': ORG_ID },
+      areaServed: { '@type': 'Country', name: 'Brasil' },
+    },
+  })),
+}
+---
+
+<BaseLayout
+  title="Segurança da Informação, Privacidade e IA | Andrade Gestão Integrada"
+  description="Segurança da informação (ISO/IEC 27001), privacidade (LGPD e ISO/IEC 27701), governança de IA (ISO/IEC 42001), riscos e continuidade integrados ao SGI, com a Cyber Consulting. Plataforma Galáxia e certificações EXIN."
+  image={ogImg}
+  imageAlt="Camada tecnológica do sistema de gestão: segurança, privacidade e IA"
+  breadcrumbs={[{ name: 'Tecnologia', path: '/tecnologia' }]}
+  jsonLd={[cyber, lista]}
+  whatsapp="Olá! Vim pela página Tecnologia do site da AGI e quero conversar sobre segurança da informação, privacidade ou IA."
+  overHero
+>
+  <!-- Hero -->
+  <section class="faixa-tech relative min-h-[88svh] flex items-center pt-36 pb-24 overflow-hidden">
+    <div class="absolute inset-0 grade-tech"></div>
+    <div
+      class="pointer-events-none absolute z-[1] top-20 h-[44%] left-[25%] -right-[20%] opacity-60 sm:left-[40%] sm:-right-[6%] lg:opacity-100 lg:inset-y-0 lg:top-10 lg:h-auto lg:left-auto lg:right-0 lg:w-[50%] xl:right-[2%] xl:w-[48%]"
+    >
+      <Malha forma="rede" />
+    </div>
+
+    <div class="container relative z-10 mx-auto px-4">
+      <div class="max-w-3xl lg:max-w-[52%]">
+        <Reveal>
+          <span class="rotulo-tech text-primary">Camada tecnológica · com a Cyber Consulting</span>
+        </Reveal>
+        <Reveal delay={100}>
+          <h1
+            class="mt-6 text-4xl sm:text-5xl md:text-6xl font-heading font-bold tracking-tight text-white uppercase leading-[1.08] break-words"
+          >
+            Segurança, privacidade e <em class="font-heading italic font-normal text-primary">IA</em> no mesmo sistema de gestão.
+          </h1>
+        </Reveal>
+        <Reveal delay={200}>
+          <p class="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl leading-relaxed">
+            O SGI continua sendo a espinha. Em atuação integrada com a Cyber Consulting, o mesmo sistema passa a cobrir
+            segurança da informação, privacidade de dados, governança de IA, riscos e continuidade, com uma auditoria interna só.
+          </p>
+        </Reveal>
+        <Reveal delay={300} class="mt-10 flex flex-col sm:flex-row gap-4">
+          <Button
+            href={linkContato('Segurança da informação (ISO 27001)')}
+            size="lg"
+            class="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold shadow-[0_4px_14px_0_rgba(207,174,112,0.39)] w-full sm:w-auto whitespace-normal"
+            linkClass="flex items-center justify-center"
+          >
+            Falar com um especialista <ArrowRight className="ml-2 h-5 w-5 shrink-0" />
+          </Button>
+          <Button
+            href="#frentes"
+            size="lg"
+            variant="outline"
+            class="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold border-white/25 bg-black/20 text-white hover:bg-white hover:text-black w-full sm:w-auto whitespace-normal"
+            linkClass="flex items-center justify-center"
+          >
+            Ver as frentes
+          </Button>
+        </Reveal>
+        <Reveal delay={400}>
+          <p class="mt-10 text-[11px] font-bold uppercase tracking-[0.22em] text-[#DCE4F0]">
+            ISO/IEC 27001 · 27701 · 42001 · ISO 22301 · 31000 · LGPD
+          </p>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como a integração funciona -->
+  <section class="py-24 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+        <Reveal>
+          <span class="rotulo-tech">Integração</span>
+          <h2 class="mt-5 text-3xl md:text-5xl font-heading font-bold text-foreground uppercase tracking-wide leading-tight">
+            Um sistema de gestão, duas especialidades.
+          </h2>
+          <p class="mt-6 text-lg text-muted-foreground leading-relaxed">
+            A estrutura de cláusulas 4 a 10 é a mesma na ISO 9001, na 14001, na 45001, na ISO/IEC 27001, na 27701 e na 42001.
+            Por isso segurança, privacidade e IA entram como camadas do SGI que a empresa já tem, e não como sistemas paralelos.
+          </p>
+          <div class="mt-10 grid sm:grid-cols-2 gap-5">
+            <div class="cartao-tech p-7">
+              <p class="rotulo-tech">AGI</p>
+              <p class="mt-3 text-foreground font-semibold">Estrutura e audita o sistema de gestão</p>
+              <p class="mt-2 text-sm text-muted-foreground leading-relaxed">
+                ISO 9001, 14001 e 45001, SGI integrado, auditoria interna integrada e o ponto de contato do projeto.
+              </p>
+            </div>
+            <div class="cartao-tech p-7">
+              <p class="rotulo-tech">Cyber Consulting</p>
+              <p class="mt-3 text-foreground font-semibold">Conduz a parte técnica das camadas</p>
+              <p class="mt-2 text-sm text-muted-foreground leading-relaxed">
+                Segurança da informação, privacidade de dados, governança de IA, riscos e continuidade.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={150}>
+          <ol class="relative border-l border-primary/30 ml-3 space-y-9">
+            {
+              METODO_INTEGRADO.map((etapa, i) => (
+                <li class="relative pl-10">
+                  <span
+                    class="absolute -left-[13px] top-0.5 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-[11px] font-bold text-foreground"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  <h3 class="text-lg font-heading font-bold text-foreground uppercase tracking-wide">{etapa.nome}</h3>
+                  <p class="mt-1.5 text-muted-foreground leading-relaxed">{etapa.texto}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frentes de consultoria -->
+  <section id="frentes" class="py-24 bg-secondary/40 border-y border-border scroll-mt-24">
+    <div class="container mx-auto px-4">
+      <Reveal class="max-w-3xl">
+        <span class="rotulo-tech">Consultoria</span>
+        <h2 class="mt-5 text-3xl md:text-5xl font-heading font-bold text-foreground uppercase tracking-wide leading-tight">
+          Quatro frentes, uma estrutura.
+        </h2>
+        <p class="mt-5 text-lg text-muted-foreground leading-relaxed">
+          Cada frente pode ser contratada sozinha ou junto com o SGI. Quando entra junto, compartilha a documentação,
+          os riscos, os indicadores e a auditoria interna.
+        </p>
+      </Reveal>
+
+      <div class="mt-14 grid md:grid-cols-2 gap-6">
+        {
+          FRENTES_TECH.map((f, i) => {
+            const Icone = ICONES[i]
+            return (
+              <Reveal delay={i * 80}>
+                <article id={f.id} class="cartao-tech h-full p-8 md:p-10 flex flex-col scroll-mt-28">
+                  <div class="flex items-start justify-between gap-4">
+                    <Icone className="h-9 w-9 text-primary" strokeWidth={1.5} />
+                    <span class="font-heading text-5xl font-bold text-foreground/10 leading-none" aria-hidden="true">
+                      {f.codigo}
+                    </span>
+                  </div>
+                  <h3 class="mt-6 text-2xl font-heading font-bold text-foreground uppercase tracking-wide">{f.nome}</h3>
+                  <ul class="mt-4 flex flex-wrap gap-2" aria-label={`Referências de ${f.nome}`}>
+                    {f.normas.map((n) => (
+                      <li class="rounded-full border border-border px-3 py-1 text-xs font-semibold text-foreground/80">{n}</li>
+                    ))}
+                  </ul>
+                  <p class="mt-5 text-muted-foreground leading-relaxed">{f.resumo}</p>
+                  <ul class="mt-5 space-y-2.5">
+                    {f.entregas.map((e) => (
+                      <li class="flex gap-3 text-sm text-foreground/90">
+                        <span class="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-primary" aria-hidden="true" />
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="mt-auto pt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold uppercase tracking-wider">
+                    <a
+                      href={zap(f.nome.toLowerCase())}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                    >
+                      <MessageCircle className="h-4 w-4" /> Conversar sobre {f.nome.toLowerCase()}
+                    </a>
+                    {f.pagina && (
+                      <a href={f.pagina} class="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+                        Página da ISO/IEC 42001 <ArrowRight className="h-4 w-4" />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              </Reveal>
+            )
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Galáxia -->
+  <section id="galaxia" class="faixa-tech relative py-24 overflow-hidden scroll-mt-20">
+    <div class="absolute inset-0 grade-tech opacity-80"></div>
+    <div class="container relative z-10 mx-auto px-4">
+      <Reveal class="max-w-3xl">
+        <span class="rotulo-tech text-primary">Plataforma · Galáxia</span>
+        <h2 class="mt-5 text-3xl md:text-5xl font-heading font-bold text-white uppercase tracking-wide leading-tight">
+          Oito sistemas de GRC que compartilham o mesmo contexto.
+        </h2>
+        <p class="mt-5 text-lg text-white/75 leading-relaxed">
+          A Galáxia é a plataforma da Cyber Consulting. O contexto da empresa (escopo, processos, sistemas e controles)
+          é definido uma vez e herdado por todos os sistemas. A IA prepara diagnósticos e minutas, e um especialista revisa e
+          aprova antes de valer.
+        </p>
+      </Reveal>
+
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          GALAXIA.map((c, i) => (
+            <Reveal delay={(i % 4) * 60}>
+              <div class="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 hover:border-primary/50 transition-colors">
+                <div class="flex items-center gap-3">
+                  <Orbit className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                  <h3 class="font-heading text-2xl font-bold text-white">{c.nome}</h3>
+                </div>
+                <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#DCE4F0]">{c.dominio}</p>
+                <p class="mt-4 text-sm text-white/70 leading-relaxed">{c.texto}</p>
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+
+      <Reveal class="mt-12 flex flex-col sm:flex-row gap-4">
+        <Button
+          href={zap('uma apresentação da plataforma Galáxia')}
+          size="lg"
+          class="h-auto min-h-14 py-4 px-8 rounded-full uppercase tracking-wider font-bold w-full sm:w-auto"
+          linkClass="flex items-center justify-center"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar uma apresentação
+        </Button>
+        <a
+          href={GALAXIA_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 min-h-14 px-8 rounded-full border border-white/25 text-sm font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black transition-colors"
+        >
+          Site da Galáxia <ArrowUpRight className="h-4 w-4" />
+        </a>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Educação: EXIN, cursos de normas e cultura -->
+  <section id="educacao" class="py-24 bg-background scroll-mt-20">
+    <div class="container mx-auto px-4">
+      <Reveal class="max-w-3xl">
+        <span class="rotulo-tech">Educação · Cyber Cultura</span>
+        <h2 class="mt-5 text-3xl md:text-5xl font-heading font-bold text-foreground uppercase tracking-wide leading-tight">
+          Certificações internacionais EXIN.
+        </h2>
+        <p class="mt-5 text-lg text-muted-foreground leading-relaxed">
+          Cursos preparatórios da Cyber Cultura, parceira oficial EXIN desde 2019, em três trilhas. Turmas abertas ou fechadas
+          para a sua equipe.
+        </p>
+      </Reveal>
+
+      <div class="mt-14 grid lg:grid-cols-3 gap-6">
+        {
+          TRILHAS_EXIN.map((trilha, i) => (
+            <Reveal delay={i * 80}>
+              <div class="cartao-tech h-full p-8">
+                <h3 class="text-lg font-heading font-bold text-foreground uppercase tracking-wide">{trilha.nome}</h3>
+                <div class="feixe-tech mt-4 mb-6" aria-hidden="true" />
+                <ul class="space-y-5">
+                  {trilha.itens.map((item) => (
+                    <li>
+                      <a
+                        href={zap(`a certificação EXIN ${item.sigla} (${item.nome})`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group flex items-baseline gap-4"
+                      >
+                        <span class="w-14 shrink-0 font-heading text-2xl font-bold text-[hsl(var(--ouro-texto))]">{item.sigla}</span>
+                        <span>
+                          <span class="block font-semibold text-foreground group-hover:text-primary transition-colors">{item.nome}</span>
+                          {item.nota && <span class="block text-sm text-muted-foreground">{item.nota}</span>}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        {
+          APOIO_EXIN.map((a) => (
+            <Reveal>
+              <a
+                href={zap(a.nome.toLowerCase())}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cartao-tech flex h-full items-start gap-5 p-7 group"
+              >
+                <MessageCircle className="mt-1 h-5 w-5 shrink-0 text-primary" />
+                <span>
+                  <span class="block font-semibold text-foreground group-hover:text-primary transition-colors">{a.nome}</span>
+                  <span class="mt-1 block text-sm text-muted-foreground">{a.texto}</span>
+                </span>
+              </a>
+            </Reveal>
+          ))
+        }
+      </div>
+
+      <Reveal class="mt-24 max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide leading-tight">
+          Cursos de normas
+        </h2>
+        <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+          Formações práticas da Cyber Cultura nas normas e referências que compõem a camada tecnológica.
+        </p>
+      </Reveal>
+      <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {
+          CURSOS_NORMAS.map((c) => (
+            <li>
+              <a
+                href={zap(`o curso ${c.norma}`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-full flex-col rounded-xl border border-border bg-card px-5 py-4 hover:border-primary/60 transition-colors group"
+              >
+                <span class="font-semibold text-foreground group-hover:text-primary transition-colors">{c.norma}</span>
+                <span class="mt-1 text-sm text-muted-foreground">{c.tema}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <Reveal class="mt-24 max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide leading-tight">
+          Desenvolvimento e cultura
+        </h2>
+      </Reveal>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        {
+          CULTURA.map((c, i) => (
+            <Reveal delay={i * 80}>
+              <div class="cartao-tech h-full p-8 flex flex-col">
+                <h3 class="text-xl font-heading font-bold text-foreground uppercase tracking-wide">{c.nome}</h3>
+                <p class="mt-4 text-muted-foreground leading-relaxed">{c.texto}</p>
+                <a
+                  href={zap(c.nome.toLowerCase())}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                >
+                  <MessageCircle className="h-4 w-4" /> Conversar sobre {c.nome.toLowerCase()}
+                </a>
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem entrega e contato -->
+  <section class="faixa-tech relative py-24 overflow-hidden">
+    <div class="absolute inset-0 grade-tech opacity-70"></div>
+    <div class="container relative z-10 mx-auto px-4">
+      <div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+        <Reveal>
+          <span class="rotulo-tech text-primary">Quem entrega</span>
+          <h2 class="mt-5 text-3xl md:text-5xl font-heading font-bold text-white uppercase tracking-wide leading-tight">
+            Um contato, cada especialista no seu escopo.
+          </h2>
+          <p class="mt-6 text-lg text-white/75 leading-relaxed">
+            As consultorias desta página são conduzidas pela Cyber Consulting; os cursos e as certificações, pela Cyber Cultura;
+            a Galáxia é a plataforma da Cyber Consulting. A AGI recebe o seu contato, integra ao sistema de gestão quando faz
+            sentido e acompanha o projeto. Valores, turmas e condições são informados no atendimento.
+          </p>
+          <a
+            href={CYBER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white border-b border-primary/60 pb-0.5 hover:text-primary transition-colors"
+          >
+            Site da Cyber Consulting <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </Reveal>
+        <Reveal delay={150}>
+          <div class="rounded-2xl border border-primary/30 bg-black/30 p-8 md:p-10 backdrop-blur-sm">
+            <p class="font-heading text-2xl font-bold text-white">Conte o seu cenário.</p>
+            <p class="mt-3 text-white/70 leading-relaxed">
+              Diga qual norma, curso ou sistema interessa e em que ponto a empresa está. A AGI retorna e, quando o tema é da Cyber, já envolve o especialista.
+            </p>
+            <div class="mt-8 flex flex-col gap-4">
+              <Button
+                href={zap('segurança da informação, privacidade ou IA')}
+                size="lg"
+                class="h-auto min-h-14 py-4 px-8 rounded-full uppercase tracking-wider font-bold w-full"
+                linkClass="flex items-center justify-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="mr-2 h-5 w-5" /> Conversar no WhatsApp
+              </Button>
+              <a
+                href={linkContato('Segurança da informação (ISO 27001)')}
+                class="inline-flex items-center justify-center gap-2 min-h-14 px-8 rounded-full border border-white/25 text-sm font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black transition-colors"
+              >
+                Usar o formulário
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

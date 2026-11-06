@@ -4,6 +4,7 @@ import { fundoHero } from '@/lib/fundo'
 import Reveal from '@/components/Reveal.astro'
 import Card from '@/components/Card.astro'
 import { SERVICOS_LISTA } from '@/data/services'
+import { FRENTES_TECH } from '@/data/tecnologia'
 import { mensagemWhatsApp, ORG_ID, SITE_URL } from '@/data/site'
 import servicosHero from '@/assets/servicos/servicos-hero.webp'
 
@@ -38,6 +39,7 @@ const fundo = await fundoHero(servicosHero)
       style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#0D0D0D]/85"></div>
+      <div class="absolute inset-0 grade-tech [mask-image:radial-gradient(ellipse_70%_80%_at_50%_50%,#000_10%,transparent_75%)]"></div>
       <div class="container relative z-10 mx-auto px-4 text-center max-w-3xl">
         <Reveal>
           <h1
@@ -80,6 +82,39 @@ const fundo = await fundoHero(servicosHero)
             ))
           }
         </div>
+      </div>
+    </section>
+
+    <section class="faixa-tech relative py-20 overflow-hidden">
+      <div class="absolute inset-0 grade-tech"></div>
+      <div class="container relative z-10 mx-auto px-4">
+        <Reveal class="grid lg:grid-cols-[1.2fr_1fr] gap-10 items-center">
+          <div>
+            <span class="rotulo-tech text-primary">Camada tecnológica · com a Cyber Consulting</span>
+            <h2 class="mt-5 text-3xl md:text-4xl font-heading font-bold text-white uppercase tracking-wide leading-tight">
+              Segurança da informação, privacidade e IA no mesmo SGI.
+            </h2>
+            <p class="mt-5 text-lg text-white/75 leading-relaxed">
+              ISO/IEC 27001, LGPD e ISO/IEC 27701, ISO/IEC 42001, ISO 31000 e ISO 22301, mais a plataforma Galáxia e as
+              certificações EXIN, integradas ao sistema de gestão.
+            </p>
+          </div>
+          <ul class="grid grid-cols-2 gap-3">
+            {
+              FRENTES_TECH.map((f) => (
+                <li>
+                  <a
+                    href={`/tecnologia#${f.id}`}
+                    class="flex h-full flex-col rounded-xl border border-white/10 bg-white/[0.03] p-5 hover:border-primary/60 transition-colors group"
+                  >
+                    <span class="text-[11px] font-bold tracking-[0.2em] text-white/60">{f.codigo}</span>
+                    <span class="mt-2 font-semibold text-white group-hover:text-primary transition-colors">{f.nome}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </Reveal>
       </div>
     </section>
   </div>

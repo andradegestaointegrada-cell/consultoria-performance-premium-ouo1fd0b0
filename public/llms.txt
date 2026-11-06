@@ -30,6 +30,10 @@ O site não publica preços. Propostas são feitas após diagnóstico, pelo form
 - [ISO 37001 · Gestão antissuborno](https://www.andradegestaointegrada.com.br/servicos/iso-37001)
 - [Lista de serviços](https://www.andradegestaointegrada.com.br/servicos)
 
+## Camada tecnológica (com a Cyber Consulting)
+
+- [Tecnologia](https://www.andradegestaointegrada.com.br/tecnologia): segurança da informação (ISO/IEC 27001, SOC 2, NIST), governança de IA (ISO/IEC 42001, ISO/IEC 23894, NIST AI RMF), privacidade de dados (LGPD, GDPR, ISO/IEC 27701), riscos e continuidade (ISO 31000, ISO 22301, ISO/IEC 27031), integrados ao sistema de gestão. A parte técnica é conduzida pela Cyber Consulting, em atuação integrada com a AGI; inclui a plataforma de GRC Galáxia (8 sistemas), certificações EXIN com cursos preparatórios da Cyber Cultura, cursos de normas, mentoria, palestras e programa de conscientização. Sem preços no site: contato pelo formulário ou WhatsApp.
+
 ## Artigos
 
 - [ISO/IEC 42001: como estruturar a governança de inteligência artificial](https://www.andradegestaointegrada.com.br/insights/iso-42001-governanca-inteligencia-artificial) (07/10/2026)

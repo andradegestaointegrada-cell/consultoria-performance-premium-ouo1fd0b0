@@ -1,0 +1,31 @@
+---
+// Malha 3D animada (camada tecnológica). Decorativa: o conteúdo da página não depende dela.
+// O motor só é baixado depois da carga da página, quando o navegador fica ocioso.
+interface Props {
+  forma: 'logo' | 'pdca' | 'globo' | 'pulso' | 'rede' | 'numero'
+  /** Texto desenhado em pontos (forma "numero"). */
+  texto?: string
+  /** Troca os rótulos em órbita da forma. */
+  rotulos?: string[]
+  /** Mostra os rótulos também no celular. */
+  rotulosNoCelular?: boolean
+  class?: string
+}
+const { forma, texto, rotulos, rotulosNoCelular = false, class: className } = Astro.props
+---
+
+<canvas
+  data-malha={forma}
+  data-texto={texto}
+  data-rotulos={rotulos ? JSON.stringify(rotulos) : undefined}
+  data-rotulos-compacto={rotulosNoCelular ? 'sim' : undefined}
+  aria-hidden="true"
+  class:list={['malha-canvas block h-full w-full', className]}></canvas>
+
+<script>
+  const iniciar = () => import('@/scripts/malha/motor').then((m) => m.iniciarMalhas())
+  const ocioso = () =>
+    'requestIdleCallback' in window ? requestIdleCallback(iniciar, { timeout: 2500 }) : setTimeout(iniciar, 300)
+  if (document.readyState === 'complete') ocioso()
+  else addEventListener('load', ocioso, { once: true })
+</script>

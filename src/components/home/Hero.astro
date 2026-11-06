@@ -3,10 +3,12 @@ import { Image } from 'astro:assets'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
+import Malha from '@/components/tech/Malha.astro'
 import bgImage from '@/assets/home/home-hero.webp'
 ---
 
-<section class="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden group">
+<!-- min-h (e não h fixa): em telas baixas o hero cresce e nada fica cortado. -->
+<section class="relative min-h-[100svh] flex items-center pt-32 pb-24 lg:pb-28 overflow-hidden group">
   <div class="absolute inset-0 z-0 bg-black">
     <Image
       src={bgImage}
@@ -15,14 +17,26 @@ import bgImage from '@/assets/home/home-hero.webp'
       sizes="100vw"
       loading="eager"
       fetchpriority="high"
-      class="w-full h-full object-cover object-[center_30%] md:object-center opacity-80 grayscale contrast-125 transition-opacity duration-700"
+      class="w-full h-full object-cover object-[center_30%] md:object-center opacity-70 grayscale contrast-125 transition-opacity duration-700"
     />
-    <div class="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/90 via-[#0D0D0D]/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/95 via-[#0D0D0D]/70 to-[#091D39]/60"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+    <div class="absolute inset-0 grade-tech"></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_28%,rgba(9,29,57,0.8),transparent_70%)] lg:bg-[radial-gradient(ellipse_38%_55%_at_74%_52%,rgba(9,29,57,0.85),transparent_72%)]"
+    >
+    </div>
+  </div>
+
+  <!-- Camada tecnológica: o símbolo da AGI em malha, envolto pela rede das normas da Cyber. -->
+  <div
+    class="pointer-events-none absolute z-[1] top-16 h-[46%] left-[22%] -right-[18%] opacity-60 sm:left-[35%] sm:-right-[8%] lg:opacity-100 lg:inset-y-0 lg:top-12 lg:h-auto lg:left-auto lg:right-0 lg:w-[50%] xl:right-[2%] xl:w-[48%]"
+  >
+    <Malha forma="logo" />
   </div>
 
   <div class="container relative z-10 mx-auto px-4">
-    <div class="max-w-4xl">
+    <div class="max-w-3xl lg:max-w-[50%]">
       <Reveal>
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider"
@@ -39,7 +53,7 @@ import bgImage from '@/assets/home/home-hero.webp'
 
       <Reveal delay={100}>
         <h1
-          class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.1] uppercase break-words"
+          class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.08] uppercase break-words"
         >
           Estratégia, Conformidade e{' '}
           <em class="font-heading italic text-primary font-normal">Performance</em>.
@@ -47,9 +61,9 @@ import bgImage from '@/assets/home/home-hero.webp'
       </Reveal>
 
       <Reveal delay={200}>
-        <p class="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
-          Consultoria especializada em normas ISO para empresas que buscam a LIDERANÇA no mercado.
-          Metodologia precisa, resultados mensuráveis.
+        <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
+          Sistemas de gestão ISO para empresas que buscam a liderança no mercado, agora com uma camada de
+          segurança da informação, privacidade de dados e governança de IA.
         </p>
       </Reveal>
 
@@ -66,16 +80,32 @@ import bgImage from '@/assets/home/home-hero.webp'
           href="/servicos"
           size="lg"
           variant="outline"
-          class="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold border-white/20 text-white hover:bg-white hover:text-black w-full sm:w-auto text-center whitespace-normal"
+          class="h-auto min-h-14 py-4 px-6 sm:px-8 text-sm sm:text-base rounded-full uppercase tracking-wider font-bold border-white/25 bg-black/20 text-white hover:bg-white hover:text-black w-full sm:w-auto text-center whitespace-normal"
           linkClass="flex items-center justify-center"
         >
           Conheça Nossas Soluções
         </Button>
       </Reveal>
+
+      <Reveal delay={400}>
+        <div class="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3 text-[11px] font-bold uppercase tracking-[0.22em]">
+          <span class="text-primary">ISO 9001 · 14001 · 45001</span>
+          <span class="hidden sm:block h-3 w-px bg-white/30" aria-hidden="true"></span>
+          <span class="text-[#DCE4F0]">ISO/IEC 27001 · 42001 · LGPD</span>
+          <a
+            href="/tecnologia"
+            class="inline-flex items-center gap-1.5 text-white border-b border-primary/60 pb-0.5 hover:text-primary transition-colors"
+          >
+            Camada tecnológica <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </Reveal>
     </div>
   </div>
 
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce motion-reduce:animate-none">
+  <div
+    class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce motion-reduce:animate-none [@media(max-height:860px)]:hidden"
+  >
     <ChevronDown className="h-8 w-8 text-primary opacity-80" />
   </div>
 </section>
