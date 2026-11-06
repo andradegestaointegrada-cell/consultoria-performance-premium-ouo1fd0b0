@@ -1,0 +1,51 @@
+# Andrade Gestão Integrada (AGI)
+
+> Consultoria brasileira em sistemas de gestão. Implanta, integra, audita e mantém sistemas baseados em normas ISO e programas setoriais: ISO 9001, ISO 14001, ISO 45001, PBQP-H (SiAC), IATF 16949, ISO/IEC 17020, ISO/IEC 17025, SASSMAQ, ISO/IEC 42001 e ISO 37001. Atua com gestão completa do sistema ou suporte técnico à equipe do cliente. Sede em São Paulo/SP, atendimento em todo o Brasil.
+
+Razão social: ALEXANDRE FERREIRA DE ANDRADE LTDA (nome fantasia Andrade Gestão Integrada e Treinamento), CNPJ 66.060.174/0001-58. Endereço: Rua Pais Leme, 215, conj. 1713, Pinheiros, São Paulo/SP, CEP 05424-150. Contato: alexandre@andradegestaointegrada.com.br, WhatsApp +55 11 98613-4789. Diretor e consultor principal: Alexandre Andrade.
+
+O site não publica preços. Propostas são feitas após diagnóstico, pelo formulário de contato ou pelo WhatsApp.
+
+## Páginas principais
+
+- [Home](https://www.andradegestaointegrada.com.br/): visão geral, pilares e principais normas atendidas
+- [Sobre](https://www.andradegestaointegrada.com.br/sobre): a empresa, a forma de atuação e o time
+- [Metodologia](https://www.andradegestaointegrada.com.br/metodologia): método em quatro fases (diagnóstico, implementação, auditoria interna e evolução contínua)
+- [Cases](https://www.andradegestaointegrada.com.br/cases): trabalhos reais com escopo, normas e marcos (SETEC, MSan Engenharia, organismo de inspeção ISO/IEC 17020, transportadora SASSMAQ, EPT Engenharia)
+- [Contato](https://www.andradegestaointegrada.com.br/contato): formulário, WhatsApp e endereço
+
+## Serviços
+
+- [ISO 9001 · Gestão da Qualidade](https://www.andradegestaointegrada.com.br/servicos/iso-9001)
+- [ISO 14001 · Gestão Ambiental](https://www.andradegestaointegrada.com.br/servicos/iso-14001)
+- [ISO 45001 · Saúde e Segurança Ocupacional](https://www.andradegestaointegrada.com.br/servicos/iso-45001)
+- [SGI · Sistema de Gestão Integrada](https://www.andradegestaointegrada.com.br/servicos/sgi): integração de normas num único sistema
+- [PBQP-H · Programa de Qualidade do Habitat (SiAC)](https://www.andradegestaointegrada.com.br/servicos/pbqp-h)
+- [IATF 16949 · Qualidade automotiva](https://www.andradegestaointegrada.com.br/servicos/iatf-16949)
+- [ISO/IEC 17020 · Organismos de inspeção](https://www.andradegestaointegrada.com.br/servicos/iso-17020)
+- [ISO/IEC 17025 · Laboratórios de ensaio e calibração](https://www.andradegestaointegrada.com.br/servicos/iso-17025)
+- [SASSMAQ · Transporte de produtos químicos](https://www.andradegestaointegrada.com.br/servicos/sassmaq)
+- [Consultoria ESG · Dupla materialidade](https://www.andradegestaointegrada.com.br/servicos/esg)
+- [ISO/IEC 42001 · Gestão de inteligência artificial](https://www.andradegestaointegrada.com.br/servicos/iso-42001)
+- [ISO 37001 · Gestão antissuborno](https://www.andradegestaointegrada.com.br/servicos/iso-37001)
+- [Lista de serviços](https://www.andradegestaointegrada.com.br/servicos)
+
+## Artigos
+
+- [ISO/IEC 42001: como estruturar a governança de inteligência artificial](https://www.andradegestaointegrada.com.br/insights/iso-42001-governanca-inteligencia-artificial) (07/10/2026)
+- [ISO 37001:2025: como estruturar um sistema antissuborno que funcione na prática](https://www.andradegestaointegrada.com.br/insights/iso-37001-sistema-gestao-antissuborno) (07/10/2026)
+- [Pit Stop SGI: a lógica da Fórmula 1 aplicada a sistemas de gestão](https://www.andradegestaointegrada.com.br/insights/pit-stop-sgi-formula-1) (06/10/2026)
+- [PBQP-H e GERIC: o que a construtora precisa para acessar o crédito da Caixa](https://www.andradegestaointegrada.com.br/insights/pbqp-h-geric-credito-caixa) (06/10/2026)
+- [NR-01 e riscos psicossociais](https://www.andradegestaointegrada.com.br/insights/nr-01-riscos-psicossociais) (06/10/2026)
+- [Dupla materialidade em ESG](https://www.andradegestaointegrada.com.br/insights/dupla-materialidade-esg) (06/10/2026)
+- [Liderança e segurança na eficiência operacional](https://www.andradegestaointegrada.com.br/insights/lideranca-e-seguranca) (24/04/2026)
+- [ISO 9001:2026: o SGQ está preparado?](https://www.andradegestaointegrada.com.br/insights/iso-9001-2026-sgq-preparado) (24/04/2026)
+- [ISO 14001:2026: a janela de oportunidade](https://www.andradegestaointegrada.com.br/insights/iso-14001-2026-janela-oportunidade) (20/04/2026)
+- [O futuro da qualidade e a ISO 9001:2026](https://www.andradegestaointegrada.com.br/insights/o-futuro-da-qualidade) (15/03/2026)
+
+## Opcional
+
+- [Newsletter quinzenal](https://www.andradegestaointegrada.com.br/newsletter)
+- [Política de Privacidade](https://www.andradegestaointegrada.com.br/politica-de-privacidade)
+- [Portal LGPD](https://www.andradegestaointegrada.com.br/portal-lgpd)
+- [Termos de Uso](https://www.andradegestaointegrada.com.br/termos-de-uso)

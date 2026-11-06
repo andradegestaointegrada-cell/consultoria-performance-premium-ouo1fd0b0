@@ -1,0 +1,13 @@
+---
+// Card do shadcn/ui em Astro (mesmas classes do componente React).
+import { cn } from '@/lib/utils'
+
+interface Props {
+  class?: string
+  content?: boolean
+}
+const { class: className, content = false } = Astro.props
+const base = content ? 'p-6 pt-0' : 'rounded-lg border bg-card text-card-foreground shadow-sm'
+---
+
+<div class={cn(base, className)}><slot /></div>

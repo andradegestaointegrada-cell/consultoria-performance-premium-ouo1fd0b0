@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets'
+import { ArrowRight } from 'lucide-react'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import iso9001 from '@/assets/home/iso-9001.webp'
+import gestaoAmbiental from '@/assets/home/gestao-ambiental.webp'
+import iso45001 from '@/assets/home/iso-45001.webp'
+
+const services = [
+  { id: 'iso-9001', title: 'ISO 9001', desc: 'Gestão da Qualidade', img: iso9001 },
+  { id: 'iso-14001', title: 'ISO 14001', desc: 'Gestão Ambiental', img: gestaoAmbiental },
+  { id: 'iso-45001', title: 'ISO 45001', desc: 'Saúde e Segurança', img: iso45001 },
+]
+---
+
+<section class="py-24 bg-background">
+  <div class="container mx-auto px-4">
+    <Reveal class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
+          Soluções de Ponta
+        </h2>
+        <p class="text-muted-foreground">
+          Implementação ágil e precisa das principais normas (ISO 9001, 14001, 45001, 17020, 17025,
+          IATF 16949, PBQP-H, SASSMAQ), garantindo vantagem competitiva e flexibilidade no
+          atendimento.
+        </p>
+      </div>
+      <Button href="/servicos" variant="outline" class="rounded-full uppercase tracking-wider font-bold">
+        Ver todos os serviços <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
+    </Reveal>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {
+        services.map((svc, i) => (
+          <Reveal delay={i * 150}>
+            <a href={`/servicos/${svc.id}`} class="group block h-full">
+              <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 border-2 border-border hover:border-primary transition-colors duration-500">
+                <Image
+                  src={svc.img}
+                  alt={svc.title}
+                  widths={[480, 800, 1200].filter((w) => w <= svc.img.width)}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80 grayscale group-hover:grayscale-0"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div class="absolute bottom-6 left-6 right-6">
+                  <h3 class="text-2xl font-heading font-bold text-foreground mb-1 uppercase tracking-wider group-hover:text-primary transition-colors">
+                    {svc.title}
+                  </h3>
+                  <p class="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
+                    {svc.desc}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

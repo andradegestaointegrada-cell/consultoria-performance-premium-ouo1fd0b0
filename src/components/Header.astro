@@ -1,0 +1,91 @@
+---
+// Cabeçalho fixo. O estado "rolado" (fundo de vidro) é ligado pelo script do layout.
+// Na home (overHero), no topo da página, o texto fica claro sobre a foto do hero.
+import { Image } from 'astro:assets'
+import { NAV_LINKS } from '@/data/site'
+import { cn } from '@/lib/utils'
+import Button from './Button.astro'
+import ThemeToggle from './ThemeToggle'
+import MobileNav from './MobileNav'
+import logoLight from '@/assets/logo-fundo-branco-7d1af.webp'
+import logoDark from '@/assets/logo-fundo-azul-petroleo-29887.webp'
+
+interface Props {
+  overHero?: boolean
+  pathname: string
+}
+const { overHero = false, pathname } = Astro.props
+const ativo = (path: string) => (path === '/' ? pathname === '/' : pathname.startsWith(path))
+---
+
+<header
+  id="site-header"
+  class="site-header fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent"
+  data-top
+  data-hero={overHero ? '' : undefined}
+>
+  <div class="container mx-auto px-4 h-28 flex items-center justify-between">
+    <a href="/" class="flex flex-col items-start justify-center group py-2 flex-1 min-w-0 mr-4">
+      <div class="flex items-center">
+        <Image
+          src={logoLight}
+          width={252}
+          alt="Andrade Gestão Integrada"
+          loading="eager"
+          class="logo-light h-9 sm:h-12 lg:h-14 w-auto dark:hidden transition-all duration-300 shrink-0 object-contain object-left"
+        />
+        <Image
+          src={logoDark}
+          width={252}
+          alt="Andrade Gestão Integrada"
+          loading="eager"
+          class="logo-dark h-9 sm:h-12 lg:h-14 w-auto hidden dark:block rounded-md overflow-hidden transition-all duration-300 shrink-0 object-contain object-left"
+        />
+      </div>
+      <span
+        class="header-tagline text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] font-bold font-sans mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity whitespace-normal leading-tight pl-0.5"
+      >
+        Estratégia, Conformidade e Performance
+      </span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-5 xl:gap-6" aria-label="Menu principal">
+      {
+        NAV_LINKS.map((link) => {
+          const isActive = ativo(link.path)
+          return (
+            <a
+              href={link.path}
+              aria-current={isActive ? 'page' : undefined}
+              class={cn(
+                'nav-link text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-primary relative group py-2',
+                isActive ? 'text-primary' : 'text-foreground/80',
+              )}
+            >
+              {link.name}
+              <span
+                class={cn(
+                  'absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300',
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full',
+                )}
+              />
+            </a>
+          )
+        })
+      }
+      <div class="header-icons flex">
+        <ThemeToggle client:idle />
+      </div>
+      <Button
+        href="/contato"
+        class="rounded-full uppercase tracking-wider font-bold bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_15px_rgba(207,174,112,0.4)] transition-all"
+      >
+        Falar com Especialista
+      </Button>
+    </nav>
+
+    <div class="header-icons lg:hidden flex items-center gap-2 sm:gap-4 shrink-0">
+      <MobileNav client:idle links={NAV_LINKS} pathname={pathname} />
+    </div>
+  </div>
+</header>

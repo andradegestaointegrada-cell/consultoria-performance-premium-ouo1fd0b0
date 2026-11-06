@@ -1,0 +1,13 @@
+---
+// Bloco que aparece ao rolar a página. A animação é aplicada pelo script do layout
+// (sem React); sem JavaScript ou com "menos movimento", o conteúdo aparece direto.
+interface Props {
+  class?: string
+  delay?: number
+}
+const { class: className, delay = 0 } = Astro.props
+---
+
+<div class:list={['opacity-0', className]} data-reveal data-reveal-delay={delay || undefined}>
+  <slot />
+</div>

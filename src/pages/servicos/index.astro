@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Reveal from '@/components/Reveal.astro'
+import Card from '@/components/Card.astro'
+import { SERVICOS_LISTA } from '@/data/services'
+import { mensagemWhatsApp, ORG_ID, SITE_URL } from '@/data/site'
+import servicosHero from '@/assets/servicos/servicos-hero.webp'
+
+const lista = {
+  '@type': 'ItemList',
+  '@id': `${SITE_URL}/servicos#lista`,
+  name: 'Serviços da Andrade Gestão Integrada',
+  itemListElement: SERVICOS_LISTA.map((svc, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${SITE_URL}/servicos/${svc.id}`,
+    name: `${svc.title} · ${svc.name}`,
+  })),
+  provider: { '@id': ORG_ID },
+}
+---
+
+<BaseLayout
+  title="Serviços e normas | Andrade Gestão Integrada"
+  description="Consultoria em ISO 9001, 14001, 45001, PBQP-H, IATF 16949, ISO/IEC 17020, 17025, SASSMAQ, ISO/IEC 42001 e ISO 37001: implantação, integração, auditoria interna e manutenção do sistema."
+  image={servicosHero}
+  pageType="CollectionPage"
+  breadcrumbs={[{ name: 'Serviços', path: '/servicos' }]}
+  jsonLd={[lista]}
+  whatsapp={mensagemWhatsApp('Serviços')}
+  preloadImage={servicosHero.src}
+>
+  <div class="pt-20">
+    <section
+      class="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
+      style={`background-image: url('${servicosHero.src}')`}
+    >
+      <div class="absolute inset-0 bg-[#0D0D0D]/85"></div>
+      <div class="container relative z-10 mx-auto px-4 text-center max-w-3xl">
+        <Reveal>
+          <h1
+            class="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words"
+          >
+            Especialidades e{' '}
+            <em class="font-heading italic font-normal text-primary">Certificações</em>
+          </h1>
+          <p class="text-lg sm:text-xl text-white/90 drop-shadow-md font-sans">
+            Com flexibilidade operacional, adaptamos nossas soluções em sistemas de gestão para
+            oferecer desde suporte técnico colaborativo até o gerenciamento completo.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+
+    <section class="py-24 bg-background">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            SERVICOS_LISTA.map((svc, i) => (
+              <Reveal delay={i * 50}>
+                <a href={`/servicos/${svc.id}`} class="block h-full group">
+                  <Card class="h-full bg-card hover:bg-card/90 border-2 border-border hover:border-primary transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary rounded-bl-[100px] transition-transform duration-500 group-hover:scale-150 opacity-50" />
+                    <Card content class="p-8 relative z-10 flex flex-col h-full">
+                      <div class="text-primary font-bold text-sm mb-2 tracking-widest uppercase">{svc.title}</div>
+                      <h2 class="text-2xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors uppercase tracking-wide">
+                        {svc.name}
+                      </h2>
+                      <p class="text-muted-foreground text-sm flex-grow font-sans">{svc.desc}</p>
+                      <div class="mt-8 flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider font-sans">
+                        Ver Mais{' '}
+                        <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                      </div>
+                    </Card>
+                  </Card>
+                </a>
+              </Reveal>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

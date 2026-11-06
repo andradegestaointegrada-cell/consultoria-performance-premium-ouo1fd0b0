@@ -1,0 +1,196 @@
+---
+import { Image } from 'astro:assets'
+import { ArrowRight, CheckCircle2, Target } from 'lucide-react'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import Card from '@/components/Card.astro'
+import { CASOS, FRENTES } from '@/data/cases'
+import { mensagemWhatsApp } from '@/data/site'
+import heroImg from '@/assets/cases/cases-hero.webp'
+---
+
+<BaseLayout
+  title="Cases | Andrade Gestão Integrada"
+  description="Cases reais de sistemas de gestão: SETEC (ISO 9001, 14001 e 45001), MSan Engenharia, organismo de inspeção ISO/IEC 17020, transportadora SASSMAQ e EPT Engenharia."
+  image={heroImg}
+  pageType="CollectionPage"
+  breadcrumbs={[{ name: 'Cases', path: '/cases' }]}
+  whatsapp={mensagemWhatsApp('Cases')}
+  preloadImage={heroImg.src}
+>
+  <div class="pt-20">
+    <section
+      class="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
+      style={`background-image: url('${heroImg.src}')`}
+    >
+      <div class="absolute inset-0 bg-[#091D39]/85"></div>
+      <div class="container relative z-10 mx-auto px-4 text-center max-w-4xl">
+        <Reveal>
+          <h1
+            class="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words"
+          >
+            Cases
+          </h1>
+          <p class="text-lg sm:text-xl text-white/90 leading-relaxed drop-shadow-md font-sans">
+            Trabalhos reais, com escopo, normas e marcos verificáveis. Clientes citados com
+            autorização.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-24 bg-background">
+      <div class="container mx-auto px-4 max-w-6xl space-y-16 md:space-y-20">
+        {
+          CASOS.map((c, idx) => (
+            <Reveal delay={80 * idx}>
+              <Card class="bg-card border-border shadow-xl border-t-4 border-t-primary overflow-hidden">
+                <div class="relative h-56 sm:h-72 md:h-96">
+                  <Image
+                    src={c.imagem}
+                    alt={c.imagemAlt}
+                    widths={[640, 960, 1280, 1536]}
+                    sizes="(min-width: 1152px) 1152px, 100vw"
+                    class="absolute inset-0 h-full w-full object-cover"
+                    style={`object-position: ${c.foco}`}
+                  />
+                  <span class="absolute bottom-3 right-3 rounded bg-black/55 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
+                    Imagem ilustrativa
+                  </span>
+                </div>
+                <Card content class="p-6 md:p-10">
+                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
+                    <div>
+                      <h2 class="text-2xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide">
+                        {c.cliente}
+                      </h2>
+                      <p class="text-muted-foreground mt-2">{c.setor}</p>
+                    </div>
+                    <span class="self-start shrink-0 text-xs font-bold uppercase tracking-widest text-primary border border-primary/60 rounded-full px-3 py-1.5">
+                      {c.status}
+                    </span>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2 mb-8">
+                    {c.normas.map((n) => (
+                      <span class="text-sm font-bold bg-secondary text-foreground rounded-md px-3 py-1">{n}</span>
+                    ))}
+                  </div>
+
+                  <div class="grid md:grid-cols-5 gap-10">
+                    <div class="md:col-span-3 space-y-8">
+                      <div>
+                        <h3 class="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                          <Target className="h-5 w-5" /> Desafio
+                        </h3>
+                        <p class="text-foreground leading-relaxed">{c.desafio}</p>
+                      </div>
+                      <div>
+                        <h3 class="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                          <CheckCircle2 className="h-5 w-5" /> O que foi feito
+                        </h3>
+                        <ul class="space-y-3">
+                          {c.entregas.map((e) => (
+                            <li class="flex gap-3 text-muted-foreground leading-relaxed">
+                              <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              <span>{e}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                      <h3 class="text-primary font-bold uppercase tracking-widest text-sm mb-5">Marcos</h3>
+                      <ol class="relative border-l-2 border-border ml-2 space-y-6">
+                        {c.marcos.map((m) => (
+                          <li class="pl-6 relative">
+                            <span class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-background" />
+                            <p class="text-sm font-bold text-foreground uppercase tracking-wider">{m.quando}</p>
+                            <p class="text-muted-foreground text-sm mt-1">{m.oque}</p>
+                          </li>
+                        ))}
+                      </ol>
+                      {c.nota && <p class="text-xs text-muted-foreground mt-8">{c.nota}</p>}
+                    </div>
+                  </div>
+                </Card>
+              </Card>
+            </Reveal>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-20 md:py-24 bg-background border-t border-border">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <Reveal>
+          <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <p class="text-primary text-xs font-bold uppercase tracking-[0.3em] mb-4 font-sans">Além dos cases</p>
+            <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide mb-6">
+              Frentes de atuação
+            </h2>
+            <p class="text-lg text-muted-foreground">
+              Outros setores e normas em que a AGI atua. Abaixo, o escopo típico de cada frente, sem
+              citar clientes nem resultados.
+            </p>
+          </div>
+        </Reveal>
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            FRENTES.map((f, idx) => (
+              <Reveal delay={80 * idx} class="h-full">
+                <Card class="h-full bg-card border-border shadow-lg overflow-hidden flex flex-col">
+                  <div class="relative h-44 md:h-52">
+                    <Image
+                      src={f.imagem}
+                      alt={f.imagemAlt}
+                      widths={[480, 720, 1080]}
+                      sizes="(min-width: 768px) 560px, 100vw"
+                      class="absolute inset-0 h-full w-full object-cover"
+                      style={`object-position: ${f.foco}`}
+                    />
+                  </div>
+                  <Card content class="p-6 md:p-8 flex flex-col flex-1">
+                    <p class="text-primary text-xs font-bold uppercase tracking-widest mb-2">{f.norma}</p>
+                    <h3 class="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-4">
+                      {f.setor}
+                    </h3>
+                    <p class="text-muted-foreground leading-relaxed mb-4">{f.texto}</p>
+                    <p class="text-sm text-foreground mb-6">
+                      <span class="font-bold">Base:</span> {f.base}
+                    </p>
+                    <a
+                      href={`/servicos/${f.servico}`}
+                      class="mt-auto inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary hover:underline"
+                    >
+                      Ver o serviço <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Card>
+                </Card>
+              </Reveal>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-secondary border-t border-border">
+      <div class="container mx-auto px-4 text-center max-w-3xl">
+        <Reveal>
+          <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground uppercase tracking-wide mb-6">
+            O próximo sistema pode ser o seu
+          </h2>
+          <p class="text-lg text-muted-foreground mb-10">
+            Implantação, integração de normas, auditoria interna ou manutenção do sistema: conte o seu
+            cenário e receba uma proposta de caminho.
+          </p>
+          <Button href="/contato" size="lg" class="h-14 px-10 uppercase font-bold tracking-widest">
+            Fale com um especialista <ArrowRight className="ml-3 h-5 w-5" />
+          </Button>
+        </Reveal>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

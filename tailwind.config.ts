@@ -8,7 +8,7 @@ export default {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    './src/**/*.{astro,md,ts,tsx}',
   ],
   prefix: '',
   theme: {
@@ -21,8 +21,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', '"Segoe UI"', 'system-ui', 'sans-serif'],
-        heading: ['"Playfair Display"', 'Georgia', '"Times New Roman"', 'serif'],
+        sans: ['"Inter Variable"', 'Inter', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        heading: ['"Playfair Display Variable"', '"Playfair Display"', 'Georgia', '"Times New Roman"', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

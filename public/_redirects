@@ -2,3 +2,8 @@
 /blog /insights 301
 /admin/* / 302
 /blog/* /insights/:splat 301
+# Endereços antigos dos artigos de Pit Stop (sitemap de abril/2026)
+/insights/pit-stop /insights/pit-stop-sgi-formula-1 301
+/insights/mapeamento-processos-pit-stop-performance /insights/pit-stop-sgi-formula-1 301
+# O sitemap agora é gerado no build (@astrojs/sitemap)
+/sitemap.xml /sitemap-index.xml 301

@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useToast } from '@/hooks/use-toast'
 import { postApi } from '@/lib/api'
+import { ToasterOnce } from '@/components/ToasterOnce'
 
 // Inscrição com dupla confirmação: o contato só entra na lista depois do clique no e-mail.
 export function NewsletterSignup({ origem, id = 'newsletter' }: { origem: string; id?: string }) {
@@ -52,14 +52,19 @@ export function NewsletterSignup({ origem, id = 'newsletter' }: { origem: string
 
   if (enviado) {
     return (
-      <p className="text-sm text-foreground border-l-4 border-primary pl-4 py-2" role="status">
-        Falta só confirmar: enviamos um e-mail com o link de confirmação. A inscrição vale depois
-        do clique (confira também a caixa de spam).
-      </p>
+      <>
+        <p className="text-sm text-foreground border-l-4 border-primary pl-4 py-2" role="status">
+          Falta só confirmar: enviamos um e-mail com o link de confirmação. A inscrição vale depois
+          do clique (confira também a caixa de spam).
+        </p>
+        <ToasterOnce />
+      </>
     )
   }
 
   return (
+    <>
+    <ToasterOnce />
     <form className="flex flex-col gap-4 relative" onSubmit={onSubmit}>
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
@@ -97,9 +102,9 @@ export function NewsletterSignup({ origem, id = 'newsletter' }: { origem: string
           className="text-xs text-muted-foreground leading-snug cursor-pointer"
         >
           Concordo com a{' '}
-          <Link to="/politica-de-privacidade" className="underline hover:text-primary">
+          <a href="/politica-de-privacidade" className="underline hover:text-primary">
             Política de Privacidade
-          </Link>{' '}
+          </a>{' '}
           e quero receber a newsletter (cancelamento a qualquer momento).
         </label>
       </div>
@@ -111,5 +116,6 @@ export function NewsletterSignup({ origem, id = 'newsletter' }: { origem: string
         {loading ? 'Enviando...' : 'Assinar'}
       </Button>
     </form>
+    </>
   )
 }

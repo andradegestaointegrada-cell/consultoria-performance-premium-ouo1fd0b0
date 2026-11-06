@@ -1,0 +1,64 @@
+---
+import { ShieldCheck, Zap, Users, LineChart } from 'lucide-react'
+import Reveal from '@/components/Reveal.astro'
+import Card from '@/components/Card.astro'
+
+const pillars = [
+  {
+    Icon: ShieldCheck,
+    title: 'Conformidade',
+    desc: 'Domínio das normas (ISO 9001, 14001, 45001, 17020, 17025, IATF 16949, PBQP-H, SASSMAQ).',
+  },
+  {
+    Icon: Zap,
+    title: 'Flexibilidade',
+    desc: 'Adaptação à dinâmica e aos prazos do cliente com gestão completa ou suporte técnico colaborativo.',
+  },
+  {
+    Icon: Users,
+    title: 'Cultura',
+    desc: 'Engajamento e transformação cultural focada em excelência na base da organização.',
+  },
+  {
+    Icon: LineChart,
+    title: 'Resultados',
+    desc: 'Foco contínuo em elevar o desempenho operacional e garantir certificações com agilidade e solidez.',
+  },
+]
+---
+
+<section class="py-24 bg-card relative">
+  <div class="container px-4 mx-auto relative z-10">
+    <Reveal>
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
+          Nossos Pilares
+        </h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          A fundação da nossa metodologia é construída sobre quatro princípios inegociáveis,
+          destacando-se a flexibilidade para atender à sua operação.
+        </p>
+      </div>
+    </Reveal>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        pillars.map(({ Icon, title, desc }, i) => (
+          <Reveal delay={i * 100}>
+            <Card class="bg-background border-border hover:border-primary transition-all duration-300 hover:-translate-y-2 h-full group">
+              <Card content class="p-8 flex flex-col items-start">
+                <div class="p-4 rounded-full bg-secondary border border-border mb-6 group-hover:scale-110 group-hover:border-primary transition-all duration-300">
+                  <Icon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-foreground mb-3 uppercase tracking-wide">
+                  {title}
+                </h3>
+                <p class="text-muted-foreground leading-relaxed">{desc}</p>
+              </Card>
+            </Card>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

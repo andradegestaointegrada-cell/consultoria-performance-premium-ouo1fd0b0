@@ -1,19 +1,13 @@
-/* Typescript config for the project: https://www.typescriptlang.org/tsconfig/ */
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "src/**/*"],
+  "exclude": ["dist", "functions", "server"],
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "noImplicitAny": false,
-    "noUnusedParameters": false,
-    "allowJs": true,
+    "paths": { "@/*": ["./src/*"] },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "strictNullChecks": true,
-    "skipLibCheck": true
+    "noImplicitAny": false
   }
 }

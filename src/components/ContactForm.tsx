@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/select'
 import { useToast } from '@/hooks/use-toast'
 import { postApi } from '@/lib/api'
+import { ToasterOnce } from '@/components/ToasterOnce'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Nome inválido.'),
@@ -118,6 +119,8 @@ export function ContactForm() {
   }
 
   return (
+    <>
+    <ToasterOnce />
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
@@ -283,5 +286,6 @@ export function ContactForm() {
         </Button>
       </form>
     </Form>
+    </>
   )
 }

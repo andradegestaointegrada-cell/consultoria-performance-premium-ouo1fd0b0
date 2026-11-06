@@ -1,5 +1,13 @@
-import sobreHero from '@/assets/sobre/sobre-hero.webp'
-import casesHero from '@/assets/cases/cases-hero.webp'
+import iso9001Hero from '@/assets/servicos/9001-hero.webp'
+import iso9001Conteudo from '@/assets/servicos/9001-conteudo.webp'
+import iso14001Hero from '@/assets/servicos/14001-hero.webp'
+import iso14001Conteudo from '@/assets/servicos/14001-conteudo.webp'
+import pbqphHero from '@/assets/servicos/pbqph-hero.webp'
+import pbqphConteudo from '@/assets/servicos/pbqph-conteudo.webp'
+import iso17020Hero from '@/assets/servicos/17020-hero.webp'
+import iso17020Conteudo from '@/assets/servicos/17020-conteudo.webp'
+import sassmaqHero from '@/assets/servicos/sassmaq-hero.webp'
+import sassmaqConteudo from '@/assets/servicos/sassmaq-conteudo.webp'
 import automotivo from '@/assets/frentes/frente-automotivo.webp'
 import esgFrente from '@/assets/frentes/frente-esg.webp'
 import laboratorio from '@/assets/frentes/frente-laboratorio.webp'
@@ -15,11 +23,13 @@ import iso42001Conteudo from '@/assets/servicos/42001-conteudo.webp'
 import iso37001Hero from '@/assets/servicos/37001-hero.webp'
 import iso37001Conteudo from '@/assets/servicos/37001-conteudo.webp'
 
+import type { ImageMetadata } from 'astro'
+
 export interface ServiceData {
   t: string
   d: string
-  hi: string
-  ci: string
+  hi: ImageMetadata
+  ci: ImageMetadata
   w: string
   methodologyDetails: string
   trainingPillars: string[]
@@ -30,8 +40,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iso-9001': {
     t: 'ISO 9001',
     d: 'A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.',
-    hi: 'https://i.postimg.cc/t4Z2xNx0/BANNER_9001.jpg',
-    ci: 'https://i.postimg.cc/15YvXjfS/9001_DESCRIÇÃO_SERVIÇO.jpg',
+    hi: iso9001Hero,
+    ci: iso9001Conteudo,
     w: 'Processos robustos que garantem a padronização e a alta performance contínua.',
     methodologyDetails:
       'Nossa metodologia para a ISO 9001 baseia-se na imersão profunda nos processos da sua empresa. Através de um diagnóstico gap-analysis rigoroso, desenvolvemos planos de ação customizados para fechar lacunas de conformidade, garantindo uma transição fluida e certificação sem surpresas.',
@@ -47,8 +57,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iso-14001': {
     t: 'ISO 14001',
     d: 'Transformamos a gestão ambiental em um diferencial competitivo sustentável.',
-    hi: 'https://i.postimg.cc/bwD3t9tz/14001_BANNER.jpg',
-    ci: 'https://i.postimg.cc/yYrLxbk7/14001_DESCRIÇÃO_SERVIÇO.jpg',
+    hi: iso14001Hero,
+    ci: iso14001Conteudo,
     w: 'Estratégias sustentáveis integradas ao negócio, mitigando impactos ambientais.',
     methodologyDetails:
       'Nossa abordagem para a ISO 14001 foca na identificação assertiva de aspectos e impactos ambientais. Estruturamos controles operacionais eficazes e promovemos o engajamento da liderança para assegurar a sustentabilidade das operações e o compliance legal.',
@@ -98,8 +108,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'pbqp-h': {
     t: 'PBQP-H',
     d: 'Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.',
-    hi: 'https://i.postimg.cc/bY3NWQFL/PBQP_H_BANNER.jpg',
-    ci: 'https://i.postimg.cc/vHTHscJB/PBQP_H_DESCRIÇÃO.jpg',
+    hi: pbqphHero,
+    ci: pbqphConteudo,
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
     methodologyDetails:
       'Para o PBQP-H, a metodologia integra as exigências específicas do SiAC com a dinâmica do canteiro de obras. Realizamos auditorias de qualificação de fornecedores, avaliação de materiais e controle tecnológico in-loco para assegurar a conformidade desde a fundação até o acabamento.',
@@ -132,8 +142,8 @@ export const S_DATA: Record<string, ServiceData> = {
   'iso-17020': {
     t: 'ISO/IEC 17020',
     d: 'Critérios rigorosos para garantir a competência e imparcialidade de organismos de inspeção.',
-    hi: 'https://i.postimg.cc/NG6BvRJk/17020_BANNER.png',
-    ci: 'https://i.postimg.cc/52jhyzgY/17000.png',
+    hi: iso17020Hero,
+    ci: iso17020Conteudo,
     w: 'Confiabilidade atestada nas inspeções, garantindo credibilidade no mercado.',
     methodologyDetails:
       'Para organismos de inspeção, a ISO 17020 demanda garantia de imparcialidade e competência técnica. Mapeamos os processos de inspeção, implementamos controles de confidencialidade e garantimos a rastreabilidade técnica dos laudos.',
@@ -166,8 +176,8 @@ export const S_DATA: Record<string, ServiceData> = {
   sassmaq: {
     t: 'SASSMAQ',
     d: 'Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.',
-    hi: 'https://i.postimg.cc/8CfxBr7N/SASSMAQ_BANNER.png',
-    ci: 'https://i.postimg.cc/wjvCMrHv/SASSMAQ_DESCRIÇÃO.png',
+    hi: sassmaqHero,
+    ci: sassmaqConteudo,
     w: 'Minimização de riscos operacionais e adequação às exigências da indústria química.',
     methodologyDetails:
       'O SASSMAQ é vital para o transporte rodoviário de produtos químicos. Focamos no gerenciamento de riscos no transporte, resposta a emergências e qualificação de motoristas, garantindo que as exigências da indústria sejam atendidas na íntegra.',
@@ -233,24 +243,6 @@ export const S_DATA: Record<string, ServiceData> = {
   },
 }
 
-export const DEF: ServiceData = {
-  t: '',
-  d: 'Soluções estratégicas focadas em trazer resultados reais para a operação da sua empresa.',
-  hi: sobreHero,
-  ci: casesHero,
-  w: 'Entregamos um sistema focado em gerar valor e reduzir riscos.',
-  methodologyDetails:
-    'Nossa metodologia adapta-se à realidade da sua empresa. Através de diagnósticos precisos e planos de ação direcionados, implementamos melhores práticas de gestão que garantem conformidade, mitigam riscos e impulsionam resultados expressivos.',
-  trainingPillars: [
-    'Conscientização e Engajamento Estratégico',
-    'Mapeamento e Otimização de Processos',
-    'Gestão de Indicadores de Performance (KPIs)',
-    'Formação de Multiplicadores Internos',
-  ],
-  deliverablesText:
-    'Implementamos soluções de alta performance onde a nossa consultoria atua como uma alavanca estratégica para a eficiência operacional e a severa redução de desperdícios. Nosso escopo técnico e analítico inclui Mapeamento Avançado de Processos, Gestão de Riscos Operacionais, Estruturação de Indicadores de Desempenho (KPIs) e Auditoria de Prontidão, consolidando operações robustas, seguras e altamente previsíveis.',
-}
-
 export const STEPS = [
   {
     step: '1',
@@ -263,4 +255,68 @@ export const STEPS = [
     desc: 'Ajustes ágeis, criação de processos customizados e treinamento.',
   },
   { step: '3', title: 'Auditoria', desc: 'Validação final de conformidade para a certificação.' },
+]
+
+/** Serviços listados em /servicos, na ordem da página. */
+export const SERVICOS_LISTA = [
+  {
+    id: 'iso-9001',
+    title: 'ISO 9001',
+    name: 'Gestão da Qualidade',
+    desc: 'Excelência operacional e satisfação do cliente em todos os processos da organização.',
+  },
+  {
+    id: 'iso-14001',
+    title: 'ISO 14001',
+    name: 'Gestão Ambiental',
+    desc: 'Sustentabilidade, compliance regulatório e redução de impactos ambientais.',
+  },
+  {
+    id: 'iso-45001',
+    title: 'ISO 45001',
+    name: 'Saúde e Segurança',
+    desc: 'Ambiente de trabalho seguro, prevenção de acidentes e gestão de riscos ocupacionais.',
+  },
+  {
+    id: 'pbqp-h',
+    title: 'PBQP-H',
+    name: 'Programa de Qualidade do Habitat',
+    desc: 'Melhoria da qualidade, produtividade e sustentabilidade no setor da construção civil.',
+  },
+  {
+    id: 'iatf-16949',
+    title: 'IATF 16949',
+    name: 'Gestão da Qualidade Automotiva',
+    desc: 'Requisitos específicos e rigorosos para a cadeia de suprimentos da indústria automotiva.',
+  },
+  {
+    id: 'iso-17020',
+    title: 'ISO/IEC 17020',
+    name: 'Organismos de Inspeção',
+    desc: 'Critérios rigorosos para garantir a competência e imparcialidade dos organismos de inspeção.',
+  },
+  {
+    id: 'iso-17025',
+    title: 'ISO/IEC 17025',
+    name: 'Laboratórios de Ensaio e Calibração',
+    desc: 'Competência técnica para testes, calibração e resultados consistentes globalmente.',
+  },
+  {
+    id: 'sassmaq',
+    title: 'SASSMAQ',
+    name: 'Logística Segura de Químicos',
+    desc: 'Avaliação de segurança, saúde, meio ambiente e qualidade para o transporte de produtos químicos.',
+  },
+  {
+    id: 'iso-42001',
+    title: 'ISO/IEC 42001',
+    name: 'Gestão de Inteligência Artificial',
+    desc: 'Governança de IA com responsáveis definidos, avaliação de riscos e de impacto e controles auditáveis.',
+  },
+  {
+    id: 'iso-37001',
+    title: 'ISO 37001',
+    name: 'Gestão Antissuborno',
+    desc: 'Programa de integridade estruturado em controles auditáveis, da due diligence ao canal de denúncia.',
+  },
 ]

@@ -1,0 +1,31 @@
+---
+// Botão do shadcn/ui em Astro, com as mesmas classes do componente React.
+// `class` entra na fusão das variantes (como o className do <Button>);
+// `linkClass` é acrescentado sem fusão (como o className do <Link> filho no asChild).
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
+interface Props {
+  href?: string
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
+  class?: string
+  linkClass?: string
+  [key: string]: unknown
+}
+
+const { href, variant, size, class: className, linkClass, ...rest } = Astro.props
+const classes = [cn(buttonVariants({ variant, size, className })), linkClass].filter(Boolean).join(' ')
+---
+
+{
+  href ? (
+    <a href={href} class={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}

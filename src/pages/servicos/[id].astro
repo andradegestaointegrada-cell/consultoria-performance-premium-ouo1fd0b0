@@ -1,0 +1,190 @@
+---
+// Uma página por serviço, gerada no build a partir de src/data/services.ts.
+import { Image } from 'astro:assets'
+import { ChevronLeft } from 'lucide-react'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import ServiceFaq from '@/components/ServiceFaq'
+import { S_DATA, STEPS, type ServiceData } from '@/data/services'
+import { ORG_ID, SITE_URL } from '@/data/site'
+
+export function getStaticPaths() {
+  return Object.entries(S_DATA).map(([id, svc]) => ({ params: { id }, props: { id, svc } }))
+}
+
+interface Props {
+  id: string
+  svc: ServiceData
+}
+const { id, svc } = Astro.props
+const title = svc.t
+const url = `${SITE_URL}/servicos/${id}`
+
+const servico = {
+  '@type': 'Service',
+  '@id': `${url}#servico`,
+  name: `Consultoria ${title}`,
+  serviceType: `Consultoria em sistemas de gestão · ${title}`,
+  description: `${svc.d} ${svc.w}`,
+  url,
+  provider: { '@id': ORG_ID },
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  availableLanguage: 'pt-BR',
+}
+const hiWidths = [640, 960, 1280, 1536].filter((w) => w <= svc.hi.width)
+---
+
+<BaseLayout
+  title={`Consultoria ${title} | Andrade Gestão Integrada`}
+  description={`${svc.d} ${svc.w}`}
+  image={svc.hi}
+  imageAlt={`Consultoria ${title}`}
+  breadcrumbs={[
+    { name: 'Serviços', path: '/servicos' },
+    { name: title, path: `/servicos/${id}` },
+  ]}
+  jsonLd={[servico]}
+  whatsapp={`Olá! Vim pela página de ${title} do site da AGI e gostaria de conversar sobre a consultoria em ${title}.`}
+>
+  <div class="pt-20">
+    <section class="relative py-32 min-h-[60vh] flex items-center overflow-hidden border-b border-border">
+      <div class="absolute inset-0 z-0">
+        <Image
+          src={svc.hi}
+          alt=""
+          widths={hiWidths.length ? hiWidths : [svc.hi.width]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/80 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      </div>
+      <div class="container mx-auto px-4 relative z-10">
+        <Reveal>
+          <a
+            href="/servicos"
+            class="text-white/80 hover:text-white transition-colors text-sm font-bold mb-8 inline-flex items-center uppercase tracking-wider"
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" /> Voltar para Serviços
+          </a>
+          <h1
+            class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 uppercase tracking-wide drop-shadow-lg break-words"
+          >
+            {title}
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 max-w-3xl drop-shadow-md font-light leading-relaxed">
+            {svc.d}
+          </p>
+        </Reveal>
+      </div>
+    </section>
+
+    <section class="py-24">
+      <div class="container mx-auto px-4 max-w-5xl space-y-24">
+        <Reveal>
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                O que entregamos
+              </h2>
+              <p class="text-lg text-muted-foreground leading-relaxed">{svc.deliverablesText}</p>
+            </div>
+            <div
+              class="relative rounded-2xl overflow-hidden border border-primary/20 bg-card p-2 shadow-[0_0_30px_rgba(207,174,112,0.1)]"
+            >
+              <div class="rounded-xl overflow-hidden bg-muted">
+                <div class="relative w-full" style="padding-bottom: 75%">
+                  <div class="absolute inset-0">
+                    <Image
+                      src={svc.ci}
+                      alt={`Detalhes de ${title}`}
+                      widths={[480, 720, 960].filter((w) => w <= svc.ci.width).concat(svc.ci.width < 480 ? [svc.ci.width] : [])}
+                      sizes="(min-width: 768px) 480px, 100vw"
+                      class="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <h2
+            class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-12 uppercase tracking-wide text-center"
+          >
+            Como funciona
+          </h2>
+          <div class="grid sm:grid-cols-3 gap-8">
+            {
+              STEPS.map((s) => (
+                <div class="p-8 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                  <div class="text-primary font-heading font-bold text-5xl mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                    {s.step}.
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-foreground mb-3 uppercase tracking-wide">{s.title}</h3>
+                  <p class="text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              ))
+            }
+          </div>
+        </Reveal>
+
+        {
+          svc.methodologyDetails && svc.trainingPillars && (
+            <Reveal delay={150}>
+              <div class="pt-10 border-t border-border">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                  Metodologia de Implementação
+                </h2>
+                <p class="text-lg text-muted-foreground leading-relaxed mb-12">{svc.methodologyDetails}</p>
+                <h3 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                  Processos de Treinamento
+                </h3>
+                <ul class="flex flex-col gap-4">
+                  {svc.trainingPillars.map((tp) => (
+                    <li class="flex items-center gap-4 bg-secondary p-5 md:p-6 rounded-xl border border-border/50 shadow-sm transition-all hover:border-primary/50">
+                      <div class="h-2.5 w-2.5 rounded-full bg-primary shrink-0" />
+                      <span class="text-foreground font-bold text-base md:text-lg">{tp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          )
+        }
+
+        <Reveal delay={200} class="max-w-3xl mx-auto">
+          <h2
+            class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide text-center"
+          >
+            Perguntas Frequentes
+          </h2>
+          <ServiceFaq client:visible />
+        </Reveal>
+
+        <Reveal delay={300}>
+          <div
+            class="p-10 md:p-12 bg-secondary border-l-4 border-l-primary rounded-r-2xl text-left shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
+          >
+            <div>
+              <h2 class="text-3xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
+                Pronto para a{' '}
+                <em class="font-heading italic font-normal text-primary">pole position</em>?
+              </h2>
+              <p class="text-muted-foreground text-lg max-w-xl">
+                Fale com um consultor e descubra o impacto real da {title} no seu negócio.
+              </p>
+            </div>
+            <Button href="/contato" size="lg" class="rounded-full uppercase tracking-wider font-bold shrink-0">
+              Agendar Diagnóstico
+            </Button>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/components/home/Hero.astro'
+import Pillars from '@/components/home/Pillars.astro'
+import Stats from '@/components/home/Stats.astro'
+import ServicesOverview from '@/components/home/ServicesOverview.astro'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import heroImg from '@/assets/home/home-hero.webp'
+import { WHATSAPP_MSG_PADRAO } from '@/data/site'
+---
+
+<BaseLayout
+  title="Andrade Gestão Integrada | Consultoria em Sistemas de Gestão ISO"
+  description="Consultoria em sistemas de gestão ISO 9001, 14001 e 45001, PBQP-H, IATF 16949, SASSMAQ e ISO 17020/17025: implantação, integração, auditoria interna e treinamento. São Paulo/SP."
+  image={heroImg}
+  imageAlt="Andrade Gestão Integrada: estratégia, conformidade e performance"
+  whatsapp={WHATSAPP_MSG_PADRAO}
+  overHero
+>
+  <div class="flex flex-col">
+    <Hero />
+    <Pillars />
+    <Stats />
+    <ServicesOverview />
+
+    <section class="py-24 relative overflow-hidden bg-secondary border-t border-border">
+      <div
+        class="absolute inset-0 opacity-10 pointer-events-none"
+        style="background-image: radial-gradient(circle at 70% 50%, #CFAE70 0%, transparent 60%)"
+      >
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10 text-center">
+        <Reveal>
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide break-words"
+          >
+            Pronto para acelerar seus resultados?
+          </h2>
+          <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            Junte-se às empresas líderes que já transformaram suas operações com nossa consultoria
+            de <em class="font-heading italic font-normal text-primary">alta performance</em>.
+          </p>
+          <Button
+            href="/contato"
+            size="lg"
+            class="h-auto min-h-14 py-4 px-6 sm:px-10 text-sm sm:text-base md:text-lg rounded-full font-bold uppercase tracking-wider whitespace-normal text-center w-full sm:w-auto"
+            linkClass="flex items-center justify-center"
+          >
+            Agende uma Avaliação Gratuita
+          </Button>
+        </Reveal>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

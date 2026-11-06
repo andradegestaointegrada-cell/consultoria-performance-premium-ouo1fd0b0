@@ -1,131 +1,62 @@
-# Projeto Criado com o Skip
+# Site da Andrade Gestão Integrada (AGI)
 
-Este projeto foi criado de ponta a ponta com o [Skip](https://goskip.dev).
+Site institucional de www.andradegestaointegrada.com.br. Repositório e publicação próprios da AGI (GitHub + Cloudflare Pages).
 
-## 🚀 Stack Tecnológica
+## Base técnica
 
-- **React 19** - Biblioteca JavaScript para construção de interfaces
-- **Vite** - Build tool extremamente rápida
-- **TypeScript** - Superset tipado do JavaScript
-- **Shadcn UI** - Componentes reutilizáveis e acessíveis
-- **Tailwind CSS** - Framework CSS utility-first
-- **React Router** - Roteamento para aplicações React
-- **React Hook Form** - Gerenciamento de formulários performático
-- **Zod** - Validação de schemas TypeScript-first
-- **Recharts** - Biblioteca de gráficos para React
+- **Astro 7**, saída estática em `dist/`: cada endereço tem o próprio HTML, com título, descrição, canônico, Open Graph e JSON-LD.
+- **React só nas ilhas**: menu do celular, escolha de tema, formulários (contato, newsletter, Portal LGPD) e perguntas frequentes dos serviços.
+- **Tailwind CSS 3** com o tema da marca (`tailwind.config.ts` e `src/styles/main.css`).
+- **Fontes locais** (`@fontsource-variable`: Inter e Playfair Display) e **imagens no próprio site** (`src/assets/`, otimizadas no build).
+- **Formulários** em Pages Functions (`functions/api/`), com código comum em `server/shared.ts` e envio pelo Resend. Variáveis no painel da Cloudflare: `RESEND_API_KEY`, `RESEND_SEGMENT_ID`, `NEWSLETTER_SECRET`.
 
-## 📋 Pré-requisitos
+## Onde fica cada coisa
 
-- Node.js 18+
-- npm
+| O quê | Onde |
+|---|---|
+| Páginas e endereços | `src/pages/` (o nome do arquivo é o endereço) |
+| Layout, SEO e scripts comuns | `src/layouts/BaseLayout.astro` |
+| Serviços (`/servicos/<id>`) | `src/data/services.ts` |
+| Cases | `src/data/cases.ts` |
+| Artigos do blog (`/insights/<slug>`) | `src/content/artigos/<slug>.md` |
+| Dados da empresa, menu e WhatsApp | `src/data/site.ts` |
+| Redirecionamentos e cabeçalhos HTTP | `public/_redirects` e `public/_headers` |
+| Resumo para assistentes de IA | `public/llms.txt` (atualizar à mão quando entrar serviço ou artigo) |
 
-## 🔧 Instalação
+## Publicar um artigo novo
+
+1. Criar `src/content/artigos/<slug>.md`. O nome do arquivo vira o endereço.
+2. Colocar a capa em `src/assets/blog/` (WebP, cerca de 1600 px de largura).
+3. Cabeçalho do arquivo:
+
+   ```yaml
+   ---
+   title: "Título do artigo"
+   summary: "Resumo de uma ou duas frases (vira a descrição da página)."
+   category: "Qualidade"
+   image: "../../assets/blog/<slug>-capa.webp"
+   imageAlt: "Descrição da imagem"
+   published_date: 2026-11-06T12:00:00.000Z
+   is_highlighted: false
+   ---
+   ```
+
+4. Texto em Markdown abaixo do cabeçalho (`##` para seções). Links externos abrem em nova aba sozinhos.
+5. Acrescentar o artigo ao `public/llms.txt`.
+
+O sitemap (`/sitemap-index.xml`) é gerado no build e já inclui o artigo novo.
+
+## Comandos
 
 ```bash
 npm install
+npm run dev        # desenvolvimento em http://localhost:4321
+npm run build      # gera dist/
+npm run preview    # prévia com as funções da Cloudflare em http://127.0.0.1:8788
 ```
 
-## 💻 Scripts Disponíveis
+Para testar os formulários na prévia, criar `.dev.vars` (fora do git) com as mesmas variáveis do painel.
 
-### Desenvolvimento
+## Publicação
 
-```bash
-# Iniciar servidor de desenvolvimento
-npm start
-# ou
-npm run dev
-```
-
-Abre a aplicação em modo de desenvolvimento em [http://localhost:5173](http://localhost:5173).
-
-### Build
-
-```bash
-# Build para produção
-npm run build
-
-# Build para desenvolvimento
-npm run build:dev
-```
-
-Gera os arquivos otimizados para produção na pasta `dist/`.
-
-### Preview
-
-```bash
-# Visualizar build de produção localmente
-npm run preview
-```
-
-Permite visualizar a build de produção localmente antes do deploy.
-
-### Linting e Formatação
-
-```bash
-# Executar linter
-npm run lint
-
-# Executar linter e corrigir problemas automaticamente
-npm run lint:fix
-
-# Formatar código com Oxfmt
-npm run format
-```
-
-## 📁 Estrutura do Projeto
-
-```
-.
-├── src/              # Código fonte da aplicação
-├── public/           # Arquivos estáticos
-├── dist/             # Build de produção (gerado)
-├── node_modules/     # Dependências (gerado)
-└── package.json      # Configurações e dependências do projeto
-```
-
-## 🎨 Componentes UI
-
-Este template inclui uma biblioteca completa de componentes Shadcn UI baseados em Radix UI:
-
-- Accordion
-- Alert Dialog
-- Avatar
-- Button
-- Checkbox
-- Dialog
-- Dropdown Menu
-- Form
-- Input
-- Label
-- Select
-- Switch
-- Tabs
-- Toast
-- Tooltip
-- E muito mais...
-
-## 📝 Ferramentas de Qualidade de Código
-
-- **TypeScript**: Tipagem estática
-- **Oxlint**: Linter extremamente rápido
-- **Oxfmt**: Formatação automática de código
-
-## 🔄 Workflow de Desenvolvimento
-
-1. Instale as dependências: `npm install`
-2. Inicie o servidor de desenvolvimento: `npm start`
-3. Faça suas alterações
-4. Verifique o código: `npm run lint`
-5. Formate o código: `npm run format`
-6. Crie a build: `npm run build`
-7. Visualize a build: `npm run preview`
-
-## 📦 Build e Deploy
-
-Para criar uma build otimizada para produção:
-
-```bash
-npm run build
-```
-
-Os arquivos otimizados serão gerados na pasta `dist/` e estarão prontos para deploy.
+A Cloudflare Pages publica a branch `main` cerca de 1 a 2 minutos depois do push (comando `npm run build`, pasta `dist`, Node definido em `.nvmrc`). Outras branches geram prévia própria em `*.pages.dev`.

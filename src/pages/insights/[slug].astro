@@ -1,0 +1,161 @@
+---
+// Página de artigo, gerada a partir de src/content/artigos/<slug>.md.
+import { Image } from 'astro:assets'
+import { render } from 'astro:content'
+import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import { NewsletterSignup } from '@/components/NewsletterSignup'
+import { listarArtigos, dataPorExtenso, type Artigo } from '@/lib/artigos'
+import { ALEXANDRE_ID, ORG_ID, SITE_URL } from '@/data/site'
+
+export async function getStaticPaths() {
+  const artigos = await listarArtigos()
+  return artigos.map((artigo) => ({ params: { slug: artigo.id }, props: { artigo } }))
+}
+
+interface Props {
+  artigo: Artigo
+}
+const { artigo } = Astro.props
+const { data } = artigo
+const { Content } = await render(artigo)
+const url = `${SITE_URL}/insights/${artigo.id}`
+
+const post = {
+  '@type': 'BlogPosting',
+  '@id': `${url}#artigo`,
+  headline: data.title,
+  description: data.summary,
+  articleSection: data.category,
+  inLanguage: 'pt-BR',
+  datePublished: data.published_date.toISOString(),
+  dateModified: (data.updated_date ?? data.published_date).toISOString(),
+  author: { '@id': ALEXANDRE_ID },
+  publisher: { '@id': ORG_ID },
+  mainEntityOfPage: { '@id': `${url}#pagina` },
+  url,
+}
+---
+
+<BaseLayout
+  title={`${data.title} | Andrade Gestão Integrada`}
+  description={data.summary}
+  image={data.image}
+  imageAlt={data.imageAlt ?? data.title}
+  type="article"
+  breadcrumbs={[
+    { name: 'Blog', path: '/insights' },
+    { name: data.title, path: `/insights/${artigo.id}` },
+  ]}
+  jsonLd={[post]}
+  whatsapp={`Olá! Li o artigo "${data.title}" no site da AGI e gostaria de conversar sobre o tema.`}
+  publishedTime={data.published_date}
+  modifiedTime={data.updated_date}
+>
+  <div class="pt-24 pb-16 bg-background min-h-screen">
+    <article class="container mx-auto px-4 max-w-4xl">
+      <Reveal>
+        <div class="mb-8 mt-8">
+          <a
+            href="/insights"
+            class="inline-flex items-center text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors mb-8"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Voltar para o blog
+          </a>
+          <div class="flex items-center gap-4 mb-6">
+            <span class="text-primary font-bold text-sm uppercase tracking-widest">
+              {data.category || 'Insight Estratégico'}
+            </span>
+            <span class="text-muted-foreground text-sm font-medium uppercase tracking-wider flex items-center">
+              <Calendar className="w-4 h-4 mr-2" />
+              <time datetime={data.published_date.toISOString()}>{dataPorExtenso(data.published_date)}</time>
+            </span>
+          </div>
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-8 uppercase tracking-wide leading-tight"
+          >
+            {data.title}
+          </h1>
+          {
+            data.summary && (
+              <p class="text-xl md:text-2xl text-muted-foreground font-medium mb-10 leading-relaxed border-l-4 border-primary pl-6">
+                {data.summary}
+              </p>
+            )
+          }
+        </div>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <div class="aspect-video w-full rounded-2xl overflow-hidden mb-16 border-2 border-border">
+          <Image
+            src={data.image}
+            alt={data.imageAlt ?? data.title}
+            widths={[640, 960, 1280, 1600].filter((w) => w <= data.image.width)}
+            sizes="(min-width: 896px) 864px, 100vw"
+            loading="eager"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          />
+        </div>
+      </Reveal>
+
+      <Reveal delay={200}>
+        <div
+          id="artigo-corpo"
+          class="text-lg text-muted-foreground leading-relaxed mb-16 [&>p]:mb-6 [&>h2]:text-3xl [&>h2]:md:text-4xl [&>h2]:font-heading [&>h2]:font-bold [&>h2]:text-foreground [&>h2]:mb-6 [&>h2]:mt-16 [&>h2]:uppercase [&>h2]:tracking-wide [&>h2]:border-b [&>h2]:border-border [&>h2]:pb-4 [&>h3]:text-2xl [&>h3]:font-heading [&>h3]:font-bold [&>h3]:text-foreground [&>h3]:mb-4 [&>h3]:mt-10 [&>h3]:uppercase [&>h3]:tracking-wide [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-8 [&>ul]:space-y-4 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-8 [&>ol]:space-y-4 [&>ul>li>strong]:text-primary [&>ul>li>strong]:font-bold [&>strong]:text-foreground [&>strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80 [&>blockquote]:border-l-4 [&>blockquote]:border-primary [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:my-8 [&>blockquote]:text-xl"
+        >
+          <Content />
+        </div>
+      </Reveal>
+
+      <Reveal delay={300}>
+        <div
+          class="mt-20 p-8 md:p-12 bg-card rounded-2xl border-2 border-primary text-center relative overflow-hidden group"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          >
+          </div>
+          <div class="relative z-10">
+            <h2 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+              Diagnóstico Especializado
+            </h2>
+            <p class="text-lg md:text-xl text-foreground font-medium mb-10 max-w-3xl mx-auto leading-relaxed">
+              Quer aplicar isso na sua empresa? Conte o seu cenário e receba uma proposta de caminho
+              para o seu sistema de gestão.
+            </p>
+            <Button
+              href="/contato"
+              size="lg"
+              class="h-14 px-10 text-base uppercase font-bold tracking-widest shadow-[0_0_20px_rgba(207,174,112,0.3)] hover:scale-105 transition-transform"
+            >
+              Fale com um Especialista
+              <ArrowRight className="ml-3 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </Reveal>
+
+      <div class="mt-12 p-8 md:p-10 rounded-2xl border border-border bg-card">
+        <h2 class="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide mb-2">
+          Receba os próximos artigos
+        </h2>
+        <p class="text-muted-foreground mb-6">
+          Newsletter quinzenal sobre sistemas de gestão, normas ISO e conformidade.
+        </p>
+        <NewsletterSignup client:visible origem={`artigo:${artigo.id}`} id="artigo-newsletter" />
+      </div>
+    </article>
+  </div>
+
+  <script is:inline>
+    // Links externos do artigo abrem em nova aba, como no site anterior.
+    document.querySelectorAll('#artigo-corpo a[href^="http"]').forEach(function (a) {
+      a.target = '_blank'
+      a.rel = 'noopener noreferrer'
+    })
+  </script>
+</BaseLayout>
