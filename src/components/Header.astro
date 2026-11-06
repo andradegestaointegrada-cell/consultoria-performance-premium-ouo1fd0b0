@@ -74,7 +74,7 @@ const ativo = (path: string) => (path === '/' ? pathname === '/' : pathname.star
         })
       }
       <div class="header-icons flex">
-        <ThemeToggle client:idle />
+        <ThemeToggle client:depoisdacarga />
       </div>
       <Button
         href="/contato"
@@ -85,7 +85,7 @@ const ativo = (path: string) => (path === '/' ? pathname === '/' : pathname.star
     </nav>
 
     <div class="header-icons lg:hidden flex items-center gap-2 sm:gap-4 shrink-0">
-      <MobileNav client:idle links={NAV_LINKS} pathname={pathname} />
+      <MobileNav client:depoisdacarga links={NAV_LINKS} pathname={pathname} />
     </div>
   </div>
 </header>

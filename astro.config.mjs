@@ -11,6 +11,15 @@ export default defineConfig({
   // CSS (≈13 KB comprimido) embutido no HTML: tira uma ida ao servidor do caminho crítico.
   build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [
+    {
+      // client:depoisdacarga — ver src/diretivas/depois-da-carga.js
+      name: 'diretiva-depois-da-carga',
+      hooks: {
+        'astro:config:setup': ({ addClientDirective }) => {
+          addClientDirective({ name: 'depoisdacarga', entrypoint: './src/diretivas/depois-da-carga.js' })
+        },
+      },
+    },
     react(),
     sitemap({
       filter: (page) => !page.includes('/404'),
