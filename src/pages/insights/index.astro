@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import { ArrowRight } from 'lucide-react'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { fundoHero } from '@/lib/fundo'
 import Reveal from '@/components/Reveal.astro'
 import { listarArtigos } from '@/lib/artigos'
 import { cn } from '@/lib/utils'
@@ -29,6 +30,7 @@ const blog = {
     datePublished: a.data.published_date.toISOString(),
   })),
 }
+const fundo = await fundoHero(blogHero)
 ---
 
 <BaseLayout
@@ -39,12 +41,12 @@ const blog = {
   breadcrumbs={[{ name: 'Blog', path: '/insights' }]}
   jsonLd={[blog]}
   whatsapp={mensagemWhatsApp('Blog')}
-  preloadImage={blogHero.src}
+  preloadImage={fundo}
 >
   <div class="pt-20 min-h-screen bg-background">
     <section
       class="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-      style={`background-image: url('${blogHero.src}')`}
+      style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#0D0D0D]/85"></div>
       <div class="container relative z-10 mx-auto px-4 text-center">

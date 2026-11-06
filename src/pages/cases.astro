@@ -2,12 +2,14 @@
 import { Image } from 'astro:assets'
 import { ArrowRight, CheckCircle2, Target } from 'lucide-react'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { fundoHero } from '@/lib/fundo'
 import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
 import Card from '@/components/Card.astro'
 import { CASOS, FRENTES } from '@/data/cases'
 import { mensagemWhatsApp } from '@/data/site'
 import heroImg from '@/assets/cases/cases-hero.webp'
+const fundo = await fundoHero(heroImg)
 ---
 
 <BaseLayout
@@ -17,12 +19,12 @@ import heroImg from '@/assets/cases/cases-hero.webp'
   pageType="CollectionPage"
   breadcrumbs={[{ name: 'Cases', path: '/cases' }]}
   whatsapp={mensagemWhatsApp('Cases')}
-  preloadImage={heroImg.src}
+  preloadImage={fundo}
 >
   <div class="pt-20">
     <section
       class="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-      style={`background-image: url('${heroImg.src}')`}
+      style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#091D39]/85"></div>
       <div class="container relative z-10 mx-auto px-4 text-center max-w-4xl">

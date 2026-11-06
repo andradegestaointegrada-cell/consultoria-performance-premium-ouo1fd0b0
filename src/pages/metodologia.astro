@@ -1,6 +1,7 @@
 ---
 import { ArrowRight, Search, Settings, ClipboardCheck, TrendingUp } from 'lucide-react'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { fundoHero } from '@/lib/fundo'
 import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
 import { mensagemWhatsApp } from '@/data/site'
@@ -71,6 +72,7 @@ const opcoes = [
     desc: 'Sua equipe conduz o sistema; a AGI orienta, revisa, audita e resolve os pontos de maior complexidade técnica e normativa.',
   },
 ]
+const fundo = await fundoHero(metodologiaHero)
 ---
 
 <BaseLayout
@@ -79,12 +81,12 @@ const opcoes = [
   image={metodologiaHero}
   breadcrumbs={[{ name: 'Metodologia', path: '/metodologia' }]}
   whatsapp={mensagemWhatsApp('Metodologia')}
-  preloadImage={metodologiaHero.src}
+  preloadImage={fundo}
 >
   <div class="pt-20">
     <section
       class="py-32 relative bg-[#091D39] bg-fixed bg-cover bg-center border-b border-border overflow-hidden"
-      style={`background-image: url('${metodologiaHero.src}')`}
+      style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#091D39]/85"></div>
       <div

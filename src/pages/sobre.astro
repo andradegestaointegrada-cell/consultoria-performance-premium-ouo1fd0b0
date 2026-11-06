@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import { Linkedin } from 'lucide-react'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { fundoHero } from '@/lib/fundo'
 import Reveal from '@/components/Reveal.astro'
 import { mensagemWhatsApp, ORG_ID, SITE_URL } from '@/data/site'
 import sobreHero from '@/assets/sobre/sobre-hero.webp'
@@ -41,6 +42,7 @@ const pessoas = [
     worksFor: { '@id': ORG_ID },
   },
 ]
+const fundo = await fundoHero(sobreHero)
 ---
 
 <BaseLayout
@@ -51,12 +53,12 @@ const pessoas = [
   breadcrumbs={[{ name: 'Sobre', path: '/sobre' }]}
   jsonLd={pessoas}
   whatsapp={mensagemWhatsApp('Sobre')}
-  preloadImage={sobreHero.src}
+  preloadImage={fundo}
 >
   <div class="pt-20">
     <section
       class="py-32 relative bg-fixed bg-cover bg-center border-b border-border"
-      style={`background-image: url('${sobreHero.src}')`}
+      style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#0D0D0D]/85"></div>
       <div class="container relative z-10 mx-auto px-4 text-center max-w-4xl">

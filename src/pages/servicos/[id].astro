@@ -55,6 +55,7 @@ const hiWidths = [640, 960, 1280, 1536].filter((w) => w <= svc.hi.width)
           alt=""
           widths={hiWidths.length ? hiWidths : [svc.hi.width]}
           sizes="100vw"
+          quality={55}
           loading="eager"
           fetchpriority="high"
           class="w-full h-full object-cover"
