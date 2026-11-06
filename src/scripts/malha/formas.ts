@@ -942,111 +942,313 @@ function predio({ densidade: d, rotulos }: OpcoesForma): Forma {
   )
 }
 
-// IATF 16949: chassi em escada com suspensão e motor (ouro), dentro da gaiola da carroceria (platina).
+/** Curva suave (Catmull-Rom) que passa pelos pontos dados. */
+function suave2d(P: [number, number][], fechada = false, n = 10): [number, number][] {
+  const m = P.length
+  const em = (i: number) => (fechada ? P[(i + m) % m] : P[Math.max(0, Math.min(m - 1, i))])
+  const out: [number, number][] = []
+  const trechos = fechada ? m : m - 1
+  for (let i = 0; i < trechos; i++) {
+    const [p0, p1, p2, p3] = [em(i - 1), em(i), em(i + 1), em(i + 2)]
+    for (let k = 0; k < n; k++) {
+      const t = k / n
+      const t2 = t * t
+      const t3 = t2 * t
+      const c = (q: 0 | 1) =>
+        0.5 *
+        (2 * p1[q] +
+          (-p0[q] + p2[q]) * t +
+          (2 * p0[q] - 5 * p1[q] + 4 * p2[q] - p3[q]) * t2 +
+          (-p0[q] + 3 * p1[q] - 3 * p2[q] + p3[q]) * t3)
+      out.push([c(0), c(1)])
+    }
+  }
+  if (!fechada) out.push(P[m - 1])
+  return out
+}
+
+/** Reamostra uma linha poligonal em passos iguais. */
+function reamostrar(pts: V3[], passo: number, fechar = false): V3[] {
+  const P = fechar ? [...pts, pts[0]] : pts
+  const acum = [0]
+  for (let i = 1; i < P.length; i++) {
+    acum.push(
+      acum[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1], P[i][2] - P[i - 1][2]),
+    )
+  }
+  const L = acum[acum.length - 1]
+  const n = Math.max(2, Math.round(L / passo))
+  const out: V3[] = []
+  let j = 0
+  for (let k = 0; k < (fechar ? n : n + 1); k++) {
+    const s = (k / n) * L
+    while (j < P.length - 2 && acum[j + 1] < s) j++
+    const t = (s - acum[j]) / (acum[j + 1] - acum[j] || 1)
+    out.push([
+      P[j][0] + (P[j + 1][0] - P[j][0]) * t,
+      P[j][1] + (P[j + 1][1] - P[j][1]) * t,
+      P[j][2] + (P[j + 1][2] - P[j][2]) * t,
+    ])
+  }
+  return out
+}
+
+/** Roda esportiva: pneu de perfil baixo (duas faces), aro grande e raios em turbina. Devolve o cubo. */
+function rodaEsportiva(
+  b: Construtor,
+  [x, y, z]: V3,
+  r: number,
+  largura: number,
+  d: number,
+  g: number,
+  distante = false,
+) {
+  if (distante) {
+    // lado de lá: só o contorno do pneu, bem leve, para não embaralhar a silhueta
+    const N = Math.max(12, Math.round(22 * d))
+    const ids: number[] = []
+    for (let k = 0; k < N; k++) {
+      const a = (k / N) * Math.PI * 2
+      ids.push(b.ponto([x + Math.cos(a) * r, y + Math.sin(a) * r, z], { g, c: 1, s: 0.5 }))
+    }
+    b.cadeia(ids, true)
+    return b.ponto([x, y, z], { g, s: 0 })
+  }
+  const N = Math.max(14, Math.round(30 * d))
+  const faces: number[][] = []
+  for (const lado of [-1, 1]) {
+    const ids: number[] = []
+    for (let k = 0; k < N; k++) {
+      const a = (k / N) * Math.PI * 2
+      ids.push(
+        b.ponto([x + Math.cos(a) * r, y + Math.sin(a) * r, z + (lado * largura) / 2], {
+          g,
+          c: 1,
+          s: 0.8,
+        }),
+      )
+    }
+    b.cadeia(ids, true)
+    faces.push(ids)
+  }
+  for (let k = 0; k < N; k += 2) b.aresta(faces[0][k], faces[1][k])
+  const zf = z + (z >= 0 ? 1 : -1) * (largura / 2) * 1.04
+  const M = Math.max(12, Math.round(N * 0.8))
+  const aro: number[] = []
+  for (let k = 0; k < M; k++) {
+    const a = (k / M) * Math.PI * 2
+    aro.push(b.ponto([x + Math.cos(a) * r * 0.76, y + Math.sin(a) * r * 0.76, zf], { g, s: 1 }))
+  }
+  b.cadeia(aro, true)
+  const H = 6
+  const miolo: number[] = []
+  for (let k = 0; k < H; k++) {
+    const a = (k / H) * Math.PI * 2
+    miolo.push(b.ponto([x + Math.cos(a) * r * 0.16, y + Math.sin(a) * r * 0.16, zf], { g, s: 0.8 }))
+  }
+  b.cadeia(miolo, true)
+  // dez raios torcidos (turbina): cada um sai do miolo e chega ao aro adiantado
+  for (let k = 0; k < 10; k++) {
+    b.aresta(miolo[Math.floor((k * H) / 10)], aro[(Math.round((k * M) / 10) + 2) % M])
+  }
+  return b.ponto([x, y, zf], { g, s: 1.6 })
+}
+
+// IATF 16949: carro elétrico moderno. Chassi tipo skate (bateria entre os eixos, um motor por eixo)
+// em ouro, dentro da carroceria de linhas fluidas em platina; rodas girando sobre a pista.
 function chassi({ densidade: d, rotulos }: OpcoesForma): Forma {
   const b = new Construtor()
   const r = rotulos ?? ['APQP', 'PPAP', 'FMEA', 'MSA · CEP', 'VDA 6.3']
   const passo = 0.065 / d
   b.origem = [0, 0.13, 0]
   const yR = -0.42
-  const xR = 0.86
-  const rR = 0.29
+  const xR = 0.92
+  const rR = 0.31
   const zR = 0.5
   const kPista = 3
   const pulsoForma = 1.2
   const vel = -pulsoForma / kPista / rR // a roda gira na velocidade em que a pista corre
+  const lim = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
-  // Longarinas e travessas.
-  const yL = -0.4
-  const xs = [-1.28, -1.0, -0.55, -0.15, 0.25, 0.6, 1.0, 1.3]
-  const yAt = (x: number) => (Math.abs(x) > 1.1 ? yL + 0.06 : yL)
-  const trilho = [-1, 1].map((lado) =>
-    b.linha(
-      xs.map((x) => [x, yAt(x), lado * 0.3] as V3),
-      passo,
-      { s: 1.15 },
-    ),
+  // Carroceria: perfil lateral suave (bico, capô, para-brisa inclinado, teto em arco e traseira fastback).
+  const topo = suave2d(
+    [
+      [1.4, -0.3],
+      [1.45, -0.18],
+      [1.37, -0.08],
+      [1.0, -0.02],
+      [0.62, 0.04],
+      [0.12, 0.34],
+      [-0.25, 0.38],
+      [-0.75, 0.3],
+      [-1.2, 0.11],
+      [-1.38, 0.08],
+      [-1.41, -0.12],
+      [-1.35, -0.3],
+    ],
+    false,
+    8,
   )
-  for (const k of [0, 1, 3, 5, 6, 7]) b.ligar(trilho[0][k], trilho[1][k], passo, { s: 0.95 })
-  b.ligar(trilho[0][2], trilho[1][4], passo, { s: 0.8 })
-  b.ligar(trilho[1][2], trilho[0][4], passo, { s: 0.8 })
-
-  // Suspensão: braço triangular e amortecedor em cada roda.
-  const mangas: number[] = []
-  for (const xw of [-xR, xR]) {
-    for (const lado of [-1, 1]) {
-      const manga = b.ponto([xw, yR, lado * (zR - 0.1)], { s: 1.3 })
-      mangas.push(manga)
-      b.ligar(b.ponto([xw - 0.15, yL, lado * 0.3], { s: 0.9 }), manga, passo, { s: 0.85 })
-      b.ligar(b.ponto([xw + 0.15, yL, lado * 0.3], { s: 0.9 }), manga, passo, { s: 0.85 })
-      b.ligar(manga, b.ponto([xw, yL + 0.3, lado * 0.36], { s: 1 }), passo * 0.8, { s: 0.85 })
-    }
-  }
-  // eixo traseiro, caixa de direção, motor, câmbio e cardã
-  b.ligar(mangas[0], mangas[1], passo, { s: 0.9 })
-  b.ligar(mangas[2], mangas[3], passo, { s: 0.7 })
-  const motor = caixa(b, [0.6, -0.37, -0.2], [1.08, -0.06, 0.2], passo, { s: 0.85 })
-  caixa(b, [0.3, -0.34, -0.1], [0.6, -0.16, 0.1], passo, { s: 0.75 })
-  b.ligar(b.ponto([0.3, -0.25, 0], { s: 0.8 }), b.ponto([-xR, yR + 0.02, 0], { s: 1.2 }), passo, {
-    s: 0.75,
-  })
-
-  // Gaiola da carroceria (platina): perfil lateral com as caixas de roda, dos dois lados.
+  const ra = rR + 0.05
+  const t0 = Math.asin(0.12 / ra)
   const arco = (xc: number): [number, number][] => {
     const pts: [number, number][] = []
     for (let k = 0; k <= 10; k++) {
-      const a = rad(152 - (k / 10) * 124)
-      pts.push([xc + Math.cos(a) * 0.34, yR + Math.sin(a) * 0.34])
+      const a = Math.PI - t0 - (k / 10) * (Math.PI - 2 * t0)
+      pts.push([xc + Math.cos(a) * ra, yR + Math.sin(a) * ra])
     }
     return pts
   }
-  const perfil: [number, number][] = [
-    [1.36, -0.26],
-    [1.39, -0.06],
-    [1.3, 0.02],
-    [0.5, 0.09],
-    [0.04, 0.42],
-    [-0.24, 0.44],
-    [-0.62, 0.43],
-    [-1.06, 0.13],
-    [-1.34, 0.09],
-    [-1.37, -0.24],
-    ...arco(-xR),
-    [-0.24, -0.26],
-    ...arco(xR),
-  ]
-  const iSoleiraB = 10 + 11
-  const ZC = 0.55
-  const lados = [-ZC, ZC].map((z) =>
-    b.linha(
-      perfil.map(([x, y]) => [x, y, z] as V3),
-      passo,
-      { c: 1, s: 0.7 },
+  const perfil: [number, number][] = [...topo, ...arco(-xR), ...arco(xR)]
+  // laterais mais estreitas no alto (a cabine recolhe) e nas pontas
+  const meia = (x: number, y: number) =>
+    0.56 - 0.16 * lim((y - 0.06) / 0.34) - 0.08 * lim((Math.abs(x) - 1.15) / 0.3)
+  // o lado voltado para a câmera (z negativo) é o desenho principal; o de lá fica leve
+  const lados = [-1, 1].map((lado) => {
+    const pts = reamostrar(
+      perfil.map(([x, y]) => [x, y, lado * meia(x, y)] as V3),
+      lado < 0 ? passo : passo * 1.6,
       true,
-    ),
+    )
+    const ids = pts.map((p) => b.ponto(p, lado < 0 ? { c: 1, s: 0.9 } : { c: 1, s: 0.45 }))
+    b.cadeia(ids, true)
+    return { pts, ids }
+  })
+  const perto = (l: { pts: V3[]; ids: number[] }, x: number, y: number) => {
+    let melhor = 0
+    let dm = Infinity
+    l.pts.forEach((p, k) => {
+      const dd = (p[0] - x) ** 2 + (p[1] - y) ** 2
+      if (dd < dm) {
+        dm = dd
+        melhor = k
+      }
+    })
+    return l.ids[melhor]
+  }
+  const chaves: [number, number][] = [
+    [1.4, -0.3],
+    [1.45, -0.18],
+    [1.37, -0.08],
+    [0.62, 0.04],
+    [0.12, 0.34],
+    [-0.25, 0.38],
+    [-0.75, 0.3],
+    [-1.2, 0.11],
+    [-1.41, -0.12],
+    [-1.35, -0.3],
+    [0, -0.3],
+  ]
+  for (const [x, y] of chaves)
+    b.ligar(perto(lados[0], x, y), perto(lados[1], x, y), passo * 1.6, { c: 1, s: 0.4 })
+
+  // Vidros laterais (uma linha contínua, sem coluna aparente) e teto panorâmico.
+  const janela = suave2d(
+    [
+      [0.5, 0.08],
+      [0.14, 0.3],
+      [-0.25, 0.335],
+      [-0.68, 0.27],
+      [-0.98, 0.15],
+      [-0.3, 0.1],
+    ],
+    true,
+    8,
   )
-  const opC = { c: 1, s: 0.55 }
-  for (const k of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, iSoleiraB])
-    b.ligar(lados[0][k], lados[1][k], passo * 1.3, opC)
-  for (const l of lados) {
-    b.ligar(l[5], l[iSoleiraB], passo, opC) // coluna B
-    b.ligar(l[3], l[7], passo * 1.2, opC) // linha da cintura
+  for (const lado of [-1]) {
+    const pts = reamostrar(
+      janela.map(([x, y]) => [x, y, lado * (meia(x, y) - 0.012)] as V3),
+      passo * 0.9,
+      true,
+    )
+    b.cadeia(
+      pts.map((p) => b.ponto(p, { c: 1, s: 0.65 })),
+      true,
+    )
+  }
+  const yTeto = (x: number) => {
+    let melhor = topo[0]
+    for (const p of topo) if (p[1] > 0.2 && Math.abs(p[0] - x) < Math.abs(melhor[0] - x)) melhor = p
+    return melhor[1]
+  }
+  const vidroTeto: V3[] = []
+  for (const z of [-0.26, 0.26]) {
+    const ida = z < 0 ? [0.02, -0.62] : [-0.62, 0.02]
+    for (let k = 0; k <= 8; k++) {
+      const x = ida[0] + ((ida[1] - ida[0]) * k) / 8
+      vidroTeto.push([x, yTeto(x) + 0.004, z])
+    }
+  }
+  const vt = reamostrar(vidroTeto, passo, true)
+  b.cadeia(
+    vt.map((p) => b.ponto(p, { c: 1, s: 0.5 })),
+    true,
+  )
+
+  // Barras de luz de ponta a ponta, na frente (branca) e atrás (ouro).
+  const farol = b.segmento([1.43, -0.11, -0.42], [1.43, -0.11, 0.42], Math.round(16 * d) + 4, {
+    c: 1,
+    s: 1.8,
+  })
+  const lanterna = b.segmento([-1.405, 0.0, -0.44], [-1.405, 0.0, 0.44], Math.round(16 * d) + 4, {
+    s: 1.8,
+  })
+
+  // Chassi tipo skate (ouro): bateria entre os eixos com os módulos, um motor por eixo,
+  // longarinas de impacto até os para-choques, braços e amortecedores.
+  const bateria = caixa(b, [-0.66, -0.5, -0.42], [0.66, -0.38, 0.42], passo, { s: 0.85 })
+  const energia = { fase: (x: number) => -x * 3 }
+  for (const x of [-0.44, -0.22, 0, 0.22, 0.44]) {
+    b.segmento([x, -0.38, -0.42], [x, -0.38, 0.42], Math.round(10 * d) + 3, { s: 0.6, ...energia })
+  }
+  b.segmento([-0.66, -0.38, 0], [0.66, -0.38, 0], Math.round(18 * d) + 4, { s: 0.6, ...energia })
+  for (const xw of [-xR, xR]) {
+    const sx = Math.sign(xw)
+    caixa(b, [xw - 0.12, yR - 0.09, -0.17], [xw + 0.12, yR + 0.09, 0.17], passo * 0.8, { s: 0.85 })
+    for (const lado of [-1, 1]) {
+      const manga = b.ponto([xw, yR, lado * (zR - 0.1)], { s: 1.3 })
+      b.ligar(b.ponto([xw, yR, lado * 0.17], { s: 0.9 }), manga, passo, { s: 0.85 }) // semieixo
+      b.ligar(b.ponto([xw - 0.16, -0.46, lado * 0.3], { s: 0.9 }), manga, passo, { s: 0.75 })
+      b.ligar(b.ponto([xw + 0.16, -0.46, lado * 0.3], { s: 0.9 }), manga, passo, { s: 0.75 })
+      b.ligar(manga, b.ponto([xw, -0.1, lado * 0.36], { s: 1 }), passo * 0.8, { s: 0.8 }) // amortecedor
+      // longarina de impacto, da bateria ao para-choque
+      b.linha(
+        [
+          [sx * 0.66, -0.44, lado * 0.3],
+          [sx * 1.33, -0.27, lado * 0.3],
+        ],
+        passo,
+        { s: 0.8 },
+      )
+      // pinça de freio (fica parada enquanto a roda gira)
+      const zp = lado * (zR + 0.01)
+      const pinca: V3[] = []
+      for (let k = 0; k <= 4; k++) {
+        const a = rad(sx > 0 ? 120 + k * 12 : 20 + k * 12)
+        pinca.push([xw + Math.cos(a) * rR * 0.6, yR + Math.sin(a) * rR * 0.6, zp])
+      }
+      b.cadeia(pinca.map((p) => b.ponto(p, { s: 1.3 })))
+    }
+    b.segmento([sx * 1.36, -0.24, -0.4], [sx * 1.36, -0.24, 0.4], Math.round(12 * d) + 3, {
+      s: 0.75,
+    }) // viga do para-choque
   }
 
   // Rodas (giram) e pista.
   const cubos: number[] = []
-  for (const xw of [-xR, xR])
+  for (const xw of [-xR, xR]) {
     for (const lado of [-1, 1])
-      cubos.push(roda(b, [xw, yR, lado * zR], rR, 0.15, d, xw < 0 ? 1 : 2))
-  pista(b, -0.73, -1.62, 1.62, [-0.9, 0, 0.9], passo, kPista)
+      cubos.push(rodaEsportiva(b, [xw, yR, lado * zR], rR, 0.17, d, xw < 0 ? 1 : 2, lado > 0))
+  }
+  pista(b, -0.74, -1.62, 1.62, [-0.9, 0, 0.9], passo, kPista)
 
-  b.rotulo(lados[0][4], r[0], 1)
-  b.rotulo(lados[0][8], r[1], 1)
-  b.rotulo(motor[5], r[2], 0)
-  b.rotulo(lados[0][1], r[3], 1)
+  b.rotulo(perto(lados[0], 0.12, 0.34), r[0], 1)
+  b.rotulo(lanterna[0], r[1], 0)
+  b.rotulo(bateria[1], r[2], 0)
+  b.rotulo(farol[0], r[3], 1)
   b.rotulo(cubos[0], r[4], 0)
 
-  const corpo: Grupo = { rumo: 0.5, balanco: 0.22, amplitude: 0.3, inclinacao: 0.2 }
+  const corpo: Grupo = { rumo: 0.14, balanco: 0.2, amplitude: 0.2, inclinacao: 0.13 }
   b.limiarRotulo = 0.36
   const yc = yR + b.origem[1]
   return b.fechar(
