@@ -1,8 +1,10 @@
 ---
 // Malha 3D animada (camada tecnológica). Decorativa: o conteúdo da página não depende dela.
 // O motor só é baixado depois da carga da página, quando o navegador fica ocioso.
+import type { NomeForma } from '@/scripts/malha/nomes'
+
 interface Props {
-  forma: 'logo' | 'pdca' | 'globo' | 'pulso' | 'rede' | 'numero'
+  forma: NomeForma
   /** Texto desenhado em pontos (forma "numero"). */
   texto?: string
   /** Troca os rótulos em órbita da forma. */

@@ -7,6 +7,7 @@ import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
 import ServiceFaq from '@/components/ServiceFaq'
 import Malha from '@/components/tech/Malha.astro'
+import type { NomeForma } from '@/scripts/malha/nomes'
 import { S_DATA, STEPS, type ServiceData } from '@/data/services'
 import { ORG_ID, SITE_URL } from '@/data/site'
 
@@ -37,7 +38,8 @@ const hiWidths = [640, 960, 1280, 1536].filter((w) => w <= svc.hi.width)
 
 // Camada tecnológica do hero: as três normas do núcleo têm forma própria (ciclo PDCA,
 // planeta com ciclo de vida, domo de proteção com pulso); as demais mostram a norma em pontos.
-type MalhaHero = { forma: 'logo' | 'pdca' | 'globo' | 'pulso' | 'rede' | 'numero'; texto?: string; rotulos?: string[] }
+// larga: forma comprida (veículo, viaduto); no celular ela vai inteira para a faixa acima do título
+type MalhaHero = { forma: NomeForma; texto?: string; rotulos?: string[]; larga?: boolean }
 const MALHAS: Record<string, MalhaHero> = {
   'iso-9001': { forma: 'pdca' },
   'iso-14001': { forma: 'globo' },
@@ -56,11 +58,11 @@ const MALHAS: Record<string, MalhaHero> = {
       'ISO 9001',
     ],
   },
-  'pbqp-h': { forma: 'numero', texto: 'PBQP-H' },
-  'iatf-16949': { forma: 'numero', texto: '16949' },
-  'iso-17020': { forma: 'numero', texto: '17020' },
+  'pbqp-h': { forma: 'predio' },
+  'iatf-16949': { forma: 'chassi', larga: true },
+  'iso-17020': { forma: 'viaduto', larga: true },
   'iso-17025': { forma: 'numero', texto: '17025' },
-  sassmaq: { forma: 'numero', texto: 'SASSMAQ' },
+  sassmaq: { forma: 'caminhao', larga: true },
   esg: { forma: 'numero', texto: 'ESG' },
   'iso-37001': { forma: 'numero', texto: '37001' },
 }
@@ -98,7 +100,12 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
         <div class="absolute inset-0 grade-tech"></div>
       </div>
       <div
-        class="pointer-events-none absolute z-[1] inset-y-0 left-[30%] -right-[22%] opacity-45 sm:left-[45%] sm:-right-[8%] lg:opacity-100 lg:left-auto lg:right-0 lg:w-[48%] xl:right-[2%] xl:w-[46%]"
+        class:list={[
+          'pointer-events-none absolute z-[1] lg:opacity-100 lg:left-auto lg:right-0 lg:w-[48%] xl:right-[2%] xl:w-[46%]',
+          malha.larga
+            ? 'top-3 h-32 inset-x-3 opacity-80 sm:inset-x-[14%] lg:inset-y-0 lg:h-auto'
+            : 'inset-y-0 left-[30%] -right-[22%] opacity-45 sm:left-[45%] sm:-right-[8%]',
+        ]}
       >
         <Malha forma={malha.forma} texto={malha.texto} rotulos={malha.rotulos} />
       </div>

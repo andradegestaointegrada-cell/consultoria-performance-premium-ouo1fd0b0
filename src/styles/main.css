@@ -178,18 +178,22 @@
     @apply relative overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-300;
   }
   .cartao-tech::before,
-  .cartao-tech::after {
+  .cartao-tech::after,
+  .mira-tech::before,
+  .mira-tech::after {
     content: '';
     @apply pointer-events-none absolute h-4 w-4 transition-colors duration-300;
     border-color: hsl(var(--primary) / 0.55);
   }
-  .cartao-tech::before {
+  .cartao-tech::before,
+  .mira-tech::before {
     top: 10px;
     left: 10px;
     border-top-width: 1px;
     border-left-width: 1px;
   }
-  .cartao-tech::after {
+  .cartao-tech::after,
+  .mira-tech::after {
     right: 10px;
     bottom: 10px;
     border-right-width: 1px;
@@ -215,6 +219,18 @@
     animation: feixe 5s linear infinite;
   }
 
+  /* o mesmo feixe, na vertical (liga as fases da metodologia) */
+  .feixe-v-tech {
+    @apply relative w-px overflow-hidden;
+    background: linear-gradient(180deg, transparent, rgb(207 174 112 / 0.4), transparent);
+  }
+  .feixe-v-tech::after {
+    content: '';
+    @apply absolute inset-x-0 h-2/5;
+    background: linear-gradient(180deg, transparent, rgb(207 174 112 / 0.95), transparent);
+    animation: feixe-v 2.8s linear infinite;
+  }
+
   /* faixa sempre escura (navy), nos dois temas */
   .faixa-tech {
     background:
@@ -226,6 +242,15 @@
   .malha-canvas {
     opacity: 0;
     transition: opacity 1.2s ease;
+  }
+}
+
+@keyframes feixe-v {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
   }
 }
 
@@ -244,7 +269,8 @@
     opacity: 1 !important;
     animation: none !important;
   }
-  .feixe-tech::after {
+  .feixe-tech::after,
+  .feixe-v-tech::after {
     animation: none;
     display: none;
   }

@@ -1,0 +1,16 @@
+// Nomes das formas da malha (formas.ts), para os componentes Astro.
+export type NomeForma =
+  | 'logo'
+  | 'pdca'
+  | 'globo'
+  | 'pulso'
+  | 'rede'
+  | 'numero'
+  | 'predio'
+  | 'chassi'
+  | 'viaduto'
+  | 'caminhao'
+  | 'radar'
+  | 'engrenagens'
+  | 'auditoria'
+  | 'evolucao'

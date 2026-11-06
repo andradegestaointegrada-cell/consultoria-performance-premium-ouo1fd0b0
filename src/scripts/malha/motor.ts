@@ -58,7 +58,11 @@ class Malha {
     } catch {
       rotulos = undefined
     }
-    this.forma = await criar({ densidade: this.compacto ? 0.55 : 1, rotulos, texto: this.tela.dataset.texto })
+    this.forma = await criar({
+      densidade: this.compacto ? 0.55 : 1,
+      rotulos,
+      texto: this.tela.dataset.texto,
+    })
     const n = (this.n = this.forma.g.length)
     this.ini = new Float32Array(n * 3)
     this.atraso = new Float32Array(n)
@@ -152,9 +156,27 @@ class Malha {
     this.my += (this.alvoY - this.my) * 0.04
 
     const grupos = forma.grupos.map((g) => {
-      const ay = (g.giro ? t * g.giro : 0) + (g.balanco ? Math.sin(t * g.balanco) * (g.amplitude ?? 0.5) : 0) + this.mx * 0.35
+      const ay =
+        (g.rumo ?? 0) +
+        (g.giro ? t * g.giro : 0) +
+        (g.balanco ? Math.sin(t * g.balanco) * (g.amplitude ?? 0.5) : 0) +
+        this.mx * 0.35
       const ax = (g.inclinacao ?? 0) + this.my * 0.16
-      return [Math.cos(ay), Math.sin(ay), Math.cos(ax), Math.sin(ax)]
+      const l = g.local
+      const al = l
+        ? l.amplitude
+          ? Math.sin(t * l.vel + (l.fase ?? 0)) * l.amplitude
+          : t * l.vel + (l.fase ?? 0)
+        : 0
+      return {
+        cY: Math.cos(ay),
+        sY: Math.sin(ay),
+        cX: Math.cos(ax),
+        sX: Math.sin(ax),
+        l,
+        cL: Math.cos(al),
+        sL: Math.sin(al),
+      }
     })
 
     const esc = Math.min(w / 2 / forma.raioX, h / 2 / forma.raioY) * 0.86
@@ -168,6 +190,21 @@ class Malha {
       let x = p[i * 3]
       let y = p[i * 3 + 1]
       let z = p[i * 3 + 2]
+      const G = grupos[g[i]]
+      if (G.l) {
+        // giro próprio da peça (roda, engrenagem, grua) em torno do seu centro
+        const [ox, oy, oz] = G.l.centro
+        const dx = x - ox
+        if (G.l.eixo === 'z') {
+          const dy = y - oy
+          x = ox + dx * G.cL - dy * G.sL
+          y = oy + dx * G.sL + dy * G.cL
+        } else {
+          const dz = z - oz
+          x = ox + dx * G.cL + dz * G.sL
+          z = oz - dx * G.sL + dz * G.cL
+        }
+      }
       let aparece = 1
       if (montando) {
         const a = limitar((t - this.atraso[i]) / MONTAGEM)
@@ -177,7 +214,7 @@ class Malha {
         z = this.ini[i * 3 + 2] + (z - this.ini[i * 3 + 2]) * e
         aparece = a
       }
-      const [cY, sY, cX, sX] = grupos[g[i]]
+      const { cY, sY, cX, sX } = G
       const x1 = x * cY + z * sY
       const z1 = -x * sY + z * cY
       const y1 = y * cX - z1 * sX
@@ -189,7 +226,10 @@ class Malha {
       let a = 0.2 + 0.8 * limitar(0.5 - z2 / (2 * R))
       this.prof[i] = a * aparece
       const fase = f[i]
-      if (fase === fase) a *= forma.pulsoBase + (1 - forma.pulsoBase) * Math.max(0, Math.cos(t * forma.pulso + fase)) ** 10
+      if (fase === fase)
+        a *=
+          forma.pulsoBase +
+          (1 - forma.pulsoBase) * Math.max(0, Math.cos(t * forma.pulso + fase)) ** 10
       this.alfa[i] = a * aparece
     }
 
@@ -256,9 +296,10 @@ class Malha {
     if (this.comRotulos && fadeRotulos > 0) {
       ctx.font = '600 10.5px "Inter Variable", Inter, system-ui, sans-serif'
       ctx.textBaseline = 'middle'
-      if ('letterSpacing' in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '1.6px'
+      if ('letterSpacing' in ctx)
+        (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '1.6px'
       for (const r of forma.rotulos) {
-        const a = limitar((this.prof[r.i] - 0.5) / 0.35) * fadeRotulos
+        const a = limitar((this.prof[r.i] - forma.limiarRotulo) / 0.35) * fadeRotulos
         if (a <= 0.02) continue
         const x = this.px[r.i]
         const y = this.py[r.i]
