@@ -109,8 +109,9 @@ const fundo = await fundoHero(contatoHero)
             <Image
               src={matriz}
               alt="Fachada do edifício da Rua Pais Leme, 215, sede da AGI"
-              widths={[560, 1024]}
-              sizes="(min-width: 768px) 560px, 100vw"
+              widths={[400, 560, 840]}
+              sizes="(min-width: 768px) 560px, calc(100vw - 32px)"
+              fetchpriority="low"
               class="w-full h-full object-cover object-center opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
             />
           </div>

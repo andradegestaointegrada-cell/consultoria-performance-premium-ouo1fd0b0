@@ -4,6 +4,6 @@ import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 
 export async function fundoHero(img: ImageMetadata) {
-  const r = await getImage({ src: img, format: 'webp', quality: 50 })
+  const r = await getImage({ src: img, format: 'webp', quality: 40 })
   return r.src
 }
