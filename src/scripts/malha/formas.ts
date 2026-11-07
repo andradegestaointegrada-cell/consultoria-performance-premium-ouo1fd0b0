@@ -2205,6 +2205,1427 @@ function evolucao({ densidade: d, rotulos }: OpcoesForma): Forma {
   return b.fechar(grupos, 1.62, 1.1, 1.3, 0.6)
 }
 
+// ISO/IEC 17025: ambiente de laboratório de ensaio e calibração (bancada técnica,
+// microscópio óptico, balança analítica de precisão com capela, vidraria graduada e curva metrológica).
+function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'Rastreabilidade metrológica',
+    'Incerteza de medição',
+    'Ensaio e calibração',
+    'Validação de métodos',
+    'RBC · Cgcre · Inmetro',
+  ]
+  const passo = 0.07 / d
+  b.origem = [0, -0.04, 0]
+  const yBancada = -0.48
+
+  // 1. Bancada técnica de laboratório (tampo em grade, borda reforçada e módulos inferiores).
+  const gx = d < 1 ? 9 : 13
+  const gz = d < 1 ? 5 : 7
+  const tampo: number[][] = []
+  for (let a = 0; a < gx; a++) {
+    tampo.push([])
+    for (let c = 0; c < gz; c++) {
+      const x = -1.52 + (3.04 * a) / (gx - 1)
+      const z = -0.62 + (1.24 * c) / (gz - 1)
+      tampo[a].push(b.ponto([x, yBancada, z], { c: 1, s: 0.55 }))
+    }
+  }
+  for (let a = 0; a < gx; a++) b.cadeia(tampo[a])
+  for (let c = 0; c < gz; c++) b.cadeia(tampo.map((l) => l[c]))
+  caixa(b, [-1.54, yBancada - 0.07, -0.64], [1.54, yBancada, 0.64], passo * 1.2, { s: 0.9 })
+  for (const x of [-1.46, -0.52, 0.52, 1.46]) {
+    for (const z of [-0.58, 0.58]) {
+      b.segmento([x, -0.92, z], [x, yBancada - 0.07, z], 4, { c: 1, s: 0.7 })
+    }
+  }
+  b.segmento([-1.46, -0.84, -0.58], [1.46, -0.84, -0.58], Math.round(18 * d) + 4, { c: 1, s: 0.6 })
+
+  // 2. Painel de controle metrológico ao fundo (curva de calibração + faixas de incerteza).
+  const zPainel = 0.52
+  caixa(b, [-1.38, -0.32, zPainel], [1.38, 0.88, zPainel + 0.02], passo * 1.4, { c: 1, s: 0.55 })
+  const nCurva = Math.round(68 * d) + 16
+  const curvaCal: number[] = []
+  const limSup: number[] = []
+  const limInf: number[] = []
+  for (let k = 0; k <= nCurva; k++) {
+    const t = k / nCurva
+    const x = -1.26 + 2.52 * t
+    const yBase = 0.28 + 0.28 * Math.sin(t * Math.PI * 2.2) * Math.exp(-((t - 0.5) ** 2) * 2.0)
+    curvaCal.push(b.ponto([x, yBase, zPainel - 0.01], { s: 1.45, f: -t * 7 }))
+    if (k % 2 === 0) {
+      limSup.push(b.ponto([x, yBase + 0.12, zPainel - 0.01], { c: 1, s: 0.6 }))
+      limInf.push(b.ponto([x, yBase - 0.12, zPainel - 0.01], { c: 1, s: 0.6 }))
+    }
+  }
+  b.cadeia(curvaCal)
+  b.cadeia(limSup)
+  b.cadeia(limInf)
+
+  // 3. À esquerda (x = -0.98): Microscópio Óptico de Precisão.
+  const xm = -0.98
+  const zm = -0.1
+  caixa(b, [xm - 0.28, yBancada, zm - 0.24], [xm + 0.28, yBancada + 0.08, zm + 0.24], passo, {
+    s: 1.05,
+  })
+  const arcoBraco = suave2d(
+    [
+      [xm - 0.18, yBancada + 0.08],
+      [xm - 0.31, yBancada + 0.38],
+      [xm - 0.26, yBancada + 0.76],
+      [xm - 0.04, yBancada + 0.94],
+    ],
+    false,
+    6,
+  )
+  for (const dz of [-0.055, 0.055]) {
+    const ids = arcoBraco.map(([x, y]) => b.ponto([x, y, zm + dz], { c: 1, s: 0.95 }))
+    b.cadeia(ids)
+  }
+  for (let k = 0; k < arcoBraco.length; k += 3) {
+    const [ax, ay] = arcoBraco[k]
+    b.segmento([ax, ay, zm - 0.055], [ax, ay, zm + 0.055], 2, { c: 1, s: 0.75 })
+  }
+  // Platina (stage) porta-amostra e feixe óptico
+  caixa(
+    b,
+    [xm - 0.16, yBancada + 0.38, zm - 0.19],
+    [xm + 0.22, yBancada + 0.43, zm + 0.19],
+    passo * 0.85,
+    { s: 0.95 },
+  )
+  const amostra = b.ponto([xm + 0.05, yBancada + 0.44, zm], { s: 2.8, f: 0 })
+  b.segmento([xm + 0.05, yBancada + 0.09, zm], [xm + 0.05, yBancada + 0.74, zm], 9, {
+    s: 1.5,
+    f: -1.5,
+  })
+  // Revólver porta-objetivas e 3 lentes
+  const nRev = 12
+  const revIds: number[] = []
+  for (let k = 0; k < nRev; k++) {
+    const a = (k / nRev) * Math.PI * 2
+    revIds.push(
+      b.ponto([xm + 0.05 + Math.cos(a) * 0.1, yBancada + 0.72, zm + Math.sin(a) * 0.1], {
+        s: 1.1,
+      }),
+    )
+  }
+  b.cadeia(revIds, true)
+  for (const angObj of [0, 2.1, 4.2]) {
+    const ox = xm + 0.05 + Math.cos(angObj) * 0.065
+    const oz = zm + Math.sin(angObj) * 0.065
+    b.segmento([ox, yBancada + 0.72, oz], [ox, yBancada + 0.54, oz], 4, { s: 1.25 })
+  }
+  // Cabeçote binocular inclinado
+  for (const dz of [-0.045, 0.045]) {
+    b.segmento([xm - 0.02, yBancada + 0.86, zm + dz], [xm + 0.22, yBancada + 1.18, zm + dz], 6, {
+      s: 1.1,
+    })
+  }
+  const ancoraMic = b.ponto([xm + 0.12, yBancada + 1.16, zm - 0.18], { s: 0 })
+
+  // 4. Ao centro (x = -0.02): Balança Analítica de Calibração com Capela de Vidro e Travessão Dinâmico (Grupo 1).
+  const xb = -0.02
+  const zb = -0.1
+  caixa(b, [xb - 0.38, yBancada, zb - 0.34], [xb + 0.38, yBancada + 0.15, zb + 0.34], passo, {
+    s: 1.1,
+  })
+  b.segmento([xb - 0.25, yBancada + 0.08, zb - 0.345], [xb + 0.25, yBancada + 0.08, zb - 0.345], 9, {
+    s: 1.9,
+    f: 0,
+  })
+  const capela = caixa(
+    b,
+    [xb - 0.36, yBancada + 0.15, zb - 0.31],
+    [xb + 0.36, yBancada + 1.02, zb + 0.31],
+    passo * 1.05,
+    { c: 1, s: 0.85 },
+  )
+  b.segmento([xb, yBancada + 0.15, zb], [xb, yBancada + 0.82, zb], 10, { s: 1.4 })
+  b.ponto([xb, yBancada + 0.82, zb], { s: 2.4 })
+
+  const gBal = 1
+  const yTrav = yBancada + 0.82
+  b.segmento([xb - 0.25, yTrav, zb], [xb + 0.25, yTrav, zb], 10, { g: gBal, s: 1.55 })
+  for (const lado of [-1, 1]) {
+    const xp = xb + lado * 0.23
+    const yp = yBancada + 0.36
+    for (const [dx, dz] of [
+      [-0.075, -0.075],
+      [0.075, -0.075],
+      [0, 0.085],
+    ]) {
+      b.segmento([xp, yTrav, zb], [xp + dx, yp, zb + dz], 5, { g: gBal, c: 1, s: 0.75 })
+    }
+    const prato: number[] = []
+    for (let k = 0; k < 14; k++) {
+      const a = (k / 14) * Math.PI * 2
+      prato.push(
+        b.ponto([xp + Math.cos(a) * 0.095, yp, zb + Math.sin(a) * 0.095], { g: gBal, s: 1.15 }),
+      )
+    }
+    b.cadeia(prato, true)
+    // Pesos-padrão de calibração em ouro nos pratos
+    const hPeso = lado < 0 ? 0.11 : 0.07
+    for (const dy of [0.02, hPeso]) {
+      const anelP: number[] = []
+      for (let k = 0; k < 10; k++) {
+        const a = (k / 10) * Math.PI * 2
+        anelP.push(
+          b.ponto([xp + Math.cos(a) * 0.048, yp + dy, zb + Math.sin(a) * 0.048], {
+            g: gBal,
+            s: 1.4,
+          }),
+        )
+      }
+      b.cadeia(anelP, true)
+    }
+    b.ponto([xp, yp + hPeso + 0.02, zb], { g: gBal, s: 2.2 })
+  }
+  const ancoraBal = b.ponto([xb - 0.22, yBancada + 0.48, zb - 0.32], { s: 0 })
+
+  // 5. À direita (x = 0.82): Erlenmeyer Graduado + Bureta de Titulação + Estante de Tubos.
+  const xq = 0.78
+  const zq = -0.12
+  const niveisFrasco: [number, number, number][] = [
+    [0.0, 0.22, 1],
+    [0.09, 0.205, 0],
+    [0.2, 0.155, 0],
+    [0.32, 0.1, 1],
+    [0.44, 0.06, 1],
+    [0.58, 0.06, 1],
+    [0.62, 0.078, 0],
+  ]
+  const nFrasco = 14
+  let anelAnt: number[] | null = null
+  niveisFrasco.forEach(([dy, raio, cor]) => {
+    const anel: number[] = []
+    for (let k = 0; k < nFrasco; k++) {
+      const a = (k / nFrasco) * Math.PI * 2
+      const id = b.ponto([xq + Math.cos(a) * raio, yBancada + dy, zq + Math.sin(a) * raio], {
+        c: cor,
+        s: cor === 0 ? 1.25 : 0.85,
+        f: cor === 0 ? -dy * 8 : NaN,
+      })
+      anel.push(id)
+    }
+    b.cadeia(anel, true)
+    if (anelAnt) {
+      for (let k = 0; k < nFrasco; k += 2) b.aresta(anelAnt[k], anel[k])
+    }
+    anelAnt = anel
+  })
+
+  const xHaste = 1.06
+  b.segmento([xHaste, yBancada, zq], [xHaste, yBancada + 1.2, zq], 12, { c: 1, s: 0.9 })
+  b.segmento([xHaste, yBancada + 1.06, zq], [xq, yBancada + 1.06, zq], 5, { c: 1, s: 0.9 })
+  for (const dx of [-0.024, 0.024]) {
+    b.segmento([xq + dx, yBancada + 0.74, zq], [xq + dx, yBancada + 1.16, zq], 7, {
+      c: 1,
+      s: 0.8,
+    })
+  }
+  b.segmento([xq, yBancada + 0.12, zq], [xq, yBancada + 0.74, zq], 10, {
+    s: 1.6,
+    f: 2.5,
+  })
+  const ancoraFrasco = b.ponto([xq + 0.14, yBancada + 0.34, zq - 0.24], { s: 0 })
+
+  // Estante com 3 tubos de ensaio
+  caixa(
+    b,
+    [1.14, yBancada, zq - 0.13],
+    [1.46, yBancada + 0.28, zq + 0.13],
+    passo * 1.05,
+    { c: 1, s: 0.75 },
+  )
+  for (const xt of [1.2, 1.3, 1.4]) {
+    for (const dy of [0.05, 0.22, 0.42]) {
+      const anelT: number[] = []
+      for (let k = 0; k < 8; k++) {
+        const a = (k / 8) * Math.PI * 2
+        anelT.push(
+          b.ponto([xt + Math.cos(a) * 0.035, yBancada + dy, zq + Math.sin(a) * 0.035], {
+            c: dy === 0.22 ? 0 : 1,
+            s: dy === 0.22 ? 1.3 : 0.75,
+          }),
+        )
+      }
+      b.cadeia(anelT, true)
+    }
+  }
+
+  const ancoraBalTopo = b.ponto([-0.04, yBancada + 1.04, zb - 0.31], { s: 0 })
+  const ancoraCurva = b.ponto([0.64, 0.58, -0.2], { s: 0 })
+  const ancoraMicEsq = b.ponto([-1.06, yBancada + 0.92, zm - 0.22], { s: 0 })
+  const ancoraFrascoDir = b.ponto([0.92, yBancada + 0.22, zq - 0.26], { s: 0 })
+  const ancoraInmetroBase = b.ponto([-0.52, yBancada - 0.08, -0.62], { s: 0 })
+
+  b.rotulo(ancoraBalTopo, r[0], 0)
+  b.rotulo(ancoraCurva, r[1], 1)
+  b.rotulo(ancoraMicEsq, r[2], 0)
+  b.rotulo(ancoraFrascoDir, r[3], 0)
+  b.rotulo(ancoraInmetroBase, r[4], 1)
+  b.limiarRotulo = 0.24
+
+  const base: Grupo = { rumo: 0.16, balanco: 0.2, amplitude: 0.26, inclinacao: 0.2 }
+  return b.fechar(
+    [
+      base,
+      {
+        ...base,
+        local: {
+          eixo: 'z',
+          vel: 1.1,
+          amplitude: 0.09,
+          centro: [xb + b.origem[0], yTrav + b.origem[1], zb],
+        },
+      },
+    ],
+    1.56,
+    0.96,
+    1.3,
+    0.48,
+  )
+}
+
+// ISO/IEC 42001: robô humanoide moderno inspirado no design Unitree G1
+// (capacete oval vazado com anel de LED, barra óptica horizontal, peitoral monobloco com check central,
+// cintura cilíndrica estreita, juntas circulares nos ombros/quadril e braços articulados).
+function humanoide({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'Sistema de gestão de IA',
+    'Inventário de IA',
+    'Avaliação de impacto',
+    'ISO/IEC 23894',
+    'NIST AI RMF',
+    'Lei de IA da UE',
+    'Supervisão humana',
+    'ISO 9001',
+  ]
+  const passo = 0.065 / d
+  b.origem = [0, -0.02, 0]
+
+  const anelH = (
+    [cx, cy, cz]: V3,
+    rx: number,
+    rz: number,
+    n: number,
+    o: OpcoesPonto = {},
+  ) => {
+    const ids: number[] = []
+    for (let k = 0; k < n; k++) {
+      const a = (k / n) * Math.PI * 2
+      ids.push(b.ponto([cx + Math.cos(a) * rx, cy, cz + Math.sin(a) * rz], o))
+    }
+    b.cadeia(ids, true)
+    return ids
+  }
+
+  const discoPlano = (
+    [cx, cy, cz]: V3,
+    raio: number,
+    eixoNormal: 'z' | 'x',
+    n: number,
+    o: OpcoesPonto = {},
+  ) => {
+    const ids: number[] = []
+    for (let k = 0; k < n; k++) {
+      const a = (k / n) * Math.PI * 2
+      if (eixoNormal === 'z') {
+        ids.push(b.ponto([cx + Math.cos(a) * raio, cy + Math.sin(a) * raio, cz], o))
+      } else {
+        ids.push(b.ponto([cx, cy + Math.sin(a) * raio, cz + Math.cos(a) * raio], o))
+      }
+    }
+    b.cadeia(ids, true)
+    return ids
+  }
+
+  // 1. Cabeça Unitree G1 (Grupo 1): moldura oval vazada com anel de LED, barra horizontal e câmera central.
+  const gCab = 1
+  const cyCab = 0.81
+  const nHalo = Math.max(24, Math.round(36 * d))
+  // Perfil oval da face (mais largo na têmpora, queixo estreito arredondado)
+  const posHalo = (a: number, escala: number): V3 => {
+    const sen = Math.sin(a)
+    const cos = Math.cos(a)
+    const larg = (0.165 + 0.025 * sen) * escala
+    const alt = 0.235 * escala
+    return [cos * larg, cyCab + sen * alt, -0.145 - 0.015 * Math.cos(a * 2)]
+  }
+  const haloExt: number[] = []
+  const haloInt: number[] = []
+  for (let k = 0; k < nHalo; k++) {
+    const a = (k / nHalo) * Math.PI * 2
+    haloExt.push(b.ponto(posHalo(a, 1.0), { g: gCab, s: 1.9, f: -a * 1.5 }))
+    haloInt.push(b.ponto(posHalo(a, 0.82), { g: gCab, c: 1, s: 0.95 }))
+  }
+  b.cadeia(haloExt, true)
+  b.cadeia(haloInt, true)
+  for (let k = 0; k < nHalo; k += 3) b.aresta(haloExt[k], haloInt[k])
+
+  // Calota craniana 3D atrás do anel facial
+  for (const [fatorZ, escala] of [
+    [-0.06, 0.96],
+    [0.04, 0.88],
+    [0.13, 0.68],
+  ] as const) {
+    const anelC: number[] = []
+    for (let k = 0; k < 18; k++) {
+      const a = (k / 18) * Math.PI * 2
+      const [hx, hy] = posHalo(a, escala)
+      anelC.push(b.ponto([hx, hy, fatorZ], { g: gCab, c: 1, s: 0.7 }))
+    }
+    b.cadeia(anelC, true)
+  }
+
+  // Barra de LED horizontal (visor superior) + câmera/LiDAR semiesférica abaixo da barra
+  b.segmento([-0.115, cyCab + 0.055, -0.155], [0.115, cyCab + 0.055, -0.155], 12, {
+    g: gCab,
+    s: 2.3,
+    f: 0,
+  })
+  b.segmento([-0.11, cyCab + 0.07, -0.15], [0.11, cyCab + 0.07, -0.15], 10, {
+    g: gCab,
+    c: 1,
+    s: 1.1,
+  })
+  const podCam = esfera(14, 0.042).map((p) =>
+    b.ponto([p[0], cyCab + 0.015 + p[1], -0.135 + p[2]], { g: gCab, s: 1.4, f: 0 }),
+  )
+  b.vizinhos(podCam, 2)
+
+  // 2. Pescoço Cônico Escuro + Colarinho com Alças Metálicas.
+  for (const [y, rPes, cor] of [
+    [0.56, 0.068, 1],
+    [0.5, 0.078, 1],
+    [0.44, 0.13, 0],
+  ] as const) {
+    anelH([0, y, -0.02], rPes, rPes * 0.9, 12, { c: cor, s: cor === 0 ? 1.05 : 0.8 })
+  }
+  // Alças metálicas em U nas extremidades do colarinho
+  for (const lado of [-1, 1]) {
+    b.linha(
+      [
+        [lado * 0.14, 0.42, -0.05],
+        [lado * 0.16, 0.46, -0.02],
+        [lado * 0.14, 0.42, 0.03],
+      ],
+      passo * 0.6,
+      { c: 1, s: 1.0 },
+    )
+  }
+
+  // 3. Peitoral Monobloco Esculpido (largo em cima, chanfrado, afunilado até a cintura).
+  const fatiasPeito: [number, number, number, number][] = [
+    [0.41, 0.22, 0.14, 0], // gola / topo do peitoral
+    [0.35, 0.34, 0.19, 1], // linha alta dos ombros
+    [0.24, 0.33, 0.21, 1], // peitoral médio
+    [0.12, 0.3, 0.2, 1], // centro do torso (onde fica o emblema check)
+    [0.0, 0.27, 0.18, 1], // costelas inferiores
+    [-0.11, 0.23, 0.15, 0], // borda inferior reta da couraça torácica
+  ]
+  const nPeito = 20
+  const aneisPeito: number[][] = []
+  fatiasPeito.forEach(([y, rx, rz, cor]) => {
+    // Superelipse para dar o formato de couraça plana na frente e arredondada nos cantos
+    const ids: number[] = []
+    for (let k = 0; k < nPeito; k++) {
+      const a = (k / nPeito) * Math.PI * 2
+      const ca = Math.cos(a)
+      const sa = Math.sin(a)
+      const mod = 1 - 0.12 * Math.cos(a * 4)
+      ids.push(
+        b.ponto([ca * rx * mod, y, sa * rz * mod], {
+          c: cor,
+          s: cor === 0 ? 1.15 : 0.85,
+        }),
+      )
+    }
+    b.cadeia(ids, true)
+    aneisPeito.push(ids)
+  })
+  for (let k = 0; k < aneisPeito.length - 1; k++) {
+    for (let m = 0; m < nPeito; m += 2) b.aresta(aneisPeito[k][m], aneisPeito[k + 1][m])
+  }
+
+  // Detalhes frontais do peito (inspirados na foto):
+  // a) Pequeno triângulo invertido no alto do peito (y = 0.31)
+  b.linha(
+    [
+      [-0.032, 0.32, -0.198],
+      [0.032, 0.32, -0.198],
+      [0, 0.275, -0.202],
+    ],
+    passo * 0.5,
+    { s: 1.3 },
+    true,
+  )
+  // b) Os 4 sensores circulares brancos/platina nos cantos da couraça frontal
+  for (const [sx, sy, sz] of [
+    [-0.085, 0.31, -0.192],
+    [0.085, 0.31, -0.192],
+    [-0.075, -0.03, -0.172],
+    [0.075, -0.03, -0.172],
+  ] as const) {
+    discoPlano([sx, sy, sz], 0.022, 'z', 8, { c: 1, s: 1.0 })
+  }
+  // c) Grande Emblema Circular com Check (✓) de Conformidade no centro do peito!
+  const yBadge = 0.14
+  const zBadge = -0.206
+  discoPlano([0, yBadge, zBadge], 0.115, 'z', 20, { s: 1.65, f: 0 })
+  discoPlano([0, yBadge, zBadge], 0.092, 'z', 16, { c: 1, s: 0.9 })
+  // O "Check" (✓) em ouro dentro do círculo central
+  b.linha(
+    [
+      [-0.048, yBadge - 0.005, zBadge - 0.005],
+      [-0.012, yBadge - 0.042, zBadge - 0.005],
+      [0.055, yBadge + 0.038, zBadge - 0.005],
+    ],
+    passo * 0.45,
+    { s: 2.3, f: 0 },
+  )
+  const centroPeito = b.ponto([0, yBadge, zBadge - 0.01], { s: 0 })
+
+  // 4. Cintura Cilíndrica Estreita (o atuador central característico entre o tórax e a pelve).
+  for (const [y, rCint, cor] of [
+    [-0.14, 0.115, 1],
+    [-0.19, 0.105, 0],
+    [-0.24, 0.12, 1],
+    [-0.28, 0.145, 0],
+  ] as const) {
+    anelH([0, y, 0], rCint, rCint, 14, { c: cor, s: cor === 0 ? 1.15 : 0.85 })
+  }
+  for (let m = 0; m < 6; m++) {
+    const a = (m / 6) * Math.PI * 2
+    b.segmento(
+      [Math.cos(a) * 0.11, -0.12, Math.sin(a) * 0.11],
+      [Math.cos(a) * 0.13, -0.28, Math.sin(a) * 0.13],
+      3,
+      { c: 1, s: 0.8 },
+    )
+  }
+
+  // 5. Bloco Pélvico Compacto + Coxas Cilíndricas com Disco Circular no Quadril.
+  const fatiasPelve: [number, number, number, number][] = [
+    [-0.3, 0.21, 0.15, 0],
+    [-0.38, 0.22, 0.16, 1],
+    [-0.46, 0.14, 0.13, 1],
+    [-0.52, 0.08, 0.1, 0],
+  ]
+  const aneisPelve: number[][] = []
+  fatiasPelve.forEach(([y, rx, rz, cor]) => {
+    aneisPelve.push(anelH([0, y, 0], rx, rz, 14, { c: cor, s: 0.9 }))
+  })
+  for (let k = 0; k < aneisPelve.length - 1; k++) {
+    for (let m = 0; m < 14; m += 2) b.aresta(aneisPelve[k][m], aneisPelve[k + 1][m])
+  }
+
+  for (const lado of [-1, 1]) {
+    const xc = lado * 0.225
+    // Disco circular frontal da junta do quadril/coxa (muito visível na foto!)
+    discoPlano([xc, -0.47, -0.125], 0.082, 'z', 14, { s: 1.3 })
+    const aneisCoxa: number[][] = []
+    for (const [y, rCoxa, cor] of [
+      [-0.44, 0.115, 0],
+      [-0.56, 0.12, 1],
+      [-0.7, 0.11, 1],
+      [-0.83, 0.1, 0],
+      [-0.95, 0.095, 1],
+    ] as const) {
+      aneisCoxa.push(anelH([xc, y, 0], rCoxa, rCoxa, 12, { c: cor, s: cor === 0 ? 1.1 : 0.8 }))
+    }
+    for (let k = 0; k < aneisCoxa.length - 1; k++) {
+      for (let m = 0; m < 12; m += 2) b.aresta(aneisCoxa[k][m], aneisCoxa[k + 1][m])
+    }
+  }
+
+  // 6. Ombros com Disco Circular + Braços Cilíndricos Segmentados + Mãos Robóticas.
+  for (const lado of [-1, 1]) {
+    // Bloco do ombro + disco circular frontal/lateral
+    const xo = lado * 0.43
+    const yo = 0.32
+    discoPlano([xo, yo, -0.105], 0.075, 'z', 12, { s: 1.35 })
+    discoPlano([xo + lado * 0.085, yo, 0], 0.075, 'x', 12, { c: 1, s: 0.95 })
+
+    // Articulações do braço seguindo o ângulo natural da foto
+    const nosBraco: [V3, number, number][] = [
+      [[lado * 0.44, 0.34, 0.0], 0.092, 0], // topo do ombro
+      [[lado * 0.47, 0.2, 0.0], 0.082, 1], // anel de giro do bíceps Superior
+      [[lado * 0.49, 0.12, 0.0], 0.078, 0], // bíceps inferior (anel escuro/ouro)
+      [[lado * 0.52, -0.01, -0.01], 0.082, 1], // cotovelo mecânico
+      [[lado * 0.55, -0.14, -0.03], 0.074, 0], // antebraço superior (anel de giro)
+      [[lado * 0.58, -0.28, -0.05], 0.062, 1], // antebraço inferior cônico
+      [[lado * 0.6, -0.39, -0.07], 0.048, 0], // punho
+    ]
+    let ant: number[] | null = null
+    nosBraco.forEach(([pos, raio, cor], idx) => {
+      const anel = anelH(pos, raio, raio, 10, {
+        c: cor,
+        s: cor === 0 ? 1.15 : 0.85,
+      })
+      if (ant) {
+        for (let m = 0; m < 10; m += 2) b.aresta(ant[m], anel[m])
+      }
+      // Disco circular na junta do cotovelo
+      if (idx === 3) {
+        discoPlano([pos[0], pos[1], pos[2] - 0.085], 0.055, 'z', 10, { s: 1.25 })
+      }
+      ant = anel
+    })
+
+    // Mão robótica esbelta (palma + polegar interno + dedos levemente curvados)
+    const [px, py, pz] = nosBraco[nosBraco.length - 1][0]
+    // Polegar apontando levemente para dentro
+    b.linha(
+      [
+        [px - lado * 0.03, py, pz - 0.02],
+        [px - lado * 0.055, py - 0.07, pz - 0.04],
+        [px - lado * 0.045, py - 0.12, pz - 0.04],
+      ],
+      passo * 0.7,
+      { s: 1.05 },
+    )
+    // 4 dedos curvados para dentro como na foto
+    for (let dIdx = 0; dIdx < 4; dIdx++) {
+      const dz = -0.03 + dIdx * 0.02
+      b.linha(
+        [
+          [px + lado * 0.02, py, pz + dz],
+          [px + lado * 0.035, py - 0.09, pz + dz - 0.01],
+          [px + lado * 0.01, py - 0.16, pz + dz - 0.02],
+        ],
+        passo * 0.7,
+        { s: 1.0 },
+      )
+    }
+  }
+
+  // 7. Plataforma Base e 2 Anéis Orbitais de Governança de IA (ISO/IEC 42001).
+  const anelBase = anelH([0, -0.96, 0], 1.12, 1.12, Math.round(60 * d), {
+    c: 1,
+    s: 0.75,
+    f: -2,
+  })
+  anelH([0, -0.96, 0], 0.76, 0.76, Math.round(42 * d), { s: 0.95 })
+
+  const planosOrbita: [number, number, number][] = [
+    [rad(20), rad(-16), 1.34],
+    [rad(-24), rad(22), 1.42],
+  ]
+  planosOrbita.forEach(([ax, az, raio], q) => {
+    const N = Math.round(72 * d)
+    const ids: number[] = []
+    for (let k = 0; k < N; k++) {
+      const a = (k / N) * Math.PI * 2
+      const pt = girar([Math.cos(a) * raio, 0.04, Math.sin(a) * raio], ax, az)
+      ids.push(
+        b.ponto(pt, {
+          c: q === 0 ? 0 : 1,
+          s: 0.7,
+          f: -a * 2 + q * 3,
+        }),
+      )
+    }
+    b.cadeia(ids, true)
+  })
+
+  // Âncoras frontais bem distribuídas para os 8 rótulos
+  const ancTopo = b.ponto([0.14, 0.96, -0.22], { g: gCab, s: 0 })
+  const ancOmbroDir = b.ponto([0.52, 0.36, -0.2], { s: 0 })
+  const ancOmbroEsq = b.ponto([-0.52, 0.34, -0.2], { s: 0 })
+  const ancMaoDir = b.ponto([0.64, -0.24, -0.22], { s: 0 })
+  const ancMaoEsq = b.ponto([-0.64, -0.22, -0.22], { s: 0 })
+  const ancBaseEsq = b.ponto([-0.74, -0.84, -0.4], { s: 0 })
+  const ancBaseDir = b.ponto([0.74, -0.78, -0.4], { s: 0 })
+
+  b.rotulo(ancTopo, r[0], 0)
+  b.rotulo(ancOmbroDir, r[1], 1)
+  b.rotulo(centroPeito, r[2], 0)
+  b.rotulo(ancMaoDir, r[3], 0)
+  b.rotulo(ancBaseEsq, r[4], 1)
+  b.rotulo(ancBaseDir, r[5], 1)
+  b.rotulo(ancOmbroEsq, r[6], 0)
+  if (r[7]) b.rotulo(anelBase[Math.round(anelBase.length * 0.75)], r[7], 1)
+  b.limiarRotulo = 0.24
+
+  const corpo: Grupo = { rumo: -0.14, balanco: 0.22, amplitude: 0.28, inclinacao: 0.12 }
+  return b.fechar(
+    [
+      corpo,
+      {
+        ...corpo,
+        local: {
+          eixo: 'y',
+          vel: 0.65,
+          amplitude: 0.22,
+          centro: [0, cyCab + b.origem[1], 0],
+        },
+      },
+    ],
+    1.48,
+    1.14,
+    1.35,
+    0.58,
+  )
+}
+
+// ESG: Turbinas de energia eólica com grandes hélices girando na parte superior +
+// Usina de placas solares fotovoltaicas inclinadas na parte inferior, no mesmo Canva.
+function esg({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'Geração eólica · Energia limpa',
+    'Sistema solar fotovoltaico',
+    'Descarbonização · Escopos 1, 2 e 3',
+    'Dupla materialidade',
+    'GRI · SASB · IFRS S1/S2',
+  ]
+  const passo = 0.075 / d
+  b.origem = [0, -0.06, 0]
+  const ySolo = -0.82
+
+  // 1. Terreno em malha + Linhas Coletoras de Energia Limpa.
+  const gx = d < 1 ? 9 : 13
+  const gz = d < 1 ? 6 : 8
+  const terreno: number[][] = []
+  for (let a = 0; a < gx; a++) {
+    terreno.push([])
+    for (let c = 0; c < gz; c++) {
+      const x = -1.56 + (3.12 * a) / (gx - 1)
+      const z = -0.78 + (1.56 * c) / (gz - 1)
+      terreno[a].push(b.ponto([x, ySolo, z], { c: 1, s: 0.45 }))
+    }
+  }
+  for (let a = 0; a < gx; a++) b.cadeia(terreno[a])
+  for (let c = 0; c < gz; c++) b.cadeia(terreno.map((l) => l[c]))
+
+  // 2. Na parte de baixo (z frontal): Usina de Placas Solares Fotovoltaicas (2 fileiras x 4 trackers).
+  const fileirasZ = [-0.52, -0.14]
+  const modulosX = [-1.14, -0.38, 0.38, 1.14]
+  const largM = 0.31
+  const profM = 0.14
+  const dyInc = 0.095 // inclinação dos módulos fotovoltaicos voltados para o sol
+  let ancoraSolar = 0
+
+  fileirasZ.forEach((zc, fIdx) => {
+    // Barramento coletor sob a fileira de placas solares (com pulso de energia correndo)
+    b.segmento([-1.42, ySolo + 0.02, zc], [1.42, ySolo + 0.02, zc], Math.round(28 * d) + 6, {
+      s: 1.15,
+      f: -fIdx * 2,
+    })
+
+    modulosX.forEach((xc, mIdx) => {
+      const yFrente = ySolo + 0.08
+      const yTras = yFrente + dyInc * 2
+      const zFrente = zc - profM
+      const zTras = zc + profM
+
+      // Pés de fixação metálica da estrutura solar no solo
+      for (const sx of [-0.22, 0.22]) {
+        b.segmento([xc + sx, ySolo, zFrente + 0.02], [xc + sx, yFrente, zFrente + 0.02], 2, {
+          c: 1,
+          s: 0.65,
+        })
+        b.segmento([xc + sx, ySolo, zTras - 0.02], [xc + sx, yTras, zTras - 0.02], 3, {
+          c: 1,
+          s: 0.65,
+        })
+      }
+
+      // Moldura externa do módulo fotovoltaico em ouro
+      const c0 = b.ponto([xc - largM, yFrente, zFrente], { s: 1.2 })
+      const c1 = b.ponto([xc + largM, yFrente, zFrente], { s: 1.2 })
+      const c2 = b.ponto([xc + largM, yTras, zTras], { s: 1.2 })
+      const c3 = b.ponto([xc - largM, yTras, zTras], { s: 1.2 })
+      b.ligar(c0, c1, passo * 0.9, { s: 1.05 })
+      b.ligar(c1, c2, passo * 0.9, { s: 1.05 })
+      b.ligar(c2, c3, passo * 0.9, { s: 1.05 })
+      b.ligar(c3, c0, passo * 0.9, { s: 1.05 })
+
+      // Malha interna das células solares fotovoltaicas (busbars longitudinais e transversais)
+      for (const fracX of [-0.5, 0, 0.5]) {
+        const xm = xc + fracX * largM * 2
+        b.segmento([xm, yFrente, zFrente], [xm, yTras, zTras], 4, {
+          c: 1,
+          s: 0.65,
+          f: -xm * 2,
+        })
+      }
+      for (const fracZ of [0.33, 0.67]) {
+        const ym = yFrente + (yTras - yFrente) * fracZ
+        const zm = zFrente + (zTras - zFrente) * fracZ
+        b.segmento([xc - largM, ym, zm], [xc + largM, ym, zm], 6, {
+          c: fIdx === 0 && fracZ === 0.33 ? 0 : 1,
+          s: 0.7,
+          f: -xc * 2,
+        })
+      }
+
+      if (fIdx === 0 && mIdx === 1) ancoraSolar = c3
+    })
+  })
+
+  // 3. Na parte de cima (z posterior): 3 Turbinas Eólicas com Grandes Hélices de 3 Pás Girando.
+  const turbinas: [number, number, number, number, number][] = [
+    [-0.92, 0.34, 0.44, 0.52, 1], // turbina esquerda (x, z, yCubo, raioHelice, grupo)
+    [0.0, 0.42, 0.62, 0.62, 2], // turbina central principal (bem alta e hélice grande!)
+    [0.92, 0.34, 0.44, 0.52, 3], // turbina direita
+  ]
+
+  const grupos: Grupo[] = []
+  const base: Grupo = { rumo: 0.14, balanco: 0.18, amplitude: 0.24, inclinacao: 0.24 }
+  grupos.push(base)
+
+  let cuboCentral = 0
+  let cuboEsq = 0
+  let cuboDir = 0
+
+  turbinas.forEach(([xt, zt, yTopo, rPas, gIdx], idx) => {
+    // Base de fundação e Torre tubular cônica esbelta (anéis horizontais + geratrizes)
+    const nNiveis = 7
+    const rBase = idx === 1 ? 0.085 : 0.072
+    const rTopo = idx === 1 ? 0.042 : 0.036
+    let anelAnt: number[] | null = null
+    for (let k = 0; k <= nNiveis; k++) {
+      const t = k / nNiveis
+      const y = ySolo + (yTopo - ySolo) * t
+      const rT = rBase + (rTopo - rBase) * t
+      const nA = 8
+      const anel: number[] = []
+      for (let m = 0; m < nA; m++) {
+        const a = (m / nA) * Math.PI * 2
+        anel.push(
+          b.ponto([xt + Math.cos(a) * rT, y, zt + Math.sin(a) * rT], {
+            c: k === 0 || k === nNiveis ? 0 : 1,
+            s: k === 0 ? 1.0 : 0.75,
+            f: -t * 5,
+          }),
+        )
+      }
+      b.cadeia(anel, true)
+      if (anelAnt) {
+        for (let m = 0; m < nA; m += 2) b.aresta(anelAnt[m], anel[m])
+      }
+      anelAnt = anel
+    }
+
+    // Nacele aerodinâmica no topo da torre
+    caixa(
+      b,
+      [xt - rTopo * 1.3, yTopo - 0.04, zt - 0.1],
+      [xt + rTopo * 1.3, yTopo + 0.05, zt + 0.14],
+      passo,
+      { s: 1.05 },
+    )
+
+    // Rotor e 3 Grandes Pás Aerodinâmicas no grupo local `gIdx` (giram continuamente no eixo Z)
+    const zRotor = zt - 0.12
+    const cubo = b.ponto([xt, yTopo, zRotor - 0.02], { g: gIdx, s: 2.6, f: 0 })
+    if (idx === 1) cuboCentral = cubo
+    if (idx === 0) cuboEsq = cubo
+    if (idx === 2) cuboDir = cubo
+
+    // Anel do spinner (nariz do rotor)
+    const spinner: number[] = []
+    for (let m = 0; m < 10; m++) {
+      const a = (m / 10) * Math.PI * 2
+      spinner.push(
+        b.ponto([xt + Math.cos(a) * 0.048, yTopo + Math.sin(a) * 0.048, zRotor], {
+          g: gIdx,
+          s: 1.2,
+        }),
+      )
+    }
+    b.cadeia(spinner, true)
+
+    // 3 Pás bem grandes com perfil de aerofólio (bordo de ataque, bordo de fuga curvo e nervuras)
+    for (let pIdx = 0; pIdx < 3; pIdx++) {
+      const angBase = rad(pIdx * 120 + idx * 25)
+      const ca = Math.cos(angBase)
+      const sa = Math.sin(angBase)
+      const nx = -sa
+      const ny = ca
+
+      const nSeg = 9
+      const bordoAtaque: number[] = []
+      const bordoFuga: number[] = []
+      for (let k = 1; k <= nSeg; k++) {
+        const u = k / nSeg
+        const dist = 0.05 + (rPas - 0.05) * u
+        // Largura da pá (corda do aerofólio): máxima em u=0.28 e afila até a ponta
+        const corda = rPas * 0.13 * Math.sin(Math.pow(u, 0.65) * Math.PI)
+        const pA: V3 = [
+          xt + ca * dist + nx * corda * 0.35,
+          yTopo + sa * dist + ny * corda * 0.35,
+          zRotor - 0.005 * u,
+        ]
+        const pF: V3 = [
+          xt + ca * dist - nx * corda * 0.85,
+          yTopo + sa * dist - ny * corda * 0.85,
+          zRotor + 0.015 * (1 - u),
+        ]
+        const idA = b.ponto(pA, { g: gIdx, s: u > 0.85 ? 1.6 : 1.15, f: -u * 3 })
+        const idF = b.ponto(pF, { g: gIdx, c: 1, s: 0.85 })
+        bordoAtaque.push(idA)
+        bordoFuga.push(idF)
+        if (k % 2 === 1 || k === nSeg) b.aresta(idA, idF)
+      }
+      b.cadeia([cubo, ...bordoAtaque])
+      b.cadeia([cubo, ...bordoFuga])
+      b.aresta(bordoAtaque[bordoAtaque.length - 1], bordoFuga[bordoFuga.length - 1])
+    }
+
+    grupos.push({
+      ...base,
+      local: {
+        eixo: 'z',
+        vel: idx === 1 ? -0.95 : -0.82,
+        centro: [xt + b.origem[0], yTopo + b.origem[1], zRotor],
+      },
+    })
+  })
+
+  // Âncoras frontais bem distribuídas para os 5 rótulos ESG (sem sobreposição)
+  const ancEolica = b.ponto([0.04, 0.94, -0.15], { s: 0 })
+  const ancSolarEsq = b.ponto([-1.14, -0.56, -0.62], { s: 0 })
+  const ancDescarb = b.ponto([-0.92, 0.52, -0.15], { s: 0 })
+  const ancDuplaMat = b.ponto([0.98, 0.56, -0.15], { s: 0 })
+  const ancFrameworks = b.ponto([1.08, -0.68, -0.62], { s: 0 })
+
+  b.rotulo(ancEolica, r[0], 0)
+  b.rotulo(ancSolarEsq || ancoraSolar || cuboEsq, r[1], 0)
+  b.rotulo(ancDescarb, r[2], 1)
+  b.rotulo(ancDuplaMat, r[3], 0)
+  b.rotulo(ancFrameworks, r[4], 1)
+  b.limiarRotulo = 0.24
+
+  return b.fechar(grupos, 1.58, 1.08, 1.4, 0.52)
+}
+
+// ISO 37001 (Opção A): Balança Clássica da Integridade em equilíbrio dinâmico + Escudo Facetado de Compliance.
+function balanca({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'ISO 37001 · Antissuborno',
+    'Due diligence de terceiros',
+    'Canal de denúncia',
+    'Controles financeiros e comerciais',
+    'Cultura de integridade',
+  ]
+  const passo = 0.075 / d
+  b.origem = [0, -0.02, 0]
+  const yBase = -0.84
+
+  // 1. Pedestal Escalonado e Coluna Central da Integridade.
+  for (const [dy, raio, cor, s] of [
+    [0.0, 0.56, 0, 1.2],
+    [0.08, 0.44, 1, 0.85],
+    [0.16, 0.3, 0, 1.1],
+  ] as const) {
+    const nA = 24
+    const ids: number[] = []
+    for (let k = 0; k < nA; k++) {
+      const a = (k / nA) * Math.PI * 2
+      ids.push(b.ponto([Math.cos(a) * raio, yBase + dy, Math.sin(a) * raio], { c: cor, s }))
+    }
+    b.cadeia(ids, true)
+  }
+
+  // Coluna canelada até o fulcro superior (y = 0.62)
+  const yFulcro = 0.62
+  for (let k = 0; k <= 8; k++) {
+    const t = k / 8
+    const y = yBase + 0.16 + (yFulcro - (yBase + 0.16)) * t
+    const rCol = 0.095 - 0.025 * Math.sin(t * Math.PI)
+    const anel: number[] = []
+    for (let m = 0; m < 10; m++) {
+      const a = (m / 10) * Math.PI * 2
+      anel.push(
+        b.ponto([Math.cos(a) * rCol, y, Math.sin(a) * rCol], {
+          c: k % 2 === 0 ? 0 : 1,
+          s: 0.9,
+          f: -t * 5,
+        }),
+      )
+    }
+    b.cadeia(anel, true)
+  }
+  b.segmento([0, yBase + 0.16, 0], [0, yFulcro + 0.18, 0], 14, { s: 1.5 })
+  const topoFulcro = b.ponto([0, yFulcro + 0.2, 0], { s: 2.8, f: 0 })
+
+  // 2. Travessão da Balança e 2 Pratos Suspensos por Correntes (Grupo 1: oscilação de equilíbrio).
+  const gBal = 1
+  const L = 0.78
+  // Dupla viga do travessão em ouro
+  b.segmento([-L, yFulcro, -0.03], [L, yFulcro, -0.03], 18, { g: gBal, s: 1.55 })
+  b.segmento([-L, yFulcro, 0.03], [L, yFulcro, 0.03], 18, { g: gBal, s: 1.25 })
+  b.linha(
+    [
+      [-L, yFulcro, 0],
+      [0, yFulcro + 0.14, 0],
+      [L, yFulcro, 0],
+    ],
+    passo,
+    { g: gBal, c: 1, s: 0.95 },
+  )
+
+  for (const lado of [-1, 1]) {
+    const xp = lado * L
+    const yp = -0.12
+    const rPrato = 0.28
+    // 4 correntes de suspensão do travessão até a borda do prato
+    for (let cIdx = 0; cIdx < 4; cIdx++) {
+      const a = (cIdx / 4) * Math.PI * 2 + Math.PI / 4
+      b.segmento(
+        [xp, yFulcro, 0],
+        [xp + Math.cos(a) * rPrato, yp, Math.sin(a) * rPrato],
+        8,
+        { g: gBal, c: 1, s: 0.85, f: -cIdx },
+      )
+    }
+    // Prato em calota rasa (2 anéis concêntricos em ouro)
+    for (const [fR, dy, cor] of [
+      [1.0, 0, 0],
+      [0.65, -0.05, 1],
+      [0.25, -0.07, 0],
+    ] as const) {
+      const nP = 18
+      const ids: number[] = []
+      for (let k = 0; k < nP; k++) {
+        const a = (k / nP) * Math.PI * 2
+        ids.push(
+          b.ponto([xp + Math.cos(a) * rPrato * fR, yp + dy, Math.sin(a) * rPrato * fR], {
+            g: gBal,
+            c: cor,
+            s: cor === 0 ? 1.25 : 0.8,
+          }),
+        )
+      }
+      b.cadeia(ids, true)
+    }
+  }
+
+  // 3. Escudo Facetado / Anéis de Proteção de Compliance ao redor da Balança.
+  const perfilEscudo: [number, number][] = [
+    [0, 1.06],
+    [0.68, 0.92],
+    [1.18, 0.56],
+    [1.12, -0.18],
+    [0.68, -0.72],
+    [0, -1.04],
+    [-0.68, -0.72],
+    [-1.12, -0.18],
+    [-1.18, 0.56],
+    [-0.68, 0.92],
+  ]
+  for (const zEsc of [-0.36, 0.36]) {
+    b.linha(
+      perfilEscudo.map(([x, y]) => [x, y, zEsc] as V3),
+      passo * 1.1,
+      { c: zEsc < 0 ? 0 : 1, s: zEsc < 0 ? 1.15 : 0.65, f: zEsc < 0 ? 0 : NaN },
+      true,
+    )
+  }
+
+  const ancTopo = b.ponto([0.08, 0.92, -0.36], { s: 0 })
+  const ancEsq = b.ponto([-0.78, 0.58, -0.34], { s: 0 })
+  const ancDir = b.ponto([0.82, 0.24, -0.34], { s: 0 })
+  const ancPratoEsq = b.ponto([-0.78, -0.22, -0.32], { s: 0 })
+  const ancBase = b.ponto([0.52, -0.78, -0.34], { s: 0 })
+
+  b.rotulo(ancTopo || topoFulcro, r[0], 0)
+  b.rotulo(ancEsq, r[1], 1)
+  b.rotulo(ancDir, r[2], 0)
+  b.rotulo(ancPratoEsq, r[3], 0)
+  b.rotulo(ancBase, r[4], 1)
+  b.limiarRotulo = 0.24
+
+  const base: Grupo = { rumo: -0.14, balanco: 0.2, amplitude: 0.28, inclinacao: 0.16 }
+  return b.fechar(
+    [
+      base,
+      {
+        ...base,
+        local: {
+          eixo: 'z',
+          vel: 0.95,
+          amplitude: 0.11,
+          centro: [0, yFulcro + b.origem[1], 0],
+        },
+      },
+    ],
+    1.38,
+    1.12,
+    1.3,
+    0.52,
+  )
+}
+
+// ISO 37001 (Opção B): Escudo Corporativo 3D de Integridade com Check de Conformidade +
+// Anéis de Bloqueio Antissuborno e Feixe de Auditoria de Terceiros (Due Diligence).
+function escudo({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'ISO 37001 · Antissuborno',
+    'Due diligence de terceiros',
+    'Canal de denúncia',
+    'Controles financeiros e comerciais',
+    'Cultura de integridade',
+  ]
+  const passo = 0.07 / d
+  b.origem = [0, 0.0, 0]
+
+  // 1. Escudo Heráldico Facetado em 3D (duas camadas com nervuras de diamante).
+  const contorno: [number, number][] = [
+    [0, 0.96],
+    [0.48, 0.88],
+    [0.84, 0.68],
+    [0.82, 0.08],
+    [0.54, -0.52],
+    [0, -0.98],
+    [-0.54, -0.52],
+    [-0.82, 0.08],
+    [-0.84, 0.68],
+    [-0.48, 0.88],
+  ]
+  const nC = contorno.length
+  const frenteIds: number[] = []
+  const costasIds: number[] = []
+  const intIds: number[] = []
+
+  for (let k = 0; k < nC; k++) {
+    const [x, y] = contorno[k]
+    frenteIds.push(b.ponto([x, y, -0.16], { s: 1.5, f: -k * 0.6 }))
+    costasIds.push(b.ponto([x * 0.92, y * 0.92, 0.16], { c: 1, s: 0.8 }))
+    intIds.push(b.ponto([x * 0.72, y * 0.72, -0.22], { c: 1, s: 1.0 }))
+  }
+  for (let k = 0; k < nC; k++) {
+    const prox = (k + 1) % nC
+    b.ligar(frenteIds[k], frenteIds[prox], passo * 0.9, { s: 1.3 })
+    b.ligar(costasIds[k], costasIds[prox], passo * 1.1, { c: 1, s: 0.75 })
+    b.ligar(intIds[k], intIds[prox], passo, { c: 1, s: 0.9 })
+    b.aresta(frenteIds[k], costasIds[k])
+    b.aresta(frenteIds[k], intIds[k])
+  }
+
+  // Grande Check (✓) de Integridade e Conformidade em ouro no centro do escudo
+  const pCheck1: V3 = [-0.34, -0.02, -0.28]
+  const pCheck2: V3 = [-0.08, -0.3, -0.3]
+  const pCheck3: V3 = [0.42, 0.28, -0.28]
+  for (const dy of [-0.04, 0, 0.04]) {
+    b.linha(
+      [
+        [pCheck1[0], pCheck1[1] + dy, pCheck1[2]],
+        [pCheck2[0], pCheck2[1] + dy, pCheck2[2]],
+        [pCheck3[0], pCheck3[1] + dy, pCheck3[2]],
+      ],
+      passo * 0.65,
+      { s: dy === 0 ? 2.4 : 1.35, f: 0 },
+    )
+  }
+
+  // 2. Dois Anéis de Bloqueio / Filtro de Due Diligence girando ao redor (Grupo 1).
+  const gAnel = 1
+  for (const [raio, ax, az, cor] of [
+    [1.22, rad(18), rad(-14), 0],
+    [1.38, rad(-22), rad(20), 1],
+  ] as const) {
+    const N = Math.round(72 * d)
+    const ids: number[] = []
+    for (let k = 0; k < N; k++) {
+      const a = (k / N) * Math.PI * 2
+      ids.push(
+        b.ponto(girar([Math.cos(a) * raio, 0, Math.sin(a) * raio], ax, az), {
+          g: gAnel,
+          c: cor,
+          s: k % 9 === 0 ? 2.2 : 0.75,
+          f: -a * 2,
+        }),
+      )
+    }
+    b.cadeia(ids, true)
+  }
+
+  const ancTopo = b.ponto([0.1, 0.92, -0.28], { s: 0 })
+  const ancEsq = b.ponto([-0.86, 0.36, -0.28], { s: 0 })
+  const ancDir = b.ponto([0.86, 0.36, -0.28], { s: 0 })
+  const ancBaixoEsq = b.ponto([-0.68, -0.52, -0.28], { s: 0 })
+  const ancBaixoDir = b.ponto([0.62, -0.68, -0.28], { s: 0 })
+
+  b.rotulo(ancTopo, r[0], 0)
+  b.rotulo(ancEsq, r[1], 1)
+  b.rotulo(ancDir, r[2], 0)
+  b.rotulo(ancBaixoEsq, r[3], 0)
+  b.rotulo(ancBaixoDir, r[4], 1)
+  b.limiarRotulo = 0.24
+
+  const base: Grupo = { rumo: -0.14, balanco: 0.22, amplitude: 0.3, inclinacao: 0.14 }
+  return b.fechar(
+    [
+      base,
+      {
+        ...base,
+        local: {
+          eixo: 'y',
+          vel: 0.45,
+          centro: [0, 0, 0],
+        },
+      },
+    ],
+    1.45,
+    1.12,
+    1.35,
+    0.55,
+  )
+}
+
+// ESG (Sugestão AGI — Opção A): Tríade E · S · G sobre a Matriz de Dupla Materialidade
+// E (Esquerda): Turbinas eólicas girando + placas solares fotovoltaicas
+// S (Centro): Biosfera geodésica + rede conectada de pessoas (comunidade e cadeia de valor)
+// G (Direita): Estrutura de Pilares de Governança Corporativa + frontão de conformidade
+function esgTriade({ densidade: d, rotulos }: OpcoesForma): Forma {
+  const b = new Construtor()
+  const r = rotulos ?? [
+    'Ambiental (E) · Energia limpa',
+    'Social (S) · Pessoas e cadeia',
+    'Governança (G) · Ética e compliance',
+    'Matriz de dupla materialidade',
+    'GRI · SASB · IFRS S1/S2',
+  ]
+  const passo = 0.075 / d
+  b.origem = [0, -0.04, 0]
+  const ySolo = -0.78
+
+  // 1. Plataforma Base: Matriz 3D de Dupla Materialidade com Eixos Cruzados e Setas em Ouro.
+  const gx = d < 1 ? 9 : 13
+  const gz = d < 1 ? 5 : 7
+  const grade: number[][] = []
+  for (let a = 0; a < gx; a++) {
+    grade.push([])
+    for (let c = 0; c < gz; c++) {
+      const x = -1.52 + (3.04 * a) / (gx - 1)
+      const z = -0.62 + (1.24 * c) / (gz - 1)
+      grade[a].push(b.ponto([x, ySolo, z], { c: 1, s: 0.45 }))
+    }
+  }
+  for (let a = 0; a < gx; a++) b.cadeia(grade[a])
+  for (let c = 0; c < gz; c++) b.cadeia(grade.map((l) => l[c]))
+  // Moldura e eixos principais da Dupla Materialidade (Impacto x Financeiro) em ouro
+  caixa(b, [-1.54, ySolo - 0.05, -0.64], [1.54, ySolo, 0.64], passo * 1.3, { s: 0.9 })
+  b.segmento([-1.48, ySolo + 0.01, -0.62], [1.48, ySolo + 0.01, 0.62], 22, { s: 1.3, f: -2 })
+  b.segmento([-1.48, ySolo + 0.01, 0.62], [1.48, ySolo + 0.01, -0.62], 22, { s: 1.3, f: 2 })
+
+  const grupos: Grupo[] = []
+  const base: Grupo = { rumo: 0.12, balanco: 0.18, amplitude: 0.24, inclinacao: 0.22 }
+  grupos.push(base)
+
+  // 2. PILAR E (Esquerda, x = -1.0): Aerogerador de Grande Porte + Placas Solares na Base.
+  const xe = -1.02
+  const ze = 0.08
+  const yTopoE = 0.46
+  const rPasE = 0.48
+  const gEolica = 1
+  // Torre cônica do aerogerador
+  for (let k = 0; k <= 6; k++) {
+    const t = k / 6
+    const y = ySolo + (yTopoE - ySolo) * t
+    const rT = 0.075 - 0.038 * t
+    const anel: number[] = []
+    for (let m = 0; m < 8; m++) {
+      const a = (m / 8) * Math.PI * 2
+      anel.push(
+        b.ponto([xe + Math.cos(a) * rT, y, ze + Math.sin(a) * rT], {
+          c: k === 0 || k === 6 ? 0 : 1,
+          s: 0.8,
+        }),
+      )
+    }
+    b.cadeia(anel, true)
+  }
+  b.segmento([xe, ySolo, ze], [xe, yTopoE, ze], 10, { s: 1.1, f: -2 })
+  const zRotorE = ze - 0.09
+  const cuboE = b.ponto([xe, yTopoE, zRotorE], { g: gEolica, s: 2.5, f: 0 })
+  for (let pIdx = 0; pIdx < 3; pIdx++) {
+    const ang = rad(pIdx * 120 + 15)
+    const ca = Math.cos(ang)
+    const sa = Math.sin(ang)
+    const nx = -sa
+    const ny = ca
+    const atk: number[] = []
+    const fug: number[] = []
+    for (let k = 1; k <= 7; k++) {
+      const u = k / 7
+      const dist = 0.04 + (rPasE - 0.04) * u
+      const corda = rPasE * 0.13 * Math.sin(Math.pow(u, 0.65) * Math.PI)
+      const idA = b.ponto([xe + ca * dist + nx * corda * 0.35, yTopoE + sa * dist + ny * corda * 0.35, zRotorE], {
+        g: gEolica,
+        s: 1.2,
+      })
+      const idF = b.ponto([xe + ca * dist - nx * corda * 0.85, yTopoE + sa * dist - ny * corda * 0.85, zRotorE + 0.01], {
+        g: gEolica,
+        c: 1,
+        s: 0.85,
+      })
+      atk.push(idA)
+      fug.push(idF)
+      if (k % 2 === 1 || k === 7) b.aresta(idA, idF)
+    }
+    b.cadeia([cuboE, ...atk])
+    b.cadeia([cuboE, ...fug])
+  }
+  grupos.push({
+    ...base,
+    local: { eixo: 'z', vel: -0.95, centro: [xe + b.origem[0], yTopoE + b.origem[1], zRotorE] },
+  })
+
+  // 2 Módulos Solares Fotovoltaicos inclinados aos pés do aerogerador (x = -1.24 e -0.78)
+  for (const xs of [-1.24, -0.78]) {
+    const yF = ySolo + 0.06
+    const yT = ySolo + 0.22
+    const zF = -0.44
+    const zT = -0.14
+    const c0 = b.ponto([xs - 0.19, yF, zF], { s: 1.15 })
+    const c1 = b.ponto([xs + 0.19, yF, zF], { s: 1.15 })
+    const c2 = b.ponto([xs + 0.19, yT, zT], { s: 1.15 })
+    const c3 = b.ponto([xs - 0.19, yT, zT], { s: 1.15 })
+    b.cadeia([c0, c1, c2, c3], true)
+    b.segmento([xs, yF, zF], [xs, yT, zT], 4, { c: 1, s: 0.7 })
+    b.segmento([xs - 0.19, (yF + yT) / 2, (zF + zT) / 2], [xs + 0.19, (yF + yT) / 2, (zF + zT) / 2], 4, {
+      s: 0.85,
+      f: -xs,
+    })
+  }
+
+  // 3. PILAR S (Centro, x = 0.0): Biosfera Geodésica + Rede de Pessoas Conectadas (Grupo 2).
+  const gSocial = 2
+  const yBio = 0.22
+  const rBio = 0.36
+  const nosBio = esfera(Math.max(36, Math.round(58 * d)), rBio).map((p) =>
+    b.ponto([p[0], yBio + p[1], p[2]], { g: gSocial, c: 1, s: 0.85 }),
+  )
+  b.vizinhos(nosBio, 2)
+  // Anel equatorial dourado na biosfera
+  const eqBio: number[] = []
+  for (let k = 0; k < 24; k++) {
+    const a = (k / 24) * Math.PI * 2
+    eqBio.push(
+      b.ponto([Math.cos(a) * (rBio + 0.02), yBio, Math.sin(a) * (rBio + 0.02)], {
+        g: gSocial,
+        s: 1.25,
+        f: -a,
+      }),
+    )
+  }
+  b.cadeia(eqBio, true)
+
+  // 3 Silhuetas Humanas Estilizadas conectadas em roda sob a biosfera (Pilar Social)
+  const rRodaS = 0.32
+  const anelSocial: number[] = []
+  for (let k = 0; k < 28; k++) {
+    const a = (k / 28) * Math.PI * 2
+    anelSocial.push(
+      b.ponto([Math.cos(a) * rRodaS, ySolo + 0.28, Math.sin(a) * rRodaS], {
+        s: 1.2,
+        f: -a * 2,
+      }),
+    )
+  }
+  b.cadeia(anelSocial, true)
+
+  for (let pIdx = 0; pIdx < 3; pIdx++) {
+    const a = rad(pIdx * 120 - 90)
+    const px = Math.cos(a) * rRodaS
+    const pz = Math.sin(a) * rRodaS
+    const tx = -Math.sin(a)
+    const tz = Math.cos(a)
+    // Cabeça da figura humana
+    const cab = esfera(8, 0.048).map((pt) =>
+      b.ponto([px + pt[0], ySolo + 0.44 + pt[1], pz + pt[2]], { s: 1.4 }),
+    )
+    b.vizinhos(cab, 2)
+    // Tronco e pernas até o piso
+    b.segmento([px, ySolo + 0.16, pz], [px, ySolo + 0.38, pz], 4, { s: 1.25 })
+    b.segmento([px - tx * 0.05, ySolo, pz - tz * 0.05], [px, ySolo + 0.16, pz], 3, { c: 1, s: 0.9 })
+    b.segmento([px + tx * 0.05, ySolo, pz + tz * 0.05], [px, ySolo + 0.16, pz], 3, { c: 1, s: 0.9 })
+    // Braços abertos conectando na roda social
+    b.segmento(
+      [px - tx * 0.14, ySolo + 0.28, pz - tz * 0.14],
+      [px + tx * 0.14, ySolo + 0.28, pz + tz * 0.14],
+      5,
+      { s: 1.15 },
+    )
+  }
+  grupos.push({
+    ...base,
+    local: { eixo: 'y', vel: 0.45, centro: [0, yBio + b.origem[1], 0] },
+  })
+
+  // 4. PILAR G (Direita, x = 1.0): Estrutura de Pilares de Governança Corporativa + Frontão.
+  const xg = 1.02
+  const zg = 0.0
+  const yBaseG = ySolo + 0.08
+  const yTopoG = 0.28
+  // Base escalonada (pódio de governança)
+  caixa(b, [xg - 0.36, ySolo, zg - 0.26], [xg + 0.36, yBaseG, zg + 0.26], passo, { s: 1.15 })
+  // 4 Colunas Clássicas de Governança (com pulso subindo)
+  for (const cxCol of [xg - 0.27, xg - 0.09, xg + 0.09, xg + 0.27]) {
+    for (const czCol of [zg - 0.16, zg + 0.16]) {
+      b.segmento([cxCol, yBaseG, czCol], [cxCol, yTopoG, czCol], 8, {
+        c: czCol < 0 ? 0 : 1,
+        s: czCol < 0 ? 1.25 : 0.75,
+        f: -1.5,
+      })
+    }
+  }
+  // Arquitrave e Frontão Triangular de Conformidade (teto de Governança)
+  caixa(b, [xg - 0.36, yTopoG, zg - 0.24], [xg + 0.36, yTopoG + 0.07, zg + 0.24], passo, {
+    s: 1.2,
+  })
+  for (const zf of [zg - 0.24, zg + 0.24]) {
+    b.linha(
+      [
+        [xg - 0.38, yTopoG + 0.07, zf],
+        [xg, yTopoG + 0.34, zf],
+        [xg + 0.38, yTopoG + 0.07, zf],
+      ],
+      passo * 0.9,
+      { c: zf < 0 ? 0 : 1, s: zf < 0 ? 1.35 : 0.8 },
+      true,
+    )
+  }
+  b.segmento([xg, yTopoG + 0.34, zg - 0.24], [xg, yTopoG + 0.34, zg + 0.24], 5, { s: 1.25 })
+
+  // 5. Arcos Superiores de Integração E ↔ S ↔ G.
+  const nArco = 28
+  const arcoESG: number[] = []
+  for (let k = 0; k <= nArco; k++) {
+    const t = k / nArco
+    const x = -1.02 + 2.04 * t
+    const y = 0.52 + 0.34 * Math.sin(t * Math.PI)
+    arcoESG.push(b.ponto([x, y, -0.05], { s: 1.25, f: -t * 6 }))
+  }
+  b.cadeia(arcoESG)
+
+  const ancE = b.ponto([-0.98, 0.54, -0.2], { s: 0 })
+  const ancS = b.ponto([0.0, 0.22, -0.38], { s: 0 })
+  const ancG = b.ponto([0.98, 0.76, -0.24], { s: 0 })
+  const ancMat = b.ponto([-1.06, -0.46, -0.52], { s: 0 })
+  const ancGri = b.ponto([0.92, ySolo - 0.04, -0.62], { s: 0 })
+
+  b.rotulo(ancE, r[0], 0)
+  b.rotulo(ancS, r[1], 1)
+  b.rotulo(ancG, r[2], 0)
+  b.rotulo(ancMat, r[3], 0)
+  b.rotulo(ancGri, r[4], 1)
+  b.limiarRotulo = 0.24
+
+  return b.fechar(grupos, 1.58, 1.04, 1.35, 0.52)
+}
+
 const limitar01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
 export const FORMAS: Record<string, (o: OpcoesForma) => Forma | Promise<Forma>> = {
@@ -2218,6 +3639,12 @@ export const FORMAS: Record<string, (o: OpcoesForma) => Forma | Promise<Forma>> 
   chassi,
   viaduto,
   caminhao,
+  laboratorio,
+  humanoide,
+  esg,
+  esgTriade,
+  balanca,
+  escudo,
   radar,
   engrenagens,
   auditoria,

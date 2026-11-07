@@ -55,7 +55,7 @@ const MALHAS: Record<string, MalhaHero> = {
   'iso-45001': { forma: 'pulso' },
   sgi: { forma: 'logo' },
   'iso-42001': {
-    forma: 'rede',
+    forma: 'humanoide',
     rotulos: [
       'Sistema de gestão de IA',
       'Inventário de IA',
@@ -70,10 +70,39 @@ const MALHAS: Record<string, MalhaHero> = {
   'pbqp-h': { forma: 'predio' },
   'iatf-16949': { forma: 'chassi', larga: true },
   'iso-17020': { forma: 'viaduto', larga: true },
-  'iso-17025': { forma: 'numero', texto: '17025' },
+  'iso-17025': {
+    forma: 'laboratorio',
+    larga: true,
+    rotulos: [
+      'Rastreabilidade metrológica',
+      'Incerteza de medição',
+      'Ensaio e calibração',
+      'Validação de métodos',
+      'RBC · Cgcre · Inmetro',
+    ],
+  },
   sassmaq: { forma: 'caminhao', larga: true },
-  esg: { forma: 'numero', texto: 'ESG' },
-  'iso-37001': { forma: 'numero', texto: '37001' },
+  esg: {
+    forma: 'esgTriade',
+    larga: true,
+    rotulos: [
+      'Ambiental (E) · Energia limpa',
+      'Social (S) · Pessoas e cadeia',
+      'Governança (G) · Ética e compliance',
+      'Matriz de dupla materialidade',
+      'GRI · SASB · IFRS S1/S2',
+    ],
+  },
+  'iso-37001': {
+    forma: 'balanca',
+    rotulos: [
+      'ISO 37001 · Antissuborno',
+      'Due diligence de terceiros',
+      'Canal de denúncia',
+      'Controles financeiros e comerciais',
+      'Cultura de integridade',
+    ],
+  },
 }
 const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
 ---
