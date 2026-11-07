@@ -1,0 +1,31 @@
+---
+// Perguntas frequentes de cada serviço, em HTML puro (details/summary): as respostas ficam no HTML
+// da página, legíveis pelo Google e pelos assistentes de IA, e abrem sem JavaScript.
+interface Props {
+  itens: { q: string; a: string }[]
+}
+const { itens } = Astro.props
+---
+
+<div class="w-full divide-y divide-border/50 border-y border-border/50">
+  {
+    itens.map((item, i) => (
+      <details class="group" open={i === 0}>
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-bold uppercase tracking-wider text-foreground transition-colors hover:text-primary [&::-webkit-details-marker]:hidden">
+          <span>{item.q}</span>
+          <svg
+            class="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <p class="pb-5 text-base leading-relaxed text-muted-foreground">{item.a}</p>
+      </details>
+    ))
+  }
+</div>

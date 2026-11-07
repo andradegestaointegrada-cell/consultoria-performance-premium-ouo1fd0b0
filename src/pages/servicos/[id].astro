@@ -5,7 +5,7 @@ import { ChevronLeft } from 'lucide-react'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
-import ServiceFaq from '@/components/ServiceFaq'
+import ServiceFaq from '@/components/ServiceFaq.astro'
 import Malha from '@/components/tech/Malha.astro'
 import type { NomeForma } from '@/scripts/malha/nomes'
 import { S_DATA, STEPS, type ServiceData } from '@/data/services'
@@ -33,6 +33,15 @@ const servico = {
   provider: { '@id': ORG_ID },
   areaServed: { '@type': 'Country', name: 'Brasil' },
   availableLanguage: 'pt-BR',
+}
+const faq = {
+  '@type': 'FAQPage',
+  '@id': `${url}#perguntas`,
+  mainEntity: svc.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 }
 const hiWidths = [640, 960, 1280, 1536].filter((w) => w <= svc.hi.width)
 
@@ -78,7 +87,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
     { name: 'Serviços', path: '/servicos' },
     { name: title, path: `/servicos/${id}` },
   ]}
-  jsonLd={[servico]}
+  jsonLd={[servico, faq]}
   whatsapp={`Olá! Vim pela página de ${title} do site da AGI e gostaria de conversar sobre a consultoria em ${title}.`}
 >
   <div class="pt-20">
@@ -210,7 +219,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
           >
             Perguntas Frequentes
           </h2>
-          <ServiceFaq client:visible />
+          <ServiceFaq itens={svc.faq} />
         </Reveal>
 
         <Reveal delay={300}>
