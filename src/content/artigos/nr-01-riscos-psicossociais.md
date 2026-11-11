@@ -1,6 +1,7 @@
 ---
 title: "NR-01 e Riscos Psicossociais: A Atualização que Mudou a SST no Brasil"
-summary: "Desde 2025, toda empresa no Brasil é obrigada a identificar e gerenciar riscos psicossociais no trabalho. Entenda o que a NR-01 exige, o que são esses riscos e como adequar sua organização."
+seo_title: "NR-01 e riscos psicossociais: o que a norma exige"
+summary: "Desde 2025 a NR-01 exige identificar e gerenciar riscos psicossociais no trabalho. O que a norma pede, o que são esses riscos e como se adequar."
 category: "Saúde e Segurança"
 image: "../../assets/blog/nr-01-riscos-psicossociais-capa.webp"
 imageAlt: "NR-01 e Riscos Psicossociais: A Atualização que Mudou a SST no Brasil"

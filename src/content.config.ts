@@ -9,6 +9,8 @@ const artigos = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      /** Título curto para o Google (até ~59 caracteres) quando o título do artigo é longo. */
+      seo_title: z.string().optional(),
       summary: z.string(),
       category: z.string(),
       image: image(),

@@ -34,6 +34,8 @@ export interface ServiceData {
   methodologyDetails: string
   trainingPillars: string[]
   deliverablesText: string
+  /** Meta description própria (até 155 caracteres); sem ela, a página usa d + w. */
+  meta?: string
   /** Perguntas frequentes próprias do serviço (viram FAQPage no JSON-LD). */
   faq: { q: string; a: string }[]
 }
@@ -41,10 +43,11 @@ export interface ServiceData {
 export const S_DATA: Record<string, ServiceData> = {
   'iso-9001': {
     t: 'ISO 9001',
-    d: 'A Andrade Gestão Integrada implementa Sistemas de Gestão da Qualidade com foco na excelência.',
+    meta: 'Consultoria ISO 9001:2026: diagnóstico, implantação do sistema da qualidade, auditoria interna, transição da versão 2015 e preparação para a certificação.',
+    d: 'Implantação e manutenção do sistema de gestão da qualidade, já na ISO 9001:2026.',
     hi: iso9001Hero,
     ci: iso9001Conteudo,
-    w: 'Processos robustos que garantem a padronização e a alta performance contínua.',
+    w: 'Processos padronizados, indicadores que a direção usa e um sistema que resiste à auditoria.',
     methodologyDetails:
       'A AGI parte do diagnóstico contra a ISO 9001:2026, com análise de lacunas e plano de ação. Em seguida, estruturamos processos, indicadores e controles com a equipe do cliente, aproveitando os documentos e registros que a operação já usa. A auditoria interna segue a ISO 19011:2026, com tratamento das constatações. A certificação fica com o organismo acreditado que você escolher.',
     trainingPillars: [
@@ -80,10 +83,11 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-14001': {
     t: 'ISO 14001',
-    d: 'Transformamos a gestão ambiental em um diferencial competitivo sustentável.',
+    meta: 'Consultoria ISO 14001:2026: aspectos e impactos, requisitos legais, controle operacional, transição da versão 2015 e preparação para a certificação.',
+    d: 'Sistema de gestão ambiental que controla aspectos, impactos e requisitos legais na operação.',
     hi: iso14001Hero,
     ci: iso14001Conteudo,
-    w: 'Estratégias sustentáveis integradas ao negócio, mitigando impactos ambientais.',
+    w: 'Licenças, resíduos e emergências sob controle, com evidência pronta para auditoria.',
     methodologyDetails:
       'Na ISO 14001:2026, o trabalho começa pelo diagnóstico: aspectos e impactos ambientais, requisitos legais e lacunas do sistema atual. Em seguida, a AGI estrutura controles operacionais, preparação para emergências e metas ambientais com a equipe do cliente. A auditoria interna segue a ISO 19011:2026, e as constatações são tratadas antes da avaliação do organismo certificador.',
     trainingPillars: [
@@ -119,10 +123,11 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-45001': {
     t: 'ISO 45001',
-    d: 'Estruturamos sistemas robustos de Saúde e Segurança Ocupacional para eliminar riscos.',
+    meta: 'Consultoria ISO 45001: perigos e riscos, GRO da NR-01 integrado ao sistema, participação dos trabalhadores, auditoria interna e certificação.',
+    d: 'Sistema de saúde e segurança ocupacional que identifica perigos e controla riscos na rotina.',
     hi: iso45001Hero,
     ci: iso45001Conteudo,
-    w: 'Criação de um ambiente seguro, reduzindo acidentes e fortalecendo a cultura de segurança.',
+    w: 'Menos acidentes, NR-01 e GRO integrados e participação real dos trabalhadores.',
     methodologyDetails:
       'A AGI diagnostica o sistema contra a ISO 45001:2018 com a Emenda 1:2024, que leva as mudanças climáticas para a análise de contexto e de partes interessadas. Estruturamos identificação de perigos, avaliação de riscos, controles operacionais, participação dos trabalhadores e resposta a emergências com a equipe do cliente. A auditoria interna segue a ISO 19011:2026, com plano de ação até a certificação.',
     trainingPillars: [
@@ -158,10 +163,11 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   sgi: {
     t: 'SGI (Sistema de Gestão Integrada)',
-    d: 'Sinergia e máxima eficiência através da integração de múltiplas normas em um único sistema.',
+    meta: 'Sistema de gestão integrada com ISO 9001, 14001 e 45001: uma só estrutura de processos, riscos, auditorias e análise crítica, sem documentos em triplicata.',
+    d: 'Qualidade, meio ambiente e segurança num único sistema de gestão.',
     hi: sgiHero,
     ci: sgiConteudo,
-    w: 'Eliminação de redundâncias operacionais e visão unificada dos resultados.',
+    w: 'Uma auditoria, uma análise crítica e um conjunto de documentos, em vez de três.',
     methodologyDetails:
       'A AGI integra a 9001, a 14001 e a 45001 pela Estrutura Harmonizada da ISO, que dá aos sistemas de gestão capítulos comuns: contexto, liderança, planejamento, apoio, operação, avaliação e melhoria. O diagnóstico avalia os três referenciais de uma vez e separa o que já funciona do que precisa ser criado. Procedimentos, registros e auditorias internas são planejados em conjunto, sem controle duplicado.',
     trainingPillars: [
@@ -197,7 +203,8 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'pbqp-h': {
     t: 'PBQP-H',
-    d: 'Programa de Qualidade do Habitat focado na melhoria e sustentabilidade da construção civil.',
+    meta: 'Consultoria PBQP-H (SiAC) para construtoras: implantação, controle de serviços e materiais e preparação para a auditoria exigida pela Caixa.',
+    d: 'Programa Brasileiro da Qualidade e Produtividade do Habitat (SiAC) para construtoras.',
     hi: pbqphHero,
     ci: pbqphConteudo,
     w: 'Aumento de produtividade, compliance setorial e redução de desperdícios em obras.',
@@ -236,6 +243,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iatf-16949': {
     t: 'IATF 16949',
+    meta: 'Consultoria IATF 16949 para fornecedores automotivos: core tools, requisitos específicos de clientes, auditoria de processo e certificação.',
     d: 'Gestão da qualidade rigorosa para a cadeia de suprimentos da indústria automotiva.',
     hi: iatfHero,
     ci: automotivo,
@@ -275,6 +283,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-17020': {
     t: 'ISO/IEC 17020',
+    meta: 'Consultoria ISO/IEC 17020 para organismos de inspeção: imparcialidade, competência, métodos de inspeção e preparação para a acreditação na Cgcre.',
     d: 'Critérios rigorosos para garantir a competência e imparcialidade de organismos de inspeção.',
     hi: iso17020Hero,
     ci: iso17020Conteudo,
@@ -314,6 +323,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-17025': {
     t: 'ISO/IEC 17025',
+    meta: 'Consultoria ISO/IEC 17025 para laboratórios de ensaio e calibração: validação de métodos, incerteza, rastreabilidade e acreditação na Cgcre.',
     d: 'Competência técnica e resultados consistentes para laboratórios de ensaio e calibração.',
     hi: iso17025Hero,
     ci: laboratorio,
@@ -353,6 +363,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   sassmaq: {
     t: 'SASSMAQ',
+    meta: 'Consultoria SASSMAQ para transportadoras de produtos químicos: requisitos da Abiquim, gestão de SSMAQ na operação e preparação para a avaliação.',
     d: 'Avaliação de segurança, saúde, meio ambiente e qualidade no transporte de químicos.',
     hi: sassmaqHero,
     ci: sassmaqConteudo,
@@ -392,10 +403,11 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   esg: {
     t: 'Consultoria ESG',
-    d: 'Guiamos sua empresa na jornada ESG, alinhando propósito e governança sólida.',
+    meta: 'Consultoria ESG: análise de dupla materialidade, indicadores ambientais, sociais e de governança e estrutura de relato para bancos, investidores e clientes.',
+    d: 'Estruturamos a agenda ESG da empresa, da materialidade aos indicadores e ao relato.',
     hi: esgHero,
     ci: esgFrente,
-    w: 'Apoiamos na estruturação completa de práticas alinhadas às exigências dos investidores.',
+    w: 'Materialidade, indicadores e relato que respondem a bancos, investidores e grandes clientes.',
     methodologyDetails:
       'O ponto de partida é a avaliação de maturidade nos três pilares: ambiental, social e de governança. Em seguida, construímos com a liderança a matriz de dupla materialidade, cruzando impacto e relevância financeira para definir prioridades. Sobre elas, estruturamos plano de ação, indicadores e rotina de coleta de dados para o relatório, com GRI, SASB ou alinhamento às IFRS S1 e S2 quando aplicável.',
     trainingPillars: [
@@ -431,6 +443,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-42001': {
     t: 'ISO/IEC 42001',
+    meta: 'Consultoria ISO/IEC 42001: inventário dos sistemas de IA, avaliação de riscos e de impacto, controles do Anexo A e preparação para a certificação.',
     d: 'Sistema de gestão de inteligência artificial com responsáveis, riscos e evidências definidos.',
     hi: iso42001Hero,
     ci: iso42001Conteudo,
@@ -470,6 +483,7 @@ export const S_DATA: Record<string, ServiceData> = {
   },
   'iso-37001': {
     t: 'ISO 37001',
+    meta: 'Consultoria ISO 37001: avaliação de risco de suborno, due diligence de terceiros, controles financeiros, canal de denúncia e certificação.',
     d: 'Sistema de gestão antissuborno que transforma o programa de integridade em controles auditáveis.',
     hi: iso37001Hero,
     ci: iso37001Conteudo,

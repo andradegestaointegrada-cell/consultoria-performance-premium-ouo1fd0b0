@@ -1,6 +1,7 @@
 ---
 title: "PBQP-H e GERIC: O Que Toda Construtora Precisa Saber para Acessar o Crédito da Caixa"
-summary: "Sem o PBQP-H, é impossível acessar o crédito habitacional da Caixa. Entenda o que é o programa, o que a análise GERIC avalia e o caminho completo para seu empreendimento ser aprovado."
+seo_title: "PBQP-H e GERIC: o caminho até o crédito da Caixa"
+summary: "Sem o PBQP-H a construtora não acessa o crédito habitacional da Caixa. O que é o programa, o que a análise GERIC avalia e o caminho até a aprovação."
 category: "Qualidade"
 image: "../../assets/blog/pbqp-h-geric-credito-caixa-capa.webp"
 imageAlt: "PBQP-H e GERIC: O Que Toda Construtora Precisa Saber para Acessar o Crédito da Caixa"

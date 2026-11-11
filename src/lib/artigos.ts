@@ -6,7 +6,9 @@ export type Artigo = CollectionEntry<'artigos'>
 /** Publicados, do mais recente para o mais antigo. */
 export async function listarArtigos(): Promise<Artigo[]> {
   const todos = await getCollection('artigos', ({ data }) => !data.draft)
-  return todos.sort((a, b) => b.data.published_date.getTime() - a.data.published_date.getTime())
+  // Artigo revisto sobe na lista: vale a data da última atualização.
+  const data = (a: (typeof todos)[number]) => (a.data.updated_date ?? a.data.published_date).getTime()
+  return todos.sort((a, b) => data(b) - data(a))
 }
 
 /** Data por extenso no fuso de São Paulo (ex.: 07 de outubro de 2026). */

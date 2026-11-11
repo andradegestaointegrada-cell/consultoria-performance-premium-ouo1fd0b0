@@ -1,6 +1,7 @@
 ---
 title: "ISO/IEC 42001: Como Estruturar a Governança de Inteligência Artificial na Sua Empresa"
-summary: "O que a ISO/IEC 42001 exige, como funcionam os controles do Anexo A e a avaliação de impacto, e como integrar a governança de IA ao sistema de gestão que a empresa já tem."
+seo_title: "ISO/IEC 42001: governança de IA na empresa"
+summary: "O que a ISO/IEC 42001 exige, como funcionam o Anexo A e a avaliação de impacto e como integrar a governança de IA ao sistema de gestão."
 category: "Inteligência Artificial"
 image: "../../assets/blog/iso-42001-capa.webp"
 imageAlt: "ISO/IEC 42001: Como Estruturar a Governança de Inteligência Artificial na Sua Empresa"

@@ -1,6 +1,7 @@
 ---
 title: "ISO 37001:2025: Como Estruturar um Sistema Antissuborno que Funcione na Prática"
-summary: "O que mudou na ISO 37001:2025, como a norma se conecta à Lei Anticorrupção e à Lei de Licitações e quais controles fazem um programa antissuborno resistir a uma investigação."
+seo_title: "ISO 37001:2025: sistema antissuborno na prática"
+summary: "O que mudou na ISO 37001:2025, como ela se liga à Lei Anticorrupção e à Lei de Licitações e quais controles resistem a uma investigação."
 category: "Compliance"
 image: "../../assets/blog/iso-37001-capa.webp"
 imageAlt: "ISO 37001:2025: Como Estruturar um Sistema Antissuborno que Funcione na Prática"

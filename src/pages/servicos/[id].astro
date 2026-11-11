@@ -1,4 +1,5 @@
 ---
+import { tituloPagina } from '@/lib/titulo'
 // Uma página por serviço, gerada no build a partir de src/data/services.ts.
 import { Image } from 'astro:assets'
 import { ChevronLeft } from 'lucide-react'
@@ -108,8 +109,8 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
 ---
 
 <BaseLayout
-  title={`Consultoria ${title} | Andrade Gestão Integrada`}
-  description={`${svc.d} ${svc.w}`}
+  title={tituloPagina(`Consultoria ${title}`)}
+  description={svc.meta ?? `${svc.d} ${svc.w}`}
   image={svc.hi}
   imageAlt={`Consultoria ${title}`}
   breadcrumbs={[

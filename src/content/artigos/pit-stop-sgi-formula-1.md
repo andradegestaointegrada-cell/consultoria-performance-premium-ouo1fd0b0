@@ -1,6 +1,7 @@
 ---
 title: "Pit Stop SGI: A Lógica da Fórmula 1 que Transforma Sistemas de Gestão em Máquinas de Alta Performance"
-summary: "Em 2,2 segundos, uma equipe de F1 executa com precisão cirúrgica o que levou meses de treino para dominar. Descubra como essa lógica transforma sistemas de gestão em vantagem competitiva real."
+seo_title: "Pit Stop SGI: a lógica da Fórmula 1 na gestão"
+summary: "Em 2,2 segundos, uma equipe de F1 executa o que levou meses de treino. Como essa lógica de padrão, treino e medição se aplica ao sistema de gestão."
 category: "Metodologia"
 image: "../../assets/blog/pit-stop-sgi-formula-1-capa.webp"
 imageAlt: "Pit Stop SGI: A Lógica da Fórmula 1 que Transforma Sistemas de Gestão em Máquinas de Alta Performance"

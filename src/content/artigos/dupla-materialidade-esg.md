@@ -1,6 +1,7 @@
 ---
 title: "Dupla Materialidade: O Mapa Estratégico que Sua Empresa Precisa Ter"
-summary: "A análise de dupla materialidade deixou de ser exigência europeia e virou expectativa de bancos, investidores e grandes clientes no Brasil. Entenda o que é, por que importa e como estruturá-la."
+seo_title: "Dupla materialidade: o que é e como estruturar"
+summary: "A dupla materialidade deixou de ser exigência só europeia: bancos, investidores e grandes clientes já a pedem no Brasil. O que é e como estruturar."
 category: "ESG"
 image: "../../assets/blog/dupla-materialidade-esg-capa.webp"
 imageAlt: "Dupla Materialidade: O Mapa Estratégico que Sua Empresa Precisa Ter"

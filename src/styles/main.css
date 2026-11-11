@@ -278,3 +278,31 @@
     transition: none;
   }
 }
+
+/* Tabelas no corpo dos artigos (Markdown GFM). No celular a tabela rola na horizontal, a página não. */
+#artigo-corpo table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 2.5rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+#artigo-corpo th,
+#artigo-corpo td {
+  border: 1px solid hsl(var(--border));
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  min-width: 11rem;
+}
+#artigo-corpo th {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+#artigo-corpo td:first-child {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}

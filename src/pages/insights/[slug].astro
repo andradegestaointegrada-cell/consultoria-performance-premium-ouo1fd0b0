@@ -9,6 +9,7 @@ import Button from '@/components/Button.astro'
 import { NewsletterSignup } from '@/components/NewsletterSignup'
 import { listarArtigos, dataPorExtenso, type Artigo } from '@/lib/artigos'
 import { ALEXANDRE_ID, ORG_ID, SITE_URL } from '@/data/site'
+import { tituloPagina } from '@/lib/titulo'
 
 export async function getStaticPaths() {
   const artigos = await listarArtigos()
@@ -40,7 +41,7 @@ const post = {
 ---
 
 <BaseLayout
-  title={`${data.title} | Andrade Gestão Integrada`}
+  title={tituloPagina(data.seo_title ?? data.title)}
   description={data.summary}
   image={data.image}
   imageAlt={data.imageAlt ?? data.title}
@@ -72,6 +73,14 @@ const post = {
             <span class="text-muted-foreground text-sm font-medium uppercase tracking-wider flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
               <time datetime={data.published_date.toISOString()}>{dataPorExtenso(data.published_date)}</time>
+              {
+                data.updated_date && (
+                  <span class="ml-2">
+                    · atualizado em{' '}
+                    <time datetime={data.updated_date.toISOString()}>{dataPorExtenso(data.updated_date)}</time>
+                  </span>
+                )
+              }
             </span>
           </div>
           <h1
