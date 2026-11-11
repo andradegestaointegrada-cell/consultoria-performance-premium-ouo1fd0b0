@@ -3,8 +3,10 @@
 // Fonte dos nomes e escopos: site da Cyber (cyberconsulting.com.br) e da Galáxia (cyberconsulting.ia.br), 06/11/2026.
 // Os textos sobre 27001, 27701, 42001 e LGPD passam pela revisão da Cyber (o dono da norma revisa).
 
-export const CYBER_URL = 'https://www.cyberconsulting.com.br/?utm_source=agi&utm_medium=site&utm_campaign=integracao'
-export const GALAXIA_URL = 'https://www.cyberconsulting.ia.br/?utm_source=agi&utm_medium=site&utm_campaign=integracao'
+export const CYBER_URL =
+  'https://www.cyberconsulting.com.br/?utm_source=agi&utm_medium=site&utm_campaign=integracao'
+export const GALAXIA_URL =
+  'https://www.cyberconsulting.ia.br/?utm_source=agi&utm_medium=site&utm_campaign=integracao'
 
 export interface FrenteTech {
   id: string
@@ -62,17 +64,17 @@ export const FRENTES_TECH: FrenteTech[] = [
     ],
   },
   {
-    id: 'riscos-e-continuidade',
+    id: 'governanca-riscos-e-conformidade',
     codigo: '04',
-    nome: 'Governança, riscos e continuidade',
+    nome: 'Governança, riscos e conformidade (GRC)',
     normas: ['ISO 31000', 'ISO 22301', 'ISO/IEC 27031'],
     resumo:
-      'Compliance regulatório, gestão de riscos corporativos e continuidade de negócios, ligados aos riscos e oportunidades que o SGI já registra.',
+      'Governança, riscos e conformidade (compliance) num só modelo: papéis e políticas definidos, riscos corporativos tratados, obrigações regulatórias acompanhadas e a continuidade do negócio preparada, ligados aos riscos e oportunidades que o SGI já registra.',
     entregas: [
+      'Estrutura de governança: papéis, alçadas e políticas',
       'Gestão de riscos corporativos com a ISO 31000',
-      'Continuidade de negócios com a ISO 22301',
-      'Prontidão de TI para continuidade com a ISO/IEC 27031',
-      'Compliance regulatório e auditorias',
+      'Conformidade regulatória (compliance) e auditorias',
+      'Continuidade de negócios com a ISO 22301 e a ISO/IEC 27031',
     ],
   },
 ]
@@ -88,17 +90,20 @@ export const GALAXIA: Constelacao[] = [
   {
     nome: 'Orion',
     dominio: 'Governança de IA',
-    texto: 'Casos de uso de IA, riscos, sistema de gestão ISO/IEC 42001 e Lei de IA da UE, do diagnóstico à auditoria.',
+    texto:
+      'Casos de uso de IA, riscos, sistema de gestão ISO/IEC 42001 e Lei de IA da UE, do diagnóstico à auditoria.',
   },
   {
     nome: 'Sirius',
     dominio: 'Segurança da informação',
-    texto: 'Maturidade, riscos, controles, planos de ação e evidências alinhados à ISO/IEC 27001 e ao NIST.',
+    texto:
+      'Maturidade, riscos, controles, planos de ação e evidências alinhados à ISO/IEC 27001 e ao NIST.',
   },
   {
     nome: 'Lyra',
     dominio: 'Privacidade de dados',
-    texto: 'Mapa de dados, registros de tratamento, RIPD, direitos dos titulares e rotina do encarregado.',
+    texto:
+      'Mapa de dados, registros de tratamento, RIPD, direitos dos titulares e rotina do encarregado.',
   },
   {
     nome: 'Polaris',
@@ -108,22 +113,26 @@ export const GALAXIA: Constelacao[] = [
   {
     nome: 'Cefeu',
     dominio: 'Políticas, normas e procedimentos',
-    texto: 'Ciclo de vida dos documentos normativos: redação com IA, aprovação rastreável, publicação e vigência.',
+    texto:
+      'Ciclo de vida dos documentos normativos: redação com IA, aprovação rastreável, publicação e vigência.',
   },
   {
     nome: 'Cassiopeia',
     dominio: 'Gestão de riscos',
-    texto: 'Riscos corporativos e por domínio com um só método, de segurança e privacidade a terceiros e IA.',
+    texto:
+      'Riscos corporativos e por domínio com um só método, de segurança e privacidade a terceiros e IA.',
   },
   {
     nome: 'Delphinus',
     dominio: 'Gestão de terceiros',
-    texto: 'Due diligence, avaliação de riscos e monitoramento de fornecedores, da contratação ao encerramento.',
+    texto:
+      'Due diligence, avaliação de riscos e monitoramento de fornecedores, da contratação ao encerramento.',
   },
   {
     nome: 'Andrômeda',
     dominio: 'Cultura e treinamentos',
-    texto: 'Trilhas de conscientização, ambiente de acesso para as pessoas e evidência de treinamento.',
+    texto:
+      'Trilhas de conscientização, ambiente de acesso para as pessoas e evidência de treinamento.',
   },
 ]
 
@@ -156,14 +165,24 @@ export const TRILHAS_EXIN: Trilha[] = [
     itens: [
       { sigla: 'AICP', nome: 'Artificial Intelligence Compliance Professional' },
       { sigla: 'AICO', nome: 'AI Compliance Officer', nota: 'Formação: ISFS, PDPF e AICP' },
-      { sigla: 'AISP', nome: 'AI Security Professional', nota: 'Novo, baseado no OWASP AI Exchange' },
+      {
+        sigla: 'AISP',
+        nome: 'AI Security Professional',
+        nota: 'Novo, baseado no OWASP AI Exchange',
+      },
     ],
   },
 ]
 
 export const APOIO_EXIN = [
-  { nome: 'Vouchers de exame com desconto', texto: 'Compra do voucher de qualquer exame EXIN, intermediada pela parceira oficial.' },
-  { nome: 'Mentoria pré-exame', texto: 'Uma hora com o professor do curso antes da prova, para dúvidas de conteúdo e do exame.' },
+  {
+    nome: 'Vouchers de exame com desconto',
+    texto: 'Compra do voucher de qualquer exame EXIN, intermediada pela parceira oficial.',
+  },
+  {
+    nome: 'Mentoria pré-exame',
+    texto: 'Uma hora com o professor do curso antes da prova, para dúvidas de conteúdo e do exame.',
+  },
 ]
 
 /** Cursos de normas da Cyber Cultura. */
@@ -187,23 +206,41 @@ export const CURSOS_NORMAS = [
 export const CULTURA = [
   {
     nome: 'Mentoria profissional',
-    texto: 'Acompanhamento individual para profissionais de segurança, privacidade e GRC que miram posições de liderança, com avaliação de perfil comportamental.',
+    texto:
+      'Acompanhamento individual para profissionais de segurança, privacidade e GRC que miram posições de liderança, com avaliação de perfil comportamental.',
   },
   {
     nome: 'Palestras corporativas',
-    texto: 'Encontros sob medida, presenciais ou online, sobre segurança da informação, privacidade, GRC e governança de IA, para equipes e lideranças.',
+    texto:
+      'Encontros sob medida, presenciais ou online, sobre segurança da informação, privacidade, GRC e governança de IA, para equipes e lideranças.',
   },
   {
     nome: 'Programa de conscientização',
-    texto: 'Programa contínuo com diagnóstico, trilhas por perfil, campanhas e medição, para a cultura de segurança não depender de um treinamento anual.',
+    texto:
+      'Programa contínuo com diagnóstico, trilhas por perfil, campanhas e medição, para a cultura de segurança não depender de um treinamento anual.',
   },
 ]
 
 /** Método comum dos projetos conjuntos (plano do site, 2.7). */
 export const METODO_INTEGRADO = [
-  { nome: 'Diagnóstico integrado', texto: 'Um só levantamento cobre o SGI e as frentes de segurança, privacidade e IA.' },
-  { nome: 'Plano único', texto: 'Cronograma, responsáveis e entregas de todas as frentes no mesmo plano.' },
-  { nome: 'Implantação por frente', texto: 'Cada empresa conduz o seu escopo, na mesma estrutura documental.' },
-  { nome: 'Auditoria interna integrada', texto: 'Uma auditoria cobre todas as normas do sistema, com um relatório só.' },
-  { nome: 'Sustentação', texto: 'Indicadores, análise crítica e melhoria contínua num ciclo comum.' },
+  {
+    nome: 'Diagnóstico integrado',
+    texto: 'Um só levantamento cobre o SGI e as frentes de segurança, privacidade e IA.',
+  },
+  {
+    nome: 'Plano único',
+    texto: 'Cronograma, responsáveis e entregas de todas as frentes no mesmo plano.',
+  },
+  {
+    nome: 'Implantação por frente',
+    texto: 'Cada empresa conduz o seu escopo, na mesma estrutura documental.',
+  },
+  {
+    nome: 'Auditoria interna integrada',
+    texto: 'Uma auditoria cobre todas as normas do sistema, com um relatório só.',
+  },
+  {
+    nome: 'Sustentação',
+    texto: 'Indicadores, análise crítica e melhoria contínua num ciclo comum.',
+  },
 ]

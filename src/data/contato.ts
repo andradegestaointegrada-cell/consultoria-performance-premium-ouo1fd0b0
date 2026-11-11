@@ -16,7 +16,7 @@ export const SERVICOS_CONTATO = [
   'ISO 42001 - Inteligência Artificial',
   'Segurança da informação (ISO 27001)',
   'Privacidade de dados (LGPD)',
-  'Governança, riscos e continuidade',
+  'Governança, riscos e conformidade (GRC)',
   'Plataforma Galáxia',
   'Certificações EXIN e cursos',
   'Auditoria Interna',
