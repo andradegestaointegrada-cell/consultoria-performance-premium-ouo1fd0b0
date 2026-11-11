@@ -166,5 +166,16 @@ const post = {
       a.target = '_blank'
       a.rel = 'noopener noreferrer'
     })
+    // Tabelas: cada célula leva o título da coluna; no celular a linha vira um cartão com esses rótulos.
+    document.querySelectorAll('#artigo-corpo table').forEach(function (t) {
+      var h = Array.prototype.map.call(t.querySelectorAll('thead th'), function (th) {
+        return th.textContent.trim()
+      })
+      t.querySelectorAll('tbody tr').forEach(function (tr) {
+        Array.prototype.forEach.call(tr.children, function (td, i) {
+          td.setAttribute('data-rotulo', h[i] || '')
+        })
+      })
+    })
   </script>
 </BaseLayout>

@@ -306,3 +306,39 @@
   color: hsl(var(--foreground));
   font-weight: 600;
 }
+
+@media (max-width: 640px) {
+  #artigo-corpo table,
+  #artigo-corpo tbody,
+  #artigo-corpo tr,
+  #artigo-corpo td {
+    display: block;
+    width: 100%;
+  }
+  #artigo-corpo thead {
+    display: none;
+  }
+  #artigo-corpo tr {
+    border: 1px solid hsl(var(--border));
+    border-left: 3px solid hsl(var(--primary));
+    margin-bottom: 1rem;
+  }
+  #artigo-corpo td {
+    border: 0;
+    min-width: 0;
+    padding: 0.5rem 1rem;
+  }
+  #artigo-corpo td:first-child {
+    padding-top: 0.9rem;
+  }
+  #artigo-corpo td:not(:first-child)[data-rotulo]::before {
+    content: attr(data-rotulo);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: hsl(var(--primary));
+    margin-bottom: 0.2rem;
+  }
+}
