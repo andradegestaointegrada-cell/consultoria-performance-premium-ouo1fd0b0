@@ -18,6 +18,7 @@ const team = [
     name: 'Alexandre Andrade',
     alt: 'Consultor Alexandre Andrade',
     role: 'Diretor e Consultor Principal',
+    bio: 'Auditor líder em ISO 9001, 14001, 45001, ISO/IEC 17020 e 17025, IATF 16949, PBQP-H e SASSMAQ, com 17 anos em implantação e auditoria de sistemas de gestão.',
     img: fotoAlexandre,
     linkedin: 'https://www.linkedin.com/in/alexandreandradegestaodeprojetos',
   },
@@ -203,6 +204,7 @@ const fundo = await fundoHero(sobreHero)
                     {member.name}
                   </h3>
                   <p class="text-primary text-sm font-bold uppercase tracking-wider font-sans">{member.role}</p>
+                  {member.bio && <p class="mt-4 text-sm text-muted-foreground leading-relaxed">{member.bio}</p>}
                   {member.cyber && (
                     <a
                       href={CYBER_URL}

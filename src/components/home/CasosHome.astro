@@ -1,0 +1,81 @@
+---
+// Prova de cliente na home: três cases com resultado concluído, tirados de src/data/cases.ts.
+import { Image } from 'astro:assets'
+import { ArrowRight } from 'lucide-react'
+import Reveal from '@/components/Reveal.astro'
+import Button from '@/components/Button.astro'
+import { CASOS } from '@/data/cases'
+
+// Resultado de cada case em uma linha, a partir dos marcos registrados na página de cases.
+const DESTAQUES: Record<string, string> = {
+  'SETEC Hidrobrasileira': 'Recertificação integrada ISO 9001, 14001 e 45001 em mar/2024. Cliente desde 2019.',
+  'Organismo de inspeção': 'Acreditação da Cgcre na ISO/IEC 17020 em 2022.',
+  'Transportadora de produtos químicos': 'SASSMAQ e ISO 9001 certificados 11 meses depois do início.',
+}
+const casos = CASOS.filter((c) => c.cliente in DESTAQUES)
+---
+
+<section class="py-24 bg-card border-t border-border">
+  <div class="container mx-auto px-4">
+    <Reveal class="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
+          Resultados de clientes
+        </h2>
+        <p class="text-muted-foreground">
+          Integração de normas, acreditação e certificação em empresas de engenharia, inspeção e transporte de
+          produtos químicos.
+        </p>
+      </div>
+      <Button href="/cases" variant="outline" class="rounded-full uppercase tracking-wider font-bold">
+        Ver todos os cases <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
+    </Reveal>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {
+        casos.map((c, i) => (
+          <Reveal delay={i * 120} class="h-full">
+            <a
+              href="/cases"
+              class="group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-border bg-background hover:border-primary transition-colors duration-500"
+            >
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src={c.imagem}
+                  alt={c.imagemAlt}
+                  widths={[480, 720, 960]}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  style={`object-position: ${c.foco}`}
+                />
+                <span class="absolute bottom-2 right-2 rounded bg-black/55 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
+                  Imagem ilustrativa
+                </span>
+              </div>
+              <div class="flex flex-1 flex-col p-6 md:p-7">
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {c.normas.map((n) => (
+                    <span class="text-xs font-bold bg-secondary text-foreground rounded-md px-2.5 py-1">{n}</span>
+                  ))}
+                </div>
+                <h3 class="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide">
+                  {c.cliente}
+                </h3>
+                <p class="text-sm text-muted-foreground mt-1 mb-5">{c.setor}</p>
+                <p class="mt-auto border-l-2 border-primary pl-4 text-foreground leading-relaxed">
+                  {DESTAQUES[c.cliente]}
+                </p>
+              </div>
+            </a>
+          </Reveal>
+        ))
+      }
+    </div>
+
+    <p class="mt-8 text-xs text-muted-foreground">
+      Projetos conduzidos por Alexandre Andrade; o do organismo de inspeção e o da transportadora, antes da fundação da
+      AGI.
+    </p>
+  </div>
+</section>

@@ -25,7 +25,7 @@ const fundo = await fundoHero(contatoHero)
 >
   <div class="pt-20">
     <section
-      class="py-32 relative bg-fixed bg-cover bg-center border-b border-border text-center"
+      class="py-32 relative md:bg-fixed bg-cover bg-center border-b border-border text-center"
       style={`background-image: url('${fundo}')`}
     >
       <div class="absolute inset-0 bg-[#091D39]/85"></div>
@@ -35,11 +35,12 @@ const fundo = await fundoHero(contatoHero)
           <h1
             class="text-3xl sm:text-4xl md:text-6xl font-heading font-bold mb-6 uppercase tracking-wide text-white drop-shadow-lg break-words"
           >
-            Inicie a{' '}
-            <b class="text-primary font-extrabold italic font-heading">TRANSFORMAÇÃO</b>
+            Fale com a{' '}
+            <b class="text-primary font-extrabold italic font-heading">AGI</b>
           </h1>
           <p class="text-lg sm:text-xl text-white/90 leading-relaxed font-sans drop-shadow-md">
-            Fale com nossos especialistas para elevar a performance da sua empresa.
+            Implantar uma norma, integrar sistemas, fazer a transição para as edições 2026 ou preparar uma
+            auditoria: conte o cenário e a gente responde por e-mail ou WhatsApp.
           </p>
         </Reveal>
       </div>
@@ -107,6 +108,14 @@ const fundo = await fundoHero(contatoHero)
             </div>
           </div>
 
+          <div class="bg-card p-8 rounded-2xl border border-border shadow-lg">
+            <h2 class="text-xl font-heading font-bold mb-6 uppercase tracking-wide text-foreground">Como funciona</h2>
+            <ol class="space-y-4 text-sm text-muted-foreground leading-relaxed font-sans">
+              <li class="flex gap-4"><span class="font-heading text-2xl font-bold text-primary leading-none">1</span><span>Você conta o cenário pelo formulário ou pelo WhatsApp: a norma, o porte da empresa e o prazo.</span></li>
+              <li class="flex gap-4"><span class="font-heading text-2xl font-bold text-primary leading-none">2</span><span>Uma conversa para entender o sistema atual, o que já existe e o que falta.</span></li>
+              <li class="flex gap-4"><span class="font-heading text-2xl font-bold text-primary leading-none">3</span><span>Proposta com escopo, etapas e prazo, sem compromisso.</span></li>
+            </ol>
+          </div>
           <div class="h-64 rounded-2xl overflow-hidden border border-border bg-card relative shadow-lg group">
             <Image
               src={matriz}
