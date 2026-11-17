@@ -2295,7 +2295,7 @@ function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
     passo * 0.85,
     { s: 0.95 },
   )
-  const amostra = b.ponto([xm + 0.05, yBancada + 0.44, zm], { s: 2.8, f: 0 })
+  b.ponto([xm + 0.05, yBancada + 0.44, zm], { s: 2.8, f: 0 })
   b.segmento([xm + 0.05, yBancada + 0.09, zm], [xm + 0.05, yBancada + 0.74, zm], 9, {
     s: 1.5,
     f: -1.5,
@@ -2323,7 +2323,6 @@ function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
       s: 1.1,
     })
   }
-  const ancoraMic = b.ponto([xm + 0.12, yBancada + 1.16, zm - 0.18], { s: 0 })
 
   // 4. Ao centro (x = -0.02): Balança Analítica de Calibração com Capela de Vidro e Travessão Dinâmico (Grupo 1).
   const xb = -0.02
@@ -2335,7 +2334,7 @@ function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
     s: 1.9,
     f: 0,
   })
-  const capela = caixa(
+  caixa(
     b,
     [xb - 0.36, yBancada + 0.15, zb - 0.31],
     [xb + 0.36, yBancada + 1.02, zb + 0.31],
@@ -2383,7 +2382,6 @@ function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
     }
     b.ponto([xp, yp + hPeso + 0.02, zb], { g: gBal, s: 2.2 })
   }
-  const ancoraBal = b.ponto([xb - 0.22, yBancada + 0.48, zb - 0.32], { s: 0 })
 
   // 5. À direita (x = 0.82): Erlenmeyer Graduado + Bureta de Titulação + Estante de Tubos.
   const xq = 0.78
@@ -2430,7 +2428,6 @@ function laboratorio({ densidade: d, rotulos }: OpcoesForma): Forma {
     s: 1.6,
     f: 2.5,
   })
-  const ancoraFrasco = b.ponto([xq + 0.14, yBancada + 0.34, zq - 0.24], { s: 0 })
 
   // Estante com 3 tubos de ensaio
   caixa(
@@ -2838,7 +2835,6 @@ function humanoide({ densidade: d, rotulos }: OpcoesForma): Forma {
   const ancOmbroDir = b.ponto([0.52, 0.36, -0.2], { s: 0 })
   const ancOmbroEsq = b.ponto([-0.52, 0.34, -0.2], { s: 0 })
   const ancMaoDir = b.ponto([0.64, -0.24, -0.22], { s: 0 })
-  const ancMaoEsq = b.ponto([-0.64, -0.22, -0.22], { s: 0 })
   const ancBaseEsq = b.ponto([-0.74, -0.84, -0.4], { s: 0 })
   const ancBaseDir = b.ponto([0.74, -0.78, -0.4], { s: 0 })
 
@@ -2980,9 +2976,7 @@ function esg({ densidade: d, rotulos }: OpcoesForma): Forma {
   const base: Grupo = { rumo: 0.14, balanco: 0.18, amplitude: 0.24, inclinacao: 0.24 }
   grupos.push(base)
 
-  let cuboCentral = 0
   let cuboEsq = 0
-  let cuboDir = 0
 
   turbinas.forEach(([xt, zt, yTopo, rPas, gIdx], idx) => {
     // Base de fundação e Torre tubular cônica esbelta (anéis horizontais + geratrizes)
@@ -3025,9 +3019,7 @@ function esg({ densidade: d, rotulos }: OpcoesForma): Forma {
     // Rotor e 3 Grandes Pás Aerodinâmicas no grupo local `gIdx` (giram continuamente no eixo Z)
     const zRotor = zt - 0.12
     const cubo = b.ponto([xt, yTopo, zRotor - 0.02], { g: gIdx, s: 2.6, f: 0 })
-    if (idx === 1) cuboCentral = cubo
     if (idx === 0) cuboEsq = cubo
-    if (idx === 2) cuboDir = cubo
 
     // Anel do spinner (nariz do rotor)
     const spinner: number[] = []

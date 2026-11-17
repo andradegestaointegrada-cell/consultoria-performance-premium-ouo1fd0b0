@@ -109,7 +109,7 @@ export function LGPDContactForm() {
                 <FormItem>
                   <FormLabel className="text-foreground font-semibold">Nome Completo</FormLabel>
                   <FormControl>
-                    <Input placeholder="Seu nome" className="bg-background/50 h-11" {...field} />
+                    <Input placeholder="Seu nome" autoComplete="name" className="bg-background/50 h-11" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,6 +123,8 @@ export function LGPDContactForm() {
                   <FormLabel className="text-foreground font-semibold">E-mail</FormLabel>
                   <FormControl>
                     <Input
+                      type="email"
+                      autoComplete="email"
                       placeholder="seu@email.com"
                       className="bg-background/50 h-11"
                       {...field}

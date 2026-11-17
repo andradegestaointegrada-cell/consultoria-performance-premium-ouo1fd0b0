@@ -66,6 +66,12 @@ export const ORGANIZACAO = {
     'ISO/IEC 17025',
     'ISO/IEC 42001',
     'ISO 37001',
+    'SGI',
+    'ESG',
+    'Dupla Materialidade',
+    'ISO/IEC 27001',
+    'ISO/IEC 27701',
+    'LGPD',
   ],
   sameAs: [
     'https://www.linkedin.com/company/andrade-gest%C3%A3o-integrada-treinamento/',

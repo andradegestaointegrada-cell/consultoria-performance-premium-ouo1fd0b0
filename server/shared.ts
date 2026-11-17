@@ -34,14 +34,37 @@ export const esc = (s: unknown) =>
 export const clean = (s: unknown, max: number) =>
   typeof s === 'string' ? s.replace(/\s+$/g, '').trim().slice(0, max) : ''
 
+export const cleanLine = (s: unknown, max: number) =>
+  typeof s === 'string'
+    ? s.replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ').trim().slice(0, max)
+    : ''
+
 export const isEmail = (s: string) =>
   s.length <= 254 && /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[a-z]{2,}$/i.test(s)
 
-// Formulário preenchido por robô: campo escondido preenchido ou envio rápido demais.
+// Valida que o POST partiu do próprio site (produção, prévia da Cloudflare ou dev local).
+export const isSameOrigin = (request: Request) => {
+  const origin = request.headers.get('origin')
+  if (!origin) return false
+  try {
+    const { hostname } = new URL(origin)
+    return (
+      hostname === 'www.andradegestaointegrada.com.br' ||
+      hostname === 'andradegestaointegrada.com.br' ||
+      hostname.endsWith('.consultoria-performance-premium-ouo1fd0b0.pages.dev') ||
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1'
+    )
+  } catch {
+    return false
+  }
+}
+
+// Formulário preenchido por robô: campo escondido preenchido ou tempo ausente/inválido (< 2s ou > 24h).
 export const isBot = (body: Record<string, unknown>) => {
   if (typeof body.website === 'string' && body.website.trim() !== '') return true
   const elapsed = Number(body.elapsed)
-  return Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2000
+  return !Number.isFinite(elapsed) || elapsed < 2000 || elapsed > 86_400_000
 }
 
 export const agoraSP = () =>
@@ -68,32 +91,41 @@ const b64url = (buf: ArrayBuffer | Uint8Array) => {
   return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
-const fromB64url = (s: string) => {
+const bytesFromB64url = (s: string) => {
   const pad = s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)
-  return new TextDecoder().decode(Uint8Array.from(atob(pad), (c) => c.charCodeAt(0)))
+  return Uint8Array.from(atob(pad), (c) => c.charCodeAt(0))
 }
 
-async function hmac(secret: string, data: string) {
-  const key = await crypto.subtle.importKey(
+async function hmacKey(secret: string, usages: KeyUsage[]) {
+  return crypto.subtle.importKey(
     'raw',
     new TextEncoder().encode(secret),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
-    ['sign'],
+    usages,
   )
-  return b64url(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data)))
 }
 
 export async function assinar(secret: string, payload: Record<string, unknown>) {
   const p = b64url(new TextEncoder().encode(JSON.stringify(payload)))
-  return `${p}.${await hmac(secret, p)}`
+  const key = await hmacKey(secret, ['sign'])
+  const sig = b64url(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(p)))
+  return `${p}.${sig}`
 }
 
 export async function verificar(secret: string, token: string) {
   const [p, sig] = token.split('.')
-  if (!p || !sig || (await hmac(secret, p)) !== sig) return null
+  if (!p || !sig) return null
   try {
-    return JSON.parse(fromB64url(p)) as Record<string, unknown>
+    const key = await hmacKey(secret, ['verify'])
+    const valido = await crypto.subtle.verify(
+      'HMAC',
+      key,
+      bytesFromB64url(sig),
+      new TextEncoder().encode(p),
+    )
+    if (!valido) return null
+    return JSON.parse(new TextDecoder().decode(bytesFromB64url(p))) as Record<string, unknown>
   } catch {
     return null
   }

@@ -6,9 +6,11 @@ import {
   FROM_SITE,
   agoraSP,
   clean,
+  cleanLine,
   esc,
   isBot,
   isEmail,
+  isSameOrigin,
   json,
   resend,
 } from '../../server/shared'
@@ -16,6 +18,8 @@ import {
 const FALHA = `Não foi possível enviar agora. Escreva para ${CONTACT_TO_DEFAULT} ou chame no WhatsApp (11) 98613-4789.`
 
 export const onRequestPost = async ({ request, env }: Ctx) => {
+  if (!isSameOrigin(request)) return json(403, { error: 'Origem não autorizada.' })
+
   let body: Record<string, unknown>
   try {
     body = await request.json()
@@ -27,11 +31,11 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
   if (isBot(body)) return json(200, { ok: true })
 
   const tipo = body.tipo === 'lgpd' ? 'lgpd' : 'contato'
-  const nome = clean(body.nome, 120)
-  const email = clean(body.email, 254).toLowerCase()
-  const empresa = clean(body.empresa, 160)
-  const servico = clean(body.servico, 80)
-  const assunto = clean(body.assunto, 160)
+  const nome = cleanLine(body.nome, 120)
+  const email = cleanLine(body.email, 254).toLowerCase()
+  const empresa = cleanLine(body.empresa, 160)
+  const servico = cleanLine(body.servico, 80)
+  const assunto = cleanLine(body.assunto, 160)
   const mensagem = clean(body.mensagem, 5000)
 
   if (nome.length < 2) return json(422, { error: 'Informe seu nome.' })

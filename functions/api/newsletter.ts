@@ -4,9 +4,11 @@ import {
   type Ctx,
   FROM_NEWSLETTER,
   assinar,
-  clean,
+  cleanLine,
+  esc,
   isBot,
   isEmail,
+  isSameOrigin,
   json,
   resend,
 } from '../../server/shared'
@@ -14,6 +16,8 @@ import {
 const FALHA = 'Não foi possível concluir a inscrição agora. Tente novamente mais tarde.'
 
 export const onRequestPost = async ({ request, env }: Ctx) => {
+  if (!isSameOrigin(request)) return json(403, { error: 'Origem não autorizada.' })
+
   let body: Record<string, unknown>
   try {
     body = await request.json()
@@ -23,8 +27,8 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
 
   if (isBot(body)) return json(200, { ok: true })
 
-  const email = clean(body.email, 254).toLowerCase()
-  const origem = clean(body.origem, 60) || 'site'
+  const email = cleanLine(body.email, 254).toLowerCase()
+  const origem = cleanLine(body.origem, 60) || 'site'
   if (!isEmail(email)) return json(422, { error: 'Informe um e-mail válido.' })
   if (body.consentimento !== true) {
     return json(422, { error: 'É preciso concordar com a Política de Privacidade.' })
@@ -40,7 +44,7 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#0D0D0D;max-width:560px">
       <h2 style="color:#091D39;margin:0 0 12px">Confirme sua inscrição</h2>
-      <p>Recebemos um pedido para inscrever <b>${email.replace(/</g, '&lt;')}</b> na newsletter da Andrade Gestão Integrada: conteúdo quinzenal sobre sistemas de gestão, normas ISO e conformidade.</p>
+      <p>Recebemos um pedido para inscrever <b>${esc(email)}</b> na newsletter da Andrade Gestão Integrada: conteúdo quinzenal sobre sistemas de gestão, normas ISO e conformidade.</p>
       <p style="margin:24px 0">
         <a href="${link}" style="background:#091D39;color:#CFAE70;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:bold">Confirmar inscrição</a>
       </p>
