@@ -25,5 +25,5 @@ export const SERVICOS_CONTATO = [
 ] as const
 
 export function linkContato(servico: (typeof SERVICOS_CONTATO)[number]) {
-  return `/contato?servico=${encodeURIComponent(servico)}#formulario`
+  return `/contato?servico=${encodeURIComponent(servico)}`
 }

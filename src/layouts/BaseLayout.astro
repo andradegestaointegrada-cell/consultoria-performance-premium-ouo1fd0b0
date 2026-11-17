@@ -189,6 +189,13 @@ const grafo = {
 
     <script is:inline>
       ;(function () {
+        // Sempre abrir páginas novas no topo (evita restauração de rolagem no meio/fim).
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+        if (!location.hash) window.scrollTo(0, 0)
+        addEventListener('pageshow', function () {
+          if (!location.hash) window.scrollTo(0, 0)
+        })
+
         // Cabeçalho: fundo de vidro depois de 20 px de rolagem.
         var h = document.getElementById('site-header')
         function topo() {
