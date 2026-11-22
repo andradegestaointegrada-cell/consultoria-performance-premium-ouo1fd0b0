@@ -223,7 +223,7 @@ const grafo = {
               }, atraso)
             })
           },
-          { threshold: 0.1, rootMargin: '50px' },
+          { threshold: 0, rootMargin: '50px' }, // threshold: 0 garante que blocos muito altos no celular (ex.: corpo de artigos) sejam revelados assim que entrarem na tela.
         )
         els.forEach(function (el) {
           io.observe(el)

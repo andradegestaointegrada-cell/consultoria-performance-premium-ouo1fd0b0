@@ -36,6 +36,7 @@ O site não publica preços. Propostas são feitas após diagnóstico, pelo form
 
 ## Artigos
 
+- [Análise de lacunas na transição ISO 9001 e 14001:2026 sem gerar papel inútil](https://www.andradegestaointegrada.com.br/insights/analise-lacunas-transicao-iso-2026) (22/11/2026)
 - [ISO/IEC 42001: como estruturar a governança de inteligência artificial](https://www.andradegestaointegrada.com.br/insights/iso-42001-governanca-inteligencia-artificial) (07/10/2026)
 - [ISO 37001:2025: como estruturar um sistema antissuborno que funcione na prática](https://www.andradegestaointegrada.com.br/insights/iso-37001-sistema-gestao-antissuborno) (07/10/2026)
 - [Pit Stop SGI: a lógica da Fórmula 1 aplicada a sistemas de gestão](https://www.andradegestaointegrada.com.br/insights/pit-stop-sgi-formula-1) (06/10/2026)
