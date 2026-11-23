@@ -30,7 +30,8 @@ export const FRENTES: Frente[] = [
     base: 'Metodologia própria para construtoras na primeira certificação.',
     servico: 'pbqp-h',
     imagem: construcaoImg,
-    imagemAlt: 'Engenheiros de capacete conferem a planta sobre a laje de um edifício em construção',
+    imagemAlt:
+      'Engenheiros de capacete conferem a planta sobre a laje de um edifício em construção',
     foco: 'center 50%',
   },
   {
@@ -41,7 +42,8 @@ export const FRENTES: Frente[] = [
     base: '16 anos de atuação na indústria automotiva e credencial de auditor líder IATF 16949.',
     servico: 'iatf-16949',
     imagem: automotivoImg,
-    imagemAlt: 'Engenheiro da qualidade mede uma peça usinada com paquímetro em uma fábrica de autopeças',
+    imagemAlt:
+      'Engenheiro da qualidade mede uma peça usinada com paquímetro em uma fábrica de autopeças',
     foco: 'center 75%',
   },
   {
@@ -68,6 +70,12 @@ export const FRENTES: Frente[] = [
   },
 ]
 
+export interface DepoimentoCaso {
+  texto: string
+  autor: string
+  cargo: string
+}
+
 export interface Caso {
   cliente: string
   setor: string
@@ -79,6 +87,8 @@ export interface Caso {
   desafio: string
   entregas: string[]
   marcos: { quando: string; oque: string }[]
+  resumoHome?: string
+  depoimento?: DepoimentoCaso
   nota?: string
 }
 
@@ -87,7 +97,8 @@ export const CASOS: Caso[] = [
     cliente: 'SETEC Hidrobrasileira',
     setor: 'Engenharia consultiva · equipes em São Paulo e Fortaleza',
     imagem: setecImg,
-    imagemAlt: 'Engenheiros de capacete e colete revisam um projeto diante de uma usina hidrelétrica',
+    imagemAlt:
+      'Engenheiros de capacete e colete revisam um projeto diante de uma usina hidrelétrica',
     foco: 'center 60%',
     normas: ['ISO 9001', 'ISO 14001', 'ISO 45001'],
     status: 'Relacionamento contínuo desde 2019',
@@ -103,8 +114,19 @@ export const CASOS: Caso[] = [
       { quando: '2019', oque: 'Início da consultoria no sistema de gestão' },
       { quando: 'Dez/2021', oque: 'Certificação ISO 14001 e ISO 45001' },
       { quando: 'Mar/2024', oque: 'Recertificação integrada ISO 9001, 14001 e 45001' },
-      { quando: '2026–2027', oque: 'Transição para a ISO 9001:2026 e preparação da recertificação' },
+      {
+        quando: '2026–2027',
+        oque: 'Transição para a ISO 9001:2026 e preparação da recertificação',
+      },
     ],
+    resumoHome:
+      'Implantação da ISO 14001 e da ISO 45001 integradas à ISO 9001, recertificação integrada em mar/2024 e manutenção contínua das equipes em São Paulo e Fortaleza.',
+    depoimento: {
+      texto:
+        'Trabalhamos com o Alexandre desde 2019. Ele conduziu a implantação da ISO 14001 e da ISO 45001 integradas à nossa ISO 9001, unificando a rotina das equipes de São Paulo e Fortaleza sem criar burocracia paralela. Passamos pelas certificações, pela recertificação integrada das três normas e seguimos juntos na manutenção do sistema e nas auditorias anuais, sempre com segurança técnica e objetividade.',
+      autor: 'Elzio Mistrelo',
+      cargo: 'Diretor · SETEC Hidrobrasileira',
+    },
     nota: 'Atuação de Alexandre Andrade desde 2019; pela AGI desde 2022.',
   },
   {

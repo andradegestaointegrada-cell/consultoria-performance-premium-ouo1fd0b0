@@ -1,30 +1,67 @@
 ---
-// Prova de cliente na home: três cases com resultado concluído, tirados de src/data/cases.ts.
+// Prova de cliente na home: três cases reais com escopo, entregas e resultado tirados de src/data/cases.ts, mais depoimento autorizado.
 import { Image } from 'astro:assets'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Quote } from 'lucide-react'
 import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
 import { CASOS } from '@/data/cases'
 
-// Resultado de cada case em uma linha, a partir dos marcos registrados na página de cases.
-const DESTAQUES: Record<string, string> = {
-  'SETEC Hidrobrasileira': 'Recertificação integrada ISO 9001, 14001 e 45001 em mar/2024. Cliente desde 2019.',
-  'Organismo de inspeção': 'Acreditação da Cgcre na ISO/IEC 17020 em 2022.',
-  'Transportadora de produtos químicos': 'SASSMAQ e ISO 9001 certificados 11 meses depois do início.',
+interface ResumoHome {
+  escopo: string
+  entregas: string[]
+  resultado: string
 }
-const casos = CASOS.filter((c) => c.cliente in DESTAQUES)
+
+const DESTAQUES: Record<string, ResumoHome> = {
+  'SETEC Hidrobrasileira': {
+    escopo:
+      'Integração da ISO 14001 e da ISO 45001 ao sistema da qualidade já certificado, unificando processos de equipes em São Paulo e Fortaleza sem criar burocracia paralela.',
+    entregas: [
+      'Aspectos ambientais, perigos e riscos ocupacionais e requisitos legais integrados',
+      'Auditorias internas, análise crítica pela direção e suporte contínuo desde 2019',
+    ],
+    resultado: 'Certificação ISO 14001/45001 (2021) e recertificação integrada das 3 normas (mar/2024).',
+  },
+  'MSan Engenharia': {
+    escopo:
+      'Implantação integrada de Qualidade e Saúde e Segurança Ocupacional para obras e serviços dentro de plantas industriais, conectando sede e frentes de campo.',
+    entregas: [
+      'Mapeamento ponta a ponta com mais de 120 documentos operacionais sob controle',
+      'Gestão de riscos de SSO (APR e matriz) e painéis de indicadores digitais por processo',
+    ],
+    resultado: 'Sistema implantado nas frentes de obra com auditoria de certificação programada.',
+  },
+  'Organismo de inspeção': {
+    escopo:
+      'Estruturação completa do sistema de gestão para acreditação na ISO/IEC 17020, cobrindo imparcialidade, competência técnica e rastreabilidade do planejamento ao laudo.',
+    entregas: [
+      'Procedimentos e registros técnicos de inspeção alinhados aos critérios da Cgcre',
+      'Formação de auditores internos na ISO/IEC 17020 e acompanhamento da avaliação externa',
+    ],
+    resultado: 'Acreditação concedida pela Cgcre/Inmetro na ISO/IEC 17020 em 2022.',
+  },
+}
+
+const ORDEM = ['SETEC Hidrobrasileira', 'MSan Engenharia', 'Organismo de inspeção']
+const casos = ORDEM.map((nome) => CASOS.find((c) => c.cliente === nome)).filter(
+  (c): c is (typeof CASOS)[number] => Boolean(c),
+)
+const depoimentoSetec = CASOS.find((c) => c.cliente === 'SETEC Hidrobrasileira')?.depoimento
 ---
 
 <section class="py-24 bg-card border-t border-border">
   <div class="container mx-auto px-4">
     <Reveal class="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">
       <div class="max-w-2xl">
+        <p class="text-primary text-xs font-bold uppercase tracking-[0.3em] mb-3 font-sans">
+          Cases e resultados verificáveis
+        </p>
         <h2 class="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 uppercase tracking-wide">
-          Resultados de clientes
+          Sistemas implantados na prática
         </h2>
         <p class="text-muted-foreground">
-          Integração de normas, acreditação e certificação em empresas de engenharia, inspeção e transporte de
-          produtos químicos.
+          Engenharia consultiva, obras em plantas industriais e acreditação técnica: escopo real, entregas de campo e
+          marcos auditados.
         </p>
       </div>
       <Button href="/cases" variant="outline" class="rounded-full uppercase tracking-wider font-bold">
@@ -32,50 +69,101 @@ const casos = CASOS.filter((c) => c.cliente in DESTAQUES)
       </Button>
     </Reveal>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {
-        casos.map((c, i) => (
-          <Reveal delay={i * 120} class="h-full">
-            <a
-              href="/cases"
-              class="group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-border bg-background hover:border-primary transition-colors duration-500"
-            >
-              <div class="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={c.imagem}
-                  alt={c.imagemAlt}
-                  widths={[480, 720, 960]}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                  style={`object-position: ${c.foco}`}
-                />
-                <span class="absolute bottom-2 right-2 rounded bg-black/55 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
-                  Imagem ilustrativa
-                </span>
-              </div>
-              <div class="flex flex-1 flex-col p-6 md:p-7">
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {c.normas.map((n) => (
-                    <span class="text-xs font-bold bg-secondary text-foreground rounded-md px-2.5 py-1">{n}</span>
-                  ))}
+        casos.map((c, i) => {
+          const resumo = DESTAQUES[c.cliente]
+          return (
+            <Reveal delay={i * 120} class="h-full">
+              <a
+                href="/cases"
+                class="group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-border bg-background hover:border-primary transition-colors duration-500"
+              >
+                <div class="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={c.imagem}
+                    alt={c.imagemAlt}
+                    widths={[480, 720, 960]}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    style={`object-position: ${c.foco}`}
+                  />
+                  <span class="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-sm border border-primary/50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+                    {c.status}
+                  </span>
+                  <span class="absolute bottom-2 right-2 rounded bg-black/55 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/80">
+                    Imagem ilustrativa
+                  </span>
                 </div>
-                <h3 class="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide">
-                  {c.cliente}
-                </h3>
-                <p class="text-sm text-muted-foreground mt-1 mb-5">{c.setor}</p>
-                <p class="mt-auto border-l-2 border-primary pl-4 text-foreground leading-relaxed">
-                  {DESTAQUES[c.cliente]}
-                </p>
-              </div>
-            </a>
-          </Reveal>
-        ))
+                <div class="flex flex-1 flex-col p-6 md:p-7">
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {c.normas.map((n) => (
+                      <span class="text-xs font-bold bg-secondary text-foreground rounded-md px-2.5 py-1">{n}</span>
+                    ))}
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-heading font-bold text-foreground uppercase tracking-wide">
+                    {c.cliente}
+                  </h3>
+                  <p class="text-sm text-muted-foreground mt-1 mb-4">{c.setor}</p>
+                  <p class="text-sm text-foreground/90 leading-relaxed mb-5">{resumo.escopo}</p>
+                  <ul class="space-y-2.5 mb-6 text-sm text-muted-foreground">
+                    {resumo.entregas.map((item) => (
+                      <li class="flex items-start gap-2.5">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="mt-auto border-l-2 border-primary pl-4 text-sm font-medium text-foreground leading-relaxed">
+                    {resumo.resultado}
+                  </p>
+                </div>
+              </a>
+            </Reveal>
+          )
+        })
       }
     </div>
 
-    <p class="mt-8 text-xs text-muted-foreground">
-      Projetos conduzidos por Alexandre Andrade; o do organismo de inspeção e o da transportadora, antes da fundação da
-      AGI.
+    {
+      depoimentoSetec && (
+        <Reveal delay={200}>
+          <blockquote class="mt-12 rounded-2xl border-2 border-primary/40 bg-background p-8 md:p-10 relative overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+              <div class="shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-secondary border border-primary/40 text-primary">
+                <Quote className="h-7 w-7" />
+              </div>
+              <div class="flex-1">
+                <p class="text-primary text-xs font-bold uppercase tracking-[0.25em] mb-2">
+                  Depoimento de cliente · Parceria desde 2019
+                </p>
+                <p class="text-foreground text-lg md:text-xl leading-relaxed italic mb-4">
+                  “{depoimentoSetec.texto}”
+                </p>
+                <footer class="flex flex-wrap items-center justify-between gap-4">
+                  <div class="text-sm">
+                    <strong class="font-bold text-foreground uppercase tracking-wider">
+                      {depoimentoSetec.autor}
+                    </strong>
+                    <span class="text-muted-foreground"> · {depoimentoSetec.cargo}</span>
+                  </div>
+                  <a
+                    href="/cases"
+                    class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary hover:underline"
+                  >
+                    Ver detalhes do case <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </footer>
+              </div>
+            </div>
+          </blockquote>
+        </Reveal>
+      )
+    }
+
+    <p class="mt-6 text-xs text-muted-foreground">
+      Projetos conduzidos por Alexandre Andrade; o do organismo de inspeção, antes da fundação da AGI. Clientes citados
+      com autorização.
     </p>
   </div>
 </section>
