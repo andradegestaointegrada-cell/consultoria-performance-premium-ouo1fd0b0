@@ -6,6 +6,7 @@ category: "Qualidade"
 image: "../../assets/blog/analise-lacunas-transicao-iso-2026-capa.webp"
 imageAlt: "Análise de lacunas para transição da ISO 9001:2026 e ISO 14001:2026 no Sistema de Gestão Integrado"
 published_date: 2026-11-22T17:00:00.000Z
+updated_date: 2026-11-23T14:00:00.000Z
 is_highlighted: false
 ---
 Com a publicação da [ISO 14001:2026](/insights/iso-14001-2026-janela-oportunidade) em 15 de abril e da [ISO 9001:2026](/insights/iso-9001-2026-sgq-preparado) em 16 de setembro de 2026, empresas certificadas entraram no período formal de transição. A primeira entrega técnica desse ciclo quase sempre é a análise de lacunas (*gap analysis*).
@@ -57,8 +58,8 @@ Nem toda lacuna tem a mesma urgência. Alterar uma tabela de contexto leva uma s
 
 Também é essencial não misturar os relógios das duas normas:
 
-- **ISO 14001:2026 (vence primeiro):** novas certificações acreditadas passam a ser emitidas apenas na edição 2026 a partir de **31 de outubro de 2027**. O prazo internacional da Global ACI encerra a transição em **30 de abril de 2029**, enquanto o Ofício Circular nº 9/2026 da Cgcre/Inmetro menciona **15 de abril de 2029**. Planeje seu cronograma pela data mais cedo.
-- **ISO 9001:2026:** novas certificações apenas na edição 2026 a partir de **31 de março de 2028**, com prazo final de transição em **30 de setembro de 2029** pela Global ACI.
+- **ISO 14001:2026 (vence primeiro):** novas certificações acreditadas passam a ser emitidas apenas na edição 2026 a partir de **31 de outubro de 2027**. Para certificados vigentes, o prazo final da transição é **30 de abril de 2029** tanto pela regra internacional da Global ACI quanto no Brasil (Ofício Circular nº 17/2026/Dicor/Cgcre-Inmetro, de 27/10/2026, que cancelou e substituiu o Ofício Circular nº 9/2026).
+- **ISO 9001:2026:** novas certificações apenas na edição 2026 a partir de **31 de março de 2028**, com prazo final de transição em **30 de setembro de 2029** pela Global ACI e pela Cgcre/Inmetro (Ofício Circular nº 18/2026/Dicor/Cgcre-Inmetro, de 27/10/2026).
 
 Organizações já certificadas não precisam reiniciar o ciclo com auditorias iniciais de estágio 1 e 2. A migração ocorre durante uma manutenção, recertificação ou auditoria especial combinada com o organismo certificador — desde que a decisão de certificação e a emissão do certificado saiam antes do vencimento.
 
@@ -85,7 +86,8 @@ Se a sua empresa precisa estruturar a análise de lacunas integrada da ISO 9001:
 - [ISO — o que mudou na ISO 14001:2026](https://www.iso.org/climate-change/iso-14001-what-has-changed)
 - [Global ACI — requisitos de transição para a ISO 9001:2026 (TECH-3-TR 2029-09-30)](https://sys.global-aci.org/uploads/documents/TECH-3-TR_2029-09-30_%28M%29_ISO_9001_2026_Transition_v1_03.pdf)
 - [Global ACI — requisitos de transição para a ISO 14001:2026 (TECH-3-TR 2029-04-30)](https://sys.global-aci.org/uploads/documents/TECH-3-TR_2029-04-30_%28M%29_ISO_14001_2026_Transition_v1_01.pdf)
-- [Cgcre/Inmetro — Ofício Circular nº 9/2026 (retificação)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-9-2026-dicor-cgcre-inmetro-retificacao.pdf/@@download/file)
+- [Cgcre/Inmetro — Ofício Circular nº 17/2026 (transição ISO 14001:2026)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-17-orientacoes-para-transicao-da-norma-iso-14001-2026.pdf)
+- [Cgcre/Inmetro — Ofício Circular nº 18/2026 (transição ISO 9001:2026)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-18-orientacao-para-transicao-da-norma-iso-9001-2026.pdf)
 - [ABNT — ABNT NBR ISO 9001:2026](https://landingpage.abnt.org.br/iso9001)
 - [DQS — comparação ISO 14001:2015 e 2026](https://www.dqsglobal.com/en/content/download/228514/file/ISO%2014001-2015%20vs.%20ISO%2014001-2026_Comparison%20_WP_DQS_en.pdf)
 - [DNV — revisão da ISO 9001](https://www.dnv.com/assurance/Management-Systems/new-iso/transition/iso-9001-revision/)

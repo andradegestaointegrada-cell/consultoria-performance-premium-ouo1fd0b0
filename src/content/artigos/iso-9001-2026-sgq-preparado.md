@@ -6,7 +6,7 @@ category: "Qualidade"
 image: "../../assets/blog/iso-9001-2026-sgq-preparado-capa.webp"
 imageAlt: "ISO 9001:2026: mudanças e transição do sistema de gestão da qualidade"
 published_date: 2026-04-24T21:04:10.116Z
-updated_date: 2026-11-11T12:00:00.000Z
+updated_date: 2026-11-23T14:00:00.000Z
 is_highlighted: false
 ---
 A ISO 9001:2026 foi publicada em 16 de setembro de 2026. A sexta edição substitui a ISO 9001:2015 e incorpora a Emenda 1:2024, a das mudanças climáticas. Para quem é certificado, a fase de acompanhar rascunhos acabou: agora há um prazo de transição, e ele já está correndo.
@@ -46,7 +46,7 @@ As regras estão no documento obrigatório Global ACI-TECH-3-TR 2029-09-30 (M). 
 
 O corte de março de 2028 vale para certificações novas e iniciais. Para quem já é certificado, a transição pode acontecer numa auditoria de manutenção, na recertificação ou numa auditoria especial, desde que a decisão e a emissão do certificado 2026 saiam até 30 de setembro de 2029. Cada organismo certificador pode fixar datas internas anteriores, então vale confirmar o cronograma no contrato.
 
-No Brasil, a ABNT já disponibiliza a ABNT NBR ISO 9001:2026, adoção brasileira da norma, que substitui a ABNT NBR ISO 9001:2015. A acreditação dos organismos certificadores continua com a Cgcre, do Inmetro; antes de agendar a transição, confira na base do Inmetro se o escopo do seu certificador está ativo.
+No Brasil, a ABNT já disponibiliza a ABNT NBR ISO 9001:2026, adoção brasileira da norma, que substitui a ABNT NBR ISO 9001:2015. Pelo Ofício Circular nº 18/2026/Dicor/Cgcre-Inmetro (de 27 de outubro de 2026), a acreditação brasileira segue integralmente a regra da Global ACI até 30 de setembro de 2029, com prazo até 30 de junho de 2027 para os organismos iniciarem a adequação no sistema Orquestra e parecer da Cgcre previsto até 30 de setembro de 2027; antes de agendar a transição, confira na base do Inmetro se o escopo do seu certificador está ativo.
 
 ## Roteiro de transição em cinco etapas
 
@@ -77,5 +77,6 @@ Se a sua empresa vai fazer a transição para a ISO 9001:2026, [fale com a AGI](
 - [Global ACI — início das operações](https://global-aci.org/en/news/global-accreditation-cooperation-incorporated-launch-unifies-international-accreditation-organisations-and-strengthens-worldwide-trust/)
 - [ABNT — ABNT NBR ISO 9001:2026](https://landingpage.abnt.org.br/iso9001)
 - [Inmetro — organismos acreditados](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/organismos-acreditados)
+- [Cgcre/Inmetro — Ofício Circular nº 18/2026 (transição ISO 9001:2026)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-18-orientacao-para-transicao-da-norma-iso-9001-2026.pdf)
 - [DNV — revisão da ISO 9001](https://www.dnv.com/assurance/Management-Systems/new-iso/transition/iso-9001-revision/)
 - [LRQA — ISO 9001:2026 publicada](https://www.lrqa.com/en/latest-news/iso-9001-2026-live/)

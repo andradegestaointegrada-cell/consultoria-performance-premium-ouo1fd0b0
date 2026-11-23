@@ -5,7 +5,7 @@ category: "Meio Ambiente"
 image: "../../assets/blog/iso-14001-2026-janela-oportunidade-capa.webp"
 imageAlt: "ISO 14001:2026: mudanças e transição do sistema de gestão ambiental"
 published_date: 2026-04-20T10:00:00.000Z
-updated_date: 2026-11-11T12:00:00.000Z
+updated_date: 2026-11-23T14:00:00.000Z
 is_highlighted: true
 ---
 A ISO 14001:2026 deixou de ser uma revisão futura. A quarta edição foi publicada em 15 de abril de 2026, e a versão brasileira, ABNT NBR ISO 14001:2026, saiu em julho. Para empresas certificadas, a pergunta agora é outra: o que precisa mudar no sistema e até quando.
@@ -42,7 +42,7 @@ O documento internacional que define a transição é o Global ACI-TECH-3-TR 202
 - **31 de outubro de 2027:** certificações novas e iniciais só podem ser emitidas na ISO 14001:2026.
 - **30 de abril de 2029:** fim da transição para as empresas certificadas na edição 2015.
 
-Há uma divergência no Brasil. O Ofício Circular nº 9/2026 da Cgcre, de junho de 2026 e anterior ao documento da Global ACI, informa que os certificados de 2015 perdem a validade em 15 de abril de 2029. A diferença é de duas semanas, mas pode decidir se um certificado vence ou não. A recomendação prática: planejar pela data mais cedo e confirmar por escrito com o organismo certificador o cronograma que ele vai seguir.
+No Brasil, a Cgcre/Inmetro alinhou integralmente esse calendário ao publicar o Ofício Circular nº 17/2026/Dicor/Cgcre-Inmetro (em 27 de outubro de 2026), que cancelou e substituiu o antigo Ofício Circular nº 9/2026 (que mencionava 15 de abril de 2029). Pelo regramento vigente, os organismos acreditados devem iniciar o processo de adequação no sistema Orquestra até **31 de janeiro de 2027**, com parecer da Cgcre previsto até **30 de abril de 2027**, e todos os certificados na edição de 2015 devem migrar até **30 de abril de 2029**. Confirme por escrito com o organismo certificador o cronograma de auditoria que ele vai seguir.
 
 A transição pode ser feita numa auditoria de manutenção, na recertificação ou numa auditoria especial. O que importa é a decisão e a emissão do certificado 2026 saírem dentro do prazo, com tempo para tratar eventuais não conformidades.
 
@@ -73,6 +73,6 @@ Se a sua empresa vai fazer a transição para a ISO 14001:2026, [fale com a AGI]
 - [ISO — o que mudou na ISO 14001:2026](https://www.iso.org/climate-change/iso-14001-what-has-changed)
 - [Global ACI — requisitos de transição para a ISO 14001:2026](https://global-aci.org/en/news/global-aci-publishes-transition-requirements-for-iso-140012026/)
 - [Global ACI — documento TECH-3-TR 2029-04-30 (M)](https://sys.global-aci.org/uploads/documents/TECH-3-TR_2029-04-30_%28M%29_ISO_14001_2026_Transition_v1_01.pdf)
-- [Cgcre/Inmetro — Ofício Circular nº 9/2026 (retificação)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-9-2026-dicor-cgcre-inmetro-retificacao.pdf/@@download/file)
+- [Cgcre/Inmetro — Ofício Circular nº 17/2026 (transição ISO 14001:2026)](https://www.gov.br/inmetro/pt-br/assuntos/acreditacao-reconhecimento-bpl/comunicados/dicor-alerta/2026/oficio-circular-17-orientacoes-para-transicao-da-norma-iso-14001-2026.pdf)
 - [DQS — comparação ISO 14001:2015 e 2026](https://www.dqsglobal.com/en/content/download/228514/file/ISO%2014001-2015%20vs.%20ISO%2014001-2026_Comparison%20_WP_DQS_en.pdf)
 - [DNV — nova edição da ISO 14001 publicada](https://www.dnv.com/news/2026/new-edition-of-iso-14001-published/)
