@@ -131,6 +131,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
           quality={55}
           loading="eager"
           fetchpriority="high"
+          decoding="sync"
           class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-black/80 mix-blend-multiply"></div>
@@ -149,7 +150,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
         <Malha forma={malha.forma} texto={malha.texto} rotulos={malha.rotulos} />
       </div>
       <div class="container mx-auto px-4 relative z-10">
-        <Reveal class="lg:max-w-[52%]">
+        <div class="lg:max-w-[52%]">
           <a
             href="/servicos"
             class="text-white/80 hover:text-white transition-colors text-sm font-bold mb-8 inline-flex items-center uppercase tracking-wider"
@@ -164,7 +165,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
           <p class="text-xl md:text-2xl text-white/90 max-w-3xl drop-shadow-md font-light leading-relaxed">
             {svc.d}
           </p>
-        </Reveal>
+        </div>
       </div>
     </section>
 

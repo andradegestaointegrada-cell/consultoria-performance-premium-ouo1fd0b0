@@ -1,0 +1,38 @@
+---
+// Hero das páginas internas: usa <img> eager com fetchpriority="high" em vez de background-image + bg-fixed
+// para evitar atraso de descoberta e repaint na pintura principal (LCP), e sem <Reveal> bloqueando o texto.
+interface Props {
+  fundo: string
+  overlay?: 'escuro' | 'marinho'
+  class?: string
+  containerClass?: string
+}
+const {
+  fundo,
+  overlay = 'escuro',
+  class: sectionClass = 'py-32 relative overflow-hidden border-b border-border',
+  containerClass = 'text-center max-w-4xl',
+} = Astro.props
+const veu = overlay === 'marinho' ? 'bg-[#091D39]/85' : 'bg-[#0D0D0D]/85'
+---
+
+<section class={sectionClass}>
+  <img
+    src={fundo}
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+  />
+  <div class:list={['absolute inset-0', veu]}></div>
+  <div
+    class="absolute inset-0 grade-tech [mask-image:radial-gradient(ellipse_70%_80%_at_50%_50%,#000_10%,transparent_75%)]"
+  >
+  </div>
+  <slot name="efeito" />
+  <div class:list={['container relative z-10 mx-auto px-4', containerClass]}>
+    <slot />
+  </div>
+</section>

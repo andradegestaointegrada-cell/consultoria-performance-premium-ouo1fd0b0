@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets'
 import { ArrowRight, ChevronDown } from 'lucide-react'
-import Reveal from '@/components/Reveal.astro'
 import Button from '@/components/Button.astro'
 import Malha from '@/components/tech/Malha.astro'
 import bgImage from '@/assets/home/home-hero.webp'
@@ -17,6 +16,7 @@ import bgImage from '@/assets/home/home-hero.webp'
       sizes="100vw"
       loading="eager"
       fetchpriority="high"
+      decoding="sync"
       class="w-full h-full object-cover object-[center_30%] md:object-center opacity-70 grayscale contrast-125 transition-opacity duration-700"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/95 via-[#0D0D0D]/70 to-[#091D39]/60"></div>
@@ -37,38 +37,32 @@ import bgImage from '@/assets/home/home-hero.webp'
 
   <div class="container relative z-10 mx-auto px-4">
     <div class="max-w-3xl lg:max-w-[50%]">
-      <Reveal>
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider"
-        >
-          <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-          </span>
-          Consultoria em sistemas de gestão
-        </div>
-      </Reveal>
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider"
+      >
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        Consultoria em sistemas de gestão
+      </div>
 
-      <Reveal delay={100}>
-        <h1
-          class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.08] uppercase break-words"
-        >
-          Estratégia, Conformidade e{' '}
-          <em class="font-heading italic text-primary font-normal">Performance</em>.
-        </h1>
-      </Reveal>
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.08] uppercase break-words"
+      >
+        Estratégia, Conformidade e{' '}
+        <em class="font-heading italic text-primary font-normal">Performance</em>.
+      </h1>
 
-      <Reveal delay={200}>
-        <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
-          Implantação, integração e auditoria de sistemas de gestão ISO para construção, engenharia,
-          indústria e logística, agora com uma camada de segurança da informação, privacidade de dados e
-          governança de IA.
-        </p>
-      </Reveal>
+      <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
+        Implantação, integração e auditoria de sistemas de gestão ISO para construção, engenharia,
+        indústria e logística, agora com uma camada de segurança da informação, privacidade de dados e
+        governança de IA.
+      </p>
 
-      <Reveal delay={300} class="flex flex-col sm:flex-row gap-4">
+      <div class="flex flex-col sm:flex-row gap-4">
         <Button
           href="/contato"
           size="lg"
@@ -86,21 +80,19 @@ import bgImage from '@/assets/home/home-hero.webp'
         >
           Ver os serviços
         </Button>
-      </Reveal>
+      </div>
 
-      <Reveal delay={400}>
-        <div class="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3 text-[11px] font-bold uppercase tracking-[0.22em]">
-          <span class="text-primary">ISO 9001 · 14001 · 45001</span>
-          <span class="hidden sm:block h-3 w-px bg-white/30" aria-hidden="true"></span>
-          <span class="text-[#DCE4F0]">ISO/IEC 27001 · 42001 · LGPD</span>
-          <a
-            href="/tecnologia"
-            class="inline-flex items-center gap-1.5 text-white border-b border-primary/60 pb-0.5 hover:text-primary transition-colors"
-          >
-            Camada tecnológica <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </Reveal>
+      <div class="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3 text-[11px] font-bold uppercase tracking-[0.22em]">
+        <span class="text-primary">ISO 9001 · 14001 · 45001</span>
+        <span class="hidden sm:block h-3 w-px bg-white/30" aria-hidden="true"></span>
+        <span class="text-[#DCE4F0]">ISO/IEC 27001 · 42001 · LGPD</span>
+        <a
+          href="/tecnologia"
+          class="inline-flex items-center gap-1.5 text-white border-b border-primary/60 pb-0.5 hover:text-primary transition-colors"
+        >
+          Camada tecnológica <ArrowRight className="h-3.5 w-3.5" />
+        </a>
+      </div>
     </div>
   </div>
 
