@@ -22,13 +22,16 @@ interface Props {
 }
 const { id, svc } = Astro.props
 const title = svc.t
+// Há serviço cujo nome já começa por "Consultoria" (ESG): não repetir o prefixo.
+const tema = title.replace(/^Consultoria /, '')
+const consultoria = `Consultoria ${tema}`
 const url = `${SITE_URL}/servicos/${id}`
 
 const servico = {
   '@type': 'Service',
   '@id': `${url}#servico`,
-  name: `Consultoria ${title}`,
-  serviceType: `Consultoria em sistemas de gestão · ${title}`,
+  name: consultoria,
+  serviceType: `Consultoria em sistemas de gestão · ${tema}`,
   description: `${svc.d} ${svc.w}`,
   url,
   provider: { '@id': ORG_ID },
@@ -109,16 +112,16 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
 ---
 
 <BaseLayout
-  title={tituloPagina(`Consultoria ${title}`)}
+  title={tituloPagina(consultoria)}
   description={svc.meta ?? `${svc.d} ${svc.w}`}
   image={svc.hi}
-  imageAlt={`Consultoria ${title}`}
+  imageAlt={consultoria}
   breadcrumbs={[
     { name: 'Serviços', path: '/servicos' },
     { name: title, path: `/servicos/${id}` },
   ]}
   jsonLd={[servico, faq]}
-  whatsapp={`Olá! Vim pela página de ${title} do site da AGI e gostaria de conversar sobre a consultoria em ${title}.`}
+  whatsapp={`Olá! Vim pela página de ${tema} do site da AGI e gostaria de conversar sobre a consultoria em ${tema}.`}
 >
   <div class="pt-20">
     <section class="relative py-32 min-h-[60vh] flex items-center overflow-hidden border-b border-border">
