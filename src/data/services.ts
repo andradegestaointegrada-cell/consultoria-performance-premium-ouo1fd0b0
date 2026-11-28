@@ -1,3 +1,4 @@
+import { GUIA_17025 } from '@/data/guia-17025'
 import iso9001Hero from '@/assets/servicos/9001-hero.webp'
 import iso9001Conteudo from '@/assets/servicos/9001-conteudo.webp'
 import iso14001Hero from '@/assets/servicos/14001-hero.webp'
@@ -38,6 +39,23 @@ export interface ServiceData {
   meta?: string
   /** Perguntas frequentes próprias do serviço (viram FAQPage no JSON-LD). */
   faq: { q: string; a: string }[]
+  /** Bloco com perguntas de comprador, fontes e responsável (hoje só na 17025). */
+  guia?: Guia
+}
+
+export interface Guia {
+  h1?: string
+  resumo: string
+  secoes: {
+    q: string
+    a: string
+    passos?: string[]
+    tabela?: { colunas: string[]; linhas: string[][] }
+    nota?: string
+  }[]
+  fontes: { t: string; url: string }[]
+  autor: string
+  atualizado: string
 }
 
 export const S_DATA: Record<string, ServiceData> = {
@@ -338,6 +356,7 @@ export const S_DATA: Record<string, ServiceData> = {
     ],
     deliverablesText:
       'O laboratório recebe o relatório de diagnóstico, os procedimentos e registros técnicos (validação de métodos, cálculo de incerteza e rastreabilidade metrológica), o plano de participação em ensaios de proficiência, os registros de treinamento e autorização do pessoal técnico, o relatório de auditoria interna com as constatações tratadas e a proposta de escopo de acreditação para submissão à Cgcre/Inmetro.',
+    guia: GUIA_17025,
     faq: [
       {
         q: 'Quem acredita o laboratório e como a AGI participa?',
@@ -358,6 +377,10 @@ export const S_DATA: Record<string, ServiceData> = {
       {
         q: 'Já temos ISO 9001. Precisamos da 17025?',
         a: 'A ISO 9001 avalia o sistema de gestão da empresa e não comprova a competência técnica do laboratório. A 17025 acrescenta os requisitos técnicos: validação de métodos, incerteza, rastreabilidade e validade dos resultados. Quem exige laboratório acreditado (cliente, órgão ou licitação) pede a 17025, e as duas normas convivem no mesmo sistema.',
+      },
+      {
+        q: 'A partir de quando posso divulgar que o laboratório é acreditado?',
+        a: 'Somente depois que a Cgcre conceder a acreditação, e apenas para os ensaios ou calibrações que constam no escopo publicado. Antes disso, o laboratório pode informar que está em preparação, sem usar o símbolo de acreditação.',
       },
     ],
   },

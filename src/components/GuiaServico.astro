@@ -1,0 +1,77 @@
+---
+// Perguntas de comprador com a resposta no início, tabelas, fontes e responsável pelo conteúdo.
+import type { Guia } from '@/data/services'
+
+interface Props {
+  guia: Guia
+}
+const { guia } = Astro.props
+const data = guia.atualizado.split('-').reverse().join('/')
+---
+
+<div class="max-w-3xl mx-auto space-y-12">
+  <p class="text-lg md:text-xl text-foreground leading-relaxed border-l-4 border-primary pl-5">{guia.resumo}</p>
+
+  {
+    guia.secoes.map((s) => (
+      <div>
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">{s.q}</h2>
+        <p class="text-lg text-muted-foreground leading-relaxed">{s.a}</p>
+        {s.passos && (
+          <ol class="mt-4 list-decimal space-y-2 pl-6 text-lg text-muted-foreground leading-relaxed marker:text-primary marker:font-bold">
+            {s.passos.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ol>
+        )}
+        {s.tabela && (
+          <div class="mt-5 overflow-x-auto rounded-xl border border-border">
+            <table class="w-full text-left text-sm md:text-base">
+              <thead class="bg-secondary text-foreground">
+                <tr>
+                  {s.tabela.colunas.map((c) => (
+                    <th scope="col" class="px-3 py-3 md:px-4 font-bold">
+                      {c}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border/60 text-muted-foreground">
+                {s.tabela.linhas.map((l) => (
+                  <tr>
+                    {l.map((c) => (
+                      <td class="px-3 py-3 md:px-4 align-top">{c}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {s.nota && <p class="mt-3 text-sm text-muted-foreground leading-relaxed">{s.nota}</p>}
+      </div>
+    ))
+  }
+
+  <div class="border-t border-border pt-8 space-y-4 text-sm text-muted-foreground">
+    <h2 class="text-lg font-heading font-bold text-foreground">Fontes oficiais</h2>
+    <ul class="list-disc space-y-2 pl-5">
+      {
+        guia.fontes.map((f) => (
+          <li>
+            <a href={f.url} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-primary break-words">
+              {f.t}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p>
+      <strong class="text-foreground">Responsável pelo conteúdo:</strong>
+      {' '}
+      {guia.autor}{' '}
+      <a href="/sobre" class="underline underline-offset-4 hover:text-primary">Conheça o time</a>. Atualizado em{' '}
+      <time datetime={guia.atualizado}>{data}</time>.
+    </p>
+  </div>
+</div>
