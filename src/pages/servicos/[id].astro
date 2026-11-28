@@ -9,7 +9,7 @@ import Button from '@/components/Button.astro'
 import ServiceFaq from '@/components/ServiceFaq.astro'
 import Malha from '@/components/tech/Malha.astro'
 import type { NomeForma } from '@/scripts/malha/nomes'
-import { S_DATA, STEPS, type ServiceData } from '@/data/services'
+import { S_DATA, STEPS, STEPS_ESG, type ServiceData } from '@/data/services'
 import { ORG_ID, SITE_URL } from '@/data/site'
 
 export function getStaticPaths() {
@@ -22,6 +22,7 @@ interface Props {
 }
 const { id, svc } = Astro.props
 const title = svc.t
+const passos = id === 'esg' ? STEPS_ESG : STEPS
 // Há serviço cujo nome já começa por "Consultoria" (ESG): não repetir o prefixo.
 const tema = title.replace(/^Consultoria /, '')
 const consultoria = `Consultoria ${tema}`
@@ -211,7 +212,7 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
           </h2>
           <div class="grid sm:grid-cols-3 gap-8">
             {
-              STEPS.map((s) => (
+              passos.map((s) => (
                 <div class="p-8 bg-card border border-border/50 rounded-2xl hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
                   <div class="text-primary font-heading font-bold text-5xl mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
                     {s.step}.

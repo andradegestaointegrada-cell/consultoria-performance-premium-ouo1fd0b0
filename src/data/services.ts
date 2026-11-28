@@ -534,7 +534,14 @@ export const STEPS = [
     title: 'Implementação',
     desc: 'Ajustes ágeis, criação de processos customizados e treinamento.',
   },
-  { step: '3', title: 'Auditoria', desc: 'Validação final de conformidade para a certificação.' },
+  // Serve para certificação e para acreditação: não citar nenhuma das duas aqui.
+  { step: '3', title: 'Auditoria', desc: 'Auditoria interna e tratamento das constatações antes da avaliação externa.' },
+]
+
+/** ESG não tem certificação nem avaliação externa obrigatória: a terceira etapa é de revisão. */
+export const STEPS_ESG = [
+  ...STEPS.slice(0, 2),
+  { step: '3', title: 'Revisão', desc: 'Conferência de dados, indicadores e relato antes de apresentá-los a clientes, bancos e investidores.' },
 ]
 
 /** Serviços listados em /servicos, na ordem da página. */
