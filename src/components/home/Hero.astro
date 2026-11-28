@@ -38,23 +38,25 @@ import bgImage from '@/assets/home/home-hero.webp'
 
   <div class="container relative z-10 mx-auto px-4">
     <div class="max-w-3xl lg:max-w-[50%]">
-      <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary text-sm font-bold mb-6 uppercase tracking-wider"
-      >
-        <span class="relative flex h-2 w-2">
-          <span
-            class="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
-          ></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+      <!-- O selo faz parte do H1: diz o que a AGI faz sem mudar o visual do topo. -->
+      <h1 class="mb-6">
+        <span
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-primary/30 text-primary font-sans text-sm font-bold mb-6 uppercase tracking-wider"
+        >
+          <span class="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+            <span
+              class="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          Consultoria em sistemas de gestão ISO<span class="sr-only">:</span>
+        </span>{' '}
+        <span
+          class="block text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-heading font-bold tracking-tight text-white leading-[1.08] uppercase break-words"
+        >
+          Estratégia, Conformidade e{' '}
+          <em class="font-heading italic text-primary font-normal">Performance</em>.
         </span>
-        Consultoria em sistemas de gestão
-      </div>
-
-      <h1
-        class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-heading font-bold tracking-tight text-white mb-6 leading-[1.08] uppercase break-words"
-      >
-        Estratégia, Conformidade e{' '}
-        <em class="font-heading italic text-primary font-normal">Performance</em>.
       </h1>
 
       <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-2xl leading-relaxed font-sans drop-shadow-md">
