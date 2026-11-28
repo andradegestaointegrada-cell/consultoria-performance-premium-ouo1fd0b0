@@ -1,5 +1,6 @@
 ---
 // Perguntas de comprador com a resposta no início, tabelas, fontes e responsável pelo conteúdo.
+import Button from '@/components/Button.astro'
 import type { Guia } from '@/data/services'
 
 interface Props {
@@ -11,6 +12,8 @@ const data = guia.atualizado.split('-').reverse().join('/')
 
 <div class="max-w-3xl mx-auto space-y-12">
   <p class="text-lg md:text-xl text-foreground leading-relaxed border-l-4 border-primary pl-5">{guia.resumo}</p>
+
+  <Button href="/contato" size="lg" class="rounded-full uppercase tracking-wider font-bold">Agendar diagnóstico</Button>
 
   {
     guia.secoes.map((s) => (

@@ -207,6 +207,8 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
           </div>
         </Reveal>
 
+        {/* Com guia, as etapas já estão no topo: não repetir. */}
+        {!svc.guia && (
         <Reveal delay={100}>
           <h2
             class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-12 uppercase tracking-wide text-center"
@@ -227,18 +229,23 @@ const malha = MALHAS[id] ?? { forma: 'numero', texto: title }
             }
           </div>
         </Reveal>
+        )}
 
         {
           svc.methodologyDetails && svc.trainingPillars && (
             <Reveal delay={150}>
               <div class="pt-10 border-t border-border">
                 <h2 class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-                  Metodologia de Implementação
+                  {svc.guia ? 'Processos de Treinamento' : 'Metodologia de Implementação'}
                 </h2>
-                <p class="text-lg text-muted-foreground leading-relaxed mb-12">{svc.methodologyDetails}</p>
-                <h3 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
-                  Processos de Treinamento
-                </h3>
+                {!svc.guia && (
+                  <>
+                    <p class="text-lg text-muted-foreground leading-relaxed mb-12">{svc.methodologyDetails}</p>
+                    <h3 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6 uppercase tracking-wide">
+                      Processos de Treinamento
+                    </h3>
+                  </>
+                )}
                 <ul class="flex flex-col gap-4">
                   {svc.trainingPillars.map((tp) => (
                     <li class="flex items-center gap-4 bg-secondary p-5 md:p-6 rounded-xl border border-border/50 shadow-sm transition-all hover:border-primary/50">

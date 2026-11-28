@@ -58,8 +58,8 @@ export const GUIA_17025: Guia = {
       a: 'Não há prazo total oficial: a carta de serviço do governo federal registra a duração como não estimada. O prazo de preparo sai do diagnóstico e depende do escopo, dos métodos, dos equipamentos e da disponibilidade da equipe.',
     },
     {
-      q: 'O que fica com a consultoria e o que fica com o laboratório?',
-      a: 'A AGI faz o diagnóstico, estrutura documentos e registros técnicos, treina a equipe, monta o plano de ensaios de proficiência, conduz a auditoria interna e prepara a proposta de escopo. O laboratório executa os ensaios ou calibrações, mantém as evidências de competência, toma as decisões técnicas e conduz a relação com a Cgcre.',
+      q: 'Quais responsabilidades continuam com o laboratório?',
+      a: 'Executar os ensaios ou calibrações, manter as evidências de competência, tomar as decisões técnicas e conduzir a relação com a Cgcre. A consultoria prepara e confere, mas não substitui essa execução. O que a AGI entrega está descrito logo abaixo.',
     },
   ],
   fontes: [
